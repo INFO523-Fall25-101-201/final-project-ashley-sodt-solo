@@ -78,8 +78,17 @@ learning approaches such as clustering and anomaly detection.
 
 ## Questions
 
-The two questions you want to answer.
+How can we model a baseline of normal movement patterns for each horse across exercise sessions?
+Which sessions deviate from this baseline, and what characteristics make anomalies occur?
 
 ## Analysis plan
 
--   A plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any).
+To answer the above questions, I will load all EquiPro session files and extract key biomechanical 
+variables such as symmetry indices, impulse, stance duration, and power. I will then engineer 
+session-level features by summarizing each variable (for example mean, standard deviation, 
+left–right ratios, and gait-phase proportions). These features will be used to establish a 
+baseline of normal movement for each horse.
+
+To identify abnormal sessions, I will standardize variables and apply unsupervised methods such 
+as z-score thresholding, k-means clustering, and Isolation Forest. Sessions that are far from 
+the baseline distribution will be labeled as anomalous. No external datasets will be merged.
