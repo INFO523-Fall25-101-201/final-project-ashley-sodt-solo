@@ -22,7 +22,7 @@ Paragraph description: |
 
   The dataset for this project consists of multiple sessions for three horses: Duque (14 sessions),
   Jackson (6 sessions), and Perseo (5 sessions). Each session is stored as a the processed results Equipro 
-  CSV file containing time-sampled biomechanical variables. These files will be summarized one file with
+  CSV file containing time-sampled biomechanical variables. These files will be summarized into one file with
   session-level features for analysis. I chose this dataset because it is directly 
   relevant to my graduate research and because it is well suited for unsupervised analysis.
   Session-level features will allow me to establish per-horse baseline distributions and apply
@@ -91,4 +91,4 @@ baseline of normal movement for each horse.
 
 To identify abnormal sessions, I will standardize variables and apply unsupervised methods such 
 as z-score thresholding, k-means clustering, and Isolation Forest. Sessions that are far from 
-the baseline distribution will be labeled as anomalous. No external datasets will be merged.
+the baseline distribution will be labeled as having anomalies. No external datasets will be merged.
