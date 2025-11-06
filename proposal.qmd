@@ -56,12 +56,12 @@ import numpy as np
 ```{python}
 #| label: load-dataset
 #| message: false
-```
+
 import pandas as pd
 
 df_duque = pd.read_csv("data/Horses/Duque/20240626T082743-Duque-results.csv")
 df_duque.shape
-
+```
 
 description: |
 The primary dataset consists of EquiPro csv result files collected from horses exercised at 
