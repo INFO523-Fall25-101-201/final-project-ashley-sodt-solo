@@ -21,9 +21,9 @@ Paragraph description: |
   subtle changes in loading or symmetry can precede clinical signs of injury.
 
   The dataset for this project consists of multiple sessions for three horses: Duque (14 sessions),
-  Jackson (6 sessions), and Perseo (5 sessions). Each session is stored as a the processed results Equipro 
-  CSV file containing time-sampled biomechanical variables. These files will be summarized into one file with
-  session-level features for analysis. I chose this dataset because it is directly 
+  Jackson (6 sessions), and Perseo (5 sessions). The Equipro system processes results for each session and outputs a 
+  CSV file containing stride-level, time-sampled biomechanical variables. For each horse, I will compile these sesssions
+  into one file with session-level features for analysis. I chose this dataset because it is directly 
   relevant to my graduate research and because it is well suited for unsupervised analysis.
   Session-level features will allow me to establish per-horse baseline distributions and apply
   methods such as z-score analysis, k-means clustering, and Isolation Forest to quantify deviations.
@@ -78,10 +78,20 @@ learning approaches such as clustering and anomaly detection.
 
 ## Questions
 
-How can we model a baseline of normal movement patterns for each horse across exercise sessions?
-Which sessions deviate from this baseline, and what characteristics make anomalies occur?
+Which exercise sessions significantly deviate from each horse’s baseline distribution, 
+and which biomechanical variables contribute most strongly to those deviations?
+
+How do different unsupervised anomaly-detection methods (z-score thresholding, k-means cluster distance, 
+and Isolation Forest) compare in identifying abnormal sessions, and to what extent do they 
+agree or disagree on which sessions are flagged as anomalous?
 
 ## Analysis plan
+
+For each exercise session, I will load the corresponding EquiPro CSV file and extract biomechanical variables relevant to symmetry, gait, and stride mechanics. To create session-level features, I will summarize each variable using statistics like mean, standard deviation, interquartile range, etc. These engineered features will form a feature matrix for each horse where each row is a session and each column is a biomechanical descriptor.
+
+I will then model each horse's baseline movement patterns. I will standardize all features within each horse by converting them to z-scores in order to remove scale differences. This will provide a clear reference point. Features consistently close to zero after standardization indicate typical behavior, but large positive or negative values indicate potential deviations. These standardized distributions form the baseline against which the anomaly-detection methods will evaluate whether any given session departs significantly from a horse’s typical movement pattern.
+
+After establishing the baselines for each horse using z-scores, I will apply three unsupervised anomaly-detection methods to identify sessions that deviate from typical movement. Z-score analysis will allow me to flag sessions where specific features are unusually high or low relative to baseline distribution. K-means clustering identify anomalies based on their distance from cluster centers in the multivariate feature space. Isolation Forest will give a measure of how isolated a session is from the rest. Each method will produce a numerical anomaly score and a corresponding label indicated whether the session is considered abnormal. 
 
 To answer the above questions, I will load all EquiPro session files and extract key biomechanical 
 variables such as symmetry indices, impulse, stance duration, and power. I will then engineer 
