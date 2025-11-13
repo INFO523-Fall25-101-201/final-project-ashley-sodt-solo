@@ -51,6 +51,8 @@ jupyter: python3
 ```{python}
 #| label: load-pkgs
 #| message: false
+
+
 import numpy as np
 ```
 
