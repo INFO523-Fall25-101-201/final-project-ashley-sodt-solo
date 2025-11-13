@@ -52,8 +52,10 @@ jupyter: python3
 #| label: load-pkgs
 #| message: false
 
-
 import numpy as np
+import pandas as pd
+
+from IPython.display import display
 ```
 
 ## Dataset
@@ -62,10 +64,26 @@ import numpy as np
 #| label: load-dataset
 #| message: false
 
-import pandas as pd
+#| label: load-dataset
+#| message: false
 
-df_duque = pd.read_csv("data/Horses/Duque/20240626T082743-Duque-results.csv")
-df_duque.shape
+# Load one example Duque session to illustrate the raw data structure
+
+df_duque = pd.read_csv("Horses/Duque/20240626T082743-Duque-results.csv")
+
+print("\nExample Duque session from EquiPro:")
+print(f"  - dataset shape: {df_duque.shape}")
+print(f"  - number of rows: {df_duque.shape[0]}")
+print(f"  - number of columns: {df_duque.shape[1]}")
+
+print("\nFirst few rows:")
+display(df_duque.head())
+
+print("\nData types:")
+display(df_duque.dtypes)
+
+print("\nSummary statistics:")
+display(df_duque.describe())
 ```
 
 ## Dataset description:
