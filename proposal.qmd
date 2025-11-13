@@ -11,7 +11,7 @@ One sentence description:
 anomalies that may reflect behavioral irregularities, equipment issues, or potential reinjury."
 
 Paragraph description: |
-In this project, I aim to detect abnormal equine exercise sessions by clustering 
+"In this project, I aim to detect abnormal equine exercise sessions by clustering 
 movement-based features derived from processed EquiPro accelerometer data. Horses 
 at the Al-Marah Equine Center are equipped with 7 accelerometers during exercise 
 sessions on a lunge line at walk, trot, and canter. The EquiPro system outputs 
@@ -33,8 +33,7 @@ establish per-horse baseline distributions and apply methods such as z-score
 analysis, k-means clustering, and Isolation Forest to quantify deviations. By 
 identifying and visualizing sessions with anomalies over time, this project will 
 explore whether data-driven monitoring can help track rehabilitation progress and 
-highlight sessions that warrant further investigation.
-
+highlight sessions that warrant further investigation."
 
 format:
   html:
