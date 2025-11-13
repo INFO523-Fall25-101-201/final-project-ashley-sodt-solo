@@ -66,7 +66,8 @@ df_duque = pd.read_csv("data/Horses/Duque/20240626T082743-Duque-results.csv")
 df_duque.shape
 ```
 
-description: |
+## Dataset description:
+
 The primary dataset consists of EquiPro csv result files collected from horses exercised at 
 the Al-Marah Equine Center. The EquiPro system outputs a CSV file for each session containing 
 biomechanical variables like diagonal advanced placement and duration of footfalls. 
