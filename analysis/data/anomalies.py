@@ -25,7 +25,7 @@ from sklearn.cluster import KMeans
 from sklearn.ensemble import IsolationForest
 
 # Path to the session-level feature matrix created by the trot-only script
-DATA_PATH = Path("data") / "session_features_trot.csv"
+DATA_PATH = Path(__file__).resolve().parent / "session_features_trot.csv"
 
 session_features = pd.read_csv(DATA_PATH)
 
