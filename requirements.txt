@@ -1,2 +1,7 @@
 jupyter
 nbformat
+pandas
+numpy
+scikit-learn
+statsmodels
+quarto-cli

@@ -1,5 +1,5 @@
 ---
-title: "Session-level Features"
+title: "Session-level Features (Trot Only)"
 format:
   html:
     code-tools: true
@@ -19,26 +19,38 @@ jupyter: python3
 from pathlib import Path
 import pandas as pd
 
+# Variables to keep
+TROT_VARS = [
+    "stride_dur","stride_speed","stride_length",
+    "duty_factor",
+    "duty_factor_LF","duty_factor_RF","duty_factor_LH","duty_factor_RH",
+    "stance_dur_LF","stance_dur_RF","stance_dur_LH","stance_dur_RH",
+    "dap_L_sec","dap_L_perc","dap_R_sec","dap_R_perc",
+    "min_diff_head","max_diff_head","si_up_head",
+    "min_diff_wth","max_diff_wth","si_up_wth",
+    "min_diff_sac","max_diff_sac","si_up_sac"
+]
+
 def summarize_session(csv_path: Path, horse: str) -> pd.Series:
-    """
-    Summarize one EquiPro session into a single row of engineered features.
-    For each numeric column, compute mean, std, IQR, min, and max.
-    """
+    """Summarize a single EquiPro session (trot only)."""
 
     df = pd.read_csv(csv_path)
-
-    # Clean column names
     df.columns = df.columns.str.strip()
 
-    # Extract session ID
-    stem = csv_path.stem   # e.g., '20240626T082743-Duque-results'
-    session_id = stem.replace(f"-{horse}-results", "")
+    # Filter to trot only
+    if "gait" in df.columns:
+        df = df[df["gait"].str.lower() == "trot"]
 
-    numeric_cols = df.select_dtypes(include="number").columns
+    # Extract session ID
+    stem = csv_path.stem
+    session_id = stem.replace(f"-{horse}-results", "")
 
     stats = {}
 
-    for col in numeric_cols:
+    for col in TROT_VARS:
+        if col not in df.columns:
+            continue
+
         s = df[col].dropna()
         if s.empty:
             continue
@@ -57,44 +69,40 @@ def summarize_session(csv_path: Path, horse: str) -> pd.Series:
 
     return pd.Series(stats)
 ```
+
 ```{python}
 #| label: build-feature-matrix
 #| message: false
 
-all_rows = []
+HORSES = ["Duque", "Jackson", "Perseo"]
+HORSES_DIR = Path("..") / "Horses"
+
+rows = []
 
 for horse in HORSES:
     horse_dir = HORSES_DIR / horse
     csv_files = sorted(horse_dir.glob("*-results.csv"))
-
-    print(f"{horse}: found {len(csv_files)} sessions")
+    print(f"{horse}: {len(csv_files)} sessions")
 
     for csv_path in csv_files:
-        row = summarize_session(csv_path, horse=horse)
-        all_rows.append(row)
+        row = summarize_session(csv_path, horse)
+        rows.append(row)
 
-session_features = pd.DataFrame(all_rows)
+session_features = pd.DataFrame(rows)
 
-if session_features.empty:
-    print("\nNo sessions were summarized. Check HORSES_DIR and file patterns.")
-else:
-    # Reorder columns: metadata first
-    meta_cols = ["horse", "session_id", "n_rows"]
-    other_cols = [c for c in session_features.columns if c not in meta_cols]
-    session_features = session_features[meta_cols + other_cols]
+meta_cols = ["horse","session_id","n_rows"]
+other_cols = [c for c in session_features.columns if c not in meta_cols]
+session_features = session_features[meta_cols + other_cols]
 
-    print("\nSession-level feature matrix:")
-    print(f"  Shape: {session_features.shape[0]} sessions × {session_features.shape[1]} features")
-    display(session_features.head())
+session_features.head()
 ```
+
 ```{python}
-#| label: save-feature-matrix
+#| label: save
 #| message: false
 
-output_path = Path("data") / "session_features.csv"
-output_path.parent.mkdir(exist_ok=True)
-
-session_features.to_csv(output_path, index=False)
-
-print(f"Saved feature matrix to: {output_path}")
+out = Path("data") / "session_features_trot.csv"
+out.parent.mkdir(exist_ok=True)
+session_features.to_csv(out, index=False)
+print(f"Saved: {out}")
 ```
