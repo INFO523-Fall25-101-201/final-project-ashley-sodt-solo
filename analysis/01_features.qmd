@@ -12,34 +12,26 @@ execute:
 jupyter: python3
 ---
 
-
-```{python}
-#| label: load-pkgs
-#| message: false
-
-import numpy as np
-import pandas as pd
-from pathlib import Path
-from IPython.display import display
-
-HORSES_DIR = Path("Horses")
-HORSES = ["Duque", "Jackson", "Perseo"]
-```
-
 ```{python}
 #| label: summarize-session
 #| message: false
 
+from pathlib import Path
+import pandas as pd
+
 def summarize_session(csv_path: Path, horse: str) -> pd.Series:
     """
     Summarize one EquiPro session into a single row of engineered features.
-    Computes summary stats for all numeric columns.
+    For each numeric column, compute mean, std, IQR, min, and max.
     """
 
     df = pd.read_csv(csv_path)
 
-    # Parse session ID (timestamp portion)
-    stem = csv_path.stem   # e.g. '20240626T082743-Duque-results'
+    # Clean column names
+    df.columns = df.columns.str.strip()
+
+    # Extract session ID
+    stem = csv_path.stem   # e.g., '20240626T082743-Duque-results'
     session_id = stem.replace(f"-{horse}-results", "")
 
     numeric_cols = df.select_dtypes(include="number").columns
@@ -59,7 +51,6 @@ def summarize_session(csv_path: Path, horse: str) -> pd.Series:
         stats[f"{col}_min"] = s.min()
         stats[f"{col}_max"] = s.max()
 
-    # Add metadata
     stats["horse"] = horse
     stats["session_id"] = session_id
     stats["n_rows"] = len(df)
@@ -84,14 +75,17 @@ for horse in HORSES:
 
 session_features = pd.DataFrame(all_rows)
 
-# Ensure metadata columns come first
-meta_cols = ["horse", "session_id", "n_rows"]
-other_cols = [c for c in session_features.columns if c not in meta_cols]
-session_features = session_features[meta_cols + other_cols]
+if session_features.empty:
+    print("\nNo sessions were summarized. Check HORSES_DIR and file patterns.")
+else:
+    # Reorder columns: metadata first
+    meta_cols = ["horse", "session_id", "n_rows"]
+    other_cols = [c for c in session_features.columns if c not in meta_cols]
+    session_features = session_features[meta_cols + other_cols]
 
-print("\nSession-level feature matrix:")
-print(f"  Shape: {session_features.shape[0]} sessions × {session_features.shape[1]} features")
-display(session_features.head())
+    print("\nSession-level feature matrix:")
+    print(f"  Shape: {session_features.shape[0]} sessions × {session_features.shape[1]} features")
+    display(session_features.head())
 ```
 ```{python}
 #| label: save-feature-matrix

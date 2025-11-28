@@ -47,19 +47,6 @@ identifying and visualizing sessions with anomalies over time, this project will
 explore whether data-driven monitoring can help track rehabilitation progress and 
 highlight sessions that warrant further investigation."
 
-format:
-  html:
-    code-tools: true
-    code-overflow: wrap
-    code-line-numbers: true
-    embed-resources: true
-editor: visual
-code-annotations: hover
-execute:
-  warning: false
-jupyter: python3
----
-
 ```{python}
 #| label: load-pkgs
 #| message: false
@@ -73,9 +60,6 @@ from IPython.display import display
 ## Dataset
 
 ```{python}
-#| label: load-dataset
-#| message: false
-
 #| label: load-dataset
 #| message: false
 
