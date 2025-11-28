@@ -1,3 +1,18 @@
+---
+title: "Session-level Features"
+format:
+  html:
+    code-tools: true
+    code-overflow: wrap
+    code-line-numbers: true
+    embed-resources: true
+execute:
+  warning: false
+  message: false
+jupyter: python3
+---
+
+
 ```{python}
 #| label: load-pkgs
 #| message: false
@@ -9,4 +24,83 @@ from IPython.display import display
 
 HORSES_DIR = Path("Horses")
 HORSES = ["Duque", "Jackson", "Perseo"]
+```
+
+```{python}
+#| label: summarize-session
+#| message: false
+
+def summarize_session(csv_path: Path, horse: str) -> pd.Series:
+    """
+    Summarize one EquiPro session into a single row of engineered features.
+    Computes summary stats for all numeric columns.
+    """
+
+    df = pd.read_csv(csv_path)
+
+    # Parse session ID (timestamp portion)
+    stem = csv_path.stem   # e.g. '20240626T082743-Duque-results'
+    session_id = stem.replace(f"-{horse}-results", "")
+
+    numeric_cols = df.select_dtypes(include="number").columns
+
+    stats = {}
+
+    for col in numeric_cols:
+        s = df[col].dropna()
+        if s.empty:
+            continue
+
+        q1, q3 = s.quantile([0.25, 0.75])
+
+        stats[f"{col}_mean"] = s.mean()
+        stats[f"{col}_std"] = s.std()
+        stats[f"{col}_iqr"] = q3 - q1
+        stats[f"{col}_min"] = s.min()
+        stats[f"{col}_max"] = s.max()
+
+    # Add metadata
+    stats["horse"] = horse
+    stats["session_id"] = session_id
+    stats["n_rows"] = len(df)
+
+    return pd.Series(stats)
+```
+```{python}
+#| label: build-feature-matrix
+#| message: false
+
+all_rows = []
+
+for horse in HORSES:
+    horse_dir = HORSES_DIR / horse
+    csv_files = sorted(horse_dir.glob("*-results.csv"))
+
+    print(f"{horse}: found {len(csv_files)} sessions")
+
+    for csv_path in csv_files:
+        row = summarize_session(csv_path, horse=horse)
+        all_rows.append(row)
+
+session_features = pd.DataFrame(all_rows)
+
+# Ensure metadata columns come first
+meta_cols = ["horse", "session_id", "n_rows"]
+other_cols = [c for c in session_features.columns if c not in meta_cols]
+session_features = session_features[meta_cols + other_cols]
+
+print("\nSession-level feature matrix:")
+print(f"  Shape: {session_features.shape[0]} sessions × {session_features.shape[1]} features")
+display(session_features.head())
+```
+```{python}
+#| label: save-feature-matrix
+#| message: false
+
+output_path = Path("data") / "session_features.csv"
+output_path.parent.mkdir(exist_ok=True)
+
+session_features.to_csv(output_path, index=False)
+
+print(f"Saved feature matrix to: {output_path}")
 ```

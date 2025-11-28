@@ -2,10 +2,22 @@
 title: "Clustering Movement Patterns in Equine Exercise Sessions Using Anomaly Detection"
 subtitle: "Proposal"
 author: 
-  - name: Ashley Sodt
+  - name: "Ashley Sodt"
     affiliations:
       - name: "Applied Math PhD Student, University of Arizona"
-
+format:
+  html:
+    code-tools: true
+    code-overflow: wrap
+    code-line-numbers: true
+    embed-resources: true
+editor: visual
+code-annotations: hover
+execute:
+  warning: false
+  message: false
+jupyter: python3
+---
 One sentence description: 
 "My goal is to use unsupervised learning techniques to cluster EquiPro sessions and detect
 anomalies that may reflect behavioral irregularities, equipment issues, or potential reinjury."
