@@ -4,7 +4,7 @@ subtitle: "INFO 523 - Final Project"
 author: 
   - name: "Ashley Sodt"
     affiliations:
-      - name: "College of Information Science, University of Arizona"
+      - name: "Applied Math PhD Student, University of Arizona"
 description: "Project description"
 format:
    html:
