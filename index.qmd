@@ -20,4 +20,4 @@ jupyter: python3
 
 ## Abstract
 
-Add project abstract here.
+Unsupervised learning techniques were used to cluster equine exercise sessions and detect anomalies that could reflect behavioral irregularities, equipment issues, or potential reinjury. Movement-based features derived from processed EquiPro accelerometer data were analyzed, including biomechanical metrics such as diagonal advanced placement, stride duration, and footfall duration. Typical movement patterns for each horse were modeled so that sessions deviating significantly from baseline could be identified. Through this approach, anomalies that may have indicated behavioral changes, equipment malfunction, pain, or reinjury were detected. This project was motivated by the need to identify subtle changes in loading or symmetry during equine rehabilitation, where deviations may precede clinical signs of injury.

@@ -11,7 +11,7 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "This project was developed by [Ashley Sodt] For INFO 523 - Data Mining and Discovery at the University of Arizona, taught by Dr. Greg Chism. Ashley Sodt is a second year PhD student in the Applied Mathematics program."
+    "text": "This project was developed by Ashley Sodt For INFO 523 - Data Mining and Discovery at the University of Arizona, taught by Dr. Greg Chism. Ashley Sodt is a second year PhD student in the Applied Mathematics program."
   },
   {
     "objectID": "presentation.html#quarto",
@@ -81,21 +81,21 @@
     "href": "index.html",
     "title": "Clustering Movement Patterns in Equine Exercise Sessions Using Anomaly Detection",
     "section": "",
-    "text": "Add project abstract here."
+    "text": "Unsupervised learning techniques were used to cluster equine exercise sessions and detect anomalies that could reflect behavioral irregularities, equipment issues, or potential reinjury. Movement-based features derived from processed EquiPro accelerometer data were analyzed, including biomechanical metrics such as diagonal advanced placement, stride duration, and footfall duration. Typical movement patterns for each horse were modeled so that sessions deviating significantly from baseline could be identified. Through this approach, anomalies that may have indicated behavioral changes, equipment malfunction, pain, or reinjury were detected. This project was motivated by the need to identify subtle changes in loading or symmetry during equine rehabilitation, where deviations may precede clinical signs of injury."
   },
   {
     "objectID": "index.html#abstract",
     "href": "index.html#abstract",
     "title": "Clustering Movement Patterns in Equine Exercise Sessions Using Anomaly Detection",
     "section": "",
-    "text": "Add project abstract here."
+    "text": "Unsupervised learning techniques were used to cluster equine exercise sessions and detect anomalies that could reflect behavioral irregularities, equipment issues, or potential reinjury. Movement-based features derived from processed EquiPro accelerometer data were analyzed, including biomechanical metrics such as diagonal advanced placement, stride duration, and footfall duration. Typical movement patterns for each horse were modeled so that sessions deviating significantly from baseline could be identified. Through this approach, anomalies that may have indicated behavioral changes, equipment malfunction, pain, or reinjury were detected. This project was motivated by the need to identify subtle changes in loading or symmetry during equine rehabilitation, where deviations may precede clinical signs of injury."
   },
   {
     "objectID": "proposal.html",
     "href": "proposal.html",
     "title": "Clustering Movement Patterns in Equine Exercise Sessions Using Anomaly Detection",
     "section": "",
-    "text": "My goal is to use unsupervised learning techniques to cluster equine exercise sessions and detect anomalies that may reflect behavioral irregularities, equipment issues, or potential reinjury.\nI aim to detect abnormal equine exercise sessions by clustering movement-based features derived from processed EquiPro accelerometer data. Horses at the Al-Marah Equine Center are equipped with 7 accelerometers during exercise sessions on a lunge line at walk, trot, and canter. The EquiPro system outputs calculated biomechanical metrics such as diagonal advanced placement, stride duration, and footfall duration. By modeling typical movement patterns for each horse, I plan to identify exercise sessions that deviate significantly from a horse’s baseline. Such anomalies may reflect behavioral irregularities, equipment malfunction, pain, or potential reinjury. This is important in equine rehabilitation, where subtle changes in loading or symmetry can precede clinical signs of injury.\n\nimport numpy as np\nimport pandas as pd\n\nfrom IPython.display import display"
+    "text": "import numpy as np\nimport pandas as pd\n\nfrom IPython.display import display"
   },
   {
     "objectID": "proposal.html#dataset",
@@ -136,7 +136,7 @@
     "objectID": "proposal.html#introduction",
     "href": "proposal.html#introduction",
     "title": "Clustering Movement Patterns in Equine Exercise Sessions Using Anomaly Detection",
-    "section": "",
-    "text": "My goal is to use unsupervised learning techniques to cluster equine exercise sessions and detect anomalies that may reflect behavioral irregularities, equipment issues, or potential reinjury.\nI aim to detect abnormal equine exercise sessions by clustering movement-based features derived from processed EquiPro accelerometer data. Horses at the Al-Marah Equine Center are equipped with 7 accelerometers during exercise sessions on a lunge line at walk, trot, and canter. The EquiPro system outputs calculated biomechanical metrics such as diagonal advanced placement, stride duration, and footfall duration. By modeling typical movement patterns for each horse, I plan to identify exercise sessions that deviate significantly from a horse’s baseline. Such anomalies may reflect behavioral irregularities, equipment malfunction, pain, or potential reinjury. This is important in equine rehabilitation, where subtle changes in loading or symmetry can precede clinical signs of injury.\n\nimport numpy as np\nimport pandas as pd\n\nfrom IPython.display import display"
+    "section": "Introduction",
+    "text": "Introduction\nMy goal is to use unsupervised learning techniques to cluster equine exercise sessions and detect anomalies that may reflect behavioral irregularities, equipment issues, or potential reinjury.\nI aim to detect abnormal equine exercise sessions by clustering movement-based features derived from processed EquiPro accelerometer data. Horses at the Al-Marah Equine Center are equipped with 7 accelerometers during exercise sessions on a lunge line at walk, trot, and canter. The EquiPro system outputs calculated biomechanical metrics such as diagonal advanced placement, stride duration, and footfall duration. By modeling typical movement patterns for each horse, I plan to identify exercise sessions that deviate significantly from a horse’s baseline. Such anomalies may reflect behavioral irregularities, equipment malfunction, pain, or potential reinjury. This is important in equine rehabilitation, where subtle changes in loading or symmetry can precede clinical signs of injury."
   }
 ]

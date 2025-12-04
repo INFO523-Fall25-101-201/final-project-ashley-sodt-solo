@@ -19,6 +19,16 @@ execute:
 jupyter: python3
 ---
 
+```{python}
+#| label: load-pkgs
+#| message: false
+
+import numpy as np
+import pandas as pd
+
+from IPython.display import display
+```
+
 ## Introduction
 My goal is to use unsupervised learning techniques to cluster equine exercise sessions and detect
 anomalies that may reflect behavioral irregularities, equipment issues, or potential reinjury.
@@ -34,15 +44,6 @@ horse’s baseline. Such anomalies may reflect behavioral irregularities, equipm
 malfunction, pain, or potential reinjury. This is important in equine rehabilitation, 
 where subtle changes in loading or symmetry can precede clinical signs of injury.
 
-```{python}
-#| label: load-pkgs
-#| message: false
-
-import numpy as np
-import pandas as pd
-
-from IPython.display import display
-```
 
 ## Dataset
 

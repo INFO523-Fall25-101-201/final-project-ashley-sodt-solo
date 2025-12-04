@@ -1,10 +1,10 @@
 {
-  "hash": "fd988bb39fa869c728578cd77a983711",
+  "hash": "cfa91ca7f28acd43682b4d87fd8fa76a",
   "result": {
     "engine": "jupyter",
-    "markdown": "---\ntitle: \"Clustering Movement Patterns in Equine Exercise Sessions Using Anomaly Detection\"\nsubtitle: \"INFO 523 - Final Project\"\nauthor: \n  - name: \"Ashley Sodt\"\n    affiliations:\n      - name: \"Applied Math PhD Student, University of Arizona\"\ndescription: \"Project description\"\nformat:\n   html:\n    code-tools: true\n    code-overflow: wrap\n    embed-resources: true\neditor: visual\nexecute:\n  warning: false\n  echo: false\njupyter: python3\n---\n\n## Abstract\n\nAdd project abstract here.\n\n",
+    "markdown": "---\ntitle: \"Clustering Movement Patterns in Equine Exercise Sessions Using Anomaly Detection\"\nsubtitle: \"INFO 523 - Final Project\"\nauthor: \n  - name: \"Ashley Sodt\"\n    affiliations:\n      - name: \"Applied Math PhD Student, University of Arizona\"\ndescription: \"Project description\"\nformat:\n   html:\n    code-tools: true\n    code-overflow: wrap\n    embed-resources: true\neditor: visual\nexecute:\n  warning: false\n  echo: false\njupyter: python3\n---\n\n## Abstract\n\nUnsupervised learning techniques were used to cluster equine exercise sessions and detect anomalies that could reflect behavioral irregularities, equipment issues, or potential reinjury. Movement-based features derived from processed EquiPro accelerometer data were analyzed, including biomechanical metrics such as diagonal advanced placement, stride duration, and footfall duration. Typical movement patterns for each horse were modeled so that sessions deviating significantly from baseline could be identified. Through this approach, anomalies that may have indicated behavioral changes, equipment malfunction, pain, or reinjury were detected. This project was motivated by the need to identify subtle changes in loading or symmetry during equine rehabilitation, where deviations may precede clinical signs of injury.\n\n",
     "supporting": [
-      "index_files/figure-html"
+      "index_files"
     ],
     "filters": [],
     "includes": {}

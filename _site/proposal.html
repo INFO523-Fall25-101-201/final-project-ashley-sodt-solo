@@ -4149,16 +4149,16 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
 </header>
 
 
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>My goal is to use unsupervised learning techniques to cluster equine exercise sessions and detect anomalies that may reflect behavioral irregularities, equipment issues, or potential reinjury.</p>
-<p>I aim to detect abnormal equine exercise sessions by clustering movement-based features derived from processed EquiPro accelerometer data. Horses at the Al-Marah Equine Center are equipped with 7 accelerometers during exercise sessions on a lunge line at walk, trot, and canter. The EquiPro system outputs calculated biomechanical metrics such as diagonal advanced placement, stride duration, and footfall duration. By modeling typical movement patterns for each horse, I plan to identify exercise sessions that deviate significantly from a horse’s baseline. Such anomalies may reflect behavioral irregularities, equipment malfunction, pain, or potential reinjury. This is important in equine rehabilitation, where subtle changes in loading or symmetry can precede clinical signs of injury.</p>
 <div id="load-pkgs" class="cell" data-message="false" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3"></a></span>
 <span id="cb1-4"><a href="#cb1-4"></a><span class="im">from</span> IPython.display <span class="im">import</span> display</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>My goal is to use unsupervised learning techniques to cluster equine exercise sessions and detect anomalies that may reflect behavioral irregularities, equipment issues, or potential reinjury.</p>
+<p>I aim to detect abnormal equine exercise sessions by clustering movement-based features derived from processed EquiPro accelerometer data. Horses at the Al-Marah Equine Center are equipped with 7 accelerometers during exercise sessions on a lunge line at walk, trot, and canter. The EquiPro system outputs calculated biomechanical metrics such as diagonal advanced placement, stride duration, and footfall duration. By modeling typical movement patterns for each horse, I plan to identify exercise sessions that deviate significantly from a horse’s baseline. Such anomalies may reflect behavioral irregularities, equipment malfunction, pain, or potential reinjury. This is important in equine rehabilitation, where subtle changes in loading or symmetry can precede clinical signs of injury.</p>
 </section>
 <section id="dataset" class="level2">
 <h2 class="anchored" data-anchor-id="dataset">Dataset</h2>
@@ -5152,117 +5152,118 @@ Summary statistics:</code></pre>
 <span id="cb7-19"><a href="#cb7-19"></a><span class="an">jupyter:</span><span class="co"> python3</span></span>
 <span id="cb7-20"><a href="#cb7-20"></a><span class="co">---</span></span>
 <span id="cb7-21"><a href="#cb7-21"></a></span>
-<span id="cb7-22"><a href="#cb7-22"></a><span class="fu">## Introduction</span></span>
-<span id="cb7-23"><a href="#cb7-23"></a>My goal is to use unsupervised learning techniques to cluster equine exercise sessions and detect</span>
-<span id="cb7-24"><a href="#cb7-24"></a>anomalies that may reflect behavioral irregularities, equipment issues, or potential reinjury.</span>
-<span id="cb7-25"><a href="#cb7-25"></a></span>
-<span id="cb7-26"><a href="#cb7-26"></a>I aim to detect abnormal equine exercise sessions by clustering </span>
-<span id="cb7-27"><a href="#cb7-27"></a>movement-based features derived from processed EquiPro accelerometer data. Horses </span>
-<span id="cb7-28"><a href="#cb7-28"></a>at the Al-Marah Equine Center are equipped with 7 accelerometers during exercise </span>
-<span id="cb7-29"><a href="#cb7-29"></a>sessions on a lunge line at walk, trot, and canter. The EquiPro system outputs </span>
-<span id="cb7-30"><a href="#cb7-30"></a>calculated biomechanical metrics such as diagonal advanced placement, stride </span>
-<span id="cb7-31"><a href="#cb7-31"></a>duration, and footfall duration. By modeling typical movement patterns for each </span>
-<span id="cb7-32"><a href="#cb7-32"></a>horse, I plan to identify exercise sessions that deviate significantly from a </span>
-<span id="cb7-33"><a href="#cb7-33"></a>horse’s baseline. Such anomalies may reflect behavioral irregularities, equipment </span>
-<span id="cb7-34"><a href="#cb7-34"></a>malfunction, pain, or potential reinjury. This is important in equine rehabilitation, </span>
-<span id="cb7-35"><a href="#cb7-35"></a>where subtle changes in loading or symmetry can precede clinical signs of injury.</span>
-<span id="cb7-36"><a href="#cb7-36"></a></span>
-<span id="cb7-39"><a href="#cb7-39"></a><span class="in">```{python}</span></span>
-<span id="cb7-40"><a href="#cb7-40"></a><span class="co">#| label: load-pkgs</span></span>
-<span id="cb7-41"><a href="#cb7-41"></a><span class="co">#| message: false</span></span>
-<span id="cb7-42"><a href="#cb7-42"></a></span>
-<span id="cb7-43"><a href="#cb7-43"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb7-44"><a href="#cb7-44"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb7-45"><a href="#cb7-45"></a></span>
-<span id="cb7-46"><a href="#cb7-46"></a><span class="im">from</span> IPython.display <span class="im">import</span> display</span>
-<span id="cb7-47"><a href="#cb7-47"></a><span class="in">```</span></span>
+<span id="cb7-24"><a href="#cb7-24"></a><span class="in">```{python}</span></span>
+<span id="cb7-25"><a href="#cb7-25"></a><span class="co">#| label: load-pkgs</span></span>
+<span id="cb7-26"><a href="#cb7-26"></a><span class="co">#| message: false</span></span>
+<span id="cb7-27"><a href="#cb7-27"></a></span>
+<span id="cb7-28"><a href="#cb7-28"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb7-29"><a href="#cb7-29"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb7-30"><a href="#cb7-30"></a></span>
+<span id="cb7-31"><a href="#cb7-31"></a><span class="im">from</span> IPython.display <span class="im">import</span> display</span>
+<span id="cb7-32"><a href="#cb7-32"></a><span class="in">```</span></span>
+<span id="cb7-33"><a href="#cb7-33"></a></span>
+<span id="cb7-34"><a href="#cb7-34"></a><span class="fu">## Introduction</span></span>
+<span id="cb7-35"><a href="#cb7-35"></a>My goal is to use unsupervised learning techniques to cluster equine exercise sessions and detect</span>
+<span id="cb7-36"><a href="#cb7-36"></a>anomalies that may reflect behavioral irregularities, equipment issues, or potential reinjury.</span>
+<span id="cb7-37"><a href="#cb7-37"></a></span>
+<span id="cb7-38"><a href="#cb7-38"></a>I aim to detect abnormal equine exercise sessions by clustering </span>
+<span id="cb7-39"><a href="#cb7-39"></a>movement-based features derived from processed EquiPro accelerometer data. Horses </span>
+<span id="cb7-40"><a href="#cb7-40"></a>at the Al-Marah Equine Center are equipped with 7 accelerometers during exercise </span>
+<span id="cb7-41"><a href="#cb7-41"></a>sessions on a lunge line at walk, trot, and canter. The EquiPro system outputs </span>
+<span id="cb7-42"><a href="#cb7-42"></a>calculated biomechanical metrics such as diagonal advanced placement, stride </span>
+<span id="cb7-43"><a href="#cb7-43"></a>duration, and footfall duration. By modeling typical movement patterns for each </span>
+<span id="cb7-44"><a href="#cb7-44"></a>horse, I plan to identify exercise sessions that deviate significantly from a </span>
+<span id="cb7-45"><a href="#cb7-45"></a>horse’s baseline. Such anomalies may reflect behavioral irregularities, equipment </span>
+<span id="cb7-46"><a href="#cb7-46"></a>malfunction, pain, or potential reinjury. This is important in equine rehabilitation, </span>
+<span id="cb7-47"><a href="#cb7-47"></a>where subtle changes in loading or symmetry can precede clinical signs of injury.</span>
 <span id="cb7-48"><a href="#cb7-48"></a></span>
-<span id="cb7-49"><a href="#cb7-49"></a><span class="fu">## Dataset</span></span>
-<span id="cb7-50"><a href="#cb7-50"></a></span>
-<span id="cb7-51"><a href="#cb7-51"></a>We analyze stride-level biomechanical metrics recorded by the EquiPro sessions</span>
-<span id="cb7-52"><a href="#cb7-52"></a>collected from three horses: Duque (14 sessions), Jackson (6 sessions), and Perseo (5 sessions).</span>
-<span id="cb7-53"><a href="#cb7-53"></a>Each session is stored as a CSV file containing time-sampled movement variables. </span>
-<span id="cb7-54"><a href="#cb7-54"></a>I chose this dataset because (1) it is directly </span>
-<span id="cb7-55"><a href="#cb7-55"></a>relevant to my research group’s goal of developing tools for equine rehabilitation </span>
-<span id="cb7-56"><a href="#cb7-56"></a>monitoring, and (2) the repeated-session structure makes it well suited for unsupervised </span>
-<span id="cb7-57"><a href="#cb7-57"></a>learning approaches. See below for an example of EquiPro CSV file structure from one exercise session.</span>
-<span id="cb7-58"><a href="#cb7-58"></a></span>
-<span id="cb7-61"><a href="#cb7-61"></a><span class="in">```{python}</span></span>
-<span id="cb7-62"><a href="#cb7-62"></a><span class="co">#| label: load-dataset</span></span>
-<span id="cb7-63"><a href="#cb7-63"></a><span class="co">#| message: false</span></span>
-<span id="cb7-64"><a href="#cb7-64"></a></span>
-<span id="cb7-65"><a href="#cb7-65"></a><span class="co"># Load one example Duque session to illustrate the raw data structure</span></span>
-<span id="cb7-66"><a href="#cb7-66"></a></span>
-<span id="cb7-67"><a href="#cb7-67"></a>df_duque <span class="op">=</span> pd.read_csv(<span class="st">&quot;Horses/Duque/20240626T082743-Duque-results.csv&quot;</span>)</span>
-<span id="cb7-68"><a href="#cb7-68"></a></span>
-<span id="cb7-69"><a href="#cb7-69"></a><span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Example Duque session from EquiPro:&quot;</span>)</span>
-<span id="cb7-70"><a href="#cb7-70"></a><span class="bu">print</span>(<span class="ss">f&quot;  - dataset shape: </span><span class="sc">{</span>df_duque<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">&quot;</span>)</span>
-<span id="cb7-71"><a href="#cb7-71"></a><span class="bu">print</span>(<span class="ss">f&quot;  - number of rows: </span><span class="sc">{</span>df_duque<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">&quot;</span>)</span>
-<span id="cb7-72"><a href="#cb7-72"></a><span class="bu">print</span>(<span class="ss">f&quot;  - number of columns: </span><span class="sc">{</span>df_duque<span class="sc">.</span>shape[<span class="dv">1</span>]<span class="sc">}</span><span class="ss">&quot;</span>)</span>
-<span id="cb7-73"><a href="#cb7-73"></a></span>
-<span id="cb7-74"><a href="#cb7-74"></a><span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">First few rows:&quot;</span>)</span>
-<span id="cb7-75"><a href="#cb7-75"></a>display(df_duque.head())</span>
-<span id="cb7-76"><a href="#cb7-76"></a></span>
-<span id="cb7-77"><a href="#cb7-77"></a><span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Data types:&quot;</span>)</span>
-<span id="cb7-78"><a href="#cb7-78"></a>display(df_duque.dtypes)</span>
-<span id="cb7-79"><a href="#cb7-79"></a></span>
-<span id="cb7-80"><a href="#cb7-80"></a><span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Summary statistics:&quot;</span>)</span>
-<span id="cb7-81"><a href="#cb7-81"></a></span>
-<span id="cb7-82"><a href="#cb7-82"></a><span class="co"># Select numeric columns</span></span>
-<span id="cb7-83"><a href="#cb7-83"></a>numeric_cols <span class="op">=</span> df_duque.select_dtypes(include<span class="op">=</span><span class="st">&quot;number&quot;</span>).columns</span>
-<span id="cb7-84"><a href="#cb7-84"></a></span>
-<span id="cb7-85"><a href="#cb7-85"></a><span class="co"># Drop &#39;segment&#39; column</span></span>
-<span id="cb7-86"><a href="#cb7-86"></a>numeric_cols <span class="op">=</span> [c <span class="cf">for</span> c <span class="kw">in</span> numeric_cols <span class="cf">if</span> c <span class="op">!=</span> <span class="st">&quot;segment&quot;</span>]</span>
-<span id="cb7-87"><a href="#cb7-87"></a></span>
-<span id="cb7-88"><a href="#cb7-88"></a>display(df_duque[numeric_cols].describe())</span>
-<span id="cb7-89"><a href="#cb7-89"></a><span class="in">```</span></span>
-<span id="cb7-90"><a href="#cb7-90"></a></span>
-<span id="cb7-91"><a href="#cb7-91"></a><span class="fu">## Questions</span></span>
-<span id="cb7-92"><a href="#cb7-92"></a></span>
-<span id="cb7-93"><a href="#cb7-93"></a>Which exercise sessions significantly deviate from each horse’s baseline distribution, </span>
-<span id="cb7-94"><a href="#cb7-94"></a>and which biomechanical variables contribute most strongly to those deviations?</span>
-<span id="cb7-95"><a href="#cb7-95"></a></span>
-<span id="cb7-96"><a href="#cb7-96"></a>How do different unsupervised anomaly-detection methods (Z-score thresholding, K-means cluster distance, </span>
-<span id="cb7-97"><a href="#cb7-97"></a>and Isolation Forest) compare in identifying abnormal sessions, and to what extent do they </span>
-<span id="cb7-98"><a href="#cb7-98"></a>agree or disagree on which sessions are flagged as anomalous?</span>
-<span id="cb7-99"><a href="#cb7-99"></a></span>
-<span id="cb7-100"><a href="#cb7-100"></a><span class="fu">## Analysis plan</span></span>
-<span id="cb7-101"><a href="#cb7-101"></a></span>
-<span id="cb7-102"><a href="#cb7-102"></a>For this project, I analyze only trot strides. The trot is a highly symmetric</span>
-<span id="cb7-103"><a href="#cb7-103"></a>gait which makes it convenient to study. More importantly, however,</span>
-<span id="cb7-104"><a href="#cb7-104"></a>mixing gaits would introduce variability unrelated to movement abnormalities.</span>
-<span id="cb7-105"><a href="#cb7-105"></a>For each exercise session, I will load the corresponding EquiPro CSV file and extract </span>
-<span id="cb7-106"><a href="#cb7-106"></a>biomechanical variables relevant to symmetry, gait, and stride mechanics. To create </span>
-<span id="cb7-107"><a href="#cb7-107"></a>session-level features, I will summarize each variable using statistics like mean, </span>
-<span id="cb7-108"><a href="#cb7-108"></a>standard deviation, interquartile range, etc. These engineered features will form </span>
-<span id="cb7-109"><a href="#cb7-109"></a>a feature matrix for each horse where each row is a session and each column is a </span>
-<span id="cb7-110"><a href="#cb7-110"></a>biomechanical variable.</span>
-<span id="cb7-111"><a href="#cb7-111"></a></span>
-<span id="cb7-112"><a href="#cb7-112"></a>I will then model each horse&#39;s baseline movement patterns. I will standardize all </span>
-<span id="cb7-113"><a href="#cb7-113"></a>features within each horse by converting them to z-scores in order to remove scale </span>
-<span id="cb7-114"><a href="#cb7-114"></a>differences. This will provide a clear reference point. Features consistently close </span>
-<span id="cb7-115"><a href="#cb7-115"></a>to zero after standardization indicate typical behavior, but large positive or negative </span>
-<span id="cb7-116"><a href="#cb7-116"></a>values indicate potential deviations. These standardized distributions form the baseline </span>
-<span id="cb7-117"><a href="#cb7-117"></a>against which the anomaly-detection methods will evaluate whether any given session </span>
-<span id="cb7-118"><a href="#cb7-118"></a>departs significantly from a horse’s typical movement pattern.</span>
-<span id="cb7-119"><a href="#cb7-119"></a></span>
-<span id="cb7-120"><a href="#cb7-120"></a>After establishing the baselines for each horse using z-scores, I will apply three </span>
-<span id="cb7-121"><a href="#cb7-121"></a>unsupervised anomaly-detection methods to identify sessions that deviate from typical </span>
-<span id="cb7-122"><a href="#cb7-122"></a>movement. Z-score analysis will allow me to flag sessions where specific features </span>
-<span id="cb7-123"><a href="#cb7-123"></a>are unusually high or low relative to baseline distribution. K-means clustering will </span>
-<span id="cb7-124"><a href="#cb7-124"></a>identify anomalies based on their distance from cluster centers in the multivariate </span>
-<span id="cb7-125"><a href="#cb7-125"></a>feature space. Isolation Forest will give a measure of how isolated a session is from </span>
-<span id="cb7-126"><a href="#cb7-126"></a>the rest. Each method will produce a numerical anomaly score and a corresponding label </span>
-<span id="cb7-127"><a href="#cb7-127"></a>indicating whether the session is considered abnormal.</span>
-<span id="cb7-128"><a href="#cb7-128"></a></span>
-<span id="cb7-129"><a href="#cb7-129"></a>I will then compare the results between the three methods. I will look for overlap </span>
-<span id="cb7-130"><a href="#cb7-130"></a>between flagged sessions, sessions consistently identified as outliers, and note where </span>
-<span id="cb7-131"><a href="#cb7-131"></a>the methods differ. I will also interpret the identified anomalies as they relate to </span>
-<span id="cb7-132"><a href="#cb7-132"></a>biomechanical variables. I will inspect which specific features contribute most strongly </span>
-<span id="cb7-133"><a href="#cb7-133"></a>to deviations from baseline. This could give insight as to possible explanations for </span>
-<span id="cb7-134"><a href="#cb7-134"></a>deviations: behavioral irregularities, equipment malfunction, pain, or potential reinjury.</span>
-<span id="cb7-135"><a href="#cb7-135"></a></span>
-<span id="cb7-136"><a href="#cb7-136"></a>No external datasets will be merged.</span>
+<span id="cb7-49"><a href="#cb7-49"></a></span>
+<span id="cb7-50"><a href="#cb7-50"></a><span class="fu">## Dataset</span></span>
+<span id="cb7-51"><a href="#cb7-51"></a></span>
+<span id="cb7-52"><a href="#cb7-52"></a>We analyze stride-level biomechanical metrics recorded by the EquiPro sessions</span>
+<span id="cb7-53"><a href="#cb7-53"></a>collected from three horses: Duque (14 sessions), Jackson (6 sessions), and Perseo (5 sessions).</span>
+<span id="cb7-54"><a href="#cb7-54"></a>Each session is stored as a CSV file containing time-sampled movement variables. </span>
+<span id="cb7-55"><a href="#cb7-55"></a>I chose this dataset because (1) it is directly </span>
+<span id="cb7-56"><a href="#cb7-56"></a>relevant to my research group’s goal of developing tools for equine rehabilitation </span>
+<span id="cb7-57"><a href="#cb7-57"></a>monitoring, and (2) the repeated-session structure makes it well suited for unsupervised </span>
+<span id="cb7-58"><a href="#cb7-58"></a>learning approaches. See below for an example of EquiPro CSV file structure from one exercise session.</span>
+<span id="cb7-59"><a href="#cb7-59"></a></span>
+<span id="cb7-62"><a href="#cb7-62"></a><span class="in">```{python}</span></span>
+<span id="cb7-63"><a href="#cb7-63"></a><span class="co">#| label: load-dataset</span></span>
+<span id="cb7-64"><a href="#cb7-64"></a><span class="co">#| message: false</span></span>
+<span id="cb7-65"><a href="#cb7-65"></a></span>
+<span id="cb7-66"><a href="#cb7-66"></a><span class="co"># Load one example Duque session to illustrate the raw data structure</span></span>
+<span id="cb7-67"><a href="#cb7-67"></a></span>
+<span id="cb7-68"><a href="#cb7-68"></a>df_duque <span class="op">=</span> pd.read_csv(<span class="st">&quot;Horses/Duque/20240626T082743-Duque-results.csv&quot;</span>)</span>
+<span id="cb7-69"><a href="#cb7-69"></a></span>
+<span id="cb7-70"><a href="#cb7-70"></a><span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Example Duque session from EquiPro:&quot;</span>)</span>
+<span id="cb7-71"><a href="#cb7-71"></a><span class="bu">print</span>(<span class="ss">f&quot;  - dataset shape: </span><span class="sc">{</span>df_duque<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb7-72"><a href="#cb7-72"></a><span class="bu">print</span>(<span class="ss">f&quot;  - number of rows: </span><span class="sc">{</span>df_duque<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb7-73"><a href="#cb7-73"></a><span class="bu">print</span>(<span class="ss">f&quot;  - number of columns: </span><span class="sc">{</span>df_duque<span class="sc">.</span>shape[<span class="dv">1</span>]<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb7-74"><a href="#cb7-74"></a></span>
+<span id="cb7-75"><a href="#cb7-75"></a><span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">First few rows:&quot;</span>)</span>
+<span id="cb7-76"><a href="#cb7-76"></a>display(df_duque.head())</span>
+<span id="cb7-77"><a href="#cb7-77"></a></span>
+<span id="cb7-78"><a href="#cb7-78"></a><span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Data types:&quot;</span>)</span>
+<span id="cb7-79"><a href="#cb7-79"></a>display(df_duque.dtypes)</span>
+<span id="cb7-80"><a href="#cb7-80"></a></span>
+<span id="cb7-81"><a href="#cb7-81"></a><span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Summary statistics:&quot;</span>)</span>
+<span id="cb7-82"><a href="#cb7-82"></a></span>
+<span id="cb7-83"><a href="#cb7-83"></a><span class="co"># Select numeric columns</span></span>
+<span id="cb7-84"><a href="#cb7-84"></a>numeric_cols <span class="op">=</span> df_duque.select_dtypes(include<span class="op">=</span><span class="st">&quot;number&quot;</span>).columns</span>
+<span id="cb7-85"><a href="#cb7-85"></a></span>
+<span id="cb7-86"><a href="#cb7-86"></a><span class="co"># Drop &#39;segment&#39; column</span></span>
+<span id="cb7-87"><a href="#cb7-87"></a>numeric_cols <span class="op">=</span> [c <span class="cf">for</span> c <span class="kw">in</span> numeric_cols <span class="cf">if</span> c <span class="op">!=</span> <span class="st">&quot;segment&quot;</span>]</span>
+<span id="cb7-88"><a href="#cb7-88"></a></span>
+<span id="cb7-89"><a href="#cb7-89"></a>display(df_duque[numeric_cols].describe())</span>
+<span id="cb7-90"><a href="#cb7-90"></a><span class="in">```</span></span>
+<span id="cb7-91"><a href="#cb7-91"></a></span>
+<span id="cb7-92"><a href="#cb7-92"></a><span class="fu">## Questions</span></span>
+<span id="cb7-93"><a href="#cb7-93"></a></span>
+<span id="cb7-94"><a href="#cb7-94"></a>Which exercise sessions significantly deviate from each horse’s baseline distribution, </span>
+<span id="cb7-95"><a href="#cb7-95"></a>and which biomechanical variables contribute most strongly to those deviations?</span>
+<span id="cb7-96"><a href="#cb7-96"></a></span>
+<span id="cb7-97"><a href="#cb7-97"></a>How do different unsupervised anomaly-detection methods (Z-score thresholding, K-means cluster distance, </span>
+<span id="cb7-98"><a href="#cb7-98"></a>and Isolation Forest) compare in identifying abnormal sessions, and to what extent do they </span>
+<span id="cb7-99"><a href="#cb7-99"></a>agree or disagree on which sessions are flagged as anomalous?</span>
+<span id="cb7-100"><a href="#cb7-100"></a></span>
+<span id="cb7-101"><a href="#cb7-101"></a><span class="fu">## Analysis plan</span></span>
+<span id="cb7-102"><a href="#cb7-102"></a></span>
+<span id="cb7-103"><a href="#cb7-103"></a>For this project, I analyze only trot strides. The trot is a highly symmetric</span>
+<span id="cb7-104"><a href="#cb7-104"></a>gait which makes it convenient to study. More importantly, however,</span>
+<span id="cb7-105"><a href="#cb7-105"></a>mixing gaits would introduce variability unrelated to movement abnormalities.</span>
+<span id="cb7-106"><a href="#cb7-106"></a>For each exercise session, I will load the corresponding EquiPro CSV file and extract </span>
+<span id="cb7-107"><a href="#cb7-107"></a>biomechanical variables relevant to symmetry, gait, and stride mechanics. To create </span>
+<span id="cb7-108"><a href="#cb7-108"></a>session-level features, I will summarize each variable using statistics like mean, </span>
+<span id="cb7-109"><a href="#cb7-109"></a>standard deviation, interquartile range, etc. These engineered features will form </span>
+<span id="cb7-110"><a href="#cb7-110"></a>a feature matrix for each horse where each row is a session and each column is a </span>
+<span id="cb7-111"><a href="#cb7-111"></a>biomechanical variable.</span>
+<span id="cb7-112"><a href="#cb7-112"></a></span>
+<span id="cb7-113"><a href="#cb7-113"></a>I will then model each horse&#39;s baseline movement patterns. I will standardize all </span>
+<span id="cb7-114"><a href="#cb7-114"></a>features within each horse by converting them to z-scores in order to remove scale </span>
+<span id="cb7-115"><a href="#cb7-115"></a>differences. This will provide a clear reference point. Features consistently close </span>
+<span id="cb7-116"><a href="#cb7-116"></a>to zero after standardization indicate typical behavior, but large positive or negative </span>
+<span id="cb7-117"><a href="#cb7-117"></a>values indicate potential deviations. These standardized distributions form the baseline </span>
+<span id="cb7-118"><a href="#cb7-118"></a>against which the anomaly-detection methods will evaluate whether any given session </span>
+<span id="cb7-119"><a href="#cb7-119"></a>departs significantly from a horse’s typical movement pattern.</span>
+<span id="cb7-120"><a href="#cb7-120"></a></span>
+<span id="cb7-121"><a href="#cb7-121"></a>After establishing the baselines for each horse using z-scores, I will apply three </span>
+<span id="cb7-122"><a href="#cb7-122"></a>unsupervised anomaly-detection methods to identify sessions that deviate from typical </span>
+<span id="cb7-123"><a href="#cb7-123"></a>movement. Z-score analysis will allow me to flag sessions where specific features </span>
+<span id="cb7-124"><a href="#cb7-124"></a>are unusually high or low relative to baseline distribution. K-means clustering will </span>
+<span id="cb7-125"><a href="#cb7-125"></a>identify anomalies based on their distance from cluster centers in the multivariate </span>
+<span id="cb7-126"><a href="#cb7-126"></a>feature space. Isolation Forest will give a measure of how isolated a session is from </span>
+<span id="cb7-127"><a href="#cb7-127"></a>the rest. Each method will produce a numerical anomaly score and a corresponding label </span>
+<span id="cb7-128"><a href="#cb7-128"></a>indicating whether the session is considered abnormal.</span>
+<span id="cb7-129"><a href="#cb7-129"></a></span>
+<span id="cb7-130"><a href="#cb7-130"></a>I will then compare the results between the three methods. I will look for overlap </span>
+<span id="cb7-131"><a href="#cb7-131"></a>between flagged sessions, sessions consistently identified as outliers, and note where </span>
+<span id="cb7-132"><a href="#cb7-132"></a>the methods differ. I will also interpret the identified anomalies as they relate to </span>
+<span id="cb7-133"><a href="#cb7-133"></a>biomechanical variables. I will inspect which specific features contribute most strongly </span>
+<span id="cb7-134"><a href="#cb7-134"></a>to deviations from baseline. This could give insight as to possible explanations for </span>
+<span id="cb7-135"><a href="#cb7-135"></a>deviations: behavioral irregularities, equipment malfunction, pain, or potential reinjury.</span>
+<span id="cb7-136"><a href="#cb7-136"></a></span>
+<span id="cb7-137"><a href="#cb7-137"></a>No external datasets will be merged.</span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

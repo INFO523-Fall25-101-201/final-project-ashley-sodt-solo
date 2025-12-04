@@ -1,10 +1,10 @@
 {
-  "hash": "32901dd56f1a1f16d0765715098c2972",
+  "hash": "00a0374950c9dbd6f7cdf4d395b38f3f",
   "result": {
     "engine": "jupyter",
-    "markdown": "---\ntitle: \"About\"\nformat: html\neditor: visual\njupyter: python3\n---\n\nThis project was developed by **[Ashley Sodt]** For [INFO 523 - Data Mining and Discovery](https://datamineaz.org/) at the University of Arizona, taught by Dr. Greg Chism. Ashley Sodt is a second year PhD student in the Applied Mathematics program.\n\n",
+    "markdown": "---\ntitle: \"About\"\nformat: html\neditor: visual\njupyter: python3\n---\n\nThis project was developed by Ashley Sodt For [INFO 523 - Data Mining and Discovery](https://datamineaz.org/) at the University of Arizona, taught by Dr. Greg Chism. Ashley Sodt is a second year PhD student in the Applied Mathematics program.\n\n",
     "supporting": [
-      "about_files/figure-html"
+      "about_files"
     ],
     "filters": [],
     "includes": {}
