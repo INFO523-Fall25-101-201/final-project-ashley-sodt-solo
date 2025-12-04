@@ -1,8 +1,8 @@
 {
-  "hash": "b3350baf28db3a424c2802459e883aaa",
+  "hash": "fd988bb39fa869c728578cd77a983711",
   "result": {
     "engine": "jupyter",
-    "markdown": "---\ntitle: \"Project Title\"\nsubtitle: \"INFO 523 - Final Project\"\nauthor: \n  - name: \"Team name - Team member 1, Team member 2,...\"\n    affiliations:\n      - name: \"College of Information Science, University of Arizona\"\ndescription: \"Project description\"\nformat:\n   html:\n    code-tools: true\n    code-overflow: wrap\n    embed-resources: true\neditor: visual\nexecute:\n  warning: false\n  echo: false\njupyter: python3\n---\n\n## Abstract\n\nAdd project abstract here.\n\n",
+    "markdown": "---\ntitle: \"Clustering Movement Patterns in Equine Exercise Sessions Using Anomaly Detection\"\nsubtitle: \"INFO 523 - Final Project\"\nauthor: \n  - name: \"Ashley Sodt\"\n    affiliations:\n      - name: \"Applied Math PhD Student, University of Arizona\"\ndescription: \"Project description\"\nformat:\n   html:\n    code-tools: true\n    code-overflow: wrap\n    embed-resources: true\neditor: visual\nexecute:\n  warning: false\n  echo: false\njupyter: python3\n---\n\n## Abstract\n\nAdd project abstract here.\n\n",
     "supporting": [
       "index_files/figure-html"
     ],

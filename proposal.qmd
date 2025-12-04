@@ -18,12 +18,10 @@ execute:
   message: false
 jupyter: python3
 ---
-One sentence description: 
-"My goal is to use unsupervised learning techniques to cluster EquiPro sessions and detect
-anomalies that may reflect behavioral irregularities, equipment issues, or potential reinjury."
+My goal is to use unsupervised learning techniques to cluster EquiPro sessions and detect
+anomalies that may reflect behavioral irregularities, equipment issues, or potential reinjury.
 
-Paragraph description:
-"In this project, I aim to detect abnormal equine exercise sessions by clustering 
+I aim to detect abnormal equine exercise sessions by clustering 
 movement-based features derived from processed EquiPro accelerometer data. Horses 
 at the Al-Marah Equine Center are equipped with 7 accelerometers during exercise 
 sessions on a lunge line at walk, trot, and canter. The EquiPro system outputs 
@@ -33,19 +31,6 @@ horse, I plan to identify exercise sessions that deviate significantly from a
 horse’s baseline. Such anomalies may reflect behavioral irregularities, equipment 
 malfunction, pain, or potential reinjury. This is important in equine rehabilitation, 
 where subtle changes in loading or symmetry can precede clinical signs of injury.
-
-The dataset for this project consists of multiple sessions for three horses: 
-Duque (14 sessions), Jackson (6 sessions), and Perseo (5 sessions). The Equipro 
-system processes results for each session and outputs a CSV file containing 
-stride-level, time-sampled biomechanical variables. For each horse, I will compile 
-these sessions into one file with session-level features for analysis. I chose this 
-dataset because it is directly relevant to my graduate research and because it is 
-well suited for unsupervised analysis. Session-level features will allow me to 
-establish per-horse baseline distributions and apply methods such as z-score 
-analysis, k-means clustering, and Isolation Forest to quantify deviations. By 
-identifying and visualizing sessions with anomalies over time, this project will 
-explore whether data-driven monitoring can help track rehabilitation progress and 
-highlight sessions that warrant further investigation."
 
 ```{python}
 #| label: load-pkgs
@@ -58,6 +43,14 @@ from IPython.display import display
 ```
 
 ## Dataset
+
+We analyze stride-level biomechanical metrics recoreded by the EquiPro sessions
+collected from three horses: Duque (14 sessions), Jackson (6 sessions), and Perseo (5 sessions).
+Each session is stored as a CSV file containing time-sampled movement variables. 
+I chose this dataset because (1) it is directly 
+relevant to my research group’s goal of developing tools for equine rehabilitation 
+monitoring, and (2) the repeated-session structure makes it well suited for unsupervised 
+learning approaches.
 
 ```{python}
 #| label: load-dataset
@@ -79,22 +72,15 @@ print("\nData types:")
 display(df_duque.dtypes)
 
 print("\nSummary statistics:")
-display(df_duque.describe())
+
+# Select numeric columns
+numeric_cols = df_duque.select_dtypes(include="number").columns
+
+# Drop 'segment' if it’s there
+numeric_cols = [c for c in numeric_cols if c != "segment"]
+
+display(df_duque[numeric_cols].describe())
 ```
-
-## Dataset description:
-
-The primary dataset consists of EquiPro csv result files collected from horses exercised at 
-the Al-Marah Equine Center. The EquiPro system outputs a CSV file for each session containing 
-biomechanical variables like diagonal advanced placement and duration of footfalls. 
-The file loaded above for Duque contains {{ df_duque.shape[0] }} rows and {{ df_duque.shape[1] }} columns.
-
-For this project, I am using three horses with multiple sessions: 
-Duque (14 sessions), Jackson (6 sessions), and Perseo (5 sessions). These sessions allow 
-analysis within each horse over time. I chose this dataset because (1) it is directly 
-relevant to my research group’s goal of developing tools for equine rehabilitation 
-monitoring, and (2) the repeated-session structure makes it well suited for unsupervised 
-learning approaches.
 
 ## Questions
 
@@ -122,8 +108,6 @@ values indicate potential deviations. These standardized distributions form the 
 against which the anomaly-detection methods will evaluate whether any given session 
 departs significantly from a horse’s typical movement pattern.
 
-um
-
 After establishing the baselines for each horse using z-scores, I will apply three 
 unsupervised anomaly-detection methods to identify sessions that deviate from typical 
 movement. Z-score analysis will allow me to flag sessions where specific features 
@@ -141,3 +125,14 @@ to deviations from baseline. This could give insight as to possible explanations
 deviations: behavioral irregularities, equipment malfunction, pain, or potential reinjury.
 
 No external datasets will be merged.
+
+blah
+For each horse, I will compile 
+these sessions into one file with session-level features for analysis. I chose this 
+dataset because it is directly relevant to my graduate research and because it is 
+well suited for unsupervised analysis. Session-level features will allow me to 
+establish per-horse baseline distributions and apply methods such as z-score 
+analysis, k-means clustering, and Isolation Forest to quantify deviations. By 
+identifying and visualizing sessions with anomalies over time, this project will 
+explore whether data-driven monitoring can help track rehabilitation progress and 
+highlight sessions that warrant further investigation.
