@@ -1,8 +1,8 @@
 ---
-title: "Project Title"
+title: "Clustering Movement Patterns in Equine Exercise Sessions Using Anomaly Detection"
 subtitle: "INFO 523 - Final Project"
 author: 
-  - name: "Team name - Team member 1, Team member 2,..."
+  - name: "Ashley Sodt"
     affiliations:
       - name: "College of Information Science, University of Arizona"
 description: "Project description"
