@@ -273,6 +273,8 @@ display(
 
 import matplotlib.pyplot as plt
 
+
+
 # Example: max |z|-score vs. session across horses
 plt.figure()
 for horse, df_h in anomaly_summary.groupby("horse"):
@@ -283,7 +285,7 @@ plt.xlabel("session_id")
 plt.title("Session-level deviation from baseline (max |z|)")
 plt.legend()
 plt.tight_layout()
-plt.show()
+plt.savefig("fig_max_zscore.png", dpi=300, bbox_inches='tight')
 
 # Example: number of methods that flag each session
 plt.figure()
@@ -295,4 +297,4 @@ plt.xlabel("session_id")
 plt.title("Agreement between anomaly-detection methods")
 plt.legend()
 plt.tight_layout()
-plt.show()
+plt.savefig("fig_method_agreement.png", dpi=300, bbox_inches='tight')

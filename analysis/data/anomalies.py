@@ -273,26 +273,33 @@ display(
 
 import matplotlib.pyplot as plt
 
+# Convert session_id to datetime and format to mm/dd/yy
+anomaly_summary["session_date"] = pd.to_datetime(
+    anomaly_summary["session_id"].str[:8], 
+    format="%Y%m%d"
+).dt.strftime("%m/%d/%y")
+
+
 # Example: max |z|-score vs. session across horses
 plt.figure()
 for horse, df_h in anomaly_summary.groupby("horse"):
-    plt.scatter(df_h["session_id"], df_h["z_max_abs"], label=horse)
+    plt.scatter(df_h["session_date"], df_h["z_max_abs"], label=horse)
 plt.xticks(rotation=90)
 plt.ylabel("max |z-score| across features")
 plt.xlabel("session_id")
 plt.title("Session-level deviation from baseline (max |z|)")
 plt.legend()
 plt.tight_layout()
-plt.show()
+plt.savefig("fig_max_zscore.png", dpi=300, bbox_inches='tight')
 
 # Example: number of methods that flag each session
 plt.figure()
 for horse, df_h in anomaly_summary.groupby("horse"):
-    plt.scatter(df_h["session_id"], df_h["n_methods_flagged"], label=horse)
+    plt.scatter(df_h["session_date"], df_h["n_methods_flagged"], label=horse)
 plt.xticks(rotation=90)
 plt.ylabel("number of methods flagging session")
 plt.xlabel("session_id")
 plt.title("Agreement between anomaly-detection methods")
 plt.legend()
 plt.tight_layout()
-plt.show()
+plt.savefig("fig_method_agreement.png", dpi=300, bbox_inches='tight')
