@@ -122,6 +122,8 @@ values indicate potential deviations. These standardized distributions form the 
 against which the anomaly-detection methods will evaluate whether any given session 
 departs significantly from a horse’s typical movement pattern.
 
+um
+
 After establishing the baselines for each horse using z-scores, I will apply three 
 unsupervised anomaly-detection methods to identify sessions that deviate from typical 
 movement. Z-score analysis will allow me to flag sessions where specific features 
