@@ -1,7 +1,7 @@
 ---
-title: "Project title"
-subtitle: "INFO 523 - Summer 2025 - Final Project"
-author: "Author names"
+title: "Clustering Movement Patterns in Equine Exercise Sessions"
+subtitle: "INFO 523 - Fall 2025 - Final Project"
+author: "Ashley Sodt"
 title-slide-attributes:
   data-background-image: images/watercolour_sys02_img34_teacup-ocean.jpg
   data-background-size: stretch
@@ -51,13 +51,21 @@ mtcars['speed'] = mtcars['horsepower'] / mtcars['weight']
 penguins = sns.load_dataset('penguins').dropna()
 ```
 
+
+
 # Using Quarto for presentations
 
-## Quarto
+## Introduction
 
--   The presentation is created using the Quarto CLI
+-   AMEC Laura Miller
 
--   `##` sets the start of a new slide
+-   Horses often develop detectable gait abnormalities before injury or reinjury occurs.
+
+-   EquiPro intertial measurement units collect accelerometer data
+\indent
+
+- Outputs calculated stride-level biomechanical metrics
+
 
 ## Layouts
 

@@ -606,11 +606,11 @@ z_spaces[horse] = X_z</code></pre>
 </section>
 <section id="example-max-z-score-vs.-session-across-horses" class="level1">
 <h1>Example: max |z|-score vs.&nbsp;session across horses</h1>
-<p>plt.figure() for horse, df_h in anomaly_summary.groupby(“horse”): plt.scatter(df_h[“session_id”], df_h[“z_max_abs”], label=horse) plt.xticks(rotation=90) plt.ylabel(“max |z-score| across features”) plt.xlabel(“session_id”) plt.title(“Session-level deviation from baseline (max |z|)”) plt.legend() plt.tight_layout() plt.show()</p>
+<p>plt.figure() for horse, df_h in anomaly_summary.groupby(“horse”): plt.scatter(df_h[“session_id”], df_h[“z_max_abs”], label=horse) plt.xticks(rotation=90) plt.ylabel(“max |z-score| across features”) plt.xlabel(“session_id”) plt.title(“Session-level deviation from baseline (max |z|)”) plt.legend() plt.tight_layout() plt.savefig(“fig_max_zscore.png”, dpi=300, bbox_inches=‘tight’)</p>
 </section>
 <section id="example-number-of-methods-that-flag-each-session" class="level1">
 <h1>Example: number of methods that flag each session</h1>
-<p>plt.figure() for horse, df_h in anomaly_summary.groupby(“horse”): plt.scatter(df_h[“session_id”], df_h[“n_methods_flagged”], label=horse) plt.xticks(rotation=90) plt.ylabel(“number of methods flagging session”) plt.xlabel(“session_id”) plt.title(“Agreement between anomaly-detection methods”) plt.legend() plt.tight_layout() plt.show()</p>
+<p>plt.figure() for horse, df_h in anomaly_summary.groupby(“horse”): plt.scatter(df_h[“session_id”], df_h[“n_methods_flagged”], label=horse) plt.xticks(rotation=90) plt.ylabel(“number of methods flagging session”) plt.xlabel(“session_id”) plt.title(“Agreement between anomaly-detection methods”) plt.legend() plt.tight_layout() plt.savefig(“fig_method_agreement.png”, dpi=300, bbox_inches=‘tight’)</p>
 
 
 </section>

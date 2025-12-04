@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-html/tabby.min.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -121,6 +121,9 @@
       margin-right: 0; 
     }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+  
+  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -128,7 +131,7 @@
 
 <section id="title-slide" data-background-image="images/watercolour_sys02_img34_teacup-ocean.jpg" data-background-opacity="0.7" data-background-size="stretch" data-slide-number="none" class="quarto-title-block center">
   <h1 class="title">Clustering Movement Patterns in Equine Exercise Sessions</h1>
-  <p class="subtitle">INFO 523 - Fall 2025 - Final Project</p>
+  <p class="subtitle">INFO 523 - Summer 2025 - Final Project</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -140,370 +143,151 @@ Ashley Sodt
 
 </section>
 <section>
-<section id="using-quarto-for-presentations" class="title-slide slide level1 center">
-<h1>Using Quarto for presentations</h1>
+<section id="project-overview" class="title-slide slide level1 center">
+<h1>Project overview</h1>
 
 </section>
-<section id="introduction" class="slide level2">
-<h2>Introduction</h2>
+<section id="why-horse-movement-anomalies" class="slide level2">
+<h2>Why horse movement anomalies?</h2>
 <ul>
-<li><p>AMEC Laura Miller</p></li>
-<li><p>Horses often develop detectable gait abnormalities before injury or reinjury occurs.</p></li>
-<li><p>EquiPro intertial measurement units collect accelerometer data </p></li>
-<li><p>Outputs calculated stride-level biomechanical metrics</p></li>
+<li>Performance and rehab horses often show <strong>subtle gait changes</strong> long before obvious lameness.</li>
+<li>Wearable sensors (EquiPro) capture <strong>stride-level biomechanics</strong> over many exercise sessions.</li>
+<li>But manually reviewing every stride across many days is <strong>not scalable</strong>.</li>
+<li>Goal of this project:
+<ul>
+<li>Build <strong>session-level summaries</strong> of movement,</li>
+<li>Model each horse’s <strong>typical pattern</strong>, and</li>
+<li>Use <strong>unsupervised anomaly detection</strong> to flag unusual sessions.</li>
+</ul></li>
 </ul>
 </section>
-<section id="layouts" class="slide level2">
-<h2>Layouts</h2>
-<p>You can use plain text</p>
-<div class="columns">
-<div class="column" style="width:40%;">
+<section id="data-and-feature-engineering" class="slide level2">
+<h2>Data and feature engineering</h2>
 <ul>
-<li>or bullet points<sup>1</sup></li>
-</ul>
-</div><div class="column" style="width:60%;">
-<p>or in two columns</p>
-</div></div>
+<li>Data source: <strong>EquiPro CSV files</strong>, one file per exercise session per horse.</li>
+<li>Each file contains many strides with variables like:
 <ul>
-<li><p>like</p></li>
-<li><p>this</p></li>
+<li>Stride duration, duty factor, diagonal advanced placement, symmetry measures, etc.</li>
+</ul></li>
+<li>For each session (per horse), I compute:
+<ul>
+<li>Mean, standard deviation, interquartile range, min, and max</li>
+<li>For each selected biomechanical variable</li>
+</ul></li>
+<li>Result: a <strong>session-level feature matrix</strong>:
+<ul>
+<li>Rows = sessions, columns = engineered biomechanical features.</li>
+</ul></li>
 </ul>
-<aside><ol class="aside-footnotes"><li id="fn1"><p>And add footnotes</p></li></ol></aside></section>
-<section id="code" class="slide level2">
-<h2>Code</h2>
-<div id="672aa47c" class="cell" data-execution_count="4">
-<div class="cell-output cell-output-stdout">
-<pre><code>                            OLS Regression Results                            
-==============================================================================
-Dep. Variable:                    mpg   R-squared:                       0.073
-Model:                            OLS   Adj. R-squared:                  0.070
-Method:                 Least Squares   F-statistic:                     30.59
-Date:                Thu, 04 Dec 2025   Prob (F-statistic):           5.84e-08
-Time:                        21:54:35   Log-Likelihood:                -1346.4
-No. Observations:                 392   AIC:                             2697.
-Df Residuals:                     390   BIC:                             2705.
-Df Model:                           1                                         
-Covariance Type:            nonrobust                                         
-==============================================================================
-                 coef    std err          t      P&gt;|t|      [0.025      0.975]
-------------------------------------------------------------------------------
-const         35.8015      2.266     15.800      0.000      31.347      40.257
-speed       -354.7055     64.129     -5.531      0.000    -480.788    -228.623
-==============================================================================
-Omnibus:                       27.687   Durbin-Watson:                   0.589
-Prob(Omnibus):                  0.000   Jarque-Bera (JB):               18.976
-Skew:                           0.420   Prob(JB):                     7.57e-05
-Kurtosis:                       2.323   Cond. No.                         169.
-==============================================================================
-
-Notes:
-[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</code></pre>
-</div>
-</div>
 </section>
-<section id="plots" class="slide level2">
-<h2>Plots</h2>
-<div id="71f29404" class="cell" data-execution_count="5">
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><img data-src="presentation_files/figure-revealjs/cell-6-output-1.png" width="1694" height="1076"></p>
-</figure>
-</div>
-</div>
-</div>
+<section id="per-horse-standardization-baseline" class="slide level2">
+<h2>Per-horse standardization (baseline)</h2>
+<ul>
+<li>Horses differ a lot in size, conformation, and way of going.</li>
+<li>To make features comparable within each horse, I:
+<ul>
+<li>Split data <strong>by horse</strong>.</li>
+<li>Standardize all columns to <strong>z-scores</strong> (mean 0, sd 1) per horse.</li>
+</ul></li>
+<li>Interpretation:
+<ul>
+<li>Values near 0 ⇒ typical for that horse.</li>
+<li>Large |z| values ⇒ potential deviations from their baseline pattern.</li>
+</ul></li>
+<li>These standardized features provide the <strong>baseline</strong> that anomaly detectors use.</li>
+</ul>
 </section>
-<section id="plot-and-text" class="slide level2">
-<h2>Plot and text</h2>
+<section id="anomaly-detection-methods" class="slide level2">
+<h2>Anomaly detection methods</h2>
+<ul>
+<li>I use three <strong>unsupervised</strong> approaches:
+<ul>
+<li><strong>Z-score thresholding</strong>
+<ul>
+<li>Flag sessions where several features have |z| above a chosen cutoff.</li>
+</ul></li>
+<li><strong>K-means clustering</strong>
+<ul>
+<li>Cluster sessions in feature space.</li>
+<li>Small, distant clusters can indicate unusual sessions.</li>
+</ul></li>
+<li><strong>Isolation Forest</strong>
+<ul>
+<li>Tree-based method that “isolates” rare or odd points.</li>
+<li>Returns an anomaly score per session.</li>
+</ul></li>
+</ul></li>
+<li>These methods complement each other and give a <strong>richer picture</strong> of atypical movement.</li>
+</ul>
+</section>
+<section id="simple-example-visualization" class="slide level2">
+<h2>Simple example visualization</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
-<li><p>Some text</p></li>
-<li><p>goes here</p></li>
+<li>Here I show an example using two engineered features:
+<ul>
+<li>e.g., mean stride duration vs.&nbsp;duty factor.</li>
+</ul></li>
+<li>Points represent <strong>sessions</strong> for one horse.</li>
+<li>The Isolation Forest assigns each session as:
+<ul>
+<li><strong>Normal</strong> or <strong>anomalous</strong>.</li>
+</ul></li>
+<li>This helps visually confirm whether flagged sessions are truly “off-pattern.”</li>
 </ul>
 </div><div class="column" style="width:50%;">
-<div id="f933f939" class="cell" data-fig.width="5.5" data-execution_count="6">
+<div id="cell-example-plot" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="presentation_files/figure-revealjs/cell-7-output-1.png" width="1604" height="1005"></p>
+<p><img data-src="presentationnn_files/figure-revealjs/example-plot-output-1.png" id="example-plot" width="1740" height="1054"></p>
 </figure>
 </div>
 </div>
 </div>
 </div></div>
-</section></section>
-<section>
-<section id="a-new-section" class="title-slide slide level1 center">
-<h1>A new section…</h1>
-
 </section>
-<section id="tables" class="slide level2">
-<h2>Tables</h2>
-<p>If you want to generate a table, make sure it is in the HTML format (instead of Markdown or other formats), e.g.,</p>
-<div id="15329db8" class="cell" data-execution_count="7">
-<div class="cell-output cell-output-display" data-execution_count="158">
-<table border="1" class="dataframe">
-
-<thead>
-
-<tr style="text-align: right;">
-
-<th>
-</th>
-
-<th>
-species
-</th>
-
-<th>
-island
-</th>
-
-<th>
-bill_length_mm
-</th>
-
-<th>
-bill_depth_mm
-</th>
-
-<th>
-flipper_length_mm
-</th>
-
-<th>
-body_mass_g
-</th>
-
-<th>
-sex
-</th>
-
-</tr>
-
-</thead>
-
-<tbody>
-
-<tr>
-
-<th>
-0
-</th>
-
-<td>
-Adelie
-</td>
-
-<td>
-Torgersen
-</td>
-
-<td>
-39.1
-</td>
-
-<td>
-18.7
-</td>
-
-<td>
-181.0
-</td>
-
-<td>
-3750.0
-</td>
-
-<td>
-Male
-</td>
-
-</tr>
-
-<tr>
-
-<th>
-1
-</th>
-
-<td>
-Adelie
-</td>
-
-<td>
-Torgersen
-</td>
-
-<td>
-39.5
-</td>
-
-<td>
-17.4
-</td>
-
-<td>
-186.0
-</td>
-
-<td>
-3800.0
-</td>
-
-<td>
-Female
-</td>
-
-</tr>
-
-<tr>
-
-<th>
-2
-</th>
-
-<td>
-Adelie
-</td>
-
-<td>
-Torgersen
-</td>
-
-<td>
-40.3
-</td>
-
-<td>
-18.0
-</td>
-
-<td>
-195.0
-</td>
-
-<td>
-3250.0
-</td>
-
-<td>
-Female
-</td>
-
-</tr>
-
-<tr>
-
-<th>
-4
-</th>
-
-<td>
-Adelie
-</td>
-
-<td>
-Torgersen
-</td>
-
-<td>
-36.7
-</td>
-
-<td>
-19.3
-</td>
-
-<td>
-193.0
-</td>
-
-<td>
-3450.0
-</td>
-
-<td>
-Female
-</td>
-
-</tr>
-
-<tr>
-
-<th>
-5
-</th>
-
-<td>
-Adelie
-</td>
-
-<td>
-Torgersen
-</td>
-
-<td>
-39.3
-</td>
-
-<td>
-20.6
-</td>
-
-<td>
-190.0
-</td>
-
-<td>
-3650.0
-</td>
-
-<td>
-Male
-</td>
-
-</tr>
-
-</tbody>
-
-</table>
-</div>
-</div>
-</section>
-<section id="images" class="slide level2">
-<h2>Images</h2>
-
-<img data-src="images/watercolour_sys02_img34_teacup-ocean.png" width="500" class="r-stretch quarto-figure-center"><p class="caption">Image credit: Danielle Navarro, Percolate.</p></section>
-<section id="math-expressions" class="slide level2 smaller">
-<h2>Math Expressions</h2>
-<p>You can write LaTeX math expressions inside a pair of dollar signs, e.g.&nbsp;$\alpha+\beta$ renders <span class="math inline">\(\alpha + \beta\)</span>. You can use the display style with double dollar signs:</p>
-<pre><code>$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$</code></pre>
-<p><span class="math display">\[
-\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i
-\]</span></p>
-<p>Limitations:</p>
-<ol type="1">
-<li><p>The source code of a LaTeX math expression must be in one line, unless it is inside a pair of double dollar signs, in which case the starting <code>$$</code> must appear in the very beginning of a line, followed immediately by a non-space character, and the ending <code>$$</code> must be at the end of a line, led by a non-space character;</p></li>
-<li><p>There should not be spaces after the opening <code>$</code> or before the closing <code>$</code>.</p></li>
-</ol>
-</section></section>
-<section>
-<section id="wrap-up" class="title-slide slide level1 center">
-<h1>Wrap up</h1>
-
-</section>
-<section id="feeling-adventurous" class="slide level2">
-<h2>Feeling adventurous?</h2>
+<section id="interpreting-flagged-sessions" class="slide level2">
+<h2>Interpreting flagged sessions</h2>
 <ul>
-<li><p>You are welcomed to use the default styling of the slides. In fact, that’s what I expect majority of you will do. You will differentiate yourself with the content of your presentation.</p></li>
-<li><p>But some of you might want to play around with slide styling. Some solutions for this can be found at https://quarto.org/docs/presentations/revealjs.</p></li>
+<li>Once sessions are flagged as anomalous, the next step is <strong>interpretation</strong>:
+<ul>
+<li>Are these sessions close to known injury or rehab dates?</li>
+<li>Do they correspond to unusually hard workouts or different footing?</li>
+<li>Are specific features (e.g., symmetry measures) consistently abnormal?</li>
+</ul></li>
+<li>This project focuses on the <strong>pipeline</strong>:
+<ul>
+<li>From raw accelerometer data → session features → anomaly scores.</li>
+</ul></li>
+<li>In future work, these anomalies can be linked with <strong>clinical notes</strong> and <strong>training logs</strong>.</li>
+</ul>
+</section>
+<section id="takeaways-and-next-steps" class="slide level2">
+<h2>Takeaways and next steps</h2>
+<ul>
+<li>I built a <strong>session-level, per-horse framework</strong> for:
+<ul>
+<li>Summarizing EquiPro stride data,</li>
+<li>Standardizing features, and</li>
+<li>Applying multiple anomaly detection methods.</li>
+</ul></li>
+<li>This framework can help:
+<ul>
+<li>Screen large numbers of sessions,</li>
+<li>Highlight candidate “problem” days for deeper review.</li>
+</ul></li>
+<li>Next steps:
+<ul>
+<li>Refine the feature set (e.g., focus on symmetry-heavy variables),</li>
+<li>Compare detectors quantitatively (precision/recall vs.&nbsp;labeled events),</li>
+<li>Integrate more horses and gaits (beyond trot) and add <strong>clinical context</strong>.</li>
+</ul></li>
 </ul>
 
 
 </section></section>
-
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
