@@ -93,6 +93,7 @@ agree or disagree on which sessions are flagged as anomalous?
 
 ## Analysis plan
 
+ 
 For each exercise session, I will load the corresponding EquiPro CSV file and extract 
 biomechanical variables relevant to symmetry, gait, and stride mechanics. To create 
 session-level features, I will summarize each variable using statistics like mean, 

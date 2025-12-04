@@ -4612,11 +4612,12 @@ Summary statistics:</code></pre>
 </section>
 <section id="analysis-plan" class="level2">
 <h2 class="anchored" data-anchor-id="analysis-plan">Analysis plan</h2>
-<p>For each exercise session, I will load the corresponding EquiPro CSV file and extract biomechanical variables relevant to symmetry, gait, and stride mechanics. To create session-level features, I will summarize each variable using statistics like mean, standard deviation, interquartile range, etc. These engineered features will form a feature matrix for each horse where each row is a session and each column is a biomechanical descriptor.</p>
+<p>Each session contains all gait biomechanical changes, but I focus and extract specifically trot sessions, since the trot is a highly symmetric gait commonly monitored in rehabilitation and multiple gaits could make the metrics look weird For each exercise session, I will load the corresponding EquiPro CSV file and extract biomechanical variables relevant to symmetry, gait, and stride mechanics. To create session-level features, I will summarize each variable using statistics like mean, standard deviation, interquartile range, etc. These engineered features will form a feature matrix for each horse where each row is a session and each column is a biomechanical descriptor.</p>
 <p>I will then model each horse’s baseline movement patterns. I will standardize all features within each horse by converting them to z-scores in order to remove scale differences. This will provide a clear reference point. Features consistently close to zero after standardization indicate typical behavior, but large positive or negative values indicate potential deviations. These standardized distributions form the baseline against which the anomaly-detection methods will evaluate whether any given session departs significantly from a horse’s typical movement pattern.</p>
 <p>After establishing the baselines for each horse using z-scores, I will apply three unsupervised anomaly-detection methods to identify sessions that deviate from typical movement. Z-score analysis will allow me to flag sessions where specific features are unusually high or low relative to baseline distribution. K-means clustering will identify anomalies based on their distance from cluster centers in the multivariate feature space. Isolation Forest will give a measure of how isolated a session is from the rest. Each method will produce a numerical anomaly score and a corresponding label indicating whether the session is considered abnormal.</p>
 <p>I will then compare the results between the three methods. I will look for overlap between flagged sessions, sessions consistently identified as outliers, and note where the methods differ. I will also interpret the identified anomalies as they relate to biomechanical variables. I will inspect which specific features contribute most strongly to deviations from baseline. This could give insight as to possible explanations for deviations: behavioral irregularities, equipment malfunction, pain, or potential reinjury.</p>
 <p>No external datasets will be merged.</p>
+<p>blah For each horse, I will compile these sessions into one file with session-level features for analysis. I chose this dataset because it is directly relevant to my graduate research and because it is well suited for unsupervised analysis. Session-level features will allow me to establish per-horse baseline distributions and apply methods such as z-score analysis, k-means clustering, and Isolation Forest to quantify deviations. By identifying and visualizing sessions with anomalies over time, this project will explore whether data-driven monitoring can help track rehabilitation progress and highlight sessions that warrant further investigation.</p>
 
 
 <!-- -->
@@ -5222,38 +5223,52 @@ Summary statistics:</code></pre>
 <span id="cb7-97"><a href="#cb7-97"></a></span>
 <span id="cb7-98"><a href="#cb7-98"></a><span class="fu">## Analysis plan</span></span>
 <span id="cb7-99"><a href="#cb7-99"></a></span>
-<span id="cb7-100"><a href="#cb7-100"></a>For each exercise session, I will load the corresponding EquiPro CSV file and extract </span>
-<span id="cb7-101"><a href="#cb7-101"></a>biomechanical variables relevant to symmetry, gait, and stride mechanics. To create </span>
-<span id="cb7-102"><a href="#cb7-102"></a>session-level features, I will summarize each variable using statistics like mean, </span>
-<span id="cb7-103"><a href="#cb7-103"></a>standard deviation, interquartile range, etc. These engineered features will form </span>
-<span id="cb7-104"><a href="#cb7-104"></a>a feature matrix for each horse where each row is a session and each column is a </span>
-<span id="cb7-105"><a href="#cb7-105"></a>biomechanical descriptor.</span>
-<span id="cb7-106"><a href="#cb7-106"></a></span>
-<span id="cb7-107"><a href="#cb7-107"></a>I will then model each horse&#39;s baseline movement patterns. I will standardize all </span>
-<span id="cb7-108"><a href="#cb7-108"></a>features within each horse by converting them to z-scores in order to remove scale </span>
-<span id="cb7-109"><a href="#cb7-109"></a>differences. This will provide a clear reference point. Features consistently close </span>
-<span id="cb7-110"><a href="#cb7-110"></a>to zero after standardization indicate typical behavior, but large positive or negative </span>
-<span id="cb7-111"><a href="#cb7-111"></a>values indicate potential deviations. These standardized distributions form the baseline </span>
-<span id="cb7-112"><a href="#cb7-112"></a>against which the anomaly-detection methods will evaluate whether any given session </span>
-<span id="cb7-113"><a href="#cb7-113"></a>departs significantly from a horse’s typical movement pattern.</span>
-<span id="cb7-114"><a href="#cb7-114"></a></span>
-<span id="cb7-115"><a href="#cb7-115"></a>After establishing the baselines for each horse using z-scores, I will apply three </span>
-<span id="cb7-116"><a href="#cb7-116"></a>unsupervised anomaly-detection methods to identify sessions that deviate from typical </span>
-<span id="cb7-117"><a href="#cb7-117"></a>movement. Z-score analysis will allow me to flag sessions where specific features </span>
-<span id="cb7-118"><a href="#cb7-118"></a>are unusually high or low relative to baseline distribution. K-means clustering will </span>
-<span id="cb7-119"><a href="#cb7-119"></a>identify anomalies based on their distance from cluster centers in the multivariate </span>
-<span id="cb7-120"><a href="#cb7-120"></a>feature space. Isolation Forest will give a measure of how isolated a session is from </span>
-<span id="cb7-121"><a href="#cb7-121"></a>the rest. Each method will produce a numerical anomaly score and a corresponding label </span>
-<span id="cb7-122"><a href="#cb7-122"></a>indicating whether the session is considered abnormal.</span>
-<span id="cb7-123"><a href="#cb7-123"></a></span>
-<span id="cb7-124"><a href="#cb7-124"></a>I will then compare the results between the three methods. I will look for overlap </span>
-<span id="cb7-125"><a href="#cb7-125"></a>between flagged sessions, sessions consistently identified as outliers, and note where </span>
-<span id="cb7-126"><a href="#cb7-126"></a>the methods differ. I will also interpret the identified anomalies as they relate to </span>
-<span id="cb7-127"><a href="#cb7-127"></a>biomechanical variables. I will inspect which specific features contribute most strongly </span>
-<span id="cb7-128"><a href="#cb7-128"></a>to deviations from baseline. This could give insight as to possible explanations for </span>
-<span id="cb7-129"><a href="#cb7-129"></a>deviations: behavioral irregularities, equipment malfunction, pain, or potential reinjury.</span>
-<span id="cb7-130"><a href="#cb7-130"></a></span>
-<span id="cb7-131"><a href="#cb7-131"></a>No external datasets will be merged.</span>
+<span id="cb7-100"><a href="#cb7-100"></a>Each session contains all gait biomechanical changes, but I focus and extract specifically</span>
+<span id="cb7-101"><a href="#cb7-101"></a>trot sessions, since the trot is a highly symmetric gait commonly monitored in rehabilitation</span>
+<span id="cb7-102"><a href="#cb7-102"></a>and multiple gaits could make the metrics look weird</span>
+<span id="cb7-103"><a href="#cb7-103"></a>For each exercise session, I will load the corresponding EquiPro CSV file and extract </span>
+<span id="cb7-104"><a href="#cb7-104"></a>biomechanical variables relevant to symmetry, gait, and stride mechanics. To create </span>
+<span id="cb7-105"><a href="#cb7-105"></a>session-level features, I will summarize each variable using statistics like mean, </span>
+<span id="cb7-106"><a href="#cb7-106"></a>standard deviation, interquartile range, etc. These engineered features will form </span>
+<span id="cb7-107"><a href="#cb7-107"></a>a feature matrix for each horse where each row is a session and each column is a </span>
+<span id="cb7-108"><a href="#cb7-108"></a>biomechanical descriptor.</span>
+<span id="cb7-109"><a href="#cb7-109"></a></span>
+<span id="cb7-110"><a href="#cb7-110"></a>I will then model each horse&#39;s baseline movement patterns. I will standardize all </span>
+<span id="cb7-111"><a href="#cb7-111"></a>features within each horse by converting them to z-scores in order to remove scale </span>
+<span id="cb7-112"><a href="#cb7-112"></a>differences. This will provide a clear reference point. Features consistently close </span>
+<span id="cb7-113"><a href="#cb7-113"></a>to zero after standardization indicate typical behavior, but large positive or negative </span>
+<span id="cb7-114"><a href="#cb7-114"></a>values indicate potential deviations. These standardized distributions form the baseline </span>
+<span id="cb7-115"><a href="#cb7-115"></a>against which the anomaly-detection methods will evaluate whether any given session </span>
+<span id="cb7-116"><a href="#cb7-116"></a>departs significantly from a horse’s typical movement pattern.</span>
+<span id="cb7-117"><a href="#cb7-117"></a></span>
+<span id="cb7-118"><a href="#cb7-118"></a>After establishing the baselines for each horse using z-scores, I will apply three </span>
+<span id="cb7-119"><a href="#cb7-119"></a>unsupervised anomaly-detection methods to identify sessions that deviate from typical </span>
+<span id="cb7-120"><a href="#cb7-120"></a>movement. Z-score analysis will allow me to flag sessions where specific features </span>
+<span id="cb7-121"><a href="#cb7-121"></a>are unusually high or low relative to baseline distribution. K-means clustering will </span>
+<span id="cb7-122"><a href="#cb7-122"></a>identify anomalies based on their distance from cluster centers in the multivariate </span>
+<span id="cb7-123"><a href="#cb7-123"></a>feature space. Isolation Forest will give a measure of how isolated a session is from </span>
+<span id="cb7-124"><a href="#cb7-124"></a>the rest. Each method will produce a numerical anomaly score and a corresponding label </span>
+<span id="cb7-125"><a href="#cb7-125"></a>indicating whether the session is considered abnormal.</span>
+<span id="cb7-126"><a href="#cb7-126"></a></span>
+<span id="cb7-127"><a href="#cb7-127"></a>I will then compare the results between the three methods. I will look for overlap </span>
+<span id="cb7-128"><a href="#cb7-128"></a>between flagged sessions, sessions consistently identified as outliers, and note where </span>
+<span id="cb7-129"><a href="#cb7-129"></a>the methods differ. I will also interpret the identified anomalies as they relate to </span>
+<span id="cb7-130"><a href="#cb7-130"></a>biomechanical variables. I will inspect which specific features contribute most strongly </span>
+<span id="cb7-131"><a href="#cb7-131"></a>to deviations from baseline. This could give insight as to possible explanations for </span>
+<span id="cb7-132"><a href="#cb7-132"></a>deviations: behavioral irregularities, equipment malfunction, pain, or potential reinjury.</span>
+<span id="cb7-133"><a href="#cb7-133"></a></span>
+<span id="cb7-134"><a href="#cb7-134"></a>No external datasets will be merged.</span>
+<span id="cb7-135"><a href="#cb7-135"></a></span>
+<span id="cb7-136"><a href="#cb7-136"></a>blah</span>
+<span id="cb7-137"><a href="#cb7-137"></a>For each horse, I will compile </span>
+<span id="cb7-138"><a href="#cb7-138"></a>these sessions into one file with session-level features for analysis. I chose this </span>
+<span id="cb7-139"><a href="#cb7-139"></a>dataset because it is directly relevant to my graduate research and because it is </span>
+<span id="cb7-140"><a href="#cb7-140"></a>well suited for unsupervised analysis. Session-level features will allow me to </span>
+<span id="cb7-141"><a href="#cb7-141"></a>establish per-horse baseline distributions and apply methods such as z-score </span>
+<span id="cb7-142"><a href="#cb7-142"></a>analysis, k-means clustering, and Isolation Forest to quantify deviations. By </span>
+<span id="cb7-143"><a href="#cb7-143"></a>identifying and visualizing sessions with anomalies over time, this project will </span>
+<span id="cb7-144"><a href="#cb7-144"></a>explore whether data-driven monitoring can help track rehabilitation progress and </span>
+<span id="cb7-145"><a href="#cb7-145"></a>highlight sessions that warrant further investigation.</span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
