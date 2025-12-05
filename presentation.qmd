@@ -61,10 +61,13 @@ penguins = sns.load_dataset('penguins').dropna()
 
 -   Horses often develop detectable gait abnormalities before injury or reinjury occurs.
 
--   EquiPro intertial measurement units collect accelerometer data
-\indent
+* EquiPro intertial measurement units collect accelerometer data
+  + Outputs calculated stride-level biomechanical metrics
 
-- Outputs calculated stride-level biomechanical metrics
+* unordered list
+  + sub-item 1
+  + sub-item 2
+    - sub-sub-item 1
 
 
 ## Layouts
