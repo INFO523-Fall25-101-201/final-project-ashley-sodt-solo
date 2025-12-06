@@ -6,8 +6,7 @@
 #     3) Isolation Forest
 # - Compares which sessions are flagged as abnormal by each method
 #
-# You can paste these cells into a Quarto .qmd file (Python engine)
-# or run them in a Jupyter notebook.
+# You can run this as a standalone Python script or import pieces into a notebook.
 
 # -----------------------------------------
 # 1. Load packages and data
@@ -128,12 +127,14 @@ def analyze_horse_anomalies(
         X_z = pd.DataFrame(index=df_horse.index)
         out = df_horse[["horse", "session_id", "n_rows"]].copy()
         out["z_max_abs"] = np.nan
+        out["z_mean_abs"] = np.nan
         out["z_n_features_big"] = 0
         out["z_is_outlier"] = 0
         out["kmeans_dist"] = np.nan
         out["kmeans_is_outlier"] = 0
         out["iforest_score"] = np.nan
         out["iforest_is_outlier"] = 0
+        out["n_methods_flagged"] = 0
         return out, X_z
 
     # 2) Standardize features (z-scores)
@@ -142,8 +143,10 @@ def analyze_horse_anomalies(
     X_z = pd.DataFrame(X_z_values, columns=X.columns, index=df_horse.index)
 
     # ---------- Method 1: Z-score thresholding ----------
-    z_max = X_z.abs().max(axis=1)
-    z_nbig = (X_z.abs() > z_thresh).sum(axis=1)
+    z_abs = X_z.abs()
+    z_max = z_abs.max(axis=1)
+    z_mean = z_abs.mean(axis=1)          # NEW: average |z| across features
+    z_nbig = (z_abs > z_thresh).sum(axis=1)
     z_label = (z_max > z_thresh).astype(int)
 
     # ---------- Method 2: K-means distance ----------
@@ -195,6 +198,7 @@ def analyze_horse_anomalies(
     # Assemble output for this horse
     out = df_horse[["horse", "session_id", "n_rows"]].copy()
     out["z_max_abs"] = z_max
+    out["z_mean_abs"] = z_mean        # NEW column
     out["z_n_features_big"] = z_nbig
     out["z_is_outlier"] = z_label
     out["kmeans_dist"] = dists
@@ -266,40 +270,122 @@ display(
 
 
 # -----------------------------------------
-# 6. (Optional) Simple visualization
+# 6. Simple visualizations
 # -----------------------------------------
-# These are optional plotting snippets you can use in the notebook/QMD.
-# Comment them out if you don't want figures.
 
 import matplotlib.pyplot as plt
 
-# Convert session_id to datetime and format to mm/dd/yy
-anomaly_summary["session_date"] = pd.to_datetime(
-    anomaly_summary["session_id"].str[:8], 
+# Convert session_id to a true datetime and sort by it
+anomaly_summary["session_dt"] = pd.to_datetime(
+    anomaly_summary["session_id"].str[:8],  # yyyymmdd
     format="%Y%m%d"
-).dt.strftime("%m/%d/%y")
+)
 
+# Optional: pretty label for ticks
+anomaly_summary["session_label"] = anomaly_summary["session_dt"].dt.strftime("%m/%d/%y")
 
-# Example: max |z|-score vs. session across horses
+# Sort once by date so plots are in chronological order
+anomaly_summary = anomaly_summary.sort_values("session_dt")
+
+# --- Plot 1: max |z|-score vs. session across horses ---
 plt.figure()
 for horse, df_h in anomaly_summary.groupby("horse"):
-    plt.scatter(df_h["session_date"], df_h["z_max_abs"], label=horse)
+    plt.scatter(df_h["session_dt"], df_h["z_max_abs"], label=horse)
+
 plt.xticks(rotation=90)
 plt.ylabel("max |z-score| across features")
-plt.xlabel("session_id")
+plt.xlabel("session date")
 plt.title("Session-level deviation from baseline (max |z|)")
 plt.legend()
 plt.tight_layout()
-plt.savefig("fig_max_zscore.png", dpi=300, bbox_inches='tight')
+plt.savefig("fig_max_zscore.png", dpi=300, bbox_inches="tight")
 
-# Example: number of methods that flag each session
+# --- Plot 2: mean |z|-score vs. session across horses ---
 plt.figure()
 for horse, df_h in anomaly_summary.groupby("horse"):
-    plt.scatter(df_h["session_date"], df_h["n_methods_flagged"], label=horse)
+    plt.scatter(df_h["session_dt"], df_h["z_mean_abs"], label=horse)
+
+plt.xticks(rotation=90)
+plt.ylabel("mean |z-score| across features")
+plt.xlabel("session date")
+plt.title("Session-level deviation from baseline (mean |z|)")
+plt.legend()
+plt.tight_layout()
+plt.savefig("fig_mean_zscore.png", dpi=300, bbox_inches="tight")
+
+# --- Plot 3: number of methods that flag each session ---
+plt.figure()
+for horse, df_h in anomaly_summary.groupby("horse"):
+    plt.scatter(df_h["session_dt"], df_h["n_methods_flagged"], label=horse)
+
 plt.xticks(rotation=90)
 plt.ylabel("number of methods flagging session")
-plt.xlabel("session_id")
+plt.xlabel("session date")
 plt.title("Agreement between anomaly-detection methods")
 plt.legend()
 plt.tight_layout()
-plt.savefig("fig_method_agreement.png", dpi=300, bbox_inches='tight')
+plt.savefig("fig_method_agreement.png", dpi=300, bbox_inches="tight")
+
+
+#plot 4
+# Copy relevant columns
+heat_df = anomaly_summary[
+    ["horse", "session_id", "z_is_outlier", "kmeans_is_outlier", "iforest_is_outlier"]
+].copy()
+
+# Sort sessions by # of methods flagged (descending)
+heat_df["n_flag"] = heat_df[["z_is_outlier", "kmeans_is_outlier", "iforest_is_outlier"]].sum(axis=1)
+heat_df = heat_df.sort_values(["horse", "n_flag"], ascending=[True, False])
+
+# Use a concise session label for readability
+heat_df["session_label"] = heat_df["horse"] + " " + heat_df["session_id"].str[-6:]
+
+# Melt into matrix form for heatmap
+matrix = heat_df.set_index("session_label")[["z_is_outlier", "kmeans_is_outlier", "iforest_is_outlier"]]
+
+# Plot
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Copy relevant columns
+heat_df = anomaly_summary[
+    ["horse", "session_id", "z_is_outlier", "kmeans_is_outlier", "iforest_is_outlier"]
+].copy()
+
+# Sort sessions by # of methods flagged (descending)
+heat_df["n_flag"] = heat_df[["z_is_outlier", "kmeans_is_outlier", "iforest_is_outlier"]].sum(axis=1)
+heat_df = heat_df.sort_values(["horse", "n_flag"], ascending=[True, False])
+
+# Create readable session labels
+heat_df["session_label"] = heat_df["horse"] + " " + heat_df["session_id"].str[-6:]
+
+# Rename columns for nicer axis labels
+heat_df = heat_df.rename(columns={
+    "z_is_outlier": "Z-score",
+    "kmeans_is_outlier": "K-means",
+    "iforest_is_outlier": "Isolation Forest"
+})
+
+# Build heatmap matrix
+matrix = heat_df.set_index("session_label")[["Z-score", "K-means", "Isolation Forest"]]
+
+# Plot
+plt.figure(figsize=(7, max(5, matrix.shape[0] * 0.35)))
+sns.heatmap(
+    matrix,
+    cmap=["white", "tab:red"],  # white = not flagged, red = flagged
+    linewidths=0.5,
+    linecolor="gray",
+    cbar=False,
+    annot=True,
+    fmt=""
+)
+
+plt.xlabel("Anomaly Detection Method")
+plt.ylabel("Session (Horse + ID)")
+plt.title("Method Agreement Heatmap: Flagged Sessions")
+plt.xticks(rotation=0)
+plt.tight_layout()
+plt.savefig("fig_method_heatmap.png", dpi=300, bbox_inches="tight")
+plt.show()

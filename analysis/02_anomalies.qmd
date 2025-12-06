@@ -5,9 +5,6 @@
 #     2) K-means clustering distance
 #     3) Isolation Forest
 # - Compares which sessions are flagged as abnormal by each method
-#
-# You can paste these cells into a Quarto .qmd file (Python engine)
-# or run them in a Jupyter notebook.
 
 # -----------------------------------------
 # 1. Load packages and data
@@ -131,6 +128,7 @@ def analyze_horse_anomalies(
         out["z_n_features_big"] = 0
         out["z_is_outlier"] = 0
         out["kmeans_dist"] = np.nan
+        out["z_mean_abs"] = z_mean
         out["kmeans_is_outlier"] = 0
         out["iforest_score"] = np.nan
         out["iforest_is_outlier"] = 0
@@ -145,6 +143,7 @@ def analyze_horse_anomalies(
     z_max = X_z.abs().max(axis=1)
     z_nbig = (X_z.abs() > z_thresh).sum(axis=1)
     z_label = (z_max > z_thresh).astype(int)
+    z_mean = X_z.abs().mean(axis=1)   # <-- NEW: average |z| across features
 
     # ---------- Method 2: K-means distance ----------
     # Choose a reasonable number of clusters given how few sessions we have
@@ -268,8 +267,6 @@ display(
 
 import matplotlib.pyplot as plt
 
-
-
 # Example: max |z|-score vs. session across horses
 plt.figure()
 for horse, df_h in anomaly_summary.groupby("horse"):
@@ -293,3 +290,16 @@ plt.title("Agreement between anomaly-detection methods")
 plt.legend()
 plt.tight_layout()
 plt.savefig("fig_method_agreement.png", dpi=300, bbox_inches='tight')
+
+# Example: average |z|-score vs. session across horses
+plt.figure()
+for horse, df_h in anomaly_summary.groupby("horse"):
+    plt.scatter(df_h["session_id"], df_h["z_mean_abs"], label=horse)
+
+plt.xticks(rotation=90)
+plt.ylabel("mean |z-score| across features")
+plt.xlabel("session_id")
+plt.title("Session-level deviation from baseline (mean |z|)")
+plt.legend()
+plt.tight_layout()
+plt.savefig("fig_mean_zscore.png", dpi=300, bbox_inches='tight')

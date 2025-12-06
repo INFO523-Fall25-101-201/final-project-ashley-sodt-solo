@@ -59,7 +59,8 @@ penguins = sns.load_dataset('penguins').dropna()
   + Outputs stride-level biomechanical metrics
   + Early detection of subtle gait abnormalities
 
-* **Goal**: Use unsupervised learning techniques to model each horse's typical movement and automatically flag exercise sessions that deviate from this baseline.
+* **Goal**: Use unsupervised learning techniques to model each horse's typical movement and automatically flag exercise sessions that deviate from this baseline. Such anomalies may reflect behavioral irregularities, equipment
+malfunction, pain, or potential reinjury.
 
 ## Dataset
 
@@ -68,20 +69,7 @@ penguins = sns.load_dataset('penguins').dropna()
   + Jackson (6 sessions)
   + Perseo (5 sessions)
 
-```{python}
-#| label: duque-head1
-#| warning: false
-# Load one example Duque session
-
-df_duque = pd.read_csv("Horses/Duque/20240626T082743-Duque-results.csv")
-
-print("\nExample Duque session from EquiPro:")
-print(f" - dataset shape: {df_duque.shape}")
-print(f" - number of rows: {df_duque.shape[0]}")
-print(f" - number of columns: {df_duque.shape[1]}")
-```
-
-## Dataset 
+## Dataset {.smaller}
 Sample of Equipro CSV output with stride-level biomechanical metrics from one exercise session.
 
 ```{python}
@@ -90,7 +78,6 @@ Sample of Equipro CSV output with stride-level biomechanical metrics from one ex
 # Load one example Duque session
 
 df_duque = pd.read_csv("Horses/Duque/20240626T082743-Duque-results.csv")
-
 
 df_duque = pd.read_csv("Horses/Duque/20240626T082743-Duque-results.csv")
 df_duque.head().style.set_properties(**{'font-size':'5px'})
@@ -117,7 +104,7 @@ We summarize **25 stride-level variables** into session-level features.
 → Producing **125 engineered features per session**
 
 
-## Session-level Feature Matrix {.smaller}
+## Session-Level Feature Matrix {.smaller}
 
 Feature matrix containing 24 exercise sessions and 125 engineered biomechanical movement features per session.
 
@@ -153,9 +140,11 @@ session_features.loc[rows_to_show, display_cols] \
 
 - **Isolation Forest**: Identifies sessions that are difficult to group with others (unusual combinations of features).
 
-Sessions flagged by **multiple methods** are more likely to reflect real gait irregularities.
+Sessions flagged by multiple methods are more likely to reflect real gait irregularities.
 
-## How many sessions were flagged?
+# Results
+
+## Anomalies Flagged by Individual Methods
 
 | Method               | Duque | Jackson | Perseo |
 |---------------------|:-----:|:-------:|:------:|
@@ -163,6 +152,22 @@ Sessions flagged by **multiple methods** are more likely to reflect real gait ir
 | K-means distance    | **3** | **2** | **2** |
 | Isolation Forest    | **4** | **2** | 0 |
 
+
+
+
+## High-Confidence Anomalies {.smaller}
+
+Sessions flagged by ≥2 methods (strongest evidence of abnormal movement):
+
+| Horse   | Session ID       |  Methods Flagged |
+|--------|-------------------|:----------------:|
+| Duque   | 20250804T082647  | **3** |
+| Duque   | 20250309T134916  | **3** |
+| Duque   | 20250308T111144  | **3** |
+| Duque   | 20240627T095239  | **2** |
+| Jackson | 20241215T152135  | **2** |
+
+These sessions consistently deviate from each horse’s typical movement pattern.
 
 ## Layouts
 text
