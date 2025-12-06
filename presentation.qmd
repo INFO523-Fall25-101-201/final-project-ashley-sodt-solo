@@ -177,6 +177,28 @@ These sessions consistently deviate from each horse’s typical movement pattern
 ![Which methods agree when flagging anomalies?](analysis/data/fig_method_heatmap.png){width="50%"}
 </div>
 
+## Max Deviation from Baseline {.smaller}
+
+<div align="center">
+
+![Which sessions show the largest single-feature deviation?](analysis/data/fig_max_zscore.png){width="80%"}
+
+</div>
+
+<div align="center">
+![Which methods agree when flagging anomalies?](analysis/data/fig_method_heatmap.png){width="50%"}
+</div>
+
+## Top Contributors to High-Confidence Anomalies {.smaller}
+
+::: {.content-visible when-format="revealjs"}
+```{python}
+import pandas as pd
+
+# Load table of top-contributing features
+top_contrib_table = pd.read_csv("data/top_feature_contributors.csv")
+top_contrib_table
+```
 
 ## Layouts
 text

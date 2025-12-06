@@ -32,7 +32,7 @@
     "href": "presentation.html#code",
     "title": "Clustering Movement Patterns in Equine Exercise Sessions",
     "section": "Code",
-    "text": "Code\n\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.073\nModel:                            OLS   Adj. R-squared:                  0.070\nMethod:                 Least Squares   F-statistic:                     30.59\nDate:                Sat, 06 Dec 2025   Prob (F-statistic):           5.84e-08\nTime:                        21:33:25   Log-Likelihood:                -1346.4\nNo. Observations:                 392   AIC:                             2697.\nDf Residuals:                     390   BIC:                             2705.\nDf Model:                           1                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         35.8015      2.266     15.800      0.000      31.347      40.257\nspeed       -354.7055     64.129     -5.531      0.000    -480.788    -228.623\n==============================================================================\nOmnibus:                       27.687   Durbin-Watson:                   0.589\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               18.976\nSkew:                           0.420   Prob(JB):                     7.57e-05\nKurtosis:                       2.323   Cond. No.                         169.\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified."
+    "text": "Code\n\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.073\nModel:                            OLS   Adj. R-squared:                  0.070\nMethod:                 Least Squares   F-statistic:                     30.59\nDate:                Sat, 06 Dec 2025   Prob (F-statistic):           5.84e-08\nTime:                        21:37:43   Log-Likelihood:                -1346.4\nNo. Observations:                 392   AIC:                             2697.\nDf Residuals:                     390   BIC:                             2705.\nDf Model:                           1                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         35.8015      2.266     15.800      0.000      31.347      40.257\nspeed       -354.7055     64.129     -5.531      0.000    -480.788    -228.623\n==============================================================================\nOmnibus:                       27.687   Durbin-Watson:                   0.589\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               18.976\nSkew:                           0.420   Prob(JB):                     7.57e-05\nKurtosis:                       2.323   Cond. No.                         169.\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified."
   },
   {
     "objectID": "presentation.html#plots",
@@ -445,6 +445,27 @@
     "href": "presentation.html#method-agreement-heatmap-1",
     "title": "Clustering Movement Patterns in Equine Exercise Sessions",
     "section": "Method Agreement Heatmap",
-    "text": "Method Agreement Heatmap\n\nWhich methods agree when flagging anomalies?"
+    "text": "Method Agreement Heatmap\n\n\n\n\nWhich methods agree when flagging anomalies?"
+  },
+  {
+    "objectID": "presentation.html#max-zscore",
+    "href": "presentation.html#max-zscore",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Max zscore",
+    "text": "Max zscore\n\n\n\n\nWhich methods agree when flagging anomalies?"
+  },
+  {
+    "objectID": "presentation.html#max-deviation-from-baseline-max-z-score",
+    "href": "presentation.html#max-deviation-from-baseline-max-z-score",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Max Deviation from Baseline (Max |z-score|)",
+    "text": "Max Deviation from Baseline (Max |z-score|)\n\n\n\n\nWhich sessions show the largest single-feature deviation?\n\n\n\n\n\n\n\nWhich methods agree when flagging anomalies?"
+  },
+  {
+    "objectID": "presentation.html#max-deviation-from-baseline",
+    "href": "presentation.html#max-deviation-from-baseline",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Max Deviation from Baseline",
+    "text": "Max Deviation from Baseline\n\n\n\n\nWhich sessions show the largest single-feature deviation?\n\n\n\n\n\n\n\nWhich methods agree when flagging anomalies?"
   }
 ]

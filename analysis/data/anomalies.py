@@ -266,6 +266,42 @@ display(
     )
 )
 
+# ============================
+# Top contributor table
+# ============================
+
+def get_top_feature(horse, session_id):
+    """Return the feature with the largest |z| deviation for the given session."""
+    X_z = z_spaces[horse]
+    idx = anomaly_summary[(anomaly_summary["horse"] == horse) &
+                          (anomaly_summary["session_id"] == session_id)].index[0]
+    z_vals = X_z.loc[idx].abs().sort_values(ascending=False)
+    return z_vals.index[0], z_vals.iloc[0]  # feature name + |z|
+
+
+# Filter sessions with agreement from ≥2 methods
+flagged_multi = anomaly_summary[anomaly_summary["n_methods_flagged"] >= 2].copy()
+
+# Build a table of strongest contributing features
+top_rows = []
+for _, row in flagged_multi.iterrows():
+    feat, zval = get_top_feature(row["horse"], row["session_id"])
+    top_rows.append({
+        "horse": row["horse"],
+        "session_date": row["session_dt"].strftime("%m/%d/%y"),
+        "# methods flagging": int(row["n_methods_flagged"]),
+        "top_feature": feat,
+        "|z| value": round(zval, 2),
+    })
+
+top_contrib_table = pd.DataFrame(top_rows)
+
+print("\n📌 Top contributing features for high-confidence anomalies:")
+display(top_contrib_table)
+
+# Save to CSV for Quarto slide
+top_contrib_table.to_csv("top_feature_contributors.csv", index=False)
+
 # -----------------------------------------
 # 5. Quick sanity checks
 # -----------------------------------------
