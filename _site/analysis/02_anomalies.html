@@ -302,28 +302,44 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#k-means-clustering-distance" id="toc-k-means-clustering-distance" class="nav-link" data-scroll-target="#k-means-clustering-distance">2) K-means clustering distance</a></li>
   <li><a href="#isolation-forest" id="toc-isolation-forest" class="nav-link" data-scroll-target="#isolation-forest">3) Isolation Forest</a></li>
   <li><a href="#compares-which-sessions-are-flagged-as-abnormal-by-each-method" id="toc-compares-which-sessions-are-flagged-as-abnormal-by-each-method" class="nav-link" data-scroll-target="#compares-which-sessions-are-flagged-as-abnormal-by-each-method">- Compares which sessions are flagged as abnormal by each method</a></li>
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section">—————————————–</a></li>
-  <li><a href="#load-packages-and-data" id="toc-load-packages-and-data" class="nav-link" data-scroll-target="#load-packages-and-data">1. Load packages and data</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  <li><a href="#you-can-run-this-as-a-standalone-python-script-or-import-pieces-into-a-notebook." id="toc-you-can-run-this-as-a-standalone-python-script-or-import-pieces-into-a-notebook." class="nav-link" data-scroll-target="#you-can-run-this-as-a-standalone-python-script-or-import-pieces-into-a-notebook.">You can run this as a standalone Python script or import pieces into a notebook.</a></li>
   <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1">—————————————–</a></li>
-  <li><a href="#path-to-the-session-level-feature-matrix-created-by-the-trot-only-script" id="toc-path-to-the-session-level-feature-matrix-created-by-the-trot-only-script" class="nav-link" data-scroll-target="#path-to-the-session-level-feature-matrix-created-by-the-trot-only-script">Path to the session-level feature matrix created by the trot-only script</a></li>
+  <li><a href="#load-packages-and-data" id="toc-load-packages-and-data" class="nav-link" data-scroll-target="#load-packages-and-data">1. Load packages and data</a></li>
   <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2">—————————————–</a></li>
-  <li><a href="#helper-prepare-per-horse-features" id="toc-helper-prepare-per-horse-features" class="nav-link" data-scroll-target="#helper-prepare-per-horse-features">2. Helper: prepare per-horse features</a></li>
+  <li><a href="#path-to-the-session-level-feature-matrix-created-by-the-trot-only-script" id="toc-path-to-the-session-level-feature-matrix-created-by-the-trot-only-script" class="nav-link" data-scroll-target="#path-to-the-session-level-feature-matrix-created-by-the-trot-only-script">Path to the session-level feature matrix created by the trot-only script</a></li>
   <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3">—————————————–</a></li>
+  <li><a href="#helper-prepare-per-horse-features" id="toc-helper-prepare-per-horse-features" class="nav-link" data-scroll-target="#helper-prepare-per-horse-features">2. Helper: prepare per-horse features</a></li>
   <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4">—————————————–</a></li>
-  <li><a href="#helper-per-horse-anomaly-analysis" id="toc-helper-per-horse-anomaly-analysis" class="nav-link" data-scroll-target="#helper-per-horse-anomaly-analysis">3. Helper: per-horse anomaly analysis</a></li>
   <li><a href="#section-5" id="toc-section-5" class="nav-link" data-scroll-target="#section-5">—————————————–</a></li>
+  <li><a href="#helper-per-horse-anomaly-analysis" id="toc-helper-per-horse-anomaly-analysis" class="nav-link" data-scroll-target="#helper-per-horse-anomaly-analysis">3. Helper: per-horse anomaly analysis</a></li>
   <li><a href="#section-6" id="toc-section-6" class="nav-link" data-scroll-target="#section-6">—————————————–</a></li>
-  <li><a href="#run-analysis-for-all-horses" id="toc-run-analysis-for-all-horses" class="nav-link" data-scroll-target="#run-analysis-for-all-horses">4. Run analysis for all horses</a></li>
   <li><a href="#section-7" id="toc-section-7" class="nav-link" data-scroll-target="#section-7">—————————————–</a></li>
-  <li><a href="#combine-results-for-all-horses" id="toc-combine-results-for-all-horses" class="nav-link" data-scroll-target="#combine-results-for-all-horses">Combine results for all horses</a></li>
+  <li><a href="#run-analysis-for-all-horses" id="toc-run-analysis-for-all-horses" class="nav-link" data-scroll-target="#run-analysis-for-all-horses">4. Run analysis for all horses</a></li>
   <li><a href="#section-8" id="toc-section-8" class="nav-link" data-scroll-target="#section-8">—————————————–</a></li>
-  <li><a href="#optional-simple-visualization" id="toc-optional-simple-visualization" class="nav-link" data-scroll-target="#optional-simple-visualization">6. (Optional) Simple visualization</a></li>
+  <li><a href="#combine-results-for-all-horses" id="toc-combine-results-for-all-horses" class="nav-link" data-scroll-target="#combine-results-for-all-horses">Combine results for all horses</a></li>
   <li><a href="#section-9" id="toc-section-9" class="nav-link" data-scroll-target="#section-9">—————————————–</a></li>
-  <li><a href="#these-are-optional-plotting-snippets-you-can-use-in-the-notebookqmd." id="toc-these-are-optional-plotting-snippets-you-can-use-in-the-notebookqmd." class="nav-link" data-scroll-target="#these-are-optional-plotting-snippets-you-can-use-in-the-notebookqmd.">These are optional plotting snippets you can use in the notebook/QMD.</a></li>
-  <li><a href="#comment-them-out-if-you-dont-want-figures." id="toc-comment-them-out-if-you-dont-want-figures." class="nav-link" data-scroll-target="#comment-them-out-if-you-dont-want-figures.">Comment them out if you don’t want figures.</a></li>
-  <li><a href="#example-max-z-score-vs.-session-across-horses" id="toc-example-max-z-score-vs.-session-across-horses" class="nav-link" data-scroll-target="#example-max-z-score-vs.-session-across-horses">Example: max |z|-score vs.&nbsp;session across horses</a></li>
-  <li><a href="#example-number-of-methods-that-flag-each-session" id="toc-example-number-of-methods-that-flag-each-session" class="nav-link" data-scroll-target="#example-number-of-methods-that-flag-each-session">Example: number of methods that flag each session</a></li>
-  <li><a href="#example-average-z-score-vs.-session-across-horses" id="toc-example-average-z-score-vs.-session-across-horses" class="nav-link" data-scroll-target="#example-average-z-score-vs.-session-across-horses">Example: average |z|-score vs.&nbsp;session across horses</a></li>
+  <li><a href="#quick-sanity-checks" id="toc-quick-sanity-checks" class="nav-link" data-scroll-target="#quick-sanity-checks">5. Quick sanity checks</a></li>
+  <li><a href="#section-10" id="toc-section-10" class="nav-link" data-scroll-target="#section-10">—————————————–</a></li>
+  <li><a href="#section-11" id="toc-section-11" class="nav-link" data-scroll-target="#section-11">—————————————–</a></li>
+  <li><a href="#simple-visualizations" id="toc-simple-visualizations" class="nav-link" data-scroll-target="#simple-visualizations">6. Simple visualizations</a></li>
+  <li><a href="#section-12" id="toc-section-12" class="nav-link" data-scroll-target="#section-12">—————————————–</a></li>
+  <li><a href="#convert-session_id-to-a-true-datetime-and-sort-by-it" id="toc-convert-session_id-to-a-true-datetime-and-sort-by-it" class="nav-link" data-scroll-target="#convert-session_id-to-a-true-datetime-and-sort-by-it">Convert session_id to a true datetime and sort by it</a></li>
+  <li><a href="#optional-pretty-label-for-ticks" id="toc-optional-pretty-label-for-ticks" class="nav-link" data-scroll-target="#optional-pretty-label-for-ticks">Optional: pretty label for ticks</a></li>
+  <li><a href="#sort-once-by-date-so-plots-are-in-chronological-order" id="toc-sort-once-by-date-so-plots-are-in-chronological-order" class="nav-link" data-scroll-target="#sort-once-by-date-so-plots-are-in-chronological-order">Sort once by date so plots are in chronological order</a></li>
+  <li><a href="#plot-1-max-z-score-vs.-session-across-horses" id="toc-plot-1-max-z-score-vs.-session-across-horses" class="nav-link" data-scroll-target="#plot-1-max-z-score-vs.-session-across-horses">— Plot 1: max |z|-score vs.&nbsp;session across horses —</a></li>
+  <li><a href="#plot-2-mean-z-score-vs.-session-across-horses" id="toc-plot-2-mean-z-score-vs.-session-across-horses" class="nav-link" data-scroll-target="#plot-2-mean-z-score-vs.-session-across-horses">— Plot 2: mean |z|-score vs.&nbsp;session across horses —</a></li>
+  <li><a href="#plot-3-number-of-methods-that-flag-each-session" id="toc-plot-3-number-of-methods-that-flag-each-session" class="nav-link" data-scroll-target="#plot-3-number-of-methods-that-flag-each-session">— Plot 3: number of methods that flag each session —</a></li>
+  <li><a href="#sort-sessions-by-of-methods-flagged-descending" id="toc-sort-sessions-by-of-methods-flagged-descending" class="nav-link" data-scroll-target="#sort-sessions-by-of-methods-flagged-descending">Sort sessions by # of methods flagged (descending)</a></li>
+  <li><a href="#use-a-concise-session-label-for-readability" id="toc-use-a-concise-session-label-for-readability" class="nav-link" data-scroll-target="#use-a-concise-session-label-for-readability">Use a concise session label for readability</a></li>
+  <li><a href="#melt-into-matrix-form-for-heatmap" id="toc-melt-into-matrix-form-for-heatmap" class="nav-link" data-scroll-target="#melt-into-matrix-form-for-heatmap">Melt into matrix form for heatmap</a></li>
+  <li><a href="#plot" id="toc-plot" class="nav-link" data-scroll-target="#plot">Plot</a></li>
+  <li><a href="#copy-relevant-columns" id="toc-copy-relevant-columns" class="nav-link" data-scroll-target="#copy-relevant-columns">Copy relevant columns</a></li>
+  <li><a href="#sort-sessions-by-of-methods-flagged-descending-1" id="toc-sort-sessions-by-of-methods-flagged-descending-1" class="nav-link" data-scroll-target="#sort-sessions-by-of-methods-flagged-descending-1">Sort sessions by # of methods flagged (descending)</a></li>
+  <li><a href="#create-readable-session-labels" id="toc-create-readable-session-labels" class="nav-link" data-scroll-target="#create-readable-session-labels">Create readable session labels</a></li>
+  <li><a href="#rename-columns-for-nicer-axis-labels" id="toc-rename-columns-for-nicer-axis-labels" class="nav-link" data-scroll-target="#rename-columns-for-nicer-axis-labels">Rename columns for nicer axis labels</a></li>
+  <li><a href="#build-heatmap-matrix" id="toc-build-heatmap-matrix" class="nav-link" data-scroll-target="#build-heatmap-matrix">Build heatmap matrix</a></li>
+  <li><a href="#plot-1" id="toc-plot-1" class="nav-link" data-scroll-target="#plot-1">Plot</a></li>
   </ul>
 </nav>
     </div>
@@ -356,12 +372,18 @@ ul.task-list li input[type="checkbox"] {
 <h1>- Compares which sessions are flagged as abnormal by each method</h1>
 </section>
 <section id="section" class="level1">
+<h1></h1>
+</section>
+<section id="you-can-run-this-as-a-standalone-python-script-or-import-pieces-into-a-notebook." class="level1">
+<h1>You can run this as a standalone Python script or import pieces into a notebook.</h1>
+</section>
+<section id="section-1" class="level1">
 <h1>—————————————–</h1>
 </section>
 <section id="load-packages-and-data" class="level1">
 <h1>1. Load packages and data</h1>
 </section>
-<section id="section-1" class="level1">
+<section id="section-2" class="level1">
 <h1>—————————————–</h1>
 <p>from pathlib import Path</p>
 <p>import numpy as np import pandas as pd</p>
@@ -370,19 +392,19 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="path-to-the-session-level-feature-matrix-created-by-the-trot-only-script" class="level1">
 <h1>Path to the session-level feature matrix created by the trot-only script</h1>
-<p>DATA_PATH = Path(“data”) / “session_features_trot.csv”</p>
+<p>DATA_PATH = Path(<strong>file</strong>).resolve().parent / “session_features_trot.csv”</p>
 <p>session_features = pd.read_csv(DATA_PATH)</p>
 <p>print(“Session-level feature matrix (trot only):”) print(f” - shape: {session_features.shape}“) print(”few rows:“) display(session_features.head())</p>
 <p>meta_cols = [“horse”, “session_id”, “n_rows”] feature_cols = [c for c in session_features.columns if c not in meta_cols]</p>
 <p>print(“of feature columns:”, len(feature_cols))</p>
 </section>
-<section id="section-2" class="level1">
+<section id="section-3" class="level1">
 <h1>—————————————–</h1>
 </section>
 <section id="helper-prepare-per-horse-features" class="level1">
 <h1>2. Helper: prepare per-horse features</h1>
 </section>
-<section id="section-3" class="level1">
+<section id="section-4" class="level1">
 <h1>—————————————–</h1>
 <p>def prepare_features( df_horse: pd.DataFrame, feature_cols, max_missing_frac: float = 0.4, ) -&gt; pd.DataFrame: “““Clean and prepare feature matrix for one horse.</p>
 <pre><code>Steps
@@ -412,13 +434,13 @@ X = X.apply(lambda col: col.fillna(col.median()), axis=0)
 
 return X</code></pre>
 </section>
-<section id="section-4" class="level1">
+<section id="section-5" class="level1">
 <h1>—————————————–</h1>
 </section>
 <section id="helper-per-horse-anomaly-analysis" class="level1">
 <h1>3. Helper: per-horse anomaly analysis</h1>
 </section>
-<section id="section-5" class="level1">
+<section id="section-6" class="level1">
 <h1>—————————————–</h1>
 <p>def analyze_horse_anomalies( df_horse: pd.DataFrame, feature_cols, z_thresh: float = 2.5, k_default: int = 2, iforest_contamination: float = 0.25, random_state: int = 42, ): “““Run all three anomaly-detection methods for a single horse.</p>
 <pre><code>Methods
@@ -456,13 +478,14 @@ if n_samples &lt; 2:
     X_z = pd.DataFrame(index=df_horse.index)
     out = df_horse[["horse", "session_id", "n_rows"]].copy()
     out["z_max_abs"] = np.nan
+    out["z_mean_abs"] = np.nan
     out["z_n_features_big"] = 0
     out["z_is_outlier"] = 0
     out["kmeans_dist"] = np.nan
-    out["z_mean_abs"] = z_mean
     out["kmeans_is_outlier"] = 0
     out["iforest_score"] = np.nan
     out["iforest_is_outlier"] = 0
+    out["n_methods_flagged"] = 0
     return out, X_z
 
 # 2) Standardize features (z-scores)
@@ -471,10 +494,11 @@ X_z_values = scaler.fit_transform(X)
 X_z = pd.DataFrame(X_z_values, columns=X.columns, index=df_horse.index)
 
 # ---------- Method 1: Z-score thresholding ----------
-z_max = X_z.abs().max(axis=1)
-z_nbig = (X_z.abs() &gt; z_thresh).sum(axis=1)
+z_abs = X_z.abs()
+z_max = z_abs.max(axis=1)
+z_mean = z_abs.mean(axis=1)          # NEW: average |z| across features
+z_nbig = (z_abs &gt; z_thresh).sum(axis=1)
 z_label = (z_max &gt; z_thresh).astype(int)
-z_mean = X_z.abs().mean(axis=1)   # &lt;-- NEW: average |z| across features
 
 # ---------- Method 2: K-means distance ----------
 # Choose a reasonable number of clusters given how few sessions we have
@@ -525,6 +549,7 @@ else:
 # Assemble output for this horse
 out = df_horse[["horse", "session_id", "n_rows"]].copy()
 out["z_max_abs"] = z_max
+out["z_mean_abs"] = z_mean        # NEW column
 out["z_n_features_big"] = z_nbig
 out["z_is_outlier"] = z_label
 out["kmeans_dist"] = dists
@@ -538,13 +563,13 @@ out["n_methods_flagged"] = out[method_cols].sum(axis=1)
 
 return out, X_z</code></pre>
 </section>
-<section id="section-6" class="level1">
+<section id="section-7" class="level1">
 <h1>—————————————–</h1>
 </section>
 <section id="run-analysis-for-all-horses" class="level1">
 <h1>4. Run analysis for all horses</h1>
 </section>
-<section id="section-7" class="level1">
+<section id="section-8" class="level1">
 <h1>—————————————–</h1>
 <p>all_results = [] z_spaces = {} # store z-scored features if you want to look later</p>
 <p>for horse in session_features[“horse”].unique(): df_horse = session_features[session_features[“horse”] == horse] print(f”=== Analyzing horse: {horse} ===“) print(f”Number of sessions: {df_horse.shape[0]}“)</p>
@@ -564,37 +589,96 @@ z_spaces[horse] = X_z</code></pre>
 <h1>Combine results for all horses</h1>
 <p>anomaly_summary = pd.concat(all_results, ignore_index=True)</p>
 <p>print(“anomaly summary for all horses:”) display( anomaly_summary.sort_values( [“horse”, “n_methods_flagged”, “z_max_abs”], ascending=[True, False, False], ) )</p>
-<p>print(“many sessions are flagged by each method?”) for col in [“z_is_outlier”, “kmeans_is_outlier”, “iforest_is_outlier”]: counts = anomaly_summary.groupby(“horse”)[col].sum() print(f”: {col}“) print(counts)</p>
-<p>print(“many sessions are flagged by 2652 methods?”) flagged_two_plus = anomaly_summary[anomaly_summary[“n_methods_flagged”] &gt;= 2] display( flagged_two_plus.sort_values( [“horse”, “n_methods_flagged”, “z_max_abs”], ascending=[True, False, False], ) )</p>
-</section>
-<section id="section-8" class="level1">
-<h1>—————————————–</h1>
-</section>
-<section id="optional-simple-visualization" class="level1">
-<h1>6. (Optional) Simple visualization</h1>
 </section>
 <section id="section-9" class="level1">
 <h1>—————————————–</h1>
 </section>
-<section id="these-are-optional-plotting-snippets-you-can-use-in-the-notebookqmd." class="level1">
-<h1>These are optional plotting snippets you can use in the notebook/QMD.</h1>
+<section id="quick-sanity-checks" class="level1">
+<h1>5. Quick sanity checks</h1>
 </section>
-<section id="comment-them-out-if-you-dont-want-figures." class="level1">
-<h1>Comment them out if you don’t want figures.</h1>
+<section id="section-10" class="level1">
+<h1>—————————————–</h1>
+<p>print(“many sessions are flagged by each method?”) for col in [“z_is_outlier”, “kmeans_is_outlier”, “iforest_is_outlier”]: counts = anomaly_summary.groupby(“horse”)[col].sum() print(f”: {col}“) print(counts)</p>
+<p>print(“many sessions are flagged by 2652 methods?”) flagged_two_plus = anomaly_summary[anomaly_summary[“n_methods_flagged”] &gt;= 2] display( flagged_two_plus.sort_values( [“horse”, “n_methods_flagged”, “z_max_abs”], ascending=[True, False, False], ) )</p>
+</section>
+<section id="section-11" class="level1">
+<h1>—————————————–</h1>
+</section>
+<section id="simple-visualizations" class="level1">
+<h1>6. Simple visualizations</h1>
+</section>
+<section id="section-12" class="level1">
+<h1>—————————————–</h1>
 <p>import matplotlib.pyplot as plt</p>
 </section>
-<section id="example-max-z-score-vs.-session-across-horses" class="level1">
-<h1>Example: max |z|-score vs.&nbsp;session across horses</h1>
-<p>plt.figure() for horse, df_h in anomaly_summary.groupby(“horse”): plt.scatter(df_h[“session_id”], df_h[“z_max_abs”], label=horse) plt.xticks(rotation=90) plt.ylabel(“max |z-score| across features”) plt.xlabel(“session_id”) plt.title(“Session-level deviation from baseline (max |z|)”) plt.legend() plt.tight_layout() plt.savefig(“fig_max_zscore.png”, dpi=300, bbox_inches=‘tight’)</p>
+<section id="convert-session_id-to-a-true-datetime-and-sort-by-it" class="level1">
+<h1>Convert session_id to a true datetime and sort by it</h1>
+<p>anomaly_summary[“session_dt”] = pd.to_datetime( anomaly_summary[“session_id”].str[:8], # yyyymmdd format=“%Y%m%d” )</p>
 </section>
-<section id="example-number-of-methods-that-flag-each-session" class="level1">
-<h1>Example: number of methods that flag each session</h1>
-<p>plt.figure() for horse, df_h in anomaly_summary.groupby(“horse”): plt.scatter(df_h[“session_id”], df_h[“n_methods_flagged”], label=horse) plt.xticks(rotation=90) plt.ylabel(“number of methods flagging session”) plt.xlabel(“session_id”) plt.title(“Agreement between anomaly-detection methods”) plt.legend() plt.tight_layout() plt.savefig(“fig_method_agreement.png”, dpi=300, bbox_inches=‘tight’)</p>
+<section id="optional-pretty-label-for-ticks" class="level1">
+<h1>Optional: pretty label for ticks</h1>
+<p>anomaly_summary[“session_label”] = anomaly_summary[“session_dt”].dt.strftime(“%m/%d/%y”)</p>
 </section>
-<section id="example-average-z-score-vs.-session-across-horses" class="level1">
-<h1>Example: average |z|-score vs.&nbsp;session across horses</h1>
-<p>plt.figure() for horse, df_h in anomaly_summary.groupby(“horse”): plt.scatter(df_h[“session_id”], df_h[“z_mean_abs”], label=horse)</p>
-<p>plt.xticks(rotation=90) plt.ylabel(“mean |z-score| across features”) plt.xlabel(“session_id”) plt.title(“Session-level deviation from baseline (mean |z|)”) plt.legend() plt.tight_layout() plt.savefig(“fig_mean_zscore.png”, dpi=300, bbox_inches=‘tight’)</p>
+<section id="sort-once-by-date-so-plots-are-in-chronological-order" class="level1">
+<h1>Sort once by date so plots are in chronological order</h1>
+<p>anomaly_summary = anomaly_summary.sort_values(“session_dt”)</p>
+</section>
+<section id="plot-1-max-z-score-vs.-session-across-horses" class="level1">
+<h1>— Plot 1: max |z|-score vs.&nbsp;session across horses —</h1>
+<p>plt.figure() for horse, df_h in anomaly_summary.groupby(“horse”): plt.scatter(df_h[“session_dt”], df_h[“z_max_abs”], label=horse)</p>
+<p>plt.xticks(rotation=90) plt.ylabel(“max |z-score| across features”) plt.xlabel(“session date”) plt.title(“Session-level deviation from baseline (max |z|)”) plt.legend() plt.tight_layout() plt.savefig(“fig_max_zscore.png”, dpi=300, bbox_inches=“tight”)</p>
+</section>
+<section id="plot-2-mean-z-score-vs.-session-across-horses" class="level1">
+<h1>— Plot 2: mean |z|-score vs.&nbsp;session across horses —</h1>
+<p>plt.figure() for horse, df_h in anomaly_summary.groupby(“horse”): plt.scatter(df_h[“session_dt”], df_h[“z_mean_abs”], label=horse)</p>
+<p>plt.xticks(rotation=90) plt.ylabel(“mean |z-score| across features”) plt.xlabel(“session date”) plt.title(“Session-level deviation from baseline (mean |z|)”) plt.legend() plt.tight_layout() plt.savefig(“fig_mean_zscore.png”, dpi=300, bbox_inches=“tight”)</p>
+</section>
+<section id="plot-3-number-of-methods-that-flag-each-session" class="level1">
+<h1>— Plot 3: number of methods that flag each session —</h1>
+<p>plt.figure() for horse, df_h in anomaly_summary.groupby(“horse”): plt.scatter(df_h[“session_dt”], df_h[“n_methods_flagged”], label=horse)</p>
+<p>plt.xticks(rotation=90) plt.ylabel(“number of methods flagging session”) plt.xlabel(“session date”) plt.title(“Agreement between anomaly-detection methods”) plt.legend() plt.tight_layout() plt.savefig(“fig_method_agreement.png”, dpi=300, bbox_inches=“tight”)</p>
+<p>#plot 4 # Copy relevant columns heat_df = anomaly_summary[ [“horse”, “session_id”, “z_is_outlier”, “kmeans_is_outlier”, “iforest_is_outlier”]].copy()</p>
+</section>
+<section id="sort-sessions-by-of-methods-flagged-descending" class="level1">
+<h1>Sort sessions by # of methods flagged (descending)</h1>
+<p>heat_df[“n_flag”] = heat_df[[“z_is_outlier”, “kmeans_is_outlier”, “iforest_is_outlier”]].sum(axis=1) heat_df = heat_df.sort_values([“horse”, “n_flag”], ascending=[True, False])</p>
+</section>
+<section id="use-a-concise-session-label-for-readability" class="level1">
+<h1>Use a concise session label for readability</h1>
+<p>heat_df[“session_label”] = heat_df[“horse”] + ” ” + heat_df[“session_id”].str[-6:]</p>
+</section>
+<section id="melt-into-matrix-form-for-heatmap" class="level1">
+<h1>Melt into matrix form for heatmap</h1>
+<p>matrix = heat_df.set_index(“session_label”)[[“z_is_outlier”, “kmeans_is_outlier”, “iforest_is_outlier”]]</p>
+</section>
+<section id="plot" class="level1">
+<h1>Plot</h1>
+<p>import pandas as pd import matplotlib.pyplot as plt import seaborn as sns</p>
+</section>
+<section id="copy-relevant-columns" class="level1">
+<h1>Copy relevant columns</h1>
+<p>heat_df = anomaly_summary[ [“horse”, “session_id”, “z_is_outlier”, “kmeans_is_outlier”, “iforest_is_outlier”]].copy()</p>
+</section>
+<section id="sort-sessions-by-of-methods-flagged-descending-1" class="level1">
+<h1>Sort sessions by # of methods flagged (descending)</h1>
+<p>heat_df[“n_flag”] = heat_df[[“z_is_outlier”, “kmeans_is_outlier”, “iforest_is_outlier”]].sum(axis=1) heat_df = heat_df.sort_values([“horse”, “n_flag”], ascending=[True, False])</p>
+</section>
+<section id="create-readable-session-labels" class="level1">
+<h1>Create readable session labels</h1>
+<p>heat_df[“session_label”] = heat_df[“horse”] + ” ” + heat_df[“session_id”].str[-6:]</p>
+</section>
+<section id="rename-columns-for-nicer-axis-labels" class="level1">
+<h1>Rename columns for nicer axis labels</h1>
+<p>heat_df = heat_df.rename(columns={ “z_is_outlier”: “Z-score”, “kmeans_is_outlier”: “K-means”, “iforest_is_outlier”: “Isolation Forest” })</p>
+</section>
+<section id="build-heatmap-matrix" class="level1">
+<h1>Build heatmap matrix</h1>
+<p>matrix = heat_df.set_index(“session_label”)[[“Z-score”, “K-means”, “Isolation Forest”]]</p>
+</section>
+<section id="plot-1" class="level1">
+<h1>Plot</h1>
+<p>plt.figure(figsize=(7, max(5, matrix.shape[0] * 0.35))) sns.heatmap( matrix, cmap=[“white”, “tab:red”], # white = not flagged, red = flagged linewidths=0.5, linecolor=“gray”, cbar=False, annot=True, fmt=“” )</p>
+<p>plt.xlabel(“Anomaly Detection Method”) plt.ylabel(“Session (Horse + ID)”) plt.title(“Method Agreement Heatmap: Flagged Sessions”) plt.xticks(rotation=0) plt.tight_layout() plt.savefig(“fig_method_heatmap.png”, dpi=300, bbox_inches=“tight”) plt.show()</p>
 
 
 </section>
