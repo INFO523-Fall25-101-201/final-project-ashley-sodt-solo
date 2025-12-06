@@ -51,28 +51,121 @@ mtcars['speed'] = mtcars['horsepower'] / mtcars['weight']
 penguins = sns.load_dataset('penguins').dropna()
 ```
 
-
-
-# Using Quarto for presentations
-
 ## Introduction
 
--   AMEC Laura Miller
-
--   Horses often develop detectable gait abnormalities before injury or reinjury occurs.
+-   Al-Marah Equine Center // Laura Miller
 
 * EquiPro intertial measurement units collect accelerometer data
-  + Outputs calculated stride-level biomechanical metrics
+  + Outputs stride-level biomechanical metrics
+  + Early detection of subtle gait abnormalities
 
-* unordered list
-  + sub-item 1
-  + sub-item 2
-    - sub-sub-item 1
+* **Goal**: Use unsupervised learning techniques to model each horse's typical movement and automatically flag exercise sessions that deviate from this baseline.
+
+## Dataset
+
+* Each session exported as CSV containing stride-level movemement variables.
+  + Duque (14 sessions)
+  + Jackson (6 sessions)
+  + Perseo (5 sessions)
+
+```{python}
+#| label: duque-head1
+#| warning: false
+# Load one example Duque session
+
+df_duque = pd.read_csv("Horses/Duque/20240626T082743-Duque-results.csv")
+
+print("\nExample Duque session from EquiPro:")
+print(f" - dataset shape: {df_duque.shape}")
+print(f" - number of rows: {df_duque.shape[0]}")
+print(f" - number of columns: {df_duque.shape[1]}")
+```
+
+## Dataset 
+Sample of Equipro CSV output with stride-level biomechanical metrics from one exercise session.
+
+```{python}
+#| label: duque-head
+#| warning: false
+# Load one example Duque session
+
+df_duque = pd.read_csv("Horses/Duque/20240626T082743-Duque-results.csv")
+
+
+df_duque = pd.read_csv("Horses/Duque/20240626T082743-Duque-results.csv")
+df_duque.head().style.set_properties(**{'font-size':'5px'})
+
+# Show first 5 rows
+df_duque.head()
+```
+
+# Methods
+
+## Session-Level Features {.smaller}
+
+We summarize **25 stride-level variables** into session-level features.
+
+| Group                     | Biomechanical Variables                                    | Count |
+|-------------------------:|:------------------------------------------------------|------:|
+| **Stride Metrics**        | stride duration, speed, length                        | 3     |
+| **Limb Loading / Timing** | duty factor (LF/RF/LH/RH), stance durations           | 12    |
+| **Coordination**    | diagonal advanced placement (left / right)            | 4     |
+| **Trunk Symmetry**        | head / withers / sacrum asymmetry + symmetry indices  | 6     |
+| **Total**                 | —                                                     | **25** |
+
+→ Each variable is summarized per session using: **mean, std, IQR, min, max**  
+→ Producing **125 engineered features per session**
+
+
+## Session-level Feature Matrix {.smaller}
+
+Feature matrix containing 24 exercise sessions and 125 engineered biomechanical movement features per session.
+
+```{python}
+import pandas as pd
+from pathlib import Path
+
+# Load the engineered feature matrix
+data_path = Path("analysis") / "data" / "session_features_trot.csv"
+session_features = pd.read_csv(data_path)
+
+# Rows to display
+rows_to_show = [1, 2, 16, 17, 22, 23]
+
+display_cols = [
+    "horse", "session_id", "n_rows",
+    "stride_dur_mean", "stride_dur_std",
+    "stride_dur_iqr","stride_dur_min","stride_dur_max"
+]
+
+# Display selected rows, clean formatting
+session_features.loc[rows_to_show, display_cols] \
+    .style.hide(axis="index") 
+```
+
+## Anomaly Detection Framework
+
+- Convert every feature to a z-score.
+
+- **Z-score Thresholding**: Flags sessions where any feature deviates strongly from the horse’s baseline.
+
+- **K-means Cluster Distance**: Groups similar sessions and marks those far from their cluster center as outliers.
+
+- **Isolation Forest**: Identifies sessions that are difficult to group with others (unusual combinations of features).
+
+Sessions flagged by **multiple methods** are more likely to reflect real gait irregularities.
+
+## How many sessions were flagged?
+
+| Method               | Duque | Jackson | Perseo |
+|---------------------|:-----:|:-------:|:------:|
+| Z-score threshold   | **7** | 0 | 0 |
+| K-means distance    | **3** | **2** | **2** |
+| Isolation Forest    | **4** | **2** | 0 |
 
 
 ## Layouts
-
-You can use plain text
+text
 
 ::: columns
 ::: {.column width="40%"}

@@ -244,11 +244,6 @@ display(
     )
 )
 
-
-# -----------------------------------------
-# 5. Quick sanity checks
-# -----------------------------------------
-
 print("\nHow many sessions are flagged by each method?")
 for col in ["z_is_outlier", "kmeans_is_outlier", "iforest_is_outlier"]:
     counts = anomaly_summary.groupby("horse")[col].sum()

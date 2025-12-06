@@ -320,11 +320,8 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#section-8" id="toc-section-8" class="nav-link" data-scroll-target="#section-8">—————————————–</a></li>
   <li><a href="#combine-results-for-all-horses" id="toc-combine-results-for-all-horses" class="nav-link" data-scroll-target="#combine-results-for-all-horses">Combine results for all horses</a></li>
   <li><a href="#section-9" id="toc-section-9" class="nav-link" data-scroll-target="#section-9">—————————————–</a></li>
-  <li><a href="#quick-sanity-checks" id="toc-quick-sanity-checks" class="nav-link" data-scroll-target="#quick-sanity-checks">5. Quick sanity checks</a></li>
-  <li><a href="#section-10" id="toc-section-10" class="nav-link" data-scroll-target="#section-10">—————————————–</a></li>
-  <li><a href="#section-11" id="toc-section-11" class="nav-link" data-scroll-target="#section-11">—————————————–</a></li>
   <li><a href="#optional-simple-visualization" id="toc-optional-simple-visualization" class="nav-link" data-scroll-target="#optional-simple-visualization">6. (Optional) Simple visualization</a></li>
-  <li><a href="#section-12" id="toc-section-12" class="nav-link" data-scroll-target="#section-12">—————————————–</a></li>
+  <li><a href="#section-10" id="toc-section-10" class="nav-link" data-scroll-target="#section-10">—————————————–</a></li>
   <li><a href="#these-are-optional-plotting-snippets-you-can-use-in-the-notebookqmd." id="toc-these-are-optional-plotting-snippets-you-can-use-in-the-notebookqmd." class="nav-link" data-scroll-target="#these-are-optional-plotting-snippets-you-can-use-in-the-notebookqmd.">These are optional plotting snippets you can use in the notebook/QMD.</a></li>
   <li><a href="#comment-them-out-if-you-dont-want-figures." id="toc-comment-them-out-if-you-dont-want-figures." class="nav-link" data-scroll-target="#comment-them-out-if-you-dont-want-figures.">Comment them out if you don’t want figures.</a></li>
   <li><a href="#example-max-z-score-vs.-session-across-horses" id="toc-example-max-z-score-vs.-session-across-horses" class="nav-link" data-scroll-target="#example-max-z-score-vs.-session-across-horses">Example: max |z|-score vs.&nbsp;session across horses</a></li>
@@ -576,25 +573,16 @@ z_spaces[horse] = X_z</code></pre>
 <h1>Combine results for all horses</h1>
 <p>anomaly_summary = pd.concat(all_results, ignore_index=True)</p>
 <p>print(“anomaly summary for all horses:”) display( anomaly_summary.sort_values( [“horse”, “n_methods_flagged”, “z_max_abs”], ascending=[True, False, False], ) )</p>
-</section>
-<section id="section-9" class="level1">
-<h1>—————————————–</h1>
-</section>
-<section id="quick-sanity-checks" class="level1">
-<h1>5. Quick sanity checks</h1>
-</section>
-<section id="section-10" class="level1">
-<h1>—————————————–</h1>
 <p>print(“many sessions are flagged by each method?”) for col in [“z_is_outlier”, “kmeans_is_outlier”, “iforest_is_outlier”]: counts = anomaly_summary.groupby(“horse”)[col].sum() print(f”: {col}“) print(counts)</p>
 <p>print(“many sessions are flagged by 2652 methods?”) flagged_two_plus = anomaly_summary[anomaly_summary[“n_methods_flagged”] &gt;= 2] display( flagged_two_plus.sort_values( [“horse”, “n_methods_flagged”, “z_max_abs”], ascending=[True, False, False], ) )</p>
 </section>
-<section id="section-11" class="level1">
+<section id="section-9" class="level1">
 <h1>—————————————–</h1>
 </section>
 <section id="optional-simple-visualization" class="level1">
 <h1>6. (Optional) Simple visualization</h1>
 </section>
-<section id="section-12" class="level1">
+<section id="section-10" class="level1">
 <h1>—————————————–</h1>
 </section>
 <section id="these-are-optional-plotting-snippets-you-can-use-in-the-notebookqmd." class="level1">
