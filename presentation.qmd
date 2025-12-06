@@ -169,6 +169,15 @@ Sessions flagged by ≥2 methods (strongest evidence of abnormal movement):
 
 These sessions consistently deviate from each horse’s typical movement pattern.
 
+
+
+## Method Agreement Heatmap
+
+<div align="center">
+![Which methods agree when flagging anomalies?](analysis/data/fig_method_heatmap.png){width="50%"}
+</div>
+
+
 ## Layouts
 text
 

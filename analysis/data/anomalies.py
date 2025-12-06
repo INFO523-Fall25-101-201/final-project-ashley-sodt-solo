@@ -237,6 +237,24 @@ for horse in session_features["horse"].unique():
     all_results.append(horse_results)
     z_spaces[horse] = X_z
 
+def top_contributing_features(anomaly_summary, z_spaces, session_id, horse, top_n=5):
+    """Return the biomechanical features that deviate most at that session."""
+    
+    # Grab the correct z-score matrix for that horse
+    X_z = z_spaces[horse]
+
+    # Ensure the session ordering in X_z still matches the horse data
+    df_horse = anomaly_summary[anomaly_summary["horse"] == horse].reset_index(drop=True)
+
+    # Look up position within this horse’s data
+    pos = df_horse[df_horse["session_id"] == session_id].index[0]
+
+    # Extract that row from standardized feature matrix
+    z_vals = X_z.loc[pos].abs().sort_values(ascending=False)
+
+    return z_vals.head(top_n)
+
+
 # Combine results for all horses
 anomaly_summary = pd.concat(all_results, ignore_index=True)
 
@@ -247,7 +265,6 @@ display(
         ascending=[True, False, False],
     )
 )
-
 
 # -----------------------------------------
 # 5. Quick sanity checks
@@ -327,40 +344,30 @@ plt.tight_layout()
 plt.savefig("fig_method_agreement.png", dpi=300, bbox_inches="tight")
 
 
-#plot 4
-# Copy relevant columns
-heat_df = anomaly_summary[
-    ["horse", "session_id", "z_is_outlier", "kmeans_is_outlier", "iforest_is_outlier"]
-].copy()
 
-# Sort sessions by # of methods flagged (descending)
-heat_df["n_flag"] = heat_df[["z_is_outlier", "kmeans_is_outlier", "iforest_is_outlier"]].sum(axis=1)
-heat_df = heat_df.sort_values(["horse", "n_flag"], ascending=[True, False])
-
-# Use a concise session label for readability
-heat_df["session_label"] = heat_df["horse"] + " " + heat_df["session_id"].str[-6:]
-
-# Melt into matrix form for heatmap
-matrix = heat_df.set_index("session_label")[["z_is_outlier", "kmeans_is_outlier", "iforest_is_outlier"]]
-
-# Plot
-import pandas as pd
+# heat map plot
 import matplotlib.pyplot as plt
 import seaborn as sns
-
 # Copy relevant columns
 heat_df = anomaly_summary[
-    ["horse", "session_id", "z_is_outlier", "kmeans_is_outlier", "iforest_is_outlier"]
+    ["horse", "session_id", "session_dt", 
+     "z_is_outlier", "kmeans_is_outlier", "iforest_is_outlier"]
 ].copy()
 
-# Sort sessions by # of methods flagged (descending)
-heat_df["n_flag"] = heat_df[["z_is_outlier", "kmeans_is_outlier", "iforest_is_outlier"]].sum(axis=1)
+# Create readable date label
+heat_df["date_label"] = heat_df["session_dt"].dt.strftime("%m/%d/%y")
+
+# Combine horse + date (e.g., "Duque 08/24/24")
+heat_df["session_label"] = heat_df["horse"] + " " + heat_df["date_label"]
+
+# Sort by number of methods flagged (descending)
+heat_df["n_flag"] = (
+    heat_df[["z_is_outlier", "kmeans_is_outlier", "iforest_is_outlier"]]
+    .sum(axis=1)
+)
 heat_df = heat_df.sort_values(["horse", "n_flag"], ascending=[True, False])
 
-# Create readable session labels
-heat_df["session_label"] = heat_df["horse"] + " " + heat_df["session_id"].str[-6:]
-
-# Rename columns for nicer axis labels
+# Rename columns for nicer axis titles
 heat_df = heat_df.rename(columns={
     "z_is_outlier": "Z-score",
     "kmeans_is_outlier": "K-means",
@@ -370,11 +377,11 @@ heat_df = heat_df.rename(columns={
 # Build heatmap matrix
 matrix = heat_df.set_index("session_label")[["Z-score", "K-means", "Isolation Forest"]]
 
-# Plot
+# Plot Heatmap
 plt.figure(figsize=(7, max(5, matrix.shape[0] * 0.35)))
 sns.heatmap(
     matrix,
-    cmap=["white", "tab:red"],  # white = not flagged, red = flagged
+    cmap=["white", "tab:red"],   # white = 0 (not flagged), red = 1 (flagged)
     linewidths=0.5,
     linecolor="gray",
     cbar=False,
@@ -383,9 +390,49 @@ sns.heatmap(
 )
 
 plt.xlabel("Anomaly Detection Method")
-plt.ylabel("Session (Horse + ID)")
+plt.ylabel("Session (Horse + Date)")
 plt.title("Method Agreement Heatmap: Flagged Sessions")
 plt.xticks(rotation=0)
 plt.tight_layout()
 plt.savefig("fig_method_heatmap.png", dpi=300, bbox_inches="tight")
 plt.show()
+
+# --- Plot 5: top contributing features for high-confidence anomalies ---
+
+# Re-use the helper you already defined:
+# def top_contributing_features(anomaly_summary, z_spaces, session_id, horse, top_n=5):
+
+# Take only sessions flagged by >= 2 methods
+flagged_two_plus = anomaly_summary[anomaly_summary["n_methods_flagged"] >= 2]
+
+for _, row in flagged_two_plus.iterrows():
+    horse = row["horse"]
+    session_id = row["session_id"]
+
+    # Get top |z|-score features for this session
+    top_feats = top_contributing_features(
+        anomaly_summary=anomaly_summary,
+        z_spaces=z_spaces,
+        session_id=session_id,
+        horse=horse,
+        top_n=8,   # change if you want more/less bars
+    )
+
+    # Make a horizontal bar plot
+    plt.figure(figsize=(6, 4))
+    top_feats.sort_values().plot(
+        kind="barh",
+        title=f"Top Feature Deviations\n{horse} {session_id}",
+    )
+    plt.xlabel("|z-score| (deviation from horse baseline)")
+    plt.ylabel("Biomechanical feature")
+    plt.tight_layout()
+
+    # Save one figure per session (safe filename)
+    safe_id = session_id.replace(":", "").replace("T", "_")
+    out_name = f"fig_top_features_{horse}_{safe_id}.png"
+    plt.savefig(out_name, dpi=300, bbox_inches="tight")
+    plt.close()
+
+
+

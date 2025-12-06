@@ -32,7 +32,7 @@
     "href": "presentation.html#code",
     "title": "Clustering Movement Patterns in Equine Exercise Sessions",
     "section": "Code",
-    "text": "Code\n\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.073\nModel:                            OLS   Adj. R-squared:                  0.070\nMethod:                 Least Squares   F-statistic:                     30.59\nDate:                Sat, 06 Dec 2025   Prob (F-statistic):           5.84e-08\nTime:                        20:26:48   Log-Likelihood:                -1346.4\nNo. Observations:                 392   AIC:                             2697.\nDf Residuals:                     390   BIC:                             2705.\nDf Model:                           1                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         35.8015      2.266     15.800      0.000      31.347      40.257\nspeed       -354.7055     64.129     -5.531      0.000    -480.788    -228.623\n==============================================================================\nOmnibus:                       27.687   Durbin-Watson:                   0.589\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               18.976\nSkew:                           0.420   Prob(JB):                     7.57e-05\nKurtosis:                       2.323   Cond. No.                         169.\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified."
+    "text": "Code\n\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.073\nModel:                            OLS   Adj. R-squared:                  0.070\nMethod:                 Least Squares   F-statistic:                     30.59\nDate:                Sat, 06 Dec 2025   Prob (F-statistic):           5.84e-08\nTime:                        21:33:25   Log-Likelihood:                -1346.4\nNo. Observations:                 392   AIC:                             2697.\nDf Residuals:                     390   BIC:                             2705.\nDf Model:                           1                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         35.8015      2.266     15.800      0.000      31.347      40.257\nspeed       -354.7055     64.129     -5.531      0.000    -480.788    -228.623\n==============================================================================\nOmnibus:                       27.687   Durbin-Watson:                   0.589\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               18.976\nSkew:                           0.420   Prob(JB):                     7.57e-05\nKurtosis:                       2.323   Cond. No.                         169.\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified."
   },
   {
     "objectID": "presentation.html#plots",
@@ -425,5 +425,26 @@
     "title": "Clustering Movement Patterns in Equine Exercise Sessions",
     "section": "High-Confidence Anomalies (Multiple Methods)",
     "text": "High-Confidence Anomalies (Multiple Methods)\nSessions flagged by ≥2 methods (strongest evidence of abnormal movement):\n\n\n\nHorse\nSession ID\nMethods Flagged\n\n\n\n\nDuque\n20250804T082647\n3\n\n\nDuque\n20250309T134916\n3\n\n\nDuque\n20250308T111144\n3\n\n\nDuque\n20240627T095239\n2\n\n\nJackson\n20241215T152135\n2\n\n\n\nThese sessions consistently deviate from each horse’s typical movement pattern."
+  },
+  {
+    "objectID": "presentation.html#heatmap",
+    "href": "presentation.html#heatmap",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "heatmap",
+    "text": "heatmap"
+  },
+  {
+    "objectID": "presentation.html#method-agreement-heatmap",
+    "href": "presentation.html#method-agreement-heatmap",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Method Agreement Heatmap",
+    "text": "Method Agreement Heatmap\n\n\n\n\nWhich methods agree when flagging anomalies?"
+  },
+  {
+    "objectID": "presentation.html#method-agreement-heatmap-1",
+    "href": "presentation.html#method-agreement-heatmap-1",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Method Agreement Heatmap",
+    "text": "Method Agreement Heatmap\n\nWhich methods agree when flagging anomalies?"
   }
 ]
