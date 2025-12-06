@@ -1,0 +1,178 @@
+---
+title: "Clustering Movement Patterns in Equine Exercise Sessions"
+subtitle: "INFO 523 - Summer 2025 - Final Project"
+author: "Ashley Sodt"
+title-slide-attributes:
+  data-background-image: images/watercolour_sys02_img34_teacup-ocean.jpg
+  data-background-size: stretch
+  data-background-opacity: "0.7"
+  data-slide-number: none
+format:
+  revealjs:
+    theme:  ['data/customtheming.scss']
+  
+editor: visual
+jupyter: python3
+execute:
+  echo: false
+---
+
+```{python}
+#| label: load-packages
+#| include: false
+
+from pathlib import Path
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# modeling
+from sklearn.preprocessing import StandardScaler
+from sklearn.ensemble import IsolationForest
+from sklearn.cluster import KMeans
+```
+
+```{python}
+#| label: setup
+#| include: false
+# Set up plot theme and figure resolution
+sns.set_theme(style="whitegrid")
+sns.set_context("notebook", font_scale=1.1)
+
+plt.rcParams['figure.dpi'] = 300
+plt.rcParams['savefig.dpi'] = 300
+plt.rcParams['figure.figsize'] = (6, 6 * 0.618)
+```
+
+```{python}
+#| label: load-data
+#| include: false
+
+# Load session-level features (one row per session)
+# Adjust the path/file name here if needed
+data_path = Path("analysis") / "data" / "session_features_trot.csv"
+df = pd.read_csv(data_path)
+
+# Assume these columns already exist from feature engineering
+id_cols = ["horse", "session_id"]
+feature_cols = [c for c in df.columns if c not in id_cols]
+
+df.head()
+```
+
+# Project overview
+
+## Why horse movement anomalies?
+
+- Performance and rehab horses often show **subtle gait changes** long before obvious lameness.
+- Wearable sensors (EquiPro) capture **stride-level biomechanics** over many exercise sessions.
+- But manually reviewing every stride across many days is **not scalable**.
+- Goal of this project:
+  - Build **session-level summaries** of movement,
+  - Model each horse's **typical pattern**, and
+  - Use **unsupervised anomaly detection** to flag unusual sessions.
+
+## Data and feature engineering
+
+- Data source: **EquiPro CSV files**, one file per exercise session per horse.
+- Each file contains many strides with variables like:
+  - Stride duration, duty factor, diagonal advanced placement, symmetry measures, etc.
+- For each session (per horse), I compute:
+  - Mean, standard deviation, interquartile range, min, and max
+  - For each selected biomechanical variable
+- Result: a **session-level feature matrix**:
+  - Rows = sessions, columns = engineered biomechanical features.
+
+## Per-horse standardization (baseline)
+
+- Horses differ a lot in size, conformation, and way of going.
+- To make features comparable within each horse, I:
+  - Split data **by horse**.
+  - Standardize all columns to **z-scores** (mean 0, sd 1) per horse.
+- Interpretation:
+  - Values near 0 ⇒ typical for that horse.
+  - Large |z| values ⇒ potential deviations from their baseline pattern.
+- These standardized features provide the **baseline** that anomaly detectors use.
+
+## Anomaly detection methods
+
+- I use three **unsupervised** approaches:
+  - **Z-score thresholding**
+    - Flag sessions where several features have |z| above a chosen cutoff.
+  - **K-means clustering**
+    - Cluster sessions in feature space.
+    - Small, distant clusters can indicate unusual sessions.
+  - **Isolation Forest**
+    - Tree-based method that “isolates” rare or odd points.
+    - Returns an anomaly score per session.
+- These methods complement each other and give a **richer picture** of atypical movement.
+
+## Simple example visualization
+
+::: columns
+::: {.column width="50%"}
+- Here I show an example using two engineered features:
+  - e.g., mean stride duration vs. duty factor.
+- Points represent **sessions** for one horse.
+- The Isolation Forest assigns each session as:
+  - **Normal** or **anomalous**.
+- This helps visually confirm whether flagged sessions are truly “off-pattern.”
+:::
+
+::: {.column width="50%"}
+```{python}
+#| label: example-plot
+#| warning: false
+
+# Example: focus on one horse and two features
+horse_name = df["horse"].unique()[0]
+df_h = df[df["horse"] == horse_name].copy()
+
+X = df_h[feature_cols].values
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+iso = IsolationForest(random_state=123, contamination=0.1)
+df_h["anom_iforest"] = iso.fit_predict(X_scaled)  # -1 = anomaly, 1 = normal
+
+feat_x = feature_cols[0]
+feat_y = feature_cols[1]
+
+sns.scatterplot(
+    data=df_h,
+    x=feat_x,
+    y=feat_y,
+    hue="anom_iforest",
+    palette="coolwarm"
+)
+plt.title(f"Example sessions for {horse_name}")
+plt.tight_layout()
+plt.show()
+```
+:::
+:::
+
+## Interpreting flagged sessions
+
+- Once sessions are flagged as anomalous, the next step is **interpretation**:
+  - Are these sessions close to known injury or rehab dates?
+  - Do they correspond to unusually hard workouts or different footing?
+  - Are specific features (e.g., symmetry measures) consistently abnormal?
+- This project focuses on the **pipeline**:
+  - From raw accelerometer data → session features → anomaly scores.
+- In future work, these anomalies can be linked with **clinical notes** and **training logs**.
+
+## Takeaways and next steps
+
+- I built a **session-level, per-horse framework** for:
+  - Summarizing EquiPro stride data,
+  - Standardizing features, and
+  - Applying multiple anomaly detection methods.
+- This framework can help:
+  - Screen large numbers of sessions,
+  - Highlight candidate “problem” days for deeper review.
+- Next steps:
+  - Refine the feature set (e.g., focus on symmetry-heavy variables),
+  - Compare detectors quantitatively (precision/recall vs. labeled events),
+  - Integrate more horses and gaits (beyond trot) and add **clinical context**.

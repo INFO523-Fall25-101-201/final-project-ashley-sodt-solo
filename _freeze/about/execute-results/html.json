@@ -1,7 +1,8 @@
 {
-  "hash": "d3a417830bf5841df8a6518236c7f44d",
+  "hash": "00a0374950c9dbd6f7cdf4d395b38f3f",
   "result": {
-    "markdown": "---\ntitle: About\nformat: html\neditor: visual\n---\n\nThis project was developed by **\\[Team Name\\]** For [INFO 523 - Data Mining and Discovery](https://datamineaz.org/) at the University of Arizona, taught by Dr. Greg Chism. The team is comprised of the following team members.\n\n-   Team member 1: One sentence description of Team member 1 (e.g., year, major, etc.).\n\n-   Team member 2: One sentence description of Team member 2 (e.g., year, major, etc.).\n\n-   Team member 3: One sentence description of Team member 3 (e.g., year, major, etc.).\n\n-   Team member 4: One sentence description of Team member 4 (e.g., year, major, etc.).\n\n",
+    "engine": "jupyter",
+    "markdown": "---\ntitle: \"About\"\nformat: html\neditor: visual\njupyter: python3\n---\n\nThis project was developed by Ashley Sodt For [INFO 523 - Data Mining and Discovery](https://datamineaz.org/) at the University of Arizona, taught by Dr. Greg Chism. Ashley Sodt is a second year PhD student in the Applied Mathematics program.\n\n",
     "supporting": [
       "about_files"
     ],
