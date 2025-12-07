@@ -51,7 +51,7 @@ mtcars['speed'] = mtcars['horsepower'] / mtcars['weight']
 penguins = sns.load_dataset('penguins').dropna()
 ```
 
-## Introduction
+## Introduction {.smaller}
 
 -   Al-Marah Equine Center // Laura Miller
 
@@ -59,7 +59,7 @@ penguins = sns.load_dataset('penguins').dropna()
   + Outputs stride-level biomechanical metrics
   + Early detection of subtle gait abnormalities
 
-* **Goal**: Use unsupervised learning techniques to model each horse's typical movement and automatically flag exercise sessions that deviate from this baseline. Such anomalies may reflect behavioral irregularities, equipment
+**Goal**: Use unsupervised learning techniques to model each horse's typical movement and automatically flag exercise sessions that deviate from this baseline. Such anomalies may reflect behavioral irregularities, equipment
 malfunction, pain, or potential reinjury.
 
 ## Dataset
@@ -189,119 +189,48 @@ These sessions consistently deviate from each horse’s typical movement pattern
 ![Which methods agree when flagging anomalies?](analysis/data/fig_method_heatmap.png){width="50%"}
 </div>
 
-## Top Contributors to High-Confidence Anomalies {.smaller}
+## Feature Drivers of High-Confidence Anomalies {.smaller}
 
-::: {.content-visible when-format="revealjs"}
-```{python}
-import pandas as pd
+<div align="center">
 
-# Load table of top-contributing features
-top_contrib_table = pd.read_csv("data/top_feature_contributors.csv")
-top_contrib_table
-```
+![](analysis/data/fig_top_feature_heatmap.png){width="100%"}
 
-## Layouts
-text
+</div>
 
-::: columns
-::: {.column width="40%"}
--   or bullet points[^1]
-:::
 
-::: {.column width="60%"}
-or in two columns
-:::
-:::
+## Interpreting Anomaly Drivers — Example: Duque 08/04/25 {.smaller}
 
-[^1]: And add footnotes
+**Top contributing features**
 
--   like
+- ↑ Right Hind stance duration (stance_dur_RH_max)
 
--   this
+- ↑ Diagonal timing variability (DAP metrics: dap_L_perc_iqr, dap_R_sec_max)
 
-## Code
+**What this suggests**
 
-```{python}
-from sklearn.linear_model import LinearRegression
-import statsmodels.api as sm
-import pandas as pd
+- Right hind is staying on the ground longer → compensation
 
-# Fit a linear regression model
-X = mtcars[['speed']]
-y = mtcars['mpg']
-model = LinearRegression().fit(X, y)
+- Increased timing variability → reduced trot symmetry & coordination
 
-# Summary of the model
-X2 = sm.add_constant(X)
-est = sm.OLS(y, X2)
-est2 = est.fit()
-print(est2.summary())
-```
+**Likely interpretation**
 
-## Plots
+Right hind is supporting more load, causing instability in diagonal pairing.  
+This may indicate early hind-limb discomfort or fatigue.
 
-```{python}
-penguins['species'] = penguins['species'].apply(lambda x: "Adelie" if x == "Adelie" else "Other")
-sns.scatterplot(data=penguins, x='flipper_length_mm', y='body_mass_g', hue='species')
-plt.show()
-```
 
-## Plot and text
+## Conclusions {.smaller}
 
-::: columns
-::: {.column width="50%"}
--   Some text
+- Computed session-level biomechanics for each horse → established individualized baseline movement patterns
+- Multiple anomaly detection methods (Z-score, K-means, Isolation Forest) flagged sessions showing deviations from baseline
+- Only a small subset of sessions showed strong evidence of abnormality  
+  - High-confidence anomalies = flagged by ≥ 2 methods
 
--   goes here
-:::
+- Deviations were driven primarily by:
+  - Diagonal advanced placement, duty factor, and head motion symmetry
+  - Features tied to stride timing and weight distribution
 
-::: {.column width="50%"}
-```{python}
-#| warning: false
-#| fig.width: 5.5
-fig, ax = plt.subplots(figsize=(5.5, 5.5 * 0.618))
-sns.boxplot(data=penguins, x='bill_length_mm', y='species', hue='species', ax=ax)
-plt.show()
-```
-:::
-:::
-
-# A new section...
-
-## Tables
-
-If you want to generate a table, make sure it is in the HTML format (instead of Markdown or other formats), e.g.,
-
-```{python}
-penguins.head().to_html()
-```
-
-## Images
-
-![Image credit: Danielle Navarro, Percolate.](images/watercolour_sys02_img34_teacup-ocean.png){fig-align="center" width="500"}
-
-## Math Expressions {.smaller}
-
-You can write LaTeX math expressions inside a pair of dollar signs, e.g. \$\\alpha+\\beta\$ renders $\alpha + \beta$. You can use the display style with double dollar signs:
-
-```         
-$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$
-```
-
-$$
-\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i
-$$
-
-Limitations:
-
-1.  The source code of a LaTeX math expression must be in one line, unless it is inside a pair of double dollar signs, in which case the starting `$$` must appear in the very beginning of a line, followed immediately by a non-space character, and the ending `$$` must be at the end of a line, led by a non-space character;
-
-2.  There should not be spaces after the opening `$` or before the closing `$`.
-
-# Wrap up
-
-## Feeling adventurous?
-
--   You are welcomed to use the default styling of the slides. In fact, that's what I expect majority of you will do. You will differentiate yourself with the content of your presentation.
-
--   But some of you might want to play around with slide styling. Some solutions for this can be found at https://quarto.org/docs/presentations/revealjs.
+<div style="margin-top:10px; font-size:0.9em;">
+**Interpretation:**  
+Automated anomaly detection reveals subtle, horse-specific gait changes that may signal behavioral irregularities, equipment issues, 
+pain responses, or early reinjury risk. This can enable earlier detection and proactive intervention.
+</div>
