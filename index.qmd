@@ -5,7 +5,9 @@ author:
   - name: "Ashley Sodt"
     affiliations:
       - name: "Applied Math PhD Student, University of Arizona"
-description: "Project description"
+description: "Unsupervised learning techniques were used to cluster equine exercise sessions and detect anomalies that may reflect behavioral irregularities, equipment issues, or potential reinjury.
+
+"
 format:
    html:
     code-tools: true
