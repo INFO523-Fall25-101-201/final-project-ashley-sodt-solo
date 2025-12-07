@@ -51,7 +51,7 @@ mtcars['speed'] = mtcars['horsepower'] / mtcars['weight']
 penguins = sns.load_dataset('penguins').dropna()
 ```
 
-## Introduction {.smaller}
+## Introduction
 
 -   Al-Marah Equine Center // Laura Miller
 
