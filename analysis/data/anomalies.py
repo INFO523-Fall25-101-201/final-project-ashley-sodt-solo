@@ -331,10 +331,10 @@ plt.legend()
 plt.tight_layout()
 plt.savefig("fig_method_agreement.png", dpi=300, bbox_inches="tight")
 
-
 # 7.5 Plot 4: Method agreement heatmap
 heat_df = anomaly_summary[
-    ["horse", "session_id", "z_is_outlier", "kmeans_is_outlier", "iforest_is_outlier"]
+    ["horse", "session_id", "session_dt",
+     "z_is_outlier", "kmeans_is_outlier", "iforest_is_outlier"]
 ].copy()
 
 # Sort sessions by # of methods flagged (descending within horse)
@@ -344,8 +344,9 @@ heat_df["n_flag"] = (
 )
 heat_df = heat_df.sort_values(["horse", "n_flag"], ascending=[True, False])
 
-# Create readable session labels
-heat_df["session_label"] = heat_df["horse"] + " " + heat_df["session_id"].str[-6:]
+# Create readable date label (mm/dd/yy) and combine with horse
+heat_df["date_label"] = heat_df["session_dt"].dt.strftime("%m/%d/%y")
+heat_df["session_label"] = heat_df["horse"] + " " + heat_df["date_label"]
 
 # Rename columns for nicer axis labels
 heat_df = heat_df.rename(columns={
@@ -369,7 +370,7 @@ sns.heatmap(
 )
 
 plt.xlabel("Anomaly Detection Method")
-plt.ylabel("Session (Horse + ID)")
+plt.ylabel("Session (Horse + Date)")
 plt.title("Method Agreement Heatmap: Flagged Sessions")
 plt.xticks(rotation=0)
 plt.tight_layout()

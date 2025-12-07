@@ -90,7 +90,7 @@ df_duque.head()
 
 ## Session-Level Features {.smaller}
 
-We summarize **25 stride-level variables** into session-level features.
+We summarize 25 stride-level variables into session-level features.
 
 | Group                     | Biomechanical Variables                                    | Count |
 |-------------------------:|:------------------------------------------------------|------:|
@@ -100,8 +100,9 @@ We summarize **25 stride-level variables** into session-level features.
 | **Trunk Symmetry**        | head / withers / sacrum asymmetry + symmetry indices  | 6     |
 | **Total**                 | —                                                     | **25** |
 
-→ Each variable is summarized per session using: **mean, std, IQR, min, max**  
-→ Producing **125 engineered features per session**
+→ Each variable is summarized per session using: mean, std, IQR, min, max 
+
+→ Producing 125 engineered features per session
 
 
 ## Session-Level Feature Matrix {.smaller}

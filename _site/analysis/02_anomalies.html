@@ -334,7 +334,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#plot-3-number-of-methods-that-flag-each-session" id="toc-plot-3-number-of-methods-that-flag-each-session" class="nav-link" data-scroll-target="#plot-3-number-of-methods-that-flag-each-session">7.4 Plot 3: number of methods that flag each session</a></li>
   <li><a href="#plot-4-method-agreement-heatmap" id="toc-plot-4-method-agreement-heatmap" class="nav-link" data-scroll-target="#plot-4-method-agreement-heatmap">7.5 Plot 4: Method agreement heatmap</a></li>
   <li><a href="#sort-sessions-by-of-methods-flagged-descending-within-horse" id="toc-sort-sessions-by-of-methods-flagged-descending-within-horse" class="nav-link" data-scroll-target="#sort-sessions-by-of-methods-flagged-descending-within-horse">Sort sessions by # of methods flagged (descending within horse)</a></li>
-  <li><a href="#create-readable-session-labels" id="toc-create-readable-session-labels" class="nav-link" data-scroll-target="#create-readable-session-labels">Create readable session labels</a></li>
+  <li><a href="#create-readable-date-label-mmddyy-and-combine-with-horse" id="toc-create-readable-date-label-mmddyy-and-combine-with-horse" class="nav-link" data-scroll-target="#create-readable-date-label-mmddyy-and-combine-with-horse">Create readable date label (mm/dd/yy) and combine with horse</a></li>
   <li><a href="#rename-columns-for-nicer-axis-labels" id="toc-rename-columns-for-nicer-axis-labels" class="nav-link" data-scroll-target="#rename-columns-for-nicer-axis-labels">Rename columns for nicer axis labels</a></li>
   <li><a href="#build-heatmap-matrix" id="toc-build-heatmap-matrix" class="nav-link" data-scroll-target="#build-heatmap-matrix">Build heatmap matrix</a></li>
   <li><a href="#section-15" id="toc-section-15" class="nav-link" data-scroll-target="#section-15">—————————————–</a></li>
@@ -650,15 +650,15 @@ z_spaces[horse] = X_z</code></pre>
 </section>
 <section id="plot-4-method-agreement-heatmap" class="level1">
 <h1>7.5 Plot 4: Method agreement heatmap</h1>
-<p>heat_df = anomaly_summary[ [“horse”, “session_id”, “z_is_outlier”, “kmeans_is_outlier”, “iforest_is_outlier”]].copy()</p>
+<p>heat_df = anomaly_summary[ [“horse”, “session_id”, “session_dt”, “z_is_outlier”, “kmeans_is_outlier”, “iforest_is_outlier”]].copy()</p>
 </section>
 <section id="sort-sessions-by-of-methods-flagged-descending-within-horse" class="level1">
 <h1>Sort sessions by # of methods flagged (descending within horse)</h1>
 <p>heat_df[“n_flag”] = ( heat_df[[“z_is_outlier”, “kmeans_is_outlier”, “iforest_is_outlier”]] .sum(axis=1) ) heat_df = heat_df.sort_values([“horse”, “n_flag”], ascending=[True, False])</p>
 </section>
-<section id="create-readable-session-labels" class="level1">
-<h1>Create readable session labels</h1>
-<p>heat_df[“session_label”] = heat_df[“horse”] + ” ” + heat_df[“session_id”].str[-6:]</p>
+<section id="create-readable-date-label-mmddyy-and-combine-with-horse" class="level1">
+<h1>Create readable date label (mm/dd/yy) and combine with horse</h1>
+<p>heat_df[“date_label”] = heat_df[“session_dt”].dt.strftime(“%m/%d/%y”) heat_df[“session_label”] = heat_df[“horse”] + ” ” + heat_df[“date_label”]</p>
 </section>
 <section id="rename-columns-for-nicer-axis-labels" class="level1">
 <h1>Rename columns for nicer axis labels</h1>
@@ -668,7 +668,7 @@ z_spaces[horse] = X_z</code></pre>
 <h1>Build heatmap matrix</h1>
 <p>matrix = heat_df.set_index(“session_label”)[[“Z-score”, “K-means”, “Isolation Forest”]]</p>
 <p>plt.figure(figsize=(7, max(5, matrix.shape[0] * 0.35))) sns.heatmap( matrix, cmap=[“white”, “tab:red”], # white = not flagged, red = flagged linewidths=0.5, linecolor=“gray”, cbar=False, annot=True, fmt=““, )</p>
-<p>plt.xlabel(“Anomaly Detection Method”) plt.ylabel(“Session (Horse + ID)”) plt.title(“Method Agreement Heatmap: Flagged Sessions”) plt.xticks(rotation=0) plt.tight_layout() plt.savefig(“fig_method_heatmap.png”, dpi=300, bbox_inches=“tight”) plt.show()</p>
+<p>plt.xlabel(“Anomaly Detection Method”) plt.ylabel(“Session (Horse + Date)”) plt.title(“Method Agreement Heatmap: Flagged Sessions”) plt.xticks(rotation=0) plt.tight_layout() plt.savefig(“fig_method_heatmap.png”, dpi=300, bbox_inches=“tight”) plt.show()</p>
 </section>
 <section id="section-15" class="level1">
 <h1>—————————————–</h1>
