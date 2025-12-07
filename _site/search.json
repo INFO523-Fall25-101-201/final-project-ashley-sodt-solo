@@ -1,0 +1,499 @@
+[
+  {
+    "objectID": "analysis/01_features.html",
+    "href": "analysis/01_features.html",
+    "title": "Session-level Features (Trot Only)",
+    "section": "",
+    "text": "from pathlib import Path\nimport pandas as pd\n\n# Variables to keep\nTROT_VARS = [\n    \"stride_dur\",\"stride_speed\",\"stride_length\",\n    \"duty_factor\",\n    \"duty_factor_LF\",\"duty_factor_RF\",\"duty_factor_LH\",\"duty_factor_RH\",\n    \"stance_dur_LF\",\"stance_dur_RF\",\"stance_dur_LH\",\"stance_dur_RH\",\n    \"dap_L_sec\",\"dap_L_perc\",\"dap_R_sec\",\"dap_R_perc\",\n    \"min_diff_head\",\"max_diff_head\",\"si_up_head\",\n    \"min_diff_wth\",\"max_diff_wth\",\"si_up_wth\",\n    \"min_diff_sac\",\"max_diff_sac\",\"si_up_sac\"\n]\n\ndef summarize_session(csv_path: Path, horse: str) -&gt; pd.Series:\n    \"\"\"Summarize a single EquiPro session (trot only).\"\"\"\n\n    df = pd.read_csv(csv_path)\n    df.columns = df.columns.str.strip()\n\n    # Filter to trot only\n    if \"gait\" in df.columns:\n        df = df[df[\"gait\"].str.lower() == \"trot\"]\n\n    # Extract session ID\n    stem = csv_path.stem\n    session_id = stem.replace(f\"-{horse}-results\", \"\")\n\n    stats = {}\n\n    for col in TROT_VARS:\n        if col not in df.columns:\n            continue\n\n        s = df[col].dropna()\n        if s.empty:\n            continue\n\n        q1, q3 = s.quantile([0.25, 0.75])\n\n        stats[f\"{col}_mean\"] = s.mean()\n        stats[f\"{col}_std\"] = s.std()\n        stats[f\"{col}_iqr\"] = q3 - q1\n        stats[f\"{col}_min\"] = s.min()\n        stats[f\"{col}_max\"] = s.max()\n\n    stats[\"horse\"] = horse\n    stats[\"session_id\"] = session_id\n    stats[\"n_rows\"] = len(df)\n\n    return pd.Series(stats)\n\n\nHORSES = [\"Duque\", \"Jackson\", \"Perseo\"]\nHORSES_DIR = Path(\"..\") / \"Horses\"\n\nrows = []\n\nfor horse in HORSES:\n    horse_dir = HORSES_DIR / horse\n    csv_files = sorted(horse_dir.glob(\"*-results.csv\"))\n    print(f\"{horse}: {len(csv_files)} sessions\")\n\n    for csv_path in csv_files:\n        row = summarize_session(csv_path, horse)\n        rows.append(row)\n\nsession_features = pd.DataFrame(rows)\n\nmeta_cols = [\"horse\",\"session_id\",\"n_rows\"]\nother_cols = [c for c in session_features.columns if c not in meta_cols]\nsession_features = session_features[meta_cols + other_cols]\n\nsession_features.head()\n\nDuque: 14 sessions\nJackson: 6 sessions\nPerseo: 4 sessions\n\n\n\n\n\n\n\n\n\nhorse\nsession_id\nn_rows\nstride_dur_mean\nstride_dur_std\nstride_dur_iqr\nstride_dur_min\nstride_dur_max\nduty_factor_mean\nduty_factor_std\n...\nstride_speed_mean\nstride_speed_std\nstride_speed_iqr\nstride_speed_min\nstride_speed_max\nstride_length_mean\nstride_length_std\nstride_length_iqr\nstride_length_min\nstride_length_max\n\n\n\n\n0\nDuque\n20240626T082743\n117\n0.776724\n0.023376\n0.031200\n0.7269\n0.8419\n49.375284\n1.883090\n...\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\n\n\n1\nDuque\n20240627T095239\n88\n0.791573\n0.028649\n0.040925\n0.7225\n0.8437\n50.354495\n2.172643\n...\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\n\n\n2\nDuque\n20241122T111237\n368\n0.747877\n0.042264\n0.058700\n0.5925\n0.8231\n48.954408\n2.418511\n...\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\n\n\n3\nDuque\n20241216T115742\n391\n0.774708\n0.041307\n0.053400\n0.6431\n0.8762\n47.045350\n1.916539\n...\n1.971923\n0.969625\n0.78\n0.42\n2.92\n1.4951\n0.734864\n0.6378\n0.3119\n2.263\n\n\n4\nDuque\n20241227T101523\n231\n0.756634\n0.036294\n0.043750\n0.5763\n0.8300\n47.272270\n1.399110\n...\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\nNaN\n\n\n\n\n5 rows × 128 columns\n\n\n\n\nout = Path(\"data\") / \"session_features_trot.csv\"\nout.parent.mkdir(exist_ok=True)\nsession_features.to_csv(out, index=False)\nprint(f\"Saved: {out}\")\n\nSaved: data/session_features_trot.csv"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "This project was developed by Ashley Sodt For INFO 523 - Data Mining and Discovery at the University of Arizona, taught by Dr. Greg Chism. Ashley Sodt is a second year PhD student in the Applied Mathematics program."
+  },
+  {
+    "objectID": "presentation.html#quarto",
+    "href": "presentation.html#quarto",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Quarto",
+    "text": "Quarto\n\nThe presentation is created using the Quarto CLI\n## sets the start of a new slide"
+  },
+  {
+    "objectID": "presentation.html#layouts",
+    "href": "presentation.html#layouts",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Layouts",
+    "text": "Layouts\ntext\n\n\n\nor bullet points1\n\n\nor in two columns\n\n\nlike\nthis\n\nAnd add footnotes"
+  },
+  {
+    "objectID": "presentation.html#code",
+    "href": "presentation.html#code",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Code",
+    "text": "Code\n\n\n                            OLS Regression Results                            \n==============================================================================\nDep. Variable:                    mpg   R-squared:                       0.073\nModel:                            OLS   Adj. R-squared:                  0.070\nMethod:                 Least Squares   F-statistic:                     30.59\nDate:                Sun, 07 Dec 2025   Prob (F-statistic):           5.84e-08\nTime:                        18:31:39   Log-Likelihood:                -1346.4\nNo. Observations:                 392   AIC:                             2697.\nDf Residuals:                     390   BIC:                             2705.\nDf Model:                           1                                         \nCovariance Type:            nonrobust                                         \n==============================================================================\n                 coef    std err          t      P&gt;|t|      [0.025      0.975]\n------------------------------------------------------------------------------\nconst         35.8015      2.266     15.800      0.000      31.347      40.257\nspeed       -354.7055     64.129     -5.531      0.000    -480.788    -228.623\n==============================================================================\nOmnibus:                       27.687   Durbin-Watson:                   0.589\nProb(Omnibus):                  0.000   Jarque-Bera (JB):               18.976\nSkew:                           0.420   Prob(JB):                     7.57e-05\nKurtosis:                       2.323   Cond. No.                         169.\n==============================================================================\n\nNotes:\n[1] Standard Errors assume that the covariance matrix of the errors is correctly specified."
+  },
+  {
+    "objectID": "presentation.html#plots",
+    "href": "presentation.html#plots",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Plots",
+    "text": "Plots"
+  },
+  {
+    "objectID": "presentation.html#plot-and-text",
+    "href": "presentation.html#plot-and-text",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Plot and text",
+    "text": "Plot and text\n\n\n\nSome text\ngoes here"
+  },
+  {
+    "objectID": "presentation.html#tables",
+    "href": "presentation.html#tables",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Tables",
+    "text": "Tables\nIf you want to generate a table, make sure it is in the HTML format (instead of Markdown or other formats), e.g.,\n\n\n\n\n\n\n\n\n\n\n\n\nspecies\n\n\n\nisland\n\n\n\nbill_length_mm\n\n\n\nbill_depth_mm\n\n\n\nflipper_length_mm\n\n\n\nbody_mass_g\n\n\n\nsex\n\n\n\n\n\n\n\n\n\n\n\n0\n\n\n\nAdelie\n\n\n\nTorgersen\n\n\n\n39.1\n\n\n\n18.7\n\n\n\n181.0\n\n\n\n3750.0\n\n\n\nMale\n\n\n\n\n\n\n\n1\n\n\n\nAdelie\n\n\n\nTorgersen\n\n\n\n39.5\n\n\n\n17.4\n\n\n\n186.0\n\n\n\n3800.0\n\n\n\nFemale\n\n\n\n\n\n\n\n2\n\n\n\nAdelie\n\n\n\nTorgersen\n\n\n\n40.3\n\n\n\n18.0\n\n\n\n195.0\n\n\n\n3250.0\n\n\n\nFemale\n\n\n\n\n\n\n\n4\n\n\n\nAdelie\n\n\n\nTorgersen\n\n\n\n36.7\n\n\n\n19.3\n\n\n\n193.0\n\n\n\n3450.0\n\n\n\nFemale\n\n\n\n\n\n\n\n5\n\n\n\nAdelie\n\n\n\nTorgersen\n\n\n\n39.3\n\n\n\n20.6\n\n\n\n190.0\n\n\n\n3650.0\n\n\n\nMale"
+  },
+  {
+    "objectID": "presentation.html#images",
+    "href": "presentation.html#images",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Images",
+    "text": "Images\n\nImage credit: Danielle Navarro, Percolate."
+  },
+  {
+    "objectID": "presentation.html#math-expressions",
+    "href": "presentation.html#math-expressions",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Math Expressions",
+    "text": "Math Expressions\nYou can write LaTeX math expressions inside a pair of dollar signs, e.g. $\\alpha+\\beta$ renders \\(\\alpha + \\beta\\). You can use the display style with double dollar signs:\n$$\\bar{X}=\\frac{1}{n}\\sum_{i=1}^nX_i$$\n\\[\n\\bar{X}=\\frac{1}{n}\\sum_{i=1}^nX_i\n\\]\nLimitations:\n\nThe source code of a LaTeX math expression must be in one line, unless it is inside a pair of double dollar signs, in which case the starting $$ must appear in the very beginning of a line, followed immediately by a non-space character, and the ending $$ must be at the end of a line, led by a non-space character;\nThere should not be spaces after the opening $ or before the closing $."
+  },
+  {
+    "objectID": "presentation.html#feeling-adventurous",
+    "href": "presentation.html#feeling-adventurous",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Feeling adventurous?",
+    "text": "Feeling adventurous?\n\nYou are welcomed to use the default styling of the slides. In fact, that’s what I expect majority of you will do. You will differentiate yourself with the content of your presentation.\nBut some of you might want to play around with slide styling. Some solutions for this can be found at https://quarto.org/docs/presentations/revealjs."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions Using Anomaly Detection",
+    "section": "",
+    "text": "Unsupervised learning techniques were used to cluster equine exercise sessions and detect anomalies that could reflect behavioral irregularities, equipment issues, or potential reinjury. Movement-based features derived from processed EquiPro accelerometer data were analyzed, including biomechanical metrics such as diagonal advanced placement, stride duration, and footfall duration. Typical movement patterns for each horse were modeled so that sessions deviating significantly from baseline could be identified. Through this approach, anomalies that may have indicated behavioral changes, equipment malfunction, pain, or reinjury were detected. This project was motivated by the need to identify subtle changes in loading or symmetry during equine rehabilitation, where deviations may precede clinical signs of injury."
+  },
+  {
+    "objectID": "index.html#abstract",
+    "href": "index.html#abstract",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions Using Anomaly Detection",
+    "section": "",
+    "text": "Unsupervised learning techniques were used to cluster equine exercise sessions and detect anomalies that could reflect behavioral irregularities, equipment issues, or potential reinjury. Movement-based features derived from processed EquiPro accelerometer data were analyzed, including biomechanical metrics such as diagonal advanced placement, stride duration, and footfall duration. Typical movement patterns for each horse were modeled so that sessions deviating significantly from baseline could be identified. Through this approach, anomalies that may have indicated behavioral changes, equipment malfunction, pain, or reinjury were detected. This project was motivated by the need to identify subtle changes in loading or symmetry during equine rehabilitation, where deviations may precede clinical signs of injury."
+  },
+  {
+    "objectID": "proposal.html",
+    "href": "proposal.html",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions Using Anomaly Detection",
+    "section": "",
+    "text": "import numpy as np\nimport pandas as pd\n\nfrom IPython.display import display"
+  },
+  {
+    "objectID": "proposal.html#dataset",
+    "href": "proposal.html#dataset",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions Using Anomaly Detection",
+    "section": "Dataset",
+    "text": "Dataset\nWe analyze stride-level biomechanical metrics recorded by the EquiPro sessions collected from three horses: Duque (14 sessions), Jackson (6 sessions), and Perseo (5 sessions). Each session is stored as a CSV file containing time-sampled movement variables. I chose this dataset because (1) it is directly relevant to my research group’s goal of developing tools for equine rehabilitation monitoring, and (2) the repeated-session structure makes it well suited for unsupervised learning approaches. See below for an example of EquiPro CSV file structure from one exercise session.\n\n# Load one example Duque session to illustrate the raw data structure\n\ndf_duque = pd.read_csv(\"Horses/Duque/20240626T082743-Duque-results.csv\")\n\nprint(\"\\nExample Duque session from EquiPro:\")\nprint(f\"  - dataset shape: {df_duque.shape}\")\nprint(f\"  - number of rows: {df_duque.shape[0]}\")\nprint(f\"  - number of columns: {df_duque.shape[1]}\")\n\nprint(\"\\nFirst few rows:\")\ndisplay(df_duque.head())\n\nprint(\"\\nData types:\")\ndisplay(df_duque.dtypes)\n\nprint(\"\\nSummary statistics:\")\n\n# Select numeric columns\nnumeric_cols = df_duque.select_dtypes(include=\"number\").columns\n\n# Drop 'segment' column\nnumeric_cols = [c for c in numeric_cols if c != \"segment\"]\n\ndisplay(df_duque[numeric_cols].describe())\n\n\nExample Duque session from EquiPro:\n  - dataset shape: (180, 80)\n  - number of rows: 180\n  - number of columns: 80\n\nFirst few rows:\n\n\n\n\n\n\n\n\n\nsegment\ngait\ndirection\nsurface\nstride_dur\nduty_factor\nstance_dur_LF\nstance_dur_RF\nstance_dur_LH\nstance_dur_RH\n...\nsi_up_sac\nhiphike_swing\nhiphike_stance\nhorse_name\nmeasurement\nexam_type\nexam_purpose\nflexion_test\ndiagnostic_analgesia\ninconclusive\n\n\n\n\n0\n1\nwalk\nleft\nsoft\n1.3444\n64.4371\n0.890\n0.870\n0.865\n0.840\n...\n0.3658\nNaN\nNaN\nDuque\n20240626T082743_logfile.itlog\nIn hand\nResearch\nNaN\nNaN\nNaN\n\n\n1\n1\nwalk\nleft\nsoft\n1.3631\n63.8211\n0.865\n0.900\n0.855\n0.860\n...\n0.3110\nNaN\nNaN\nDuque\n20240626T082743_logfile.itlog\nIn hand\nResearch\nNaN\nNaN\nNaN\n\n\n2\n1\nwalk\nleft\nsoft\n1.4238\n65.0491\n0.950\n0.960\n0.910\n0.885\n...\n0.3212\nNaN\nNaN\nDuque\n20240626T082743_logfile.itlog\nIn hand\nResearch\nNaN\nNaN\nNaN\n\n\n3\n1\nwalk\nleft\nsoft\n1.3925\n64.5510\n0.905\n0.930\n0.855\n0.905\n...\n0.1506\nNaN\nNaN\nDuque\n20240626T082743_logfile.itlog\nIn hand\nResearch\nNaN\nNaN\nNaN\n\n\n4\n1\nwalk\nleft\nsoft\n1.4337\n65.2012\n0.955\n0.955\n0.880\n0.950\n...\n-0.0292\nNaN\nNaN\nDuque\n20240626T082743_logfile.itlog\nIn hand\nResearch\nNaN\nNaN\nNaN\n\n\n\n\n5 rows × 80 columns\n\n\n\n\nData types:\n\n\nsegment                   int64\ngait                     object\ndirection                object\nsurface                  object\nstride_dur              float64\n                         ...   \nexam_type                object\nexam_purpose             object\nflexion_test            float64\ndiagnostic_analgesia    float64\ninconclusive            float64\nLength: 80, dtype: object\n\n\n\nSummary statistics:\n\n\n\n\n\n\n\n\n\nstride_dur\nduty_factor\nstance_dur_LF\nstance_dur_RF\nstance_dur_LH\nstance_dur_RH\nswing_dur_LF\nswing_dur_RF\nswing_dur_LH\nswing_dur_RH\n...\nmax_diff_wth\nsi_up_wth\nmin_diff_sac\nmax_diff_sac\nsi_up_sac\nhiphike_swing\nhiphike_stance\nflexion_test\ndiagnostic_analgesia\ninconclusive\n\n\n\n\ncount\n180.000000\n180.000000\n180.000000\n180.000000\n180.000000\n180.000000\n180.000000\n180.000000\n180.000000\n180.000000\n...\n176.000000\n177.000000\n178.000000\n176.000000\n179.000000\n0.0\n0.0\n0.0\n0.0\n0.0\n\n\nmean\n0.963107\n54.579687\n0.568389\n0.559389\n0.514639\n0.534889\n0.395111\n0.404083\n0.446528\n0.427972\n...\n1.488275\n-0.122714\n7.669183\n-3.365421\n0.107437\nNaN\nNaN\nNaN\nNaN\nNaN\n\n\nstd\n0.262439\n7.311467\n0.221720\n0.229814\n0.229520\n0.227791\n0.050078\n0.040903\n0.044156\n0.041779\n...\n8.932586\n0.217380\n14.673789\n6.850741\n0.184641\nNaN\nNaN\nNaN\nNaN\nNaN\n\n\nmin\n0.726900\n46.336100\n0.350000\n0.345000\n0.265000\n0.315000\n0.305000\n0.330000\n0.350000\n0.355000\n...\n-16.488600\n-0.616400\n-32.960600\n-18.834500\n-0.313200\nNaN\nNaN\nNaN\nNaN\nNaN\n\n\n25%\n0.769400\n48.422575\n0.403750\n0.385000\n0.335000\n0.370000\n0.360000\n0.375000\n0.410000\n0.400000\n...\n-6.055375\n-0.268000\n1.107650\n-8.561275\n-0.013300\nNaN\nNaN\nNaN\nNaN\nNaN\n\n\n50%\n0.796250\n50.770600\n0.435000\n0.420000\n0.382500\n0.387500\n0.377500\n0.400000\n0.445000\n0.412500\n...\n3.138850\n-0.116900\n11.673800\n-3.368450\n0.141800\nNaN\nNaN\nNaN\nNaN\nNaN\n\n\n75%\n1.266225\n63.661100\n0.820000\n0.825000\n0.780000\n0.796250\n0.435000\n0.435000\n0.480000\n0.451250\n...\n8.718675\n0.013400\n17.654575\n1.765275\n0.225950\nNaN\nNaN\nNaN\nNaN\nNaN\n\n\nmax\n1.975600\n72.720200\n1.585000\n1.335000\n1.380000\n1.450000\n0.520000\n0.610000\n0.555000\n0.535000\n...\n19.448700\n0.648100\n36.335700\n13.080800\n0.748000\nNaN\nNaN\nNaN\nNaN\nNaN\n\n\n\n\n8 rows × 72 columns"
+  },
+  {
+    "objectID": "proposal.html#dataset-description",
+    "href": "proposal.html#dataset-description",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions Using Anomaly Detection",
+    "section": "Dataset description:",
+    "text": "Dataset description:\nThe primary dataset consists of EquiPro csv result files collected from horses exercised at the Al-Marah Equine Center. The EquiPro system outputs a CSV file for each session containing biomechanical variables like diagonal advanced placement and duration of footfalls. The file loaded above for Duque contains {{ df_duque.shape[0] }} rows and {{ df_duque.shape[1] }} columns.\nFor this project, I am using three horses with multiple sessions: Duque (14 sessions), Jackson (6 sessions), and Perseo (5 sessions). These sessions allow analysis within each horse over time. I chose this dataset because (1) it is directly relevant to my research group’s goal of developing tools for equine rehabilitation monitoring, and (2) the repeated-session structure makes it well suited for unsupervised learning approaches."
+  },
+  {
+    "objectID": "proposal.html#questions",
+    "href": "proposal.html#questions",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions Using Anomaly Detection",
+    "section": "Questions",
+    "text": "Questions\nWhich exercise sessions significantly deviate from each horse’s baseline distribution, and which biomechanical variables contribute most strongly to those deviations?\nHow do different unsupervised anomaly-detection methods (Z-score thresholding, K-means cluster distance, and Isolation Forest) compare in identifying abnormal sessions, and to what extent do they agree or disagree on which sessions are flagged as anomalous?"
+  },
+  {
+    "objectID": "proposal.html#analysis-plan",
+    "href": "proposal.html#analysis-plan",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions Using Anomaly Detection",
+    "section": "Analysis plan",
+    "text": "Analysis plan\nFor this project, I analyze only trot strides. The trot is a highly symmetric gait which makes it convenient to study. More importantly, however, mixing gaits would introduce variability unrelated to movement abnormalities. For each exercise session, I will load the corresponding EquiPro CSV file and extract biomechanical variables relevant to symmetry, gait, and stride mechanics. To create session-level features, I will summarize each variable using statistics like mean, standard deviation, interquartile range, etc. These engineered features will form a feature matrix for each horse where each row is a session and each column is a biomechanical variable.\nI will then model each horse’s baseline movement patterns. I will standardize all features within each horse by converting them to z-scores in order to remove scale differences. This will provide a clear reference point. Features consistently close to zero after standardization indicate typical behavior, but large positive or negative values indicate potential deviations. These standardized distributions form the baseline against which the anomaly-detection methods will evaluate whether any given session departs significantly from a horse’s typical movement pattern.\nAfter establishing the baselines for each horse using z-scores, I will apply three unsupervised anomaly-detection methods to identify sessions that deviate from typical movement. Z-score analysis will allow me to flag sessions where specific features are unusually high or low relative to baseline distribution. K-means clustering will identify anomalies based on their distance from cluster centers in the multivariate feature space. Isolation Forest will give a measure of how isolated a session is from the rest. Each method will produce a numerical anomaly score and a corresponding label indicating whether the session is considered abnormal.\nI will then compare the results between the three methods. I will look for overlap between flagged sessions, sessions consistently identified as outliers, and note where the methods differ. I will also interpret the identified anomalies as they relate to biomechanical variables. I will inspect which specific features contribute most strongly to deviations from baseline. This could give insight as to possible explanations for deviations: behavioral irregularities, equipment malfunction, pain, or potential reinjury.\nNo external datasets will be merged."
+  },
+  {
+    "objectID": "analysis/02_anomalies.html",
+    "href": "analysis/02_anomalies.html",
+    "title": "Anomaly analysis for EquiPro session-level features (trot only)",
+    "section": "",
+    "text": "Anomaly analysis for EquiPro session-level features (trot only)\n\n\n- Computes per-horse baselines via z-scores\n\n\n- Runs three anomaly-detection methods:\n\n\n1) Z-score thresholding\n\n\n2) K-means clustering distance\n\n\n3) Isolation Forest\n\n\n- Compares which sessions are flagged as abnormal by each method\n\n\n\n\n\nYou can run this as a standalone Python script or import pieces into a notebook.\n\n\n—————————————–\n\n\n1. Imports and configuration\n\n\n—————————————–\nfrom pathlib import Path\nimport numpy as np import pandas as pd\nfrom IPython.display import display\nfrom sklearn.preprocessing import StandardScaler from sklearn.cluster import KMeans from sklearn.ensemble import IsolationForest\nimport matplotlib.pyplot as plt import seaborn as sns\n\n\n—————————————–\n\n\n2. Load session-level feature matrix\n\n\n—————————————–\n\n\nPath to the session-level feature matrix created by the trot-only script\nDATA_PATH = Path(file).resolve().parent / “session_features_trot.csv”\nsession_features = pd.read_csv(DATA_PATH)\nprint(“Session-level feature matrix (trot only):”) print(f” - shape: {session_features.shape}“) print(”few rows:“) display(session_features.head())\nmeta_cols = [“horse”, “session_id”, “n_rows”] feature_cols = [c for c in session_features.columns if c not in meta_cols]\nprint(“of feature columns:”, len(feature_cols))\n\n\n—————————————–\n\n\n3. Helper: prepare per-horse features\n\n\n—————————————–\ndef prepare_features( df_horse: pd.DataFrame, feature_cols, max_missing_frac: float = 0.4, ) -&gt; pd.DataFrame: ““” Clean and prepare feature matrix for one horse.\nSteps\n-----\n- Keep only the numeric feature columns (drop meta columns).\n- Drop columns that are entirely NaN.\n- Drop columns where more than `max_missing_frac` of entries are NaN.\n- Impute any remaining NaN values with the column median.\n\nReturns\n-------\nX : pd.DataFrame\n    Cleaned feature matrix for this horse (sessions x features).\n\"\"\"\nX = df_horse[feature_cols].copy()\n\n# Remove columns that are entirely NaN\nX = X.dropna(axis=1, how=\"all\")\n\n# Drop columns with too much missing data\nmissing_frac = X.isna().mean()\nkeep_cols = missing_frac[missing_frac &lt;= max_missing_frac].index\nX = X[keep_cols]\n\n# Median imputation for any remaining NaNs\nX = X.apply(lambda col: col.fillna(col.median()), axis=0)\n\nreturn X\n\n\n—————————————–\n\n\n4. Helper: per-horse anomaly analysis\n\n\n—————————————–\ndef analyze_horse_anomalies( df_horse: pd.DataFrame, feature_cols, z_thresh: float = 2.5, k_default: int = 2, iforest_contamination: float = 0.25, random_state: int = 42, ): ““” Run all three anomaly-detection methods for a single horse.\nMethods\n-------\n1) Z-score thresholding:\n     - Standardize features\n     - Compute max absolute z-score per session\n     - Count how many features exceed |z| &gt; z_thresh\n2) K-means distance:\n     - Fit K-means in z-scored space\n     - Compute distance of each session to its assigned cluster center\n     - Label top ~20% (or ~1/3 for very small N) as outliers\n3) Isolation Forest:\n     - Run IsolationForest in z-scored space\n     - Use -score_samples as anomaly score (higher = more isolated)\n     - Use model's predicted label (-1 = anomaly)\n\nReturns\n-------\nhorse_results : pd.DataFrame\n    One row per session with meta info + anomaly scores + outlier labels.\nX_z : pd.DataFrame\n    Z-scored features for this horse (sessions x features).\n\"\"\"\n# Reset index so everything is clean\ndf_horse = df_horse.reset_index(drop=True)\n\n# 1) Prepare clean feature matrix\nX = prepare_features(df_horse, feature_cols)\nn_samples = X.shape[0]\n\n# If too few sessions, return minimal output\nif n_samples &lt; 2:\n    print(f\"Not enough sessions for horse {df_horse['horse'].iloc[0]} to run anomalies.\")\n    X_z = pd.DataFrame(index=df_horse.index)\n    out = df_horse[[\"horse\", \"session_id\", \"n_rows\"]].copy()\n    out[\"z_max_abs\"] = np.nan\n    out[\"z_mean_abs\"] = np.nan\n    out[\"z_n_features_big\"] = 0\n    out[\"z_is_outlier\"] = 0\n    out[\"kmeans_dist\"] = np.nan\n    out[\"kmeans_is_outlier\"] = 0\n    out[\"iforest_score\"] = np.nan\n    out[\"iforest_is_outlier\"] = 0\n    out[\"n_methods_flagged\"] = 0\n    return out, X_z\n\n# 2) Standardize features (z-scores)\nscaler = StandardScaler()\nX_z_values = scaler.fit_transform(X)\nX_z = pd.DataFrame(X_z_values, columns=X.columns, index=df_horse.index)\n\n# ---------- Method 1: Z-score thresholding ----------\nz_abs = X_z.abs()\nz_max = z_abs.max(axis=1)\nz_mean = z_abs.mean(axis=1)          # average |z| across features\nz_nbig = (z_abs &gt; z_thresh).sum(axis=1)\nz_label = (z_max &gt; z_thresh).astype(int)\n\n# ---------- Method 2: K-means distance ----------\nif n_samples &gt;= 3:\n    n_clusters = min(k_default, n_samples - 1)\n    kmeans = KMeans(\n        n_clusters=n_clusters,\n        n_init=10,\n        random_state=random_state,\n    )\n    cluster_labels = kmeans.fit_predict(X_z)\n    centers = kmeans.cluster_centers_\n\n    # Euclidean distance to the assigned cluster center\n    dists = []\n    for i, x in enumerate(X_z.to_numpy()):\n        center = centers[cluster_labels[i]]\n        dists.append(np.linalg.norm(x - center))\n    dists = pd.Series(dists, index=X_z.index, name=\"kmeans_dist\")\n\n    # Flag the largest distances as outliers\n    if n_samples &gt;= 5:\n        cutoff = dists.quantile(0.80)  # top 20% as candidate outliers\n    else:\n        cutoff = dists.quantile(2 / 3)  # for very small N, top ~1/3\n    kmeans_label = (dists &gt;= cutoff).astype(int)\nelse:\n    # If there are only 2 sessions we skip K-means\n    dists = pd.Series(np.nan, index=X_z.index, name=\"kmeans_dist\")\n    kmeans_label = pd.Series(0, index=X_z.index, name=\"kmeans_is_outlier\")\n\n# ---------- Method 3: Isolation Forest ----------\nif n_samples &gt;= 5:\n    iforest = IsolationForest(\n        n_estimators=200,\n        contamination=iforest_contamination,\n        random_state=random_state,\n    )\n    if_labels = iforest.fit_predict(X_z)         # -1 = anomaly\n    if_scores = -iforest.score_samples(X_z)      # higher = more isolated\n\n    if_label = (pd.Series(if_labels, index=X_z.index) == -1).astype(int)\n    if_score = pd.Series(if_scores, index=X_z.index, name=\"iforest_score\")\nelse:\n    if_label = pd.Series(0, index=X_z.index, name=\"iforest_is_outlier\")\n    if_score = pd.Series(np.nan, index=X_z.index, name=\"iforest_score\")\n\n# Assemble output for this horse\nout = df_horse[[\"horse\", \"session_id\", \"n_rows\"]].copy()\nout[\"z_max_abs\"] = z_max\nout[\"z_mean_abs\"] = z_mean\nout[\"z_n_features_big\"] = z_nbig\nout[\"z_is_outlier\"] = z_label\nout[\"kmeans_dist\"] = dists\nout[\"kmeans_is_outlier\"] = kmeans_label\nout[\"iforest_score\"] = if_score\nout[\"iforest_is_outlier\"] = if_label\n\n# How many methods flag each session?\nmethod_cols = [\"z_is_outlier\", \"kmeans_is_outlier\", \"iforest_is_outlier\"]\nout[\"n_methods_flagged\"] = out[method_cols].sum(axis=1)\n\nreturn out, X_z\n\n\n—————————————–\n\n\n5. Run analysis for all horses\n\n\n—————————————–\nall_results = [] z_spaces = {} # store z-scored features if you want to look later\nfor horse in session_features[“horse”].unique(): df_horse = session_features[session_features[“horse”] == horse] print(f”=== Analyzing horse: {horse} ===“) print(f”Number of sessions: {df_horse.shape[0]}“)\nhorse_results, X_z = analyze_horse_anomalies(\n    df_horse=df_horse,\n    feature_cols=feature_cols,\n    z_thresh=2.5,\n    k_default=2,\n    iforest_contamination=0.25,\n    random_state=42,\n)\n\nall_results.append(horse_results)\nz_spaces[horse] = X_z\n\n\nCombine results for all horses\nanomaly_summary = pd.concat(all_results, ignore_index=True)\nprint(“anomaly summary for all horses:”) display( anomaly_summary.sort_values( [“horse”, “n_methods_flagged”, “z_max_abs”], ascending=[True, False, False], ) )\n\n\n—————————————–\n\n\n6. Quick sanity checks\n\n\n—————————————–\nprint(“many sessions are flagged by each method?”) for col in [“z_is_outlier”, “kmeans_is_outlier”, “iforest_is_outlier”]: counts = anomaly_summary.groupby(“horse”)[col].sum() print(f”: {col}“) print(counts)\nprint(“many sessions are flagged by ≥2 methods?”) flagged_two_plus = anomaly_summary[anomaly_summary[“n_methods_flagged”] &gt;= 2] display( flagged_two_plus.sort_values( [“horse”, “n_methods_flagged”, “z_max_abs”], ascending=[True, False, False], ) )\n\n\n—————————————–\n\n\n7. Simple visualizations\n\n\n—————————————–\n\n\n7.1 Add datetime columns and sort\nanomaly_summary[“session_dt”] = pd.to_datetime( anomaly_summary[“session_id”].str[:8], # yyyymmdd format=“%Y%m%d” ) anomaly_summary[“session_label”] = anomaly_summary[“session_dt”].dt.strftime(“%m/%d/%y”)\n\n\nSort once by date so plots are in chronological order\nanomaly_summary = anomaly_summary.sort_values(“session_dt”)\n\n\n7.2 Plot 1: max |z|-score vs. session across horses\nplt.figure() for horse, df_h in anomaly_summary.groupby(“horse”): plt.scatter(df_h[“session_dt”], df_h[“z_max_abs”], label=horse)\nplt.xticks(rotation=90) plt.ylabel(“max |z-score| across features”) plt.xlabel(“session date”) plt.title(“Session-level deviation from baseline (max |z|)”) plt.legend() plt.tight_layout() plt.savefig(“fig_max_zscore.png”, dpi=300, bbox_inches=“tight”)\n\n\n7.3 Plot 2: mean |z|-score vs. session across horses\nplt.figure() for horse, df_h in anomaly_summary.groupby(“horse”): plt.scatter(df_h[“session_dt”], df_h[“z_mean_abs”], label=horse)\nplt.xticks(rotation=90) plt.ylabel(“mean |z-score| across features”) plt.xlabel(“session date”) plt.title(“Session-level deviation from baseline (mean |z|)”) plt.legend() plt.tight_layout() plt.savefig(“fig_mean_zscore.png”, dpi=300, bbox_inches=“tight”)\n\n\n7.4 Plot 3: number of methods that flag each session\nplt.figure() for horse, df_h in anomaly_summary.groupby(“horse”): plt.scatter(df_h[“session_dt”], df_h[“n_methods_flagged”], label=horse)\nplt.xticks(rotation=90) plt.ylabel(“number of methods flagging session”) plt.xlabel(“session date”) plt.title(“Agreement between anomaly-detection methods”) plt.legend() plt.tight_layout() plt.savefig(“fig_method_agreement.png”, dpi=300, bbox_inches=“tight”)\n\n\n7.5 Plot 4: Method agreement heatmap\nheat_df = anomaly_summary[ [“horse”, “session_id”, “session_dt”, “z_is_outlier”, “kmeans_is_outlier”, “iforest_is_outlier”]].copy()\n\n\nSort sessions by # of methods flagged (descending within horse)\nheat_df[“n_flag”] = ( heat_df[[“z_is_outlier”, “kmeans_is_outlier”, “iforest_is_outlier”]] .sum(axis=1) ) heat_df = heat_df.sort_values([“horse”, “n_flag”], ascending=[True, False])\n\n\nCreate readable date label (mm/dd/yy) and combine with horse\nheat_df[“date_label”] = heat_df[“session_dt”].dt.strftime(“%m/%d/%y”) heat_df[“session_label”] = heat_df[“horse”] + ” ” + heat_df[“date_label”]\n\n\nRename columns for nicer axis labels\nheat_df = heat_df.rename(columns={ “z_is_outlier”: “Z-score”, “kmeans_is_outlier”: “K-means”, “iforest_is_outlier”: “Isolation Forest”, })\n\n\nBuild heatmap matrix\nmatrix = heat_df.set_index(“session_label”)[[“Z-score”, “K-means”, “Isolation Forest”]]\nplt.figure(figsize=(7, max(5, matrix.shape[0] * 0.35))) sns.heatmap( matrix, cmap=[“white”, “tab:red”], # white = not flagged, red = flagged linewidths=0.5, linecolor=“gray”, cbar=False, annot=True, fmt=““, )\nplt.xlabel(“Anomaly Detection Method”) plt.ylabel(“Session (Horse + Date)”) plt.title(“Method Agreement Heatmap: Flagged Sessions”) plt.xticks(rotation=0) plt.tight_layout() plt.savefig(“fig_method_heatmap.png”, dpi=300, bbox_inches=“tight”) plt.show()\n\n\n—————————————–\n\n\n8. Feature contribution visualization\n\n\n—————————————–\ndef top_contributing_features_for_session( horse: str, session_id: str, top_n: int = 5, ): ““” Return the top-N biomechanical features (by |z|) for a given horse/session.\nUses the z-scored feature space stored in z_spaces[horse].\n\"\"\"\n# Rebuild this horse's session order to match how z_spaces[horse] was created\ndf_horse = session_features[session_features[\"horse\"] == horse].reset_index(drop=True)\nX_z = z_spaces[horse]\n\n# Position of this session within that horse's dataframe\npos = df_horse[df_horse[\"session_id\"] == session_id].index[0]\n\n# Absolute z-scores for this session\nz_vals = X_z.iloc[pos].abs().sort_values(ascending=False)\n\nreturn z_vals.head(top_n)   # series: index = feature names, values = |z|\n\n\nTake only high-confidence anomalies (flagged by ≥2 methods)\nflagged_multi = anomaly_summary[anomaly_summary[“n_methods_flagged”] &gt;= 2].copy()\n\n\nBuild a long-form table of top features per session\nrows = [] for _, row in flagged_multi.iterrows(): horse = row[“horse”] session_id = row[“session_id”]\ntop_feats = top_contributing_features_for_session(\n    horse=horse,\n    session_id=session_id,\n    top_n=5,       # change if you want more/less per session\n)\n\n# Session label for plotting\nsess_date = pd.to_datetime(session_id[:8], format=\"%Y%m%d\").strftime(\"%m/%d/%y\")\nsession_label = f\"{horse} {sess_date}\"\n\nfor feat_name, z_val in top_feats.items():\n    rows.append({\n        \"session_label\": session_label,\n        \"feature\": feat_name,\n        \"abs_z\": float(z_val),\n    })\ntop_feat_long = pd.DataFrame(rows)\n\n\nPivot to session x feature matrix (NaN where a feature is not in that session’s top-N)\ntop_feat_matrix = top_feat_long.pivot_table( index=“session_label”, columns=“feature”, values=“abs_z”, aggfunc=“max” )\n\n\nOptional: order sessions by how many methods flagged them (same order as flagged_multi)\nsession_order = [] for _, row in flagged_multi.sort_values( [“horse”, “n_methods_flagged”, “z_max_abs”], ascending=[True, False, False] ).iterrows(): sess_date = row[“session_dt”].strftime(“%m/%d/%y”) session_order.append(f”{row[‘horse’]} {sess_date}“)\n\n\nKeep only sessions that appear in the matrix\nsession_order = [s for s in session_order if s in top_feat_matrix.index] top_feat_matrix = top_feat_matrix.loc[session_order]\n\n\nPlot heatmap of top contributing features\nplt.figure(figsize=(8, max(4, 0.4 * top_feat_matrix.shape[0]))) sns.heatmap( top_feat_matrix, cmap=“viridis”, # magnitude of |z| linewidths=0.5, linecolor=“gray”, cbar_kws={“label”: “|z-score|”}, annot=False )\nplt.xlabel(“Biomechanical Feature”) plt.ylabel(“Session (Horse + Date)”) plt.title(“Top Contributing Features for High-Confidence Anomalies”) plt.xticks(rotation=90) plt.tight_layout() plt.savefig(“fig_top_feature_heatmap.png”, dpi=300, bbox_inches=“tight”) plt.show()"
+  },
+  {
+    "objectID": "proposal.html#introduction",
+    "href": "proposal.html#introduction",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions Using Anomaly Detection",
+    "section": "Introduction",
+    "text": "Introduction\nMy goal is to use unsupervised learning techniques to cluster equine exercise sessions and detect anomalies that may reflect behavioral irregularities, equipment issues, or potential reinjury.\nI aim to detect abnormal equine exercise sessions by clustering movement-based features derived from processed EquiPro accelerometer data. Horses at the Al-Marah Equine Center are equipped with 7 accelerometers during exercise sessions on a lunge line at walk, trot, and canter. The EquiPro system outputs calculated biomechanical metrics such as diagonal advanced placement, stride duration, and footfall duration. By modeling typical movement patterns for each horse, I plan to identify exercise sessions that deviate significantly from a horse’s baseline. Such anomalies may reflect behavioral irregularities, equipment malfunction, pain, or potential reinjury. This is important in equine rehabilitation, where subtle changes in loading or symmetry can precede clinical signs of injury."
+  },
+  {
+    "objectID": "presentation.html#why-horse-movement-anomalies",
+    "href": "presentation.html#why-horse-movement-anomalies",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Why horse movement anomalies?",
+    "text": "Why horse movement anomalies?\n\nPerformance and rehab horses often show subtle gait changes long before obvious lameness.\nWearable sensors (EquiPro) capture stride-level biomechanics over many exercise sessions.\nBut manually reviewing every stride across many days is not scalable.\nGoal of this project:\n\nBuild session-level summaries of movement,\nModel each horse’s typical pattern, and\nUse unsupervised anomaly detection to flag unusual sessions."
+  },
+  {
+    "objectID": "presentation.html#data-and-feature-engineering",
+    "href": "presentation.html#data-and-feature-engineering",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Data and feature engineering",
+    "text": "Data and feature engineering\n\nData source: EquiPro CSV files, one file per exercise session per horse.\nEach file contains many strides with variables like:\n\nStride duration, duty factor, diagonal advanced placement, symmetry measures, etc.\n\nFor each session (per horse), I compute:\n\nMean, standard deviation, interquartile range, min, and max\nFor each selected biomechanical variable\n\nResult: a session-level feature matrix:\n\nRows = sessions, columns = engineered biomechanical features."
+  },
+  {
+    "objectID": "presentation.html#per-horse-standardization-baseline",
+    "href": "presentation.html#per-horse-standardization-baseline",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Per-horse standardization (baseline)",
+    "text": "Per-horse standardization (baseline)\n\nHorses differ a lot in size, conformation, and way of going.\nTo make features comparable within each horse, I:\n\nSplit data by horse.\nStandardize all columns to z-scores (mean 0, sd 1) per horse.\n\nInterpretation:\n\nValues near 0 ⇒ typical for that horse.\nLarge |z| values ⇒ potential deviations from their baseline pattern.\n\nThese standardized features provide the baseline that anomaly detectors use."
+  },
+  {
+    "objectID": "presentation.html#anomaly-detection-methods",
+    "href": "presentation.html#anomaly-detection-methods",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Anomaly Detection Methods",
+    "text": "Anomaly Detection Methods\n\nConvert every feature to a z-score.\nZ-score Thresholding\n\nFlags sessions where any feature deviates strongly from the horse’s baseline (large |z|).\n\nK-means Cluster Distance\n\nGroups similar sessions and marks those far from their cluster center as outliers.\n\nIsolation Forest\n\nIdentifies sessions that are difficult to group with others (unusual combinations of features).\n\n\nSessions flagged by multiple methods are more likely to reflect real gait irregularities."
+  },
+  {
+    "objectID": "presentation.html#simple-example-visualization",
+    "href": "presentation.html#simple-example-visualization",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Simple example visualization",
+    "text": "Simple example visualization\n\n\n\nHere I show an example using two engineered features:\n\ne.g., mean stride duration vs. duty factor.\n\nPoints represent sessions for one horse.\nThe Isolation Forest assigns each session as:\n\nNormal or anomalous.\n\nThis helps visually confirm whether flagged sessions are truly “off-pattern.”"
+  },
+  {
+    "objectID": "presentation.html#interpreting-flagged-sessions",
+    "href": "presentation.html#interpreting-flagged-sessions",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Interpreting flagged sessions",
+    "text": "Interpreting flagged sessions\n\nOnce sessions are flagged as anomalous, the next step is interpretation:\n\nAre these sessions close to known injury or rehab dates?\nDo they correspond to unusually hard workouts or different footing?\nAre specific features (e.g., symmetry measures) consistently abnormal?\n\nThis project focuses on the pipeline:\n\nFrom raw accelerometer data → session features → anomaly scores.\n\nIn future work, these anomalies can be linked with clinical notes and training logs."
+  },
+  {
+    "objectID": "presentation.html#takeaways-and-next-steps",
+    "href": "presentation.html#takeaways-and-next-steps",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Takeaways and next steps",
+    "text": "Takeaways and next steps\n\nI built a session-level, per-horse framework for:\n\nSummarizing EquiPro stride data,\nStandardizing features, and\nApplying multiple anomaly detection methods.\n\nThis framework can help:\n\nScreen large numbers of sessions,\nHighlight candidate “problem” days for deeper review.\n\nNext steps:\n\nRefine the feature set (e.g., focus on symmetry-heavy variables),\nCompare detectors quantitatively (precision/recall vs. labeled events),\nIntegrate more horses and gaits (beyond trot) and add clinical context."
+  },
+  {
+    "objectID": "presentationnn.html#why-horse-movement-anomalies",
+    "href": "presentationnn.html#why-horse-movement-anomalies",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Why horse movement anomalies?",
+    "text": "Why horse movement anomalies?\n\nPerformance and rehab horses often show subtle gait changes long before obvious lameness.\nWearable sensors (EquiPro) capture stride-level biomechanics over many exercise sessions.\nBut manually reviewing every stride across many days is not scalable.\nGoal of this project:\n\nBuild session-level summaries of movement,\nModel each horse’s typical pattern, and\nUse unsupervised anomaly detection to flag unusual sessions."
+  },
+  {
+    "objectID": "presentationnn.html#data-and-feature-engineering",
+    "href": "presentationnn.html#data-and-feature-engineering",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Data and feature engineering",
+    "text": "Data and feature engineering\n\nData source: EquiPro CSV files, one file per exercise session per horse.\nEach file contains many strides with variables like:\n\nStride duration, duty factor, diagonal advanced placement, symmetry measures, etc.\n\nFor each session (per horse), I compute:\n\nMean, standard deviation, interquartile range, min, and max\nFor each selected biomechanical variable\n\nResult: a session-level feature matrix:\n\nRows = sessions, columns = engineered biomechanical features."
+  },
+  {
+    "objectID": "presentationnn.html#per-horse-standardization-baseline",
+    "href": "presentationnn.html#per-horse-standardization-baseline",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Per-horse standardization (baseline)",
+    "text": "Per-horse standardization (baseline)\n\nHorses differ a lot in size, conformation, and way of going.\nTo make features comparable within each horse, I:\n\nSplit data by horse.\nStandardize all columns to z-scores (mean 0, sd 1) per horse.\n\nInterpretation:\n\nValues near 0 ⇒ typical for that horse.\nLarge |z| values ⇒ potential deviations from their baseline pattern.\n\nThese standardized features provide the baseline that anomaly detectors use."
+  },
+  {
+    "objectID": "presentationnn.html#anomaly-detection-methods",
+    "href": "presentationnn.html#anomaly-detection-methods",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Anomaly detection methods",
+    "text": "Anomaly detection methods\n\nI use three unsupervised approaches:\n\nZ-score thresholding\n\nFlag sessions where several features have |z| above a chosen cutoff.\n\nK-means clustering\n\nCluster sessions in feature space.\nSmall, distant clusters can indicate unusual sessions.\n\nIsolation Forest\n\nTree-based method that “isolates” rare or odd points.\nReturns an anomaly score per session.\n\n\nThese methods complement each other and give a richer picture of atypical movement."
+  },
+  {
+    "objectID": "presentationnn.html#simple-example-visualization",
+    "href": "presentationnn.html#simple-example-visualization",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Simple example visualization",
+    "text": "Simple example visualization\n\n\n\nHere I show an example using two engineered features:\n\ne.g., mean stride duration vs. duty factor.\n\nPoints represent sessions for one horse.\nThe Isolation Forest assigns each session as:\n\nNormal or anomalous.\n\nThis helps visually confirm whether flagged sessions are truly “off-pattern.”"
+  },
+  {
+    "objectID": "presentationnn.html#interpreting-flagged-sessions",
+    "href": "presentationnn.html#interpreting-flagged-sessions",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Interpreting flagged sessions",
+    "text": "Interpreting flagged sessions\n\nOnce sessions are flagged as anomalous, the next step is interpretation:\n\nAre these sessions close to known injury or rehab dates?\nDo they correspond to unusually hard workouts or different footing?\nAre specific features (e.g., symmetry measures) consistently abnormal?\n\nThis project focuses on the pipeline:\n\nFrom raw accelerometer data → session features → anomaly scores.\n\nIn future work, these anomalies can be linked with clinical notes and training logs."
+  },
+  {
+    "objectID": "presentationnn.html#takeaways-and-next-steps",
+    "href": "presentationnn.html#takeaways-and-next-steps",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Takeaways and next steps",
+    "text": "Takeaways and next steps\n\nI built a session-level, per-horse framework for:\n\nSummarizing EquiPro stride data,\nStandardizing features, and\nApplying multiple anomaly detection methods.\n\nThis framework can help:\n\nScreen large numbers of sessions,\nHighlight candidate “problem” days for deeper review.\n\nNext steps:\n\nRefine the feature set (e.g., focus on symmetry-heavy variables),\nCompare detectors quantitatively (precision/recall vs. labeled events),\nIntegrate more horses and gaits (beyond trot) and add clinical context."
+  },
+  {
+    "objectID": "presentation.html#itroduction",
+    "href": "presentation.html#itroduction",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Itroduction",
+    "text": "Itroduction\n\nThe presentation is created using the Quarto CLI\n## sets the start of a new slide"
+  },
+  {
+    "objectID": "presentation.html#introduction",
+    "href": "presentation.html#introduction",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Introduction",
+    "text": "Introduction\n\nAl-Marah Equine Center // Laura Miller\nEquiPro intertial measurement units collect accelerometer data\n\nOutputs stride-level biomechanical metrics\nEarly detection of subtle gait abnormalities\n\n\nGoal: Use unsupervised learning techniques to model each horse’s typical movement and automatically flag exercise sessions that deviate from this baseline. Such anomalies may reflect behavioral irregularities, equipment malfunction, pain, or potential reinjury."
+  },
+  {
+    "objectID": "presentation.html#dataset",
+    "href": "presentation.html#dataset",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Dataset",
+    "text": "Dataset\n\nEach session exported as CSV containing stride-level movemement variables.\n\nDuque (14 sessions)\nJackson (6 sessions)\nPerseo (5 sessions)"
+  },
+  {
+    "objectID": "presentation.html#dataset-example-duque",
+    "href": "presentation.html#dataset-example-duque",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Dataset Example (Duque)",
+    "text": "Dataset Example (Duque)\n\n\nDataset dimensions: 180 rows × 80 columns"
+  },
+  {
+    "objectID": "presentation.html#dataset-1",
+    "href": "presentation.html#dataset-1",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Dataset",
+    "text": "Dataset\nSample of Equipro CSV output with stride-level biomechanical metrics from one exercise session.\n\n\n\n\n\n\n\n\n\nsegment\ngait\ndirection\nsurface\nstride_dur\nduty_factor\nstance_dur_LF\nstance_dur_RF\nstance_dur_LH\nstance_dur_RH\n...\nsi_up_sac\nhiphike_swing\nhiphike_stance\nhorse_name\nmeasurement\nexam_type\nexam_purpose\nflexion_test\ndiagnostic_analgesia\ninconclusive\n\n\n\n\n0\n1\nwalk\nleft\nsoft\n1.3444\n64.4371\n0.890\n0.870\n0.865\n0.840\n...\n0.3658\nNaN\nNaN\nDuque\n20240626T082743_logfile.itlog\nIn hand\nResearch\nNaN\nNaN\nNaN\n\n\n1\n1\nwalk\nleft\nsoft\n1.3631\n63.8211\n0.865\n0.900\n0.855\n0.860\n...\n0.3110\nNaN\nNaN\nDuque\n20240626T082743_logfile.itlog\nIn hand\nResearch\nNaN\nNaN\nNaN\n\n\n2\n1\nwalk\nleft\nsoft\n1.4238\n65.0491\n0.950\n0.960\n0.910\n0.885\n...\n0.3212\nNaN\nNaN\nDuque\n20240626T082743_logfile.itlog\nIn hand\nResearch\nNaN\nNaN\nNaN\n\n\n3\n1\nwalk\nleft\nsoft\n1.3925\n64.5510\n0.905\n0.930\n0.855\n0.905\n...\n0.1506\nNaN\nNaN\nDuque\n20240626T082743_logfile.itlog\nIn hand\nResearch\nNaN\nNaN\nNaN\n\n\n4\n1\nwalk\nleft\nsoft\n1.4337\n65.2012\n0.955\n0.955\n0.880\n0.950\n...\n-0.0292\nNaN\nNaN\nDuque\n20240626T082743_logfile.itlog\nIn hand\nResearch\nNaN\nNaN\nNaN\n\n\n\n\n5 rows × 80 columns"
+  },
+  {
+    "objectID": "presentation.html#dataset-2",
+    "href": "presentation.html#dataset-2",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Dataset",
+    "text": "Dataset\n\n\n\nExample Duque session from EquiPro:\n - dataset shape: (180, 80)\n - number of rows: 180\n - number of columns: 80\n\n\n\n\n\n\n\n\n\nsegment\ngait\ndirection\nsurface\nstride_dur\nduty_factor\nstance_dur_LF\nstance_dur_RF\nstance_dur_LH\nstance_dur_RH\n...\nsi_up_sac\nhiphike_swing\nhiphike_stance\nhorse_name\nmeasurement\nexam_type\nexam_purpose\nflexion_test\ndiagnostic_analgesia\ninconclusive\n\n\n\n\n0\n1\nwalk\nleft\nsoft\n1.3444\n64.4371\n0.890\n0.870\n0.865\n0.840\n...\n0.3658\nNaN\nNaN\nDuque\n20240626T082743_logfile.itlog\nIn hand\nResearch\nNaN\nNaN\nNaN\n\n\n1\n1\nwalk\nleft\nsoft\n1.3631\n63.8211\n0.865\n0.900\n0.855\n0.860\n...\n0.3110\nNaN\nNaN\nDuque\n20240626T082743_logfile.itlog\nIn hand\nResearch\nNaN\nNaN\nNaN\n\n\n2\n1\nwalk\nleft\nsoft\n1.4238\n65.0491\n0.950\n0.960\n0.910\n0.885\n...\n0.3212\nNaN\nNaN\nDuque\n20240626T082743_logfile.itlog\nIn hand\nResearch\nNaN\nNaN\nNaN\n\n\n3\n1\nwalk\nleft\nsoft\n1.3925\n64.5510\n0.905\n0.930\n0.855\n0.905\n...\n0.1506\nNaN\nNaN\nDuque\n20240626T082743_logfile.itlog\nIn hand\nResearch\nNaN\nNaN\nNaN\n\n\n4\n1\nwalk\nleft\nsoft\n1.4337\n65.2012\n0.955\n0.955\n0.880\n0.950\n...\n-0.0292\nNaN\nNaN\nDuque\n20240626T082743_logfile.itlog\nIn hand\nResearch\nNaN\nNaN\nNaN\n\n\n\n\n5 rows × 80 columns"
+  },
+  {
+    "objectID": "presentation.html#dataset-equipro-example-output",
+    "href": "presentation.html#dataset-equipro-example-output",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Dataset Equipro Example Output",
+    "text": "Dataset Equipro Example Output\nExample excerpt from an EquiPro stride-level dataset recorded during an exercise session with Duque.\n\n\n\n\n\n\n\n\n\nsegment\ngait\ndirection\nsurface\nstride_dur\nduty_factor\nstance_dur_LF\nstance_dur_RF\nstance_dur_LH\nstance_dur_RH\n...\nsi_up_sac\nhiphike_swing\nhiphike_stance\nhorse_name\nmeasurement\nexam_type\nexam_purpose\nflexion_test\ndiagnostic_analgesia\ninconclusive\n\n\n\n\n0\n1\nwalk\nleft\nsoft\n1.3444\n64.4371\n0.890\n0.870\n0.865\n0.840\n...\n0.3658\nNaN\nNaN\nDuque\n20240626T082743_logfile.itlog\nIn hand\nResearch\nNaN\nNaN\nNaN\n\n\n1\n1\nwalk\nleft\nsoft\n1.3631\n63.8211\n0.865\n0.900\n0.855\n0.860\n...\n0.3110\nNaN\nNaN\nDuque\n20240626T082743_logfile.itlog\nIn hand\nResearch\nNaN\nNaN\nNaN\n\n\n2\n1\nwalk\nleft\nsoft\n1.4238\n65.0491\n0.950\n0.960\n0.910\n0.885\n...\n0.3212\nNaN\nNaN\nDuque\n20240626T082743_logfile.itlog\nIn hand\nResearch\nNaN\nNaN\nNaN\n\n\n3\n1\nwalk\nleft\nsoft\n1.3925\n64.5510\n0.905\n0.930\n0.855\n0.905\n...\n0.1506\nNaN\nNaN\nDuque\n20240626T082743_logfile.itlog\nIn hand\nResearch\nNaN\nNaN\nNaN\n\n\n4\n1\nwalk\nleft\nsoft\n1.4337\n65.2012\n0.955\n0.955\n0.880\n0.950\n...\n-0.0292\nNaN\nNaN\nDuque\n20240626T082743_logfile.itlog\nIn hand\nResearch\nNaN\nNaN\nNaN\n\n\n\n\n5 rows × 80 columns"
+  },
+  {
+    "objectID": "presentation.html#session-level-feature-engineering",
+    "href": "presentation.html#session-level-feature-engineering",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Session-Level Feature Engineering",
+    "text": "Session-Level Feature Engineering\n\nRestrict to trot strides.\nFor each selected variable, compute mean, standard deviation, IQR, min, max\nProduces 1 feature vector (row) per session:\n\nColumns describe movement pattern for that exercise session\nEnables comparison across sessions for the same horse\n\nOutput: a session-level feature matrix used for anomaly detection"
+  },
+  {
+    "objectID": "presentation.html#blah",
+    "href": "presentation.html#blah",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "blah",
+    "text": "blah"
+  },
+  {
+    "objectID": "presentation.html#session-level-feature-matrix-trot-only",
+    "href": "presentation.html#session-level-feature-matrix-trot-only",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Session-level Feature Matrix (Trot Only)",
+    "text": "Session-level Feature Matrix (Trot Only)\n\n\nFeature matrix: 24 sessions × 128 engineered features\n\n\n\n\n\n\n\n\nhorse\nsession_id\nn_rows\nstride_dur_mean\nstride_dur_std\nstride_dur_iqr\nstride_dur_min\nstride_dur_max\n\n\n\n\nDuque\n20240627T095239\n88\n0.791573\n0.028649\n0.040925\n0.722500\n0.843700\n\n\nDuque\n20241122T111237\n368\n0.747877\n0.042264\n0.058700\n0.592500\n0.823100\n\n\nJackson\n20250128T130146\n136\n0.733101\n0.043684\n0.069325\n0.636900\n0.845000\n\n\nPerseo\n20250505T123314\n268\n0.724856\n0.019112\n0.021350\n0.667500\n0.803700"
+  },
+  {
+    "objectID": "presentation.html#session-level-feature-matrix-example-rows",
+    "href": "presentation.html#session-level-feature-matrix-example-rows",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Session-level Feature Matrix (Example Rows)",
+    "text": "Session-level Feature Matrix (Example Rows)\n\n\nFeature matrix: 24 sessions × 128 engineered features\n\n\n\n\n\n\n\n\nhorse\nsession_id\nn_rows\nstride_dur_mean\nstride_dur_std\nstride_dur_iqr\nstride_dur_min\nstride_dur_max\n\n\n\n\nDuque\n20240627T095239\n88\n0.791573\n0.028649\n0.040925\n0.722500\n0.843700\n\n\nDuque\n20241122T111237\n368\n0.747877\n0.042264\n0.058700\n0.592500\n0.823100\n\n\nJackson\n20250128T130146\n136\n0.733101\n0.043684\n0.069325\n0.636900\n0.845000\n\n\nPerseo\n20250505T123314\n268\n0.724856\n0.019112\n0.021350\n0.667500\n0.803700"
+  },
+  {
+    "objectID": "presentation.html#session-level-feature-matrix",
+    "href": "presentation.html#session-level-feature-matrix",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Session-Level Feature Matrix",
+    "text": "Session-Level Feature Matrix\nFeature matrix containing 24 exercise sessions and 125 engineered biomechanical movement features per session.\n\n\n\n\n\n\n\nhorse\nsession_id\nn_rows\nstride_dur_mean\nstride_dur_std\nstride_dur_iqr\nstride_dur_min\nstride_dur_max\n\n\n\n\nDuque\n20240627T095239\n88\n0.791573\n0.028649\n0.040925\n0.722500\n0.843700\n\n\nDuque\n20241122T111237\n368\n0.747877\n0.042264\n0.058700\n0.592500\n0.823100\n\n\nJackson\n20250128T130146\n136\n0.733101\n0.043684\n0.069325\n0.636900\n0.845000\n\n\nJackson\n20250413T144809\n143\n0.738984\n0.047872\n0.066900\n0.650000\n0.898100\n\n\nPerseo\n20250505T123314\n268\n0.724856\n0.019112\n0.021350\n0.667500\n0.803700\n\n\nPerseo\n20250508T130406\n676\n0.746507\n0.016887\n0.021300\n0.696200\n0.798800"
+  },
+  {
+    "objectID": "presentation.html#variables",
+    "href": "presentation.html#variables",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "variables",
+    "text": "variables"
+  },
+  {
+    "objectID": "presentation.html#engineered-biomechanical-features-trot-only",
+    "href": "presentation.html#engineered-biomechanical-features-trot-only",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Engineered Biomechanical Features (Trot Only)",
+    "text": "Engineered Biomechanical Features (Trot Only)\nWe extract summary statistics (mean, std, IQR, min, max) for key stride-level variables:\n\nStride timing\n\nstride_dur (stride duration)\nstance_dur_* (stance time for each limb: LF, RF, LH, RH)\nstride_speed\nstride_length\n\nSymmetry & loading metrics\n\nduty_factor, duty_factor_* (LF/RF/LH/RH)\nmin_diff_* & max_diff_* (head / withers / sacrum asymmetry)\nsi_up_* (symmetry index measures)\n\nDiagonal Advanced Placement (limb coordination)\n\ndap_L_* (left diagonal timing)\ndap_R_* (right diagonal timing)\n\nData metadata\n\nhorse, session_id, n_rows (number of trot strides)\n\n\nThese session-level summaries allow direct comparison of movement patterns across days."
+  },
+  {
+    "objectID": "presentation.html#biomechanical-features-trot-only",
+    "href": "presentation.html#biomechanical-features-trot-only",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Biomechanical Features (Trot Only)",
+    "text": "Biomechanical Features (Trot Only)\n\nStride timing\n\nStride duration, stance duration\n\nCoordination\n\nDiagonal advanced placement (DAP)\n\nSymmetry\n\nHead / withers / sacrum metrics\n\nLoading\n\nDuty factor (overall + limb-specific)\n\n\n→ Each summarized with: mean, std, IQR, min, max"
+  },
+  {
+    "objectID": "presentation.html#enumerate",
+    "href": "presentation.html#enumerate",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "enumerate",
+    "text": "enumerate"
+  },
+  {
+    "objectID": "presentation.html#base-biomechanical-variables",
+    "href": "presentation.html#base-biomechanical-variables",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Base Biomechanical Variables",
+    "text": "Base Biomechanical Variables\nWe summarize 25 stride-level variables into session-level features.\n\n\n\n\n\n\n\n\nGroup\nVariables Included\nCount\n\n\n\n\nStride Metrics\nstride duration, speed, length\n3\n\n\nLimb Loading / Timing\nduty factor (LF/RF/LH/RH), stance durations\n12\n\n\nCoordination \ndiagonal advanced placement (left / right)\n4\n\n\nTrunk Symmetry\nhead / withers / sacrum asymmetry + symmetry indices\n6\n\n\nTotal\n—\n25\n\n\n\n→ Each variable is summarized per session using: mean, std, IQR, min, max\n→ Producing 125 engineered features per session"
+  },
+  {
+    "objectID": "presentation.html#biomechanical-features",
+    "href": "presentation.html#biomechanical-features",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Biomechanical Features",
+    "text": "Biomechanical Features\nWe summarize 25 stride-level variables into session-level features.\n\n\n\n\n\n\n\n\nGroup\nVariables Included\nCount\n\n\n\n\nStride Metrics\nstride duration, speed, length\n3\n\n\nLimb Loading / Timing\nduty factor (LF/RF/LH/RH), stance durations\n12\n\n\nCoordination\ndiagonal advanced placement (left / right)\n4\n\n\nTrunk Symmetry\nhead / withers / sacrum asymmetry + symmetry indices\n6\n\n\nTotal\n—\n25\n\n\n\n→ Each variable is summarized per session using: mean, std, IQR, min, max\n→ Producing 125 engineered features per session"
+  },
+  {
+    "objectID": "presentation.html#session-level-features",
+    "href": "presentation.html#session-level-features",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Session-Level Features",
+    "text": "Session-Level Features\nWe summarize 25 stride-level variables into session-level features.\n\n\n\n\n\n\n\n\nGroup\nBiomechanical Variables\nCount\n\n\n\n\nStride Metrics\nstride duration, speed, length\n3\n\n\nLimb Loading / Timing\nduty factor (LF/RF/LH/RH), stance durations\n12\n\n\nCoordination\ndiagonal advanced placement (left / right)\n4\n\n\nTrunk Symmetry\nhead / withers / sacrum asymmetry + symmetry indices\n6\n\n\nTotal\n—\n25\n\n\n\n→ Each variable is summarized per session using: mean, std, IQR, min, max\n→ Producing 125 engineered features per session"
+  },
+  {
+    "objectID": "presentation.html#bleep",
+    "href": "presentation.html#bleep",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "bleep",
+    "text": "bleep\n\n\n24 rows × 128 columns"
+  },
+  {
+    "objectID": "presentation.html#anomaly-detection-framework",
+    "href": "presentation.html#anomaly-detection-framework",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Anomaly Detection Framework",
+    "text": "Anomaly Detection Framework\n\nConvert every feature to a z-score.\nZ-score Thresholding: Flags sessions where any feature deviates strongly from the horse’s baseline.\nK-means Cluster Distance: Groups similar sessions and marks those far from their cluster center as outliers.\nIsolation Forest: Identifies sessions that are difficult to group with others (unusual combinations of features).\n\nSessions flagged by multiple methods are more likely to reflect real gait irregularities."
+  },
+  {
+    "objectID": "presentation.html#how-many-sessions-were-flagged",
+    "href": "presentation.html#how-many-sessions-were-flagged",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "How many sessions were flagged?",
+    "text": "How many sessions were flagged?\n\n\n\nMethod\nDuque\nJackson\nPerseo\n\n\n\n\nZ-score threshold\n7\n0\n0\n\n\nK-means distance\n3\n2\n2\n\n\nIsolation Forest\n4\n2\n0"
+  },
+  {
+    "objectID": "presentation.html#sessions-flagged-by-individual-methods",
+    "href": "presentation.html#sessions-flagged-by-individual-methods",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Sessions Flagged By Individual Methods",
+    "text": "Sessions Flagged By Individual Methods\n\n\n\nMethod\nDuque\nJackson\nPerseo\n\n\n\n\nZ-score threshold\n7\n0\n0\n\n\nK-means distance\n3\n2\n2\n\n\nIsolation Forest\n4\n2\n0"
+  },
+  {
+    "objectID": "presentation.html#high-confidence-anomalies",
+    "href": "presentation.html#high-confidence-anomalies",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "High-Confidence Anomalies",
+    "text": "High-Confidence Anomalies\nSessions flagged by ≥2 methods (strongest evidence of abnormal movement):\n\n\n\nHorse\nSession ID\nMethods Flagged\n\n\n\n\nDuque\n20250804T082647\n3\n\n\nDuque\n20250309T134916\n3\n\n\nDuque\n20250308T111144\n3\n\n\nDuque\n20240627T095239\n2\n\n\nJackson\n20241215T152135\n2\n\n\n\nThese sessions consistently deviate from each horse’s typical movement pattern."
+  },
+  {
+    "objectID": "presentation.html#sessions",
+    "href": "presentation.html#sessions",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Sessions",
+    "text": "Sessions"
+  },
+  {
+    "objectID": "presentation.html#anomalies-flagged-by-individual-methods",
+    "href": "presentation.html#anomalies-flagged-by-individual-methods",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Anomalies Flagged by Individual Methods",
+    "text": "Anomalies Flagged by Individual Methods\n\n\n\nMethod\nDuque\nJackson\nPerseo\n\n\n\n\nZ-score threshold\n7\n0\n0\n\n\nK-means distance\n3\n2\n2\n\n\nIsolation Forest\n4\n2\n0"
+  },
+  {
+    "objectID": "presentation.html#high-confidence-anomalies-multiple-methods",
+    "href": "presentation.html#high-confidence-anomalies-multiple-methods",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "High-Confidence Anomalies (Multiple Methods)",
+    "text": "High-Confidence Anomalies (Multiple Methods)\nSessions flagged by ≥2 methods (strongest evidence of abnormal movement):\n\n\n\nHorse\nSession ID\nMethods Flagged\n\n\n\n\nDuque\n20250804T082647\n3\n\n\nDuque\n20250309T134916\n3\n\n\nDuque\n20250308T111144\n3\n\n\nDuque\n20240627T095239\n2\n\n\nJackson\n20241215T152135\n2\n\n\n\nThese sessions consistently deviate from each horse’s typical movement pattern."
+  },
+  {
+    "objectID": "presentation.html#heatmap",
+    "href": "presentation.html#heatmap",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "heatmap",
+    "text": "heatmap"
+  },
+  {
+    "objectID": "presentation.html#method-agreement-heatmap",
+    "href": "presentation.html#method-agreement-heatmap",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Method Agreement Heatmap",
+    "text": "Method Agreement Heatmap\n\n\n\n\nWhich methods agree when flagging anomalies?"
+  },
+  {
+    "objectID": "presentation.html#method-agreement-heatmap-1",
+    "href": "presentation.html#method-agreement-heatmap-1",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Method Agreement Heatmap",
+    "text": "Method Agreement Heatmap\n\n\n\n\nWhich methods agree when flagging anomalies?"
+  },
+  {
+    "objectID": "presentation.html#max-zscore",
+    "href": "presentation.html#max-zscore",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Max zscore",
+    "text": "Max zscore\n\n\n\n\nWhich methods agree when flagging anomalies?"
+  },
+  {
+    "objectID": "presentation.html#max-deviation-from-baseline-max-z-score",
+    "href": "presentation.html#max-deviation-from-baseline-max-z-score",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Max Deviation from Baseline (Max |z-score|)",
+    "text": "Max Deviation from Baseline (Max |z-score|)\n\n\n\n\nWhich sessions show the largest single-feature deviation?\n\n\n\n\n\n\n\nWhich methods agree when flagging anomalies?"
+  },
+  {
+    "objectID": "presentation.html#max-deviation-from-baseline",
+    "href": "presentation.html#max-deviation-from-baseline",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Max Deviation from Baseline",
+    "text": "Max Deviation from Baseline\n\n\n\n\nWhich sessions show the largest single-feature deviation?\n\n\n\n\n\n\n\nWhich methods agree when flagging anomalies?"
+  },
+  {
+    "objectID": "presentation.html#feature-drivers-of-high-confidence-anomalies",
+    "href": "presentation.html#feature-drivers-of-high-confidence-anomalies",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Feature Drivers of High-Confidence Anomalies",
+    "text": "Feature Drivers of High-Confidence Anomalies"
+  },
+  {
+    "objectID": "presentation.html#results-conclusions",
+    "href": "presentation.html#results-conclusions",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Results & Conclusions",
+    "text": "Results & Conclusions\n\nComputed session-level biomechanics for each horse → established individualized baseline movement patterns\nMultiple anomaly detection methods (Z-score, K-means, Isolation Forest) flagged sessions showing deviations from baseline\nOnly a small subset of sessions showed strong evidence of abnormality\n\nHigh-confidence anomalies = flagged by ≥ 2 methods\n\nDeviations were driven primarily by:\n\nDiagonal advanced placement, duty factor, and head motion symmetry\nFeatures tied to stride timing and weight distribution\n\n\n\nInterpretation:\nAutomated anomaly detection reveals subtle, horse-specific gait changes that may signal behavioral irregularities, equipment issues, pain responses, or early reinjury risk. This can enable earlier detection and proactive intervention."
+  },
+  {
+    "objectID": "presentation.html#interpreting-anomaly-drivers-example-duque-080425",
+    "href": "presentation.html#interpreting-anomaly-drivers-example-duque-080425",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Interpreting Anomaly Drivers — Example: Duque 08/04/25",
+    "text": "Interpreting Anomaly Drivers — Example: Duque 08/04/25\nTop contributing features\n\n↑ Right Hind stance duration (stance_dur_RH_max)\n↑ Diagonal timing variability (DAP metrics: dap_L_perc_iqr, dap_R_sec_max)\n\nWhat this suggests\n\nRight hind is staying on the ground longer → compensation\nIncreased timing variability → reduced trot symmetry & coordination\n\nLikely interpretation\nRight hind is supporting more load, causing instability in diagonal pairing.\nThis may indicate early hind-limb discomfort or fatigue."
+  },
+  {
+    "objectID": "presentation.html#conclusions",
+    "href": "presentation.html#conclusions",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Conclusions",
+    "text": "Conclusions\n\nComputed session-level biomechanics for each horse → established individualized baseline movement patterns\nMultiple anomaly detection methods (Z-score, K-means, Isolation Forest) flagged sessions showing deviations from baseline\nOnly a small subset of sessions showed strong evidence of abnormality\n\nHigh-confidence anomalies = flagged by ≥ 2 methods\n\nDeviations were driven primarily by:\n\nDiagonal advanced placement, duty factor, and head motion symmetry\nFeatures tied to stride timing and weight distribution\n\n\n\nInterpretation:\nAutomated anomaly detection reveals subtle, horse-specific gait changes that may signal behavioral irregularities, equipment issues, pain responses, or early reinjury risk. This can enable earlier detection and proactive intervention."
+  }
+]

@@ -1,0 +1,473 @@
+# Anomaly analysis for EquiPro session-level features (trot only)
+# - Computes per-horse baselines via z-scores
+# - Runs three anomaly-detection methods:
+#     1) Z-score thresholding
+#     2) K-means clustering distance
+#     3) Isolation Forest
+# - Compares which sessions are flagged as abnormal by each method
+#
+# You can run this as a standalone Python script or import pieces into a notebook.
+
+# -----------------------------------------
+# 1. Imports and configuration
+# -----------------------------------------
+
+from pathlib import Path
+
+import numpy as np
+import pandas as pd
+
+from IPython.display import display
+
+from sklearn.preprocessing import StandardScaler
+from sklearn.cluster import KMeans
+from sklearn.ensemble import IsolationForest
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+
+# -----------------------------------------
+# 2. Load session-level feature matrix
+# -----------------------------------------
+
+# Path to the session-level feature matrix created by the trot-only script
+DATA_PATH = Path(__file__).resolve().parent / "session_features_trot.csv"
+
+session_features = pd.read_csv(DATA_PATH)
+
+print("Session-level feature matrix (trot only):")
+print(f"  - shape: {session_features.shape}")
+print("\nFirst few rows:")
+display(session_features.head())
+
+meta_cols = ["horse", "session_id", "n_rows"]
+feature_cols = [c for c in session_features.columns if c not in meta_cols]
+
+print("\nNumber of feature columns:", len(feature_cols))
+
+
+# -----------------------------------------
+# 3. Helper: prepare per-horse features
+# -----------------------------------------
+
+def prepare_features(
+    df_horse: pd.DataFrame,
+    feature_cols,
+    max_missing_frac: float = 0.4,
+) -> pd.DataFrame:
+    """
+    Clean and prepare feature matrix for one horse.
+
+    Steps
+    -----
+    - Keep only the numeric feature columns (drop meta columns).
+    - Drop columns that are entirely NaN.
+    - Drop columns where more than `max_missing_frac` of entries are NaN.
+    - Impute any remaining NaN values with the column median.
+
+    Returns
+    -------
+    X : pd.DataFrame
+        Cleaned feature matrix for this horse (sessions x features).
+    """
+    X = df_horse[feature_cols].copy()
+
+    # Remove columns that are entirely NaN
+    X = X.dropna(axis=1, how="all")
+
+    # Drop columns with too much missing data
+    missing_frac = X.isna().mean()
+    keep_cols = missing_frac[missing_frac <= max_missing_frac].index
+    X = X[keep_cols]
+
+    # Median imputation for any remaining NaNs
+    X = X.apply(lambda col: col.fillna(col.median()), axis=0)
+
+    return X
+
+
+# -----------------------------------------
+# 4. Helper: per-horse anomaly analysis
+# -----------------------------------------
+
+def analyze_horse_anomalies(
+    df_horse: pd.DataFrame,
+    feature_cols,
+    z_thresh: float = 2.5,
+    k_default: int = 2,
+    iforest_contamination: float = 0.25,
+    random_state: int = 42,
+):
+    """
+    Run all three anomaly-detection methods for a single horse.
+
+    Methods
+    -------
+    1) Z-score thresholding:
+         - Standardize features
+         - Compute max absolute z-score per session
+         - Count how many features exceed |z| > z_thresh
+    2) K-means distance:
+         - Fit K-means in z-scored space
+         - Compute distance of each session to its assigned cluster center
+         - Label top ~20% (or ~1/3 for very small N) as outliers
+    3) Isolation Forest:
+         - Run IsolationForest in z-scored space
+         - Use -score_samples as anomaly score (higher = more isolated)
+         - Use model's predicted label (-1 = anomaly)
+
+    Returns
+    -------
+    horse_results : pd.DataFrame
+        One row per session with meta info + anomaly scores + outlier labels.
+    X_z : pd.DataFrame
+        Z-scored features for this horse (sessions x features).
+    """
+    # Reset index so everything is clean
+    df_horse = df_horse.reset_index(drop=True)
+
+    # 1) Prepare clean feature matrix
+    X = prepare_features(df_horse, feature_cols)
+    n_samples = X.shape[0]
+
+    # If too few sessions, return minimal output
+    if n_samples < 2:
+        print(f"Not enough sessions for horse {df_horse['horse'].iloc[0]} to run anomalies.")
+        X_z = pd.DataFrame(index=df_horse.index)
+        out = df_horse[["horse", "session_id", "n_rows"]].copy()
+        out["z_max_abs"] = np.nan
+        out["z_mean_abs"] = np.nan
+        out["z_n_features_big"] = 0
+        out["z_is_outlier"] = 0
+        out["kmeans_dist"] = np.nan
+        out["kmeans_is_outlier"] = 0
+        out["iforest_score"] = np.nan
+        out["iforest_is_outlier"] = 0
+        out["n_methods_flagged"] = 0
+        return out, X_z
+
+    # 2) Standardize features (z-scores)
+    scaler = StandardScaler()
+    X_z_values = scaler.fit_transform(X)
+    X_z = pd.DataFrame(X_z_values, columns=X.columns, index=df_horse.index)
+
+    # ---------- Method 1: Z-score thresholding ----------
+    z_abs = X_z.abs()
+    z_max = z_abs.max(axis=1)
+    z_mean = z_abs.mean(axis=1)          # average |z| across features
+    z_nbig = (z_abs > z_thresh).sum(axis=1)
+    z_label = (z_max > z_thresh).astype(int)
+
+    # ---------- Method 2: K-means distance ----------
+    if n_samples >= 3:
+        n_clusters = min(k_default, n_samples - 1)
+        kmeans = KMeans(
+            n_clusters=n_clusters,
+            n_init=10,
+            random_state=random_state,
+        )
+        cluster_labels = kmeans.fit_predict(X_z)
+        centers = kmeans.cluster_centers_
+
+        # Euclidean distance to the assigned cluster center
+        dists = []
+        for i, x in enumerate(X_z.to_numpy()):
+            center = centers[cluster_labels[i]]
+            dists.append(np.linalg.norm(x - center))
+        dists = pd.Series(dists, index=X_z.index, name="kmeans_dist")
+
+        # Flag the largest distances as outliers
+        if n_samples >= 5:
+            cutoff = dists.quantile(0.80)  # top 20% as candidate outliers
+        else:
+            cutoff = dists.quantile(2 / 3)  # for very small N, top ~1/3
+        kmeans_label = (dists >= cutoff).astype(int)
+    else:
+        # If there are only 2 sessions we skip K-means
+        dists = pd.Series(np.nan, index=X_z.index, name="kmeans_dist")
+        kmeans_label = pd.Series(0, index=X_z.index, name="kmeans_is_outlier")
+
+    # ---------- Method 3: Isolation Forest ----------
+    if n_samples >= 5:
+        iforest = IsolationForest(
+            n_estimators=200,
+            contamination=iforest_contamination,
+            random_state=random_state,
+        )
+        if_labels = iforest.fit_predict(X_z)         # -1 = anomaly
+        if_scores = -iforest.score_samples(X_z)      # higher = more isolated
+
+        if_label = (pd.Series(if_labels, index=X_z.index) == -1).astype(int)
+        if_score = pd.Series(if_scores, index=X_z.index, name="iforest_score")
+    else:
+        if_label = pd.Series(0, index=X_z.index, name="iforest_is_outlier")
+        if_score = pd.Series(np.nan, index=X_z.index, name="iforest_score")
+
+    # Assemble output for this horse
+    out = df_horse[["horse", "session_id", "n_rows"]].copy()
+    out["z_max_abs"] = z_max
+    out["z_mean_abs"] = z_mean
+    out["z_n_features_big"] = z_nbig
+    out["z_is_outlier"] = z_label
+    out["kmeans_dist"] = dists
+    out["kmeans_is_outlier"] = kmeans_label
+    out["iforest_score"] = if_score
+    out["iforest_is_outlier"] = if_label
+
+    # How many methods flag each session?
+    method_cols = ["z_is_outlier", "kmeans_is_outlier", "iforest_is_outlier"]
+    out["n_methods_flagged"] = out[method_cols].sum(axis=1)
+
+    return out, X_z
+
+
+# -----------------------------------------
+# 5. Run analysis for all horses
+# -----------------------------------------
+
+all_results = []
+z_spaces = {}  # store z-scored features if you want to look later
+
+for horse in session_features["horse"].unique():
+    df_horse = session_features[session_features["horse"] == horse]
+    print(f"\n=== Analyzing horse: {horse} ===")
+    print(f"Number of sessions: {df_horse.shape[0]}")
+
+    horse_results, X_z = analyze_horse_anomalies(
+        df_horse=df_horse,
+        feature_cols=feature_cols,
+        z_thresh=2.5,
+        k_default=2,
+        iforest_contamination=0.25,
+        random_state=42,
+    )
+
+    all_results.append(horse_results)
+    z_spaces[horse] = X_z
+
+# Combine results for all horses
+anomaly_summary = pd.concat(all_results, ignore_index=True)
+
+print("\nCombined anomaly summary for all horses:")
+display(
+    anomaly_summary.sort_values(
+        ["horse", "n_methods_flagged", "z_max_abs"],
+        ascending=[True, False, False],
+    )
+)
+
+
+# -----------------------------------------
+# 6. Quick sanity checks
+# -----------------------------------------
+
+print("\nHow many sessions are flagged by each method?")
+for col in ["z_is_outlier", "kmeans_is_outlier", "iforest_is_outlier"]:
+    counts = anomaly_summary.groupby("horse")[col].sum()
+    print(f"\nMethod: {col}")
+    print(counts)
+
+print("\nHow many sessions are flagged by ≥2 methods?")
+flagged_two_plus = anomaly_summary[anomaly_summary["n_methods_flagged"] >= 2]
+display(
+    flagged_two_plus.sort_values(
+        ["horse", "n_methods_flagged", "z_max_abs"],
+        ascending=[True, False, False],
+    )
+)
+
+
+# -----------------------------------------
+# 7. Simple visualizations
+# -----------------------------------------
+
+# 7.1 Add datetime columns and sort
+anomaly_summary["session_dt"] = pd.to_datetime(
+    anomaly_summary["session_id"].str[:8],  # yyyymmdd
+    format="%Y%m%d"
+)
+anomaly_summary["session_label"] = anomaly_summary["session_dt"].dt.strftime("%m/%d/%y")
+
+# Sort once by date so plots are in chronological order
+anomaly_summary = anomaly_summary.sort_values("session_dt")
+
+# 7.2 Plot 1: max |z|-score vs. session across horses
+plt.figure()
+for horse, df_h in anomaly_summary.groupby("horse"):
+    plt.scatter(df_h["session_dt"], df_h["z_max_abs"], label=horse)
+
+plt.xticks(rotation=90)
+plt.ylabel("max |z-score| across features")
+plt.xlabel("session date")
+plt.title("Session-level deviation from baseline (max |z|)")
+plt.legend()
+plt.tight_layout()
+plt.savefig("fig_max_zscore.png", dpi=300, bbox_inches="tight")
+
+# 7.3 Plot 2: mean |z|-score vs. session across horses
+plt.figure()
+for horse, df_h in anomaly_summary.groupby("horse"):
+    plt.scatter(df_h["session_dt"], df_h["z_mean_abs"], label=horse)
+
+plt.xticks(rotation=90)
+plt.ylabel("mean |z-score| across features")
+plt.xlabel("session date")
+plt.title("Session-level deviation from baseline (mean |z|)")
+plt.legend()
+plt.tight_layout()
+plt.savefig("fig_mean_zscore.png", dpi=300, bbox_inches="tight")
+
+# 7.4 Plot 3: number of methods that flag each session
+plt.figure()
+for horse, df_h in anomaly_summary.groupby("horse"):
+    plt.scatter(df_h["session_dt"], df_h["n_methods_flagged"], label=horse)
+
+plt.xticks(rotation=90)
+plt.ylabel("number of methods flagging session")
+plt.xlabel("session date")
+plt.title("Agreement between anomaly-detection methods")
+plt.legend()
+plt.tight_layout()
+plt.savefig("fig_method_agreement.png", dpi=300, bbox_inches="tight")
+
+# 7.5 Plot 4: Method agreement heatmap
+heat_df = anomaly_summary[
+    ["horse", "session_id", "session_dt",
+     "z_is_outlier", "kmeans_is_outlier", "iforest_is_outlier"]
+].copy()
+
+# Sort sessions by # of methods flagged (descending within horse)
+heat_df["n_flag"] = (
+    heat_df[["z_is_outlier", "kmeans_is_outlier", "iforest_is_outlier"]]
+    .sum(axis=1)
+)
+heat_df = heat_df.sort_values(["horse", "n_flag"], ascending=[True, False])
+
+# Create readable date label (mm/dd/yy) and combine with horse
+heat_df["date_label"] = heat_df["session_dt"].dt.strftime("%m/%d/%y")
+heat_df["session_label"] = heat_df["horse"] + " " + heat_df["date_label"]
+
+# Rename columns for nicer axis labels
+heat_df = heat_df.rename(columns={
+    "z_is_outlier": "Z-score",
+    "kmeans_is_outlier": "K-means",
+    "iforest_is_outlier": "Isolation Forest",
+})
+
+# Build heatmap matrix
+matrix = heat_df.set_index("session_label")[["Z-score", "K-means", "Isolation Forest"]]
+
+plt.figure(figsize=(7, max(5, matrix.shape[0] * 0.35)))
+sns.heatmap(
+    matrix,
+    cmap=["white", "tab:red"],  # white = not flagged, red = flagged
+    linewidths=0.5,
+    linecolor="gray",
+    cbar=False,
+    annot=True,
+    fmt="",
+)
+
+plt.xlabel("Anomaly Detection Method")
+plt.ylabel("Session (Horse + Date)")
+plt.title("Method Agreement Heatmap: Flagged Sessions")
+plt.xticks(rotation=0)
+plt.tight_layout()
+plt.savefig("fig_method_heatmap.png", dpi=300, bbox_inches="tight")
+plt.show()
+
+# -----------------------------------------
+# 8. Feature contribution visualization
+# -----------------------------------------
+
+def top_contributing_features_for_session(
+    horse: str,
+    session_id: str,
+    top_n: int = 5,
+):
+    """
+    Return the top-N biomechanical features (by |z|) for a given horse/session.
+
+    Uses the z-scored feature space stored in z_spaces[horse].
+    """
+    # Rebuild this horse's session order to match how z_spaces[horse] was created
+    df_horse = session_features[session_features["horse"] == horse].reset_index(drop=True)
+    X_z = z_spaces[horse]
+
+    # Position of this session within that horse's dataframe
+    pos = df_horse[df_horse["session_id"] == session_id].index[0]
+
+    # Absolute z-scores for this session
+    z_vals = X_z.iloc[pos].abs().sort_values(ascending=False)
+
+    return z_vals.head(top_n)   # series: index = feature names, values = |z|
+
+
+# Take only high-confidence anomalies (flagged by ≥2 methods)
+flagged_multi = anomaly_summary[anomaly_summary["n_methods_flagged"] >= 2].copy()
+
+# Build a long-form table of top features per session
+rows = []
+for _, row in flagged_multi.iterrows():
+    horse = row["horse"]
+    session_id = row["session_id"]
+
+    top_feats = top_contributing_features_for_session(
+        horse=horse,
+        session_id=session_id,
+        top_n=5,       # change if you want more/less per session
+    )
+
+    # Session label for plotting
+    sess_date = pd.to_datetime(session_id[:8], format="%Y%m%d").strftime("%m/%d/%y")
+    session_label = f"{horse} {sess_date}"
+
+    for feat_name, z_val in top_feats.items():
+        rows.append({
+            "session_label": session_label,
+            "feature": feat_name,
+            "abs_z": float(z_val),
+        })
+
+top_feat_long = pd.DataFrame(rows)
+
+# Pivot to session x feature matrix (NaN where a feature is not in that session's top-N)
+top_feat_matrix = top_feat_long.pivot_table(
+    index="session_label",
+    columns="feature",
+    values="abs_z",
+    aggfunc="max"
+)
+
+# Optional: order sessions by how many methods flagged them (same order as flagged_multi)
+session_order = []
+for _, row in flagged_multi.sort_values(
+    ["horse", "n_methods_flagged", "z_max_abs"],
+    ascending=[True, False, False]
+).iterrows():
+    sess_date = row["session_dt"].strftime("%m/%d/%y")
+    session_order.append(f"{row['horse']} {sess_date}")
+
+# Keep only sessions that appear in the matrix
+session_order = [s for s in session_order if s in top_feat_matrix.index]
+top_feat_matrix = top_feat_matrix.loc[session_order]
+
+# Plot heatmap of top contributing features
+plt.figure(figsize=(8, max(4, 0.4 * top_feat_matrix.shape[0])))
+sns.heatmap(
+    top_feat_matrix,
+    cmap="viridis",      # magnitude of |z|
+    linewidths=0.5,
+    linecolor="gray",
+    cbar_kws={"label": "|z-score|"},
+    annot=False
+)
+
+plt.xlabel("Biomechanical Feature")
+plt.ylabel("Session (Horse + Date)")
+plt.title("Top Contributing Features for High-Confidence Anomalies")
+plt.xticks(rotation=90)
+plt.tight_layout()
+plt.savefig("fig_top_feature_heatmap.png", dpi=300, bbox_inches="tight")
+plt.show()

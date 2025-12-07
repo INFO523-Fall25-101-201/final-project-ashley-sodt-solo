@@ -1,7 +1,7 @@
 ---
-title: "Project title"
-subtitle: "INFO 523 - Summer 2025 - Final Project"
-author: "Author names"
+title: "Clustering Movement Patterns in Equine Exercise Sessions"
+subtitle: "INFO 523 - Fall 2025 - Final Project"
+author: "Ashley Sodt"
 title-slide-attributes:
   data-background-image: images/watercolour_sys02_img34_teacup-ocean.jpg
   data-background-size: stretch
@@ -51,117 +51,187 @@ mtcars['speed'] = mtcars['horsepower'] / mtcars['weight']
 penguins = sns.load_dataset('penguins').dropna()
 ```
 
-# Using Quarto for presentations
+## Introduction
 
-## Quarto
+-   Al-Marah Equine Center // Laura Miller
 
--   The presentation is created using the Quarto CLI
+* EquiPro intertial measurement units collect accelerometer data
+  + Outputs stride-level biomechanical metrics
+  + Early detection of subtle gait abnormalities
 
--   `##` sets the start of a new slide
+**Goal**: Use unsupervised learning techniques to model each horse's typical movement and automatically flag exercise sessions that deviate from this baseline. Such anomalies may reflect behavioral irregularities, equipment
+malfunction, pain, or potential reinjury.
 
-## Layouts
+## Dataset
 
-You can use plain text
+* Each session exported as CSV containing stride-level movemement variables.
+  + Duque (14 sessions)
+  + Jackson (6 sessions)
+  + Perseo (5 sessions)
 
-::: columns
-::: {.column width="40%"}
--   or bullet points[^1]
-:::
-
-::: {.column width="60%"}
-or in two columns
-:::
-:::
-
-[^1]: And add footnotes
-
--   like
-
--   this
-
-## Code
+## Dataset {.smaller}
+Sample of Equipro CSV output with stride-level biomechanical metrics from one exercise session.
 
 ```{python}
-from sklearn.linear_model import LinearRegression
-import statsmodels.api as sm
-import pandas as pd
-
-# Fit a linear regression model
-X = mtcars[['speed']]
-y = mtcars['mpg']
-model = LinearRegression().fit(X, y)
-
-# Summary of the model
-X2 = sm.add_constant(X)
-est = sm.OLS(y, X2)
-est2 = est.fit()
-print(est2.summary())
-```
-
-## Plots
-
-```{python}
-penguins['species'] = penguins['species'].apply(lambda x: "Adelie" if x == "Adelie" else "Other")
-sns.scatterplot(data=penguins, x='flipper_length_mm', y='body_mass_g', hue='species')
-plt.show()
-```
-
-## Plot and text
-
-::: columns
-::: {.column width="50%"}
--   Some text
-
--   goes here
-:::
-
-::: {.column width="50%"}
-```{python}
+#| label: duque-head
 #| warning: false
-#| fig.width: 5.5
-fig, ax = plt.subplots(figsize=(5.5, 5.5 * 0.618))
-sns.boxplot(data=penguins, x='bill_length_mm', y='species', hue='species', ax=ax)
-plt.show()
+# Load one example Duque session
+
+df_duque = pd.read_csv("Horses/Duque/20240626T082743-Duque-results.csv")
+
+df_duque = pd.read_csv("Horses/Duque/20240626T082743-Duque-results.csv")
+df_duque.head().style.set_properties(**{'font-size':'5px'})
+
+# Show first 5 rows
+df_duque.head()
 ```
-:::
-:::
 
-# A new section...
+# Methods
 
-## Tables
+## Session-Level Features {.smaller}
 
-If you want to generate a table, make sure it is in the HTML format (instead of Markdown or other formats), e.g.,
+We summarize 25 stride-level variables into session-level features.
+
+| Group                     | Biomechanical Variables                                    | Count |
+|-------------------------:|:------------------------------------------------------|------:|
+| **Stride Metrics**        | stride duration, speed, length                        | 3     |
+| **Limb Loading / Timing** | duty factor (LF/RF/LH/RH), stance durations           | 12    |
+| **Coordination**    | diagonal advanced placement (left / right)            | 4     |
+| **Trunk Symmetry**        | head / withers / sacrum asymmetry + symmetry indices  | 6     |
+| **Total**                 | —                                                     | **25** |
+
+→ Each variable is summarized per session using: mean, std, IQR, min, max 
+
+→ Producing 125 engineered features per session
+
+
+## Session-Level Feature Matrix {.smaller}
+
+Feature matrix containing 24 exercise sessions and 125 engineered biomechanical movement features per session.
 
 ```{python}
-penguins.head().to_html()
+import pandas as pd
+from pathlib import Path
+
+# Load the engineered feature matrix
+data_path = Path("analysis") / "data" / "session_features_trot.csv"
+session_features = pd.read_csv(data_path)
+
+# Rows to display
+rows_to_show = [1, 2, 16, 17, 22, 23]
+
+display_cols = [
+    "horse", "session_id", "n_rows",
+    "stride_dur_mean", "stride_dur_std",
+    "stride_dur_iqr","stride_dur_min","stride_dur_max"
+]
+
+# Display selected rows, clean formatting
+session_features.loc[rows_to_show, display_cols] \
+    .style.hide(axis="index") 
 ```
 
-## Images
+## Anomaly Detection Framework
 
-![Image credit: Danielle Navarro, Percolate.](images/watercolour_sys02_img34_teacup-ocean.png){fig-align="center" width="500"}
+- Convert every feature to a z-score.
 
-## Math Expressions {.smaller}
+- **Z-score Thresholding**: Flags sessions where any feature deviates strongly from the horse’s baseline.
 
-You can write LaTeX math expressions inside a pair of dollar signs, e.g. \$\\alpha+\\beta\$ renders $\alpha + \beta$. You can use the display style with double dollar signs:
+- **K-means Cluster Distance**: Groups similar sessions and marks those far from their cluster center as outliers.
 
-```         
-$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$
-```
+- **Isolation Forest**: Identifies sessions that are difficult to group with others (unusual combinations of features).
 
-$$
-\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i
-$$
+Sessions flagged by multiple methods are more likely to reflect real gait irregularities.
 
-Limitations:
+# Results
 
-1.  The source code of a LaTeX math expression must be in one line, unless it is inside a pair of double dollar signs, in which case the starting `$$` must appear in the very beginning of a line, followed immediately by a non-space character, and the ending `$$` must be at the end of a line, led by a non-space character;
+## Anomalies Flagged by Individual Methods
 
-2.  There should not be spaces after the opening `$` or before the closing `$`.
+| Method               | Duque | Jackson | Perseo |
+|---------------------|:-----:|:-------:|:------:|
+| Z-score threshold   | **7** | 0 | 0 |
+| K-means distance    | **3** | **2** | **2** |
+| Isolation Forest    | **4** | **2** | 0 |
 
-# Wrap up
 
-## Feeling adventurous?
 
--   You are welcomed to use the default styling of the slides. In fact, that's what I expect majority of you will do. You will differentiate yourself with the content of your presentation.
 
--   But some of you might want to play around with slide styling. Some solutions for this can be found at https://quarto.org/docs/presentations/revealjs.
+## High-Confidence Anomalies {.smaller}
+
+Sessions flagged by ≥2 methods (strongest evidence of abnormal movement):
+
+| Horse   | Session ID       |  Methods Flagged |
+|--------|-------------------|:----------------:|
+| Duque   | 20250804T082647  | **3** |
+| Duque   | 20250309T134916  | **3** |
+| Duque   | 20250308T111144  | **3** |
+| Duque   | 20240627T095239  | **2** |
+| Jackson | 20241215T152135  | **2** |
+
+These sessions consistently deviate from each horse’s typical movement pattern.
+
+
+
+## Method Agreement Heatmap
+
+<div align="center">
+![Which methods agree when flagging anomalies?](analysis/data/fig_method_heatmap.png){width="50%"}
+</div>
+
+## Max Deviation from Baseline {.smaller}
+
+<div align="center">
+
+![Which sessions show the largest single-feature deviation?](analysis/data/fig_max_zscore.png){width="80%"}
+
+</div>
+
+<div align="center">
+![Which methods agree when flagging anomalies?](analysis/data/fig_method_heatmap.png){width="50%"}
+</div>
+
+## Feature Drivers of High-Confidence Anomalies {.smaller}
+
+<div align="center">
+
+![](analysis/data/fig_top_feature_heatmap.png){width="100%"}
+
+</div>
+
+
+## Interpreting Anomaly Drivers — Example: Duque 08/04/25 {.smaller}
+
+**Top contributing features**
+
+- ↑ Right Hind stance duration (stance_dur_RH_max)
+
+- ↑ Diagonal timing variability (DAP metrics: dap_L_perc_iqr, dap_R_sec_max)
+
+**What this suggests**
+
+- Right hind is staying on the ground longer → compensation
+
+- Increased timing variability → reduced trot symmetry & coordination
+
+**Likely interpretation**
+
+Right hind is supporting more load, causing instability in diagonal pairing.  
+This may indicate early hind-limb discomfort or fatigue.
+
+
+## Conclusions {.smaller}
+
+- Computed session-level biomechanics for each horse → established individualized baseline movement patterns
+- Multiple anomaly detection methods (Z-score, K-means, Isolation Forest) flagged sessions showing deviations from baseline
+- Only a small subset of sessions showed strong evidence of abnormality  
+  - High-confidence anomalies = flagged by ≥ 2 methods
+
+- Deviations were driven primarily by:
+  - Diagonal advanced placement, duty factor, and head motion symmetry
+  - Features tied to stride timing and weight distribution
+
+<div style="margin-top:10px; font-size:0.9em;">
+**Interpretation:**  
+Automated anomaly detection reveals subtle, horse-specific gait changes that may signal behavioral irregularities, equipment issues, 
+pain responses, or early reinjury risk. This can enable earlier detection and proactive intervention.
+</div>
