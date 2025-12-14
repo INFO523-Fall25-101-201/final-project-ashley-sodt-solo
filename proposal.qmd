@@ -1,5 +1,5 @@
 ---
-title: "Clustering Movement Patterns in Equine Exercise Sessions Using Anomaly Detection"
+title: "Anomaly Detection for Equine Gait Abnormalities"
 subtitle: "Proposal"
 author: 
   - name: "Ashley Sodt"

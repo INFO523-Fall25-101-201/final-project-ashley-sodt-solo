@@ -1,5 +1,5 @@
 ---
-title: "Clustering Movement Patterns in Equine Exercise Sessions"
+title: "Anomaly Detection for Equine Gait Abnormalities"
 subtitle: "INFO 523 - Fall 2025 - Final Project"
 author: "Ashley Sodt"
 title-slide-attributes:
@@ -207,17 +207,17 @@ Example: Duque 06/26/24
 
 **Top contributing features**
 
-- ↑ Right Hind duty factor and stance duration (duty_factor_RH_mean / stance_dur_RH_mean)
+- Right Hind duty factor and stance duration (duty_factor_RH_mean / stance_dur_RH_mean)
 
-- ↑ Diagonal timing variability (DAP metrics: dap_L_, dap_R_)
+- Diagonal timing variability (DAP metrics: dap_L_, dap_R_)
 
-- ↑ Trunk and limb asymmetry measures
+- Trunk and limb asymmetry measures
 
 **What this suggests**
 
 - Prolonged loading of right hind limb: potential compensatory behavior
 
-- Changes in diagonaal timing: potential altered coordination during trot
+- Changes in diagonal timing: potential altered coordination during trot
 
 - Redistribution of load toward hind limb could indicate subtle gait adaptation prior to visible abnormalities.
 
