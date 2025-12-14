@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Ashley Sodt">
-<meta name="description" content="My goal is to use unsupervised learning techniques to cluster equine exercise sessions and detect anomalies that may reflect behavioral irregularities, equipment issues, or potential reinjury.">
+<meta name="description" content="Unsupervised learning techniques were used to cluster equine exercise sessions and detect anomalies that may reflect behavioral irregularities, equipment issues, or potential reinjury.">
 
 <title>Clustering Movement Patterns in Equine Exercise Sessions Using Anomaly Detection – Project Title</title>
 <style>
@@ -4091,6 +4091,10 @@ vertical-align: -.125em;
    
   <ul>
   <li><a href="#abstract" id="toc-abstract" class="nav-link active" data-scroll-target="#abstract">Abstract</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#dataset" id="toc-dataset" class="nav-link" data-scroll-target="#dataset">Dataset</a></li>
+  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
   </ul>
 </nav>
     </div>
@@ -4106,7 +4110,7 @@ vertical-align: -.125em;
 
 <div>
   <div class="description">
-    <p>My goal is to use unsupervised learning techniques to cluster equine exercise sessions and detect anomalies that may reflect behavioral irregularities, equipment issues, or potential reinjury.</p>
+    <p>Unsupervised learning techniques were used to cluster equine exercise sessions and detect anomalies that may reflect behavioral irregularities, equipment issues, or potential reinjury.</p>
   </div>
 </div>
 
@@ -4139,6 +4143,44 @@ vertical-align: -.125em;
 <section id="abstract" class="level2">
 <h2 class="anchored" data-anchor-id="abstract">Abstract</h2>
 <p>Unsupervised learning techniques were used to cluster equine exercise sessions and detect anomalies that could reflect behavioral irregularities, equipment issues, or potential reinjury. Movement-based features derived from processed EquiPro accelerometer data were analyzed, including biomechanical metrics such as diagonal advanced placement, stride duration, and footfall duration. Typical movement patterns for each horse were modeled so that sessions deviating significantly from baseline could be identified. Through this approach, anomalies that may have indicated behavioral changes, equipment malfunction, pain, or reinjury were detected. This project was motivated by the need to identify subtle changes in loading or symmetry during equine rehabilitation, where deviations may precede clinical signs of injury.</p>
+</section>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>My overall goal was to use unsupervised learning techniques to cluster equine exercise sessions and detect anomalies that may reflect behavioral irregularities, equipment issues, or potential reinjury.</p>
+<p>I work under advisor Dr. Laura Miller; those recent projects involve work at the Al-Marah Equine Center owned by the University. Our team collects gait analysis data using EquiPro accelerometers during lunging exercise sessions. Seven accelerometer sensors are placed on the horse in key anatomical locations (each leg, head, withers, and sacrum) while the horse is worked on the lunge line at a walk, trot, and canter. The EquiPro system then computes stride-level biomechanical metrics such as diagonal advanced placement, stride duration, and footfall duration.</p>
+<p>By modeling typical movement patterns for three selected horses, I aim to identify exercise sessions that deviate significantly from a horse’s baseline. Such anomalies may reflect behavior irregularities, equipment malfunction, pain, or potential reinjury. These subtle changes in loading or symmetry can also precede visible signs of injury, making anomaly detection a valuable tool for proactive performance monitoring.</p>
+</section>
+<section id="dataset" class="level2">
+<h2 class="anchored" data-anchor-id="dataset">Dataset</h2>
+<p>I analyzed stride-level biomechanical metrics recorded by the EquiPro sessions collected from three horses: Duque (14 sessions), Jackson (6 sessions), and Perseo (5 sessions). Each exercise session is stored as a CSV file containing time-sampled movement variables derived from the accelerometer data. I chose this data set because it is directly relevant to my research group’s goal of developing tools for equine rehabilitation monitoring. Its repeated-session structure also makes it well suited to unsupervised learning approaches.</p>
+<p>See below for an example of EquiPro CSV file structure from one exercise session.</p>
+</section>
+<section id="methods" class="level2">
+<h2 class="anchored" data-anchor-id="methods">Methods</h2>
+<p>For this project, I focused exclusively on trot strides. The trot is a highly symmetric gait which makes deviations easier to detect but more importantly, mixing gaits would introduce variability unrelated to movement abnormalities. For each exercise session, I loaded the corresponding EquiPro CSV file and extracted stride-level biomechanical variables related to timing, symmetry, and limb loading mechanics:</p>
+<p><strong>Stride Metrics</strong><br>
+- <code>stride_duration</code>: time to complete one full stride<br>
+- <code>stride_speed</code>: forward velocity of the horse during each stride cycle<br>
+- <code>stride_length</code>: distance covered by the horse in one stride</p>
+<p><strong>Limb Loading and Timing</strong><br>
+- <code>stance_duration_LF/RF/LH/RH</code>: time each hoof remains in contact with the ground during one stride<br>
+- <code>duty_factor_LF/RF/LH/RH</code>: proportion of the stride spent in ground contact for each limb (stance duration / stride duration)</p>
+<p><strong>Coordination</strong><br>
+- Footfall timing: relevant timing between limbs within the stride<br>
+- <code>dap_L/R</code> (Diagonal Advanced Placement): difference in timing between diagonal limb pairs (LF–RH, RF–LH)</p>
+<p><strong>Trunk Symmetry</strong><br>
+- <code>head_asymmetry</code>: difference in vertical or lateral head movement between left and right loading phases<br>
+- <code>withers_asymmetry</code>: uneven vertical motion of the withers<br>
+- <code>sacrum_asymmetry</code>: uneven vertical motion of pelvis<br>
+- <code>symmetry_indices</code>: composite metrics summarizing torso movement balance across limbs and phases</p>
+<p>To create session-level features, I summarized each variable using mean, standard deviation, interquartile range, and minimum/maximum. These transformations converted raw stride-by-stride data into session-level behaviors. In all, the session-level feature matrix was created and contained 24 total exercise sessions each with 125 engineered biomechanical features.</p>
+<p>I then focused on modeling each horse’s baseline movement patterns. All features were standardized within each horse by first converting them to z-scores in order to remove scale differences. This provided a clear reference point for typical movement behavior: features consistently close to zero after standardization indicated typical behavior, but large positive or negative values indicate potential deviations. These standardized distributions formed the baseline against which the anomaly detection methods will evaluate whether any given session departs significantly from a horse’s typical movement pattern.</p>
+<p>After establishing the baselines for each horse using z-scores, I applied three unsupervised anomaly detection methods to identify sessions that deviate from typical movement. Z-score analysis allowed me to flag sessions where specific features are unusually high or low relative to baseline distribution. K-means clustering identified anomalies based on their distance from cluster centers in the multivariate feature space. Isolation forest gave a measure of how isolated a session was from the rest. Each method identified sessions as anomalous based on its own criteria, allowing comparison of agreement across methods and identification of high-confidence anomalies.</p>
+<p>Generative AI tools (ChatGPT) were used to assist with code development and debugging. All code was reviewed, modified, and validated by the author to ensure correctness and alignment with the project objectives.</p>
+</section>
+<section id="results" class="level2">
+<h2 class="anchored" data-anchor-id="results">Results</h2>
+<p><em>TBD: add results summary, tables/figures, and interpretation here.</em></p>
 
 
 <!-- -->
@@ -4634,7 +4676,56 @@ vertical-align: -.125em;
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="fu">## Abstract</span></span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>Unsupervised learning techniques were used to cluster equine exercise sessions and detect anomalies that could reflect behavioral irregularities, equipment issues, or potential reinjury. Movement-based features derived from processed EquiPro accelerometer data were analyzed, including biomechanical metrics such as diagonal advanced placement, stride duration, and footfall duration. Typical movement patterns for each horse were modeled so that sessions deviating significantly from baseline could be identified. Through this approach, anomalies that may have indicated behavioral changes, equipment malfunction, pain, or reinjury were detected. This project was motivated by the need to identify subtle changes in loading or symmetry during equine rehabilitation, where deviations may precede clinical signs of injury.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></div>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>Unsupervised learning techniques were used to cluster equine exercise sessions and detect anomalies that could reflect behavioral irregularities, equipment issues, or potential reinjury. Movement-based features derived from processed EquiPro accelerometer data were analyzed, including biomechanical metrics such as diagonal advanced placement, stride duration, and footfall duration. Typical movement patterns for each horse were modeled so that sessions deviating significantly from baseline could be identified. Through this approach, anomalies that may have indicated behavioral changes, equipment malfunction, pain, or reinjury were detected. This project was motivated by the need to identify subtle changes in loading or symmetry during equine rehabilitation, where deviations may precede clinical signs of injury.</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="fu">## Introduction</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>My overall goal was to use unsupervised learning techniques to cluster equine exercise sessions and detect anomalies that may reflect behavioral irregularities, equipment issues, or potential reinjury.</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>I work under advisor Dr. Laura Miller; those recent projects involve work at the Al-Marah Equine Center owned by the University. Our team collects gait analysis data using EquiPro accelerometers during lunging exercise sessions. Seven accelerometer sensors are placed on the horse in key anatomical locations (each leg, head, withers, and sacrum) while the horse is worked on the lunge line at a walk, trot, and canter. The EquiPro system then computes stride-level biomechanical metrics such as diagonal advanced placement, stride duration, and footfall duration.</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>By modeling typical movement patterns for three selected horses, I aim to identify exercise sessions that deviate significantly from a horse’s baseline. Such anomalies may reflect behavior irregularities, equipment malfunction, pain, or potential reinjury. These subtle changes in loading or symmetry can also precede visible signs of injury, making anomaly detection a valuable tool for proactive performance monitoring.</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="fu">## Dataset</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>I analyzed stride-level biomechanical metrics recorded by the EquiPro sessions collected from three horses: Duque (14 sessions), Jackson (6 sessions), and Perseo (5 sessions). Each exercise session is stored as a CSV file containing time-sampled movement variables derived from the accelerometer data. I chose this data set because it is directly relevant to my research group’s goal of developing tools for equine rehabilitation monitoring. Its repeated-session structure also makes it well suited to unsupervised learning approaches.</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>See below for an example of EquiPro CSV file structure from one exercise session.</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="fu">## Methods</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>For this project, I focused exclusively on trot strides. The trot is a highly symmetric gait which makes deviations easier to detect but more importantly, mixing gaits would introduce variability unrelated to movement abnormalities. For each exercise session, I loaded the corresponding EquiPro CSV file and extracted stride-level biomechanical variables related to timing, symmetry, and limb loading mechanics:</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>**Stride Metrics**  </span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`stride_duration`</span>: time to complete one full stride  </span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`stride_speed`</span>: forward velocity of the horse during each stride cycle  </span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`stride_length`</span>: distance covered by the horse in one stride  </span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>**Limb Loading and Timing**  </span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`stance_duration_LF/RF/LH/RH`</span>: time each hoof remains in contact with the ground during one stride  </span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`duty_factor_LF/RF/LH/RH`</span>: proportion of the stride spent in ground contact for each limb (stance duration / stride duration)  </span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>**Coordination**  </span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Footfall timing: relevant timing between limbs within the stride  </span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`dap_L/R`</span> (Diagonal Advanced Placement): difference in timing between diagonal limb pairs (LF–RH, RF–LH)  </span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>**Trunk Symmetry**  </span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`head_asymmetry`</span>: difference in vertical or lateral head movement between left and right loading phases  </span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`withers_asymmetry`</span>: uneven vertical motion of the withers  </span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`sacrum_asymmetry`</span>: uneven vertical motion of pelvis  </span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`symmetry_indices`</span>: composite metrics summarizing torso movement balance across limbs and phases  </span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>To create session-level features, I summarized each variable using mean, standard deviation, interquartile range, and minimum/maximum. These transformations converted raw stride-by-stride data into session-level behaviors. In all, the session-level feature matrix was created and contained 24 total exercise sessions each with 125 engineered biomechanical features.</span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>I then focused on modeling each horse’s baseline movement patterns. All features were standardized within each horse by first converting them to z-scores in order to remove scale differences. This provided a clear reference point for typical movement behavior: features consistently close to zero after standardization indicated typical behavior, but large positive or negative values indicate potential deviations. These standardized distributions formed the baseline against which the anomaly detection methods will evaluate whether any given session departs significantly from a horse’s typical movement pattern.</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>After establishing the baselines for each horse using z-scores, I applied three unsupervised anomaly detection methods to identify sessions that deviate from typical movement. Z-score analysis allowed me to flag sessions where specific features are unusually high or low relative to baseline distribution. K-means clustering identified anomalies based on their distance from cluster centers in the multivariate feature space. Isolation forest gave a measure of how isolated a session was from the rest. Each method identified sessions as anomalous based on its own criteria, allowing comparison of agreement across methods and identification of high-confidence anomalies.</span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>Generative AI tools (ChatGPT) were used to assist with code development and debugging. All code was reviewed, modified, and validated by the author to ensure correctness and alignment with the project objectives.</span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a><span class="fu">## Results</span></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>*TBD: add results summary, tables/figures, and interpretation here.*</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

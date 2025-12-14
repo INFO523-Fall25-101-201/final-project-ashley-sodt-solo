@@ -4170,14 +4170,12 @@ var requirejs,require,define;(function(global,setTimeout){var req,s,head,baseEle
 <span id="cb1-42"><a href="#cb1-42"></a>        stats[<span class="ss">f&quot;</span><span class="sc">{</span>col<span class="sc">}</span><span class="ss">_mean&quot;</span>] <span class="op">=</span> s.mean()</span>
 <span id="cb1-43"><a href="#cb1-43"></a>        stats[<span class="ss">f&quot;</span><span class="sc">{</span>col<span class="sc">}</span><span class="ss">_std&quot;</span>] <span class="op">=</span> s.std()</span>
 <span id="cb1-44"><a href="#cb1-44"></a>        stats[<span class="ss">f&quot;</span><span class="sc">{</span>col<span class="sc">}</span><span class="ss">_iqr&quot;</span>] <span class="op">=</span> q3 <span class="op">-</span> q1</span>
-<span id="cb1-45"><a href="#cb1-45"></a>        stats[<span class="ss">f&quot;</span><span class="sc">{</span>col<span class="sc">}</span><span class="ss">_min&quot;</span>] <span class="op">=</span> s.<span class="bu">min</span>()</span>
-<span id="cb1-46"><a href="#cb1-46"></a>        stats[<span class="ss">f&quot;</span><span class="sc">{</span>col<span class="sc">}</span><span class="ss">_max&quot;</span>] <span class="op">=</span> s.<span class="bu">max</span>()</span>
-<span id="cb1-47"><a href="#cb1-47"></a></span>
-<span id="cb1-48"><a href="#cb1-48"></a>    stats[<span class="st">&quot;horse&quot;</span>] <span class="op">=</span> horse</span>
-<span id="cb1-49"><a href="#cb1-49"></a>    stats[<span class="st">&quot;session_id&quot;</span>] <span class="op">=</span> session_id</span>
-<span id="cb1-50"><a href="#cb1-50"></a>    stats[<span class="st">&quot;n_rows&quot;</span>] <span class="op">=</span> <span class="bu">len</span>(df)</span>
-<span id="cb1-51"><a href="#cb1-51"></a></span>
-<span id="cb1-52"><a href="#cb1-52"></a>    <span class="cf">return</span> pd.Series(stats)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-45"><a href="#cb1-45"></a></span>
+<span id="cb1-46"><a href="#cb1-46"></a>    stats[<span class="st">&quot;horse&quot;</span>] <span class="op">=</span> horse</span>
+<span id="cb1-47"><a href="#cb1-47"></a>    stats[<span class="st">&quot;session_id&quot;</span>] <span class="op">=</span> session_id</span>
+<span id="cb1-48"><a href="#cb1-48"></a>    stats[<span class="st">&quot;n_rows&quot;</span>] <span class="op">=</span> <span class="bu">len</span>(df)</span>
+<span id="cb1-49"><a href="#cb1-49"></a></span>
+<span id="cb1-50"><a href="#cb1-50"></a>    <span class="cf">return</span> pd.Series(stats)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="cell-build-feature-matrix" class="cell" data-message="false" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>HORSES <span class="op">=</span> [<span class="st">&quot;Duque&quot;</span>, <span class="st">&quot;Jackson&quot;</span>, <span class="st">&quot;Perseo&quot;</span>]</span>
@@ -4220,21 +4218,21 @@ Perseo: 4 sessions</code></pre>
 <th data-quarto-table-cell-role="th">stride_dur_mean</th>
 <th data-quarto-table-cell-role="th">stride_dur_std</th>
 <th data-quarto-table-cell-role="th">stride_dur_iqr</th>
-<th data-quarto-table-cell-role="th">stride_dur_min</th>
-<th data-quarto-table-cell-role="th">stride_dur_max</th>
 <th data-quarto-table-cell-role="th">duty_factor_mean</th>
 <th data-quarto-table-cell-role="th">duty_factor_std</th>
+<th data-quarto-table-cell-role="th">duty_factor_iqr</th>
+<th data-quarto-table-cell-role="th">duty_factor_LF_mean</th>
 <th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">max_diff_sac_iqr</th>
+<th data-quarto-table-cell-role="th">si_up_sac_mean</th>
+<th data-quarto-table-cell-role="th">si_up_sac_std</th>
+<th data-quarto-table-cell-role="th">si_up_sac_iqr</th>
 <th data-quarto-table-cell-role="th">stride_speed_mean</th>
 <th data-quarto-table-cell-role="th">stride_speed_std</th>
 <th data-quarto-table-cell-role="th">stride_speed_iqr</th>
-<th data-quarto-table-cell-role="th">stride_speed_min</th>
-<th data-quarto-table-cell-role="th">stride_speed_max</th>
 <th data-quarto-table-cell-role="th">stride_length_mean</th>
 <th data-quarto-table-cell-role="th">stride_length_std</th>
 <th data-quarto-table-cell-role="th">stride_length_iqr</th>
-<th data-quarto-table-cell-role="th">stride_length_min</th>
-<th data-quarto-table-cell-role="th">stride_length_max</th>
 </tr>
 </thead>
 <tbody>
@@ -4246,15 +4244,15 @@ Perseo: 4 sessions</code></pre>
 <td>0.776724</td>
 <td>0.023376</td>
 <td>0.031200</td>
-<td>0.7269</td>
-<td>0.8419</td>
 <td>49.375284</td>
 <td>1.883090</td>
+<td>2.44580</td>
+<td>53.208504</td>
 <td>...</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
+<td>9.18050</td>
+<td>0.156634</td>
+<td>0.125986</td>
+<td>0.146125</td>
 <td>NaN</td>
 <td>NaN</td>
 <td>NaN</td>
@@ -4270,15 +4268,15 @@ Perseo: 4 sessions</code></pre>
 <td>0.791573</td>
 <td>0.028649</td>
 <td>0.040925</td>
-<td>0.7225</td>
-<td>0.8437</td>
 <td>50.354495</td>
 <td>2.172643</td>
+<td>3.17055</td>
+<td>53.207060</td>
 <td>...</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
+<td>8.47970</td>
+<td>0.143724</td>
+<td>0.132073</td>
+<td>0.168550</td>
 <td>NaN</td>
 <td>NaN</td>
 <td>NaN</td>
@@ -4294,15 +4292,15 @@ Perseo: 4 sessions</code></pre>
 <td>0.747877</td>
 <td>0.042264</td>
 <td>0.058700</td>
-<td>0.5925</td>
-<td>0.8231</td>
 <td>48.954408</td>
 <td>2.418511</td>
+<td>3.55290</td>
+<td>50.561436</td>
 <td>...</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
+<td>10.24770</td>
+<td>0.053839</td>
+<td>0.149157</td>
+<td>0.211200</td>
 <td>NaN</td>
 <td>NaN</td>
 <td>NaN</td>
@@ -4318,21 +4316,21 @@ Perseo: 4 sessions</code></pre>
 <td>0.774708</td>
 <td>0.041307</td>
 <td>0.053400</td>
-<td>0.6431</td>
-<td>0.8762</td>
 <td>47.045350</td>
 <td>1.916539</td>
+<td>2.40870</td>
+<td>48.901162</td>
 <td>...</td>
+<td>13.11660</td>
+<td>0.105180</td>
+<td>0.166408</td>
+<td>0.230800</td>
 <td>1.971923</td>
 <td>0.969625</td>
 <td>0.78</td>
-<td>0.42</td>
-<td>2.92</td>
 <td>1.4951</td>
 <td>0.734864</td>
 <td>0.6378</td>
-<td>0.3119</td>
-<td>2.263</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">4</th>
@@ -4342,15 +4340,15 @@ Perseo: 4 sessions</code></pre>
 <td>0.756634</td>
 <td>0.036294</td>
 <td>0.043750</td>
-<td>0.5763</td>
-<td>0.8300</td>
 <td>47.272270</td>
 <td>1.399110</td>
+<td>1.70520</td>
+<td>50.791134</td>
 <td>...</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
+<td>10.12455</td>
+<td>0.047288</td>
+<td>0.167338</td>
+<td>0.189200</td>
 <td>NaN</td>
 <td>NaN</td>
 <td>NaN</td>
@@ -4361,7 +4359,7 @@ Perseo: 4 sessions</code></pre>
 </tbody>
 </table>
 
-<p>5 rows × 128 columns</p>
+<p>5 rows × 78 columns</p>
 </div>
 </div>
 </div>
@@ -4906,52 +4904,50 @@ Perseo: 4 sessions</code></pre>
 <span id="cb6-62"><a href="#cb6-62"></a>        stats[<span class="ss">f&quot;</span><span class="sc">{</span>col<span class="sc">}</span><span class="ss">_mean&quot;</span>] <span class="op">=</span> s.mean()</span>
 <span id="cb6-63"><a href="#cb6-63"></a>        stats[<span class="ss">f&quot;</span><span class="sc">{</span>col<span class="sc">}</span><span class="ss">_std&quot;</span>] <span class="op">=</span> s.std()</span>
 <span id="cb6-64"><a href="#cb6-64"></a>        stats[<span class="ss">f&quot;</span><span class="sc">{</span>col<span class="sc">}</span><span class="ss">_iqr&quot;</span>] <span class="op">=</span> q3 <span class="op">-</span> q1</span>
-<span id="cb6-65"><a href="#cb6-65"></a>        stats[<span class="ss">f&quot;</span><span class="sc">{</span>col<span class="sc">}</span><span class="ss">_min&quot;</span>] <span class="op">=</span> s.<span class="bu">min</span>()</span>
-<span id="cb6-66"><a href="#cb6-66"></a>        stats[<span class="ss">f&quot;</span><span class="sc">{</span>col<span class="sc">}</span><span class="ss">_max&quot;</span>] <span class="op">=</span> s.<span class="bu">max</span>()</span>
-<span id="cb6-67"><a href="#cb6-67"></a></span>
-<span id="cb6-68"><a href="#cb6-68"></a>    stats[<span class="st">&quot;horse&quot;</span>] <span class="op">=</span> horse</span>
-<span id="cb6-69"><a href="#cb6-69"></a>    stats[<span class="st">&quot;session_id&quot;</span>] <span class="op">=</span> session_id</span>
-<span id="cb6-70"><a href="#cb6-70"></a>    stats[<span class="st">&quot;n_rows&quot;</span>] <span class="op">=</span> <span class="bu">len</span>(df)</span>
-<span id="cb6-71"><a href="#cb6-71"></a></span>
-<span id="cb6-72"><a href="#cb6-72"></a>    <span class="cf">return</span> pd.Series(stats)</span>
-<span id="cb6-73"><a href="#cb6-73"></a><span class="in">```</span></span>
-<span id="cb6-74"><a href="#cb6-74"></a></span>
-<span id="cb6-77"><a href="#cb6-77"></a><span class="in">```{python}</span></span>
-<span id="cb6-78"><a href="#cb6-78"></a><span class="co">#| label: build-feature-matrix</span></span>
-<span id="cb6-79"><a href="#cb6-79"></a><span class="co">#| message: false</span></span>
-<span id="cb6-80"><a href="#cb6-80"></a></span>
-<span id="cb6-81"><a href="#cb6-81"></a>HORSES <span class="op">=</span> [<span class="st">&quot;Duque&quot;</span>, <span class="st">&quot;Jackson&quot;</span>, <span class="st">&quot;Perseo&quot;</span>]</span>
-<span id="cb6-82"><a href="#cb6-82"></a>HORSES_DIR <span class="op">=</span> Path(<span class="st">&quot;..&quot;</span>) <span class="op">/</span> <span class="st">&quot;Horses&quot;</span></span>
+<span id="cb6-65"><a href="#cb6-65"></a></span>
+<span id="cb6-66"><a href="#cb6-66"></a>    stats[<span class="st">&quot;horse&quot;</span>] <span class="op">=</span> horse</span>
+<span id="cb6-67"><a href="#cb6-67"></a>    stats[<span class="st">&quot;session_id&quot;</span>] <span class="op">=</span> session_id</span>
+<span id="cb6-68"><a href="#cb6-68"></a>    stats[<span class="st">&quot;n_rows&quot;</span>] <span class="op">=</span> <span class="bu">len</span>(df)</span>
+<span id="cb6-69"><a href="#cb6-69"></a></span>
+<span id="cb6-70"><a href="#cb6-70"></a>    <span class="cf">return</span> pd.Series(stats)</span>
+<span id="cb6-71"><a href="#cb6-71"></a><span class="in">```</span></span>
+<span id="cb6-72"><a href="#cb6-72"></a></span>
+<span id="cb6-75"><a href="#cb6-75"></a><span class="in">```{python}</span></span>
+<span id="cb6-76"><a href="#cb6-76"></a><span class="co">#| label: build-feature-matrix</span></span>
+<span id="cb6-77"><a href="#cb6-77"></a><span class="co">#| message: false</span></span>
+<span id="cb6-78"><a href="#cb6-78"></a></span>
+<span id="cb6-79"><a href="#cb6-79"></a>HORSES <span class="op">=</span> [<span class="st">&quot;Duque&quot;</span>, <span class="st">&quot;Jackson&quot;</span>, <span class="st">&quot;Perseo&quot;</span>]</span>
+<span id="cb6-80"><a href="#cb6-80"></a>HORSES_DIR <span class="op">=</span> Path(<span class="st">&quot;..&quot;</span>) <span class="op">/</span> <span class="st">&quot;Horses&quot;</span></span>
+<span id="cb6-81"><a href="#cb6-81"></a></span>
+<span id="cb6-82"><a href="#cb6-82"></a>rows <span class="op">=</span> []</span>
 <span id="cb6-83"><a href="#cb6-83"></a></span>
-<span id="cb6-84"><a href="#cb6-84"></a>rows <span class="op">=</span> []</span>
-<span id="cb6-85"><a href="#cb6-85"></a></span>
-<span id="cb6-86"><a href="#cb6-86"></a><span class="cf">for</span> horse <span class="kw">in</span> HORSES:</span>
-<span id="cb6-87"><a href="#cb6-87"></a>    horse_dir <span class="op">=</span> HORSES_DIR <span class="op">/</span> horse</span>
-<span id="cb6-88"><a href="#cb6-88"></a>    csv_files <span class="op">=</span> <span class="bu">sorted</span>(horse_dir.glob(<span class="st">&quot;*-results.csv&quot;</span>))</span>
-<span id="cb6-89"><a href="#cb6-89"></a>    <span class="bu">print</span>(<span class="ss">f&quot;</span><span class="sc">{</span>horse<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span><span class="bu">len</span>(csv_files)<span class="sc">}</span><span class="ss"> sessions&quot;</span>)</span>
-<span id="cb6-90"><a href="#cb6-90"></a></span>
-<span id="cb6-91"><a href="#cb6-91"></a>    <span class="cf">for</span> csv_path <span class="kw">in</span> csv_files:</span>
-<span id="cb6-92"><a href="#cb6-92"></a>        row <span class="op">=</span> summarize_session(csv_path, horse)</span>
-<span id="cb6-93"><a href="#cb6-93"></a>        rows.append(row)</span>
+<span id="cb6-84"><a href="#cb6-84"></a><span class="cf">for</span> horse <span class="kw">in</span> HORSES:</span>
+<span id="cb6-85"><a href="#cb6-85"></a>    horse_dir <span class="op">=</span> HORSES_DIR <span class="op">/</span> horse</span>
+<span id="cb6-86"><a href="#cb6-86"></a>    csv_files <span class="op">=</span> <span class="bu">sorted</span>(horse_dir.glob(<span class="st">&quot;*-results.csv&quot;</span>))</span>
+<span id="cb6-87"><a href="#cb6-87"></a>    <span class="bu">print</span>(<span class="ss">f&quot;</span><span class="sc">{</span>horse<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span><span class="bu">len</span>(csv_files)<span class="sc">}</span><span class="ss"> sessions&quot;</span>)</span>
+<span id="cb6-88"><a href="#cb6-88"></a></span>
+<span id="cb6-89"><a href="#cb6-89"></a>    <span class="cf">for</span> csv_path <span class="kw">in</span> csv_files:</span>
+<span id="cb6-90"><a href="#cb6-90"></a>        row <span class="op">=</span> summarize_session(csv_path, horse)</span>
+<span id="cb6-91"><a href="#cb6-91"></a>        rows.append(row)</span>
+<span id="cb6-92"><a href="#cb6-92"></a></span>
+<span id="cb6-93"><a href="#cb6-93"></a>session_features <span class="op">=</span> pd.DataFrame(rows)</span>
 <span id="cb6-94"><a href="#cb6-94"></a></span>
-<span id="cb6-95"><a href="#cb6-95"></a>session_features <span class="op">=</span> pd.DataFrame(rows)</span>
-<span id="cb6-96"><a href="#cb6-96"></a></span>
-<span id="cb6-97"><a href="#cb6-97"></a>meta_cols <span class="op">=</span> [<span class="st">&quot;horse&quot;</span>,<span class="st">&quot;session_id&quot;</span>,<span class="st">&quot;n_rows&quot;</span>]</span>
-<span id="cb6-98"><a href="#cb6-98"></a>other_cols <span class="op">=</span> [c <span class="cf">for</span> c <span class="kw">in</span> session_features.columns <span class="cf">if</span> c <span class="kw">not</span> <span class="kw">in</span> meta_cols]</span>
-<span id="cb6-99"><a href="#cb6-99"></a>session_features <span class="op">=</span> session_features[meta_cols <span class="op">+</span> other_cols]</span>
-<span id="cb6-100"><a href="#cb6-100"></a></span>
-<span id="cb6-101"><a href="#cb6-101"></a>session_features.head()</span>
-<span id="cb6-102"><a href="#cb6-102"></a><span class="in">```</span></span>
-<span id="cb6-103"><a href="#cb6-103"></a></span>
-<span id="cb6-106"><a href="#cb6-106"></a><span class="in">```{python}</span></span>
-<span id="cb6-107"><a href="#cb6-107"></a><span class="co">#| label: save</span></span>
-<span id="cb6-108"><a href="#cb6-108"></a><span class="co">#| message: false</span></span>
-<span id="cb6-109"><a href="#cb6-109"></a></span>
-<span id="cb6-110"><a href="#cb6-110"></a>out <span class="op">=</span> Path(<span class="st">&quot;data&quot;</span>) <span class="op">/</span> <span class="st">&quot;session_features_trot.csv&quot;</span></span>
-<span id="cb6-111"><a href="#cb6-111"></a>out.parent.mkdir(exist_ok<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb6-112"><a href="#cb6-112"></a>session_features.to_csv(out, index<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb6-113"><a href="#cb6-113"></a><span class="bu">print</span>(<span class="ss">f&quot;Saved: </span><span class="sc">{</span>out<span class="sc">}</span><span class="ss">&quot;</span>)</span>
-<span id="cb6-114"><a href="#cb6-114"></a><span class="in">```</span></span>
+<span id="cb6-95"><a href="#cb6-95"></a>meta_cols <span class="op">=</span> [<span class="st">&quot;horse&quot;</span>,<span class="st">&quot;session_id&quot;</span>,<span class="st">&quot;n_rows&quot;</span>]</span>
+<span id="cb6-96"><a href="#cb6-96"></a>other_cols <span class="op">=</span> [c <span class="cf">for</span> c <span class="kw">in</span> session_features.columns <span class="cf">if</span> c <span class="kw">not</span> <span class="kw">in</span> meta_cols]</span>
+<span id="cb6-97"><a href="#cb6-97"></a>session_features <span class="op">=</span> session_features[meta_cols <span class="op">+</span> other_cols]</span>
+<span id="cb6-98"><a href="#cb6-98"></a></span>
+<span id="cb6-99"><a href="#cb6-99"></a>session_features.head()</span>
+<span id="cb6-100"><a href="#cb6-100"></a><span class="in">```</span></span>
+<span id="cb6-101"><a href="#cb6-101"></a></span>
+<span id="cb6-104"><a href="#cb6-104"></a><span class="in">```{python}</span></span>
+<span id="cb6-105"><a href="#cb6-105"></a><span class="co">#| label: save</span></span>
+<span id="cb6-106"><a href="#cb6-106"></a><span class="co">#| message: false</span></span>
+<span id="cb6-107"><a href="#cb6-107"></a></span>
+<span id="cb6-108"><a href="#cb6-108"></a>out <span class="op">=</span> Path(<span class="st">&quot;data&quot;</span>) <span class="op">/</span> <span class="st">&quot;session_features_trot.csv&quot;</span></span>
+<span id="cb6-109"><a href="#cb6-109"></a>out.parent.mkdir(exist_ok<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb6-110"><a href="#cb6-110"></a>session_features.to_csv(out, index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb6-111"><a href="#cb6-111"></a><span class="bu">print</span>(<span class="ss">f&quot;Saved: </span><span class="sc">{</span>out<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb6-112"><a href="#cb6-112"></a><span class="in">```</span></span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

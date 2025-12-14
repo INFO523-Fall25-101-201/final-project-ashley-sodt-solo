@@ -329,7 +329,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#section-14" id="toc-section-14" class="nav-link" data-scroll-target="#section-14">—————————————–</a></li>
   <li><a href="#add-datetime-columns-and-sort" id="toc-add-datetime-columns-and-sort" class="nav-link" data-scroll-target="#add-datetime-columns-and-sort">7.1 Add datetime columns and sort</a></li>
   <li><a href="#sort-once-by-date-so-plots-are-in-chronological-order" id="toc-sort-once-by-date-so-plots-are-in-chronological-order" class="nav-link" data-scroll-target="#sort-once-by-date-so-plots-are-in-chronological-order">Sort once by date so plots are in chronological order</a></li>
-  <li><a href="#plot-1-max-z-score-vs.-session-across-horses" id="toc-plot-1-max-z-score-vs.-session-across-horses" class="nav-link" data-scroll-target="#plot-1-max-z-score-vs.-session-across-horses">7.2 Plot 1: max |z|-score vs.&nbsp;session across horses</a></li>
+  <li><a href="#plot-1-max-z-score-vs.-session-across-horses-stars-for-2-methods" id="toc-plot-1-max-z-score-vs.-session-across-horses-stars-for-2-methods" class="nav-link" data-scroll-target="#plot-1-max-z-score-vs.-session-across-horses-stars-for-2-methods">7.2 Plot 1: max |z|-score vs.&nbsp;session across horses (stars for ≥2 methods)</a></li>
   <li><a href="#plot-2-mean-z-score-vs.-session-across-horses" id="toc-plot-2-mean-z-score-vs.-session-across-horses" class="nav-link" data-scroll-target="#plot-2-mean-z-score-vs.-session-across-horses">7.3 Plot 2: mean |z|-score vs.&nbsp;session across horses</a></li>
   <li><a href="#plot-3-number-of-methods-that-flag-each-session" id="toc-plot-3-number-of-methods-that-flag-each-session" class="nav-link" data-scroll-target="#plot-3-number-of-methods-that-flag-each-session">7.4 Plot 3: number of methods that flag each session</a></li>
   <li><a href="#plot-4-method-agreement-heatmap" id="toc-plot-4-method-agreement-heatmap" class="nav-link" data-scroll-target="#plot-4-method-agreement-heatmap">7.5 Plot 4: Method agreement heatmap</a></li>
@@ -633,10 +633,35 @@ z_spaces[horse] = X_z</code></pre>
 <h1>Sort once by date so plots are in chronological order</h1>
 <p>anomaly_summary = anomaly_summary.sort_values(“session_dt”)</p>
 </section>
-<section id="plot-1-max-z-score-vs.-session-across-horses" class="level1">
-<h1>7.2 Plot 1: max |z|-score vs.&nbsp;session across horses</h1>
-<p>plt.figure() for horse, df_h in anomaly_summary.groupby(“horse”): plt.scatter(df_h[“session_dt”], df_h[“z_max_abs”], label=horse)</p>
-<p>plt.xticks(rotation=90) plt.ylabel(“max |z-score| across features”) plt.xlabel(“session date”) plt.title(“Session-level deviation from baseline (max |z|)”) plt.legend() plt.tight_layout() plt.savefig(“fig_max_zscore.png”, dpi=300, bbox_inches=“tight”)</p>
+<section id="plot-1-max-z-score-vs.-session-across-horses-stars-for-2-methods" class="level1">
+<h1>7.2 Plot 1: max |z|-score vs.&nbsp;session across horses (stars for ≥2 methods)</h1>
+<p>horse_order = [“Duque”, “Jackson”, “Perseo”] # optional, keeps legend consistent horse_colors = { “Duque”: “tab:blue”, “Jackson”: “tab:orange”, “Perseo”: “tab:green”, }</p>
+<p>plt.figure()</p>
+<p>for horse in horse_order: df_h = anomaly_summary[anomaly_summary[“horse”] == horse]</p>
+<pre><code># Base points (all sessions)
+plt.scatter(
+    df_h["session_dt"],
+    df_h["z_max_abs"],
+    label=horse,
+    color=horse_colors[horse],
+    marker="o",
+    alpha=0.85
+)
+
+# High-confidence overlay (same color, star marker)
+df_hi = df_h[df_h["n_methods_flagged"] &gt;= 2]
+if not df_hi.empty:
+    plt.scatter(
+        df_hi["session_dt"],
+        df_hi["z_max_abs"],
+        color=horse_colors[horse],
+        marker="*",
+        s=200,
+        edgecolors="black",
+        linewidths=0.8,
+        alpha=1.0
+    )</code></pre>
+<p>plt.xticks(rotation=90) plt.ylabel(“max |z-score| across features”) plt.xlabel(“session date”) plt.title(“Session-level deviation from baseline (max |z|)= flagged by ≥2 methods”) plt.legend() plt.tight_layout() plt.savefig(“fig_max_zscore.png”, dpi=300, bbox_inches=“tight”)</p>
 </section>
 <section id="plot-2-mean-z-score-vs.-session-across-horses" class="level1">
 <h1>7.3 Plot 2: mean |z|-score vs.&nbsp;session across horses</h1>

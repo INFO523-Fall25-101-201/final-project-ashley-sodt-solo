@@ -60,8 +60,6 @@ def summarize_session(csv_path: Path, horse: str) -> pd.Series:
         stats[f"{col}_mean"] = s.mean()
         stats[f"{col}_std"] = s.std()
         stats[f"{col}_iqr"] = q3 - q1
-        stats[f"{col}_min"] = s.min()
-        stats[f"{col}_max"] = s.max()
 
     stats["horse"] = horse
     stats["session_id"] = session_id

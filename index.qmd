@@ -23,3 +23,52 @@ jupyter: python3
 ## Abstract
 
 Unsupervised learning techniques were used to cluster equine exercise sessions and detect anomalies that could reflect behavioral irregularities, equipment issues, or potential reinjury. Movement-based features derived from processed EquiPro accelerometer data were analyzed, including biomechanical metrics such as diagonal advanced placement, stride duration, and footfall duration. Typical movement patterns for each horse were modeled so that sessions deviating significantly from baseline could be identified. Through this approach, anomalies that may have indicated behavioral changes, equipment malfunction, pain, or reinjury were detected. This project was motivated by the need to identify subtle changes in loading or symmetry during equine rehabilitation, where deviations may precede clinical signs of injury.
+
+## Introduction
+
+My overall goal was to use unsupervised learning techniques to cluster equine exercise sessions and detect anomalies that may reflect behavioral irregularities, equipment issues, or potential reinjury.
+
+I work under advisor Dr. Laura Miller; those recent projects involve work at the Al-Marah Equine Center owned by the University. Our team collects gait analysis data using EquiPro accelerometers during lunging exercise sessions. Seven accelerometer sensors are placed on the horse in key anatomical locations (each leg, head, withers, and sacrum) while the horse is worked on the lunge line at a walk, trot, and canter. The EquiPro system then computes stride-level biomechanical metrics such as diagonal advanced placement, stride duration, and footfall duration.
+
+By modeling typical movement patterns for three selected horses, I aim to identify exercise sessions that deviate significantly from a horse’s baseline. Such anomalies may reflect behavior irregularities, equipment malfunction, pain, or potential reinjury. These subtle changes in loading or symmetry can also precede visible signs of injury, making anomaly detection a valuable tool for proactive performance monitoring.
+
+## Dataset
+
+I analyzed stride-level biomechanical metrics recorded by the EquiPro sessions collected from three horses: Duque (14 sessions), Jackson (6 sessions), and Perseo (5 sessions). Each exercise session is stored as a CSV file containing time-sampled movement variables derived from the accelerometer data. I chose this data set because it is directly relevant to my research group’s goal of developing tools for equine rehabilitation monitoring. Its repeated-session structure also makes it well suited to unsupervised learning approaches.
+
+See below for an example of EquiPro CSV file structure from one exercise session.
+
+## Methods
+
+For this project, I focused exclusively on trot strides. The trot is a highly symmetric gait which makes deviations easier to detect but more importantly, mixing gaits would introduce variability unrelated to movement abnormalities. For each exercise session, I loaded the corresponding EquiPro CSV file and extracted stride-level biomechanical variables related to timing, symmetry, and limb loading mechanics:
+
+**Stride Metrics**  
+- `stride_duration`: time to complete one full stride  
+- `stride_speed`: forward velocity of the horse during each stride cycle  
+- `stride_length`: distance covered by the horse in one stride  
+
+**Limb Loading and Timing**  
+- `stance_duration_LF/RF/LH/RH`: time each hoof remains in contact with the ground during one stride  
+- `duty_factor_LF/RF/LH/RH`: proportion of the stride spent in ground contact for each limb (stance duration / stride duration)  
+
+**Coordination**  
+- Footfall timing: relevant timing between limbs within the stride  
+- `dap_L/R` (Diagonal Advanced Placement): difference in timing between diagonal limb pairs (LF–RH, RF–LH)  
+
+**Trunk Symmetry**  
+- `head_asymmetry`: difference in vertical or lateral head movement between left and right loading phases  
+- `withers_asymmetry`: uneven vertical motion of the withers  
+- `sacrum_asymmetry`: uneven vertical motion of pelvis  
+- `symmetry_indices`: composite metrics summarizing torso movement balance across limbs and phases  
+
+To create session-level features, I summarized each variable using mean, standard deviation, interquartile range, and minimum/maximum. These transformations converted raw stride-by-stride data into session-level behaviors. In all, the session-level feature matrix was created and contained 24 total exercise sessions each with 125 engineered biomechanical features.
+
+I then focused on modeling each horse’s baseline movement patterns. All features were standardized within each horse by first converting them to z-scores in order to remove scale differences. This provided a clear reference point for typical movement behavior: features consistently close to zero after standardization indicated typical behavior, but large positive or negative values indicate potential deviations. These standardized distributions formed the baseline against which the anomaly detection methods will evaluate whether any given session departs significantly from a horse’s typical movement pattern.
+
+After establishing the baselines for each horse using z-scores, I applied three unsupervised anomaly detection methods to identify sessions that deviate from typical movement. Z-score analysis allowed me to flag sessions where specific features are unusually high or low relative to baseline distribution. K-means clustering identified anomalies based on their distance from cluster centers in the multivariate feature space. Isolation forest gave a measure of how isolated a session was from the rest. Each method identified sessions as anomalous based on its own criteria, allowing comparison of agreement across methods and identification of high-confidence anomalies.
+
+Generative AI tools (ChatGPT) were used to assist with code development and debugging. All code was reviewed, modified, and validated by the author to ensure correctness and alignment with the project objectives.
+
+## Results
+
+*TBD: add results summary, tables/figures, and interpretation here.*

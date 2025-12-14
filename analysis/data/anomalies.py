@@ -292,15 +292,47 @@ anomaly_summary["session_label"] = anomaly_summary["session_dt"].dt.strftime("%m
 # Sort once by date so plots are in chronological order
 anomaly_summary = anomaly_summary.sort_values("session_dt")
 
-# 7.2 Plot 1: max |z|-score vs. session across horses
+# 7.2 Plot 1: max |z|-score vs. session across horses (stars for ≥2 methods)
+horse_order = ["Duque", "Jackson", "Perseo"]  # optional, keeps legend consistent
+horse_colors = {
+    "Duque": "tab:blue",
+    "Jackson": "tab:orange",
+    "Perseo": "tab:green",
+}
+
 plt.figure()
-for horse, df_h in anomaly_summary.groupby("horse"):
-    plt.scatter(df_h["session_dt"], df_h["z_max_abs"], label=horse)
+
+for horse in horse_order:
+    df_h = anomaly_summary[anomaly_summary["horse"] == horse]
+
+    # Base points (all sessions)
+    plt.scatter(
+        df_h["session_dt"],
+        df_h["z_max_abs"],
+        label=horse,
+        color=horse_colors[horse],
+        marker="o",
+        alpha=0.85
+    )
+
+    # High-confidence overlay (same color, star marker)
+    df_hi = df_h[df_h["n_methods_flagged"] >= 2]
+    if not df_hi.empty:
+        plt.scatter(
+            df_hi["session_dt"],
+            df_hi["z_max_abs"],
+            color=horse_colors[horse],
+            marker="*",
+            s=200,
+            edgecolors="black",
+            linewidths=0.8,
+            alpha=1.0
+        )
 
 plt.xticks(rotation=90)
 plt.ylabel("max |z-score| across features")
 plt.xlabel("session date")
-plt.title("Session-level deviation from baseline (max |z|)")
+plt.title("Session-level deviation from baseline (max |z|)\n* = flagged by ≥2 methods")
 plt.legend()
 plt.tight_layout()
 plt.savefig("fig_max_zscore.png", dpi=300, bbox_inches="tight")
