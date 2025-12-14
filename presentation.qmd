@@ -62,7 +62,7 @@ penguins = sns.load_dataset('penguins').dropna()
 
 ## Dataset
 
-* Each session exported as CSV containing stride-level movemement variables.
+* Each session exported as CSV containing stride-level movement variables.
   + Duque (14 sessions)
   + Jackson (6 sessions)
   + Perseo (5 sessions)
