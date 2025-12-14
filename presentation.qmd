@@ -166,13 +166,13 @@ Sessions flagged by multiple methods are more likely to reflect real gait irregu
 
 Sessions flagged by ≥2 methods (strongest evidence of abnormal movement):
 
-| Horse   | Session ID       | Methods Flagged |
-|--------|------------------|:---------------:|
-| Duque   | 20250308T111144 | **3** |
-| Duque   | 20250309T134916 | **2** |
-| Duque   | 20240626T082743 | **2** |
-| Jackson | 20241130T114129 | **2** |
-| Jackson | 20250725T084940 | **2** |
+| Horse   | Session Date | Methods Flagged |
+| :-------: | :------------: | :-------------: |
+| Duque   | 03/08/25     |      **3**      |
+| Duque   | 03/09/25     |      **2**      |
+| Duque   | 06/26/24     |      **2**      |
+| Jackson | 11/30/24     |      **2**      |
+| Jackson | 07/25/25     |      **2**      |
 
 These sessions consistently deviate from each horse’s typical movement pattern.
 
@@ -192,10 +192,6 @@ These sessions consistently deviate from each horse’s typical movement pattern
 
 </div>
 
-<div align="center">
-![Which methods agree when flagging anomalies?](analysis/data/fig_method_heatmap.png){width="50%"}
-</div>
-
 ## Feature Drivers of High-Confidence Anomalies {.smaller}
 
 <div align="center">
@@ -207,19 +203,23 @@ These sessions consistently deviate from each horse’s typical movement pattern
 
 ## Interpreting Anomaly Drivers {.smaller}
 
-Example: Duque 08/04/25
+Example: Duque 06/26/24
 
 **Top contributing features**
 
-- ↑ Right Hind stance duration (stance_dur_RH_max)
+- ↑ Right Hind duty factor and stance duration (duty_factor_RH_mean / stance_dur_RH_mean)
 
-- ↑ Diagonal timing variability (DAP metrics: dap_L_perc_iqr, dap_R_sec_max)
+- ↑ Diagonal timing variability (DAP metrics: dap_L_, dap_R_)
+
+- ↑ Trunk and limb asymmetry measures
 
 **What this suggests**
 
-- Right hind is staying on the ground longer → compensation
+- Right hind is remaining on the ground longer than typical → load compensation
 
-- Increased timing variability → reduced trot symmetry & coordination
+- Altered diagonal pairing between limbs → disrupted trot coordination
+
+- Redistribution of load toward the hind limb, potentially preceding visible gait abnormalities
 
 ## Limitations 
 
