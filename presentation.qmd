@@ -91,17 +91,17 @@ df_duque.head()
 
 We summarize 25 stride-level variables into session-level features.
 
-| Group                     | Biomechanical Variables                                    | Count |
-|-------------------------:|:------------------------------------------------------|------:|
-| **Stride Metrics**        | stride duration, speed, length                        | 3     |
-| **Limb Loading / Timing** | duty factor (LF/RF/LH/RH), stance durations           | 12    |
-| **Coordination**          | diagonal advanced placement (left / right)            | 4     |
-| **Trunk Symmetry**        | head / withers / sacrum asymmetry + symmetry indices  | 6     |
-| **Total**                 | —                                                     | **25** |
+| Group                     | Biomechanical Variables                                                                 | Count |
+|-------------------------:|:------------------------------------------------------------------------------------------|------:|
+| **Stride Metrics**        | stride duration, stride speed, stride length                                               | 3     |
+| **Limb Loading / Timing** | duty factor (overall, LF, RF, LH, RH); stance duration (LF, RF, LH, RH)                    | 9     |
+| **Coordination**          | diagonal advanced placement (left/right × seconds/percent)                                | 4     |
+| **Trunk Symmetry**        | head, withers, sacrum asymmetry (min/max) + symmetry index (SI)                            | 9     |
+| **Total**                 | —                                                                                        | **25** |
 
-→ Each variable is summarized per session using: **mean, standard deviation, and interquartile range (IQR)**
+- Each variable is summarized per session using: mean, standard deviation, and interquartile range (IQR)
 
-→ Producing **75 engineered features per session**
+- Producing 75 engineered features per session
 
 
 ## Session-Level Feature Matrix {.smaller}
@@ -215,17 +215,16 @@ Example: Duque 06/26/24
 
 **What this suggests**
 
-- Right hind is remaining on the ground longer than typical → load compensation
+- Prolonged loading of right hind limb: potential compensatory behavior
 
-- Altered diagonal pairing between limbs → disrupted trot coordination
+- Changes in diagonaal timing: potential altered coordination during trot
 
-- Redistribution of load toward the hind limb, potentially preceding visible gait abnormalities
+- Redistribution of load toward hind limb could indicate subtle gait adaptation prior to visible abnormalities.
 
 ## Limitations 
 
 - Small number of sessions per horse (5-14 sessions)
 - External factors (environment, rider, equipment)
-- No labeled injury or clinical ground truth
 - Assumes stable baseline gait over time
 
 
@@ -236,13 +235,11 @@ Example: Duque 06/26/24
 - Only a small subset shows strong evidence of abnormality
   - High-confidence anomalies (flagged by ≥ 2 methods)
 
-- Deviations were driven primarily by
-  - stride timing
-  - limb loading
-  - symmetry features
+- For high-confidence anomalies, feature-level z-scores highlight which variables most contributed
+  - Enables interpretation of gait changes underlying each flagged session
 
-<div style="margin-top:10px; font-size:0.9em;">
-**Interpretation:**  
-Automated anomaly detection can reveal subtle, horse-specific gait changes that
-may indicate early movement irregularities or reinjury risk.
+<div style="margin-top:10px; font-size:1.0em;">
+**Takeaway:**  
+Anomaly detection can reveal subtle, horse-specific gait changes that
+may indicate early movement irregularities or reinjury risk before abnormalities are apparent through visual observation.
 </div>
