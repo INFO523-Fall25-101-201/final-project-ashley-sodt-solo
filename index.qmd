@@ -5,9 +5,7 @@ author:
   - name: "Ashley Sodt"
     affiliations:
       - name: "Applied Math PhD Student, University of Arizona"
-description: "Unsupervised learning techniques were used to cluster equine exercise sessions and detect anomalies that may reflect behavioral irregularities, equipment issues, or potential reinjury.
-
-"
+description: "Unsupervised learning techniques were used to detect equine exercise sessions exhibiting gait abnormalities, providing an objective means of identifying subtle movement changes that may be missed by visual evaluation."
 format:
    html:
     code-tools: true
@@ -22,15 +20,13 @@ jupyter: python3
 
 ## Abstract
 
-Unsupervised learning techniques were used to cluster equine exercise sessions and detect anomalies that could reflect behavioral irregularities, equipment issues, or potential reinjury. Movement-based features derived from processed EquiPro accelerometer data were analyzed, including biomechanical metrics such as diagonal advanced placement, stride duration, and footfall duration. Typical movement patterns for each horse were modeled so that sessions deviating significantly from baseline could be identified. Through this approach, anomalies that may have indicated behavioral changes, equipment malfunction, pain, or reinjury were detected. This project was motivated by the need to identify subtle changes in loading or symmetry during equine rehabilitation, where deviations may precede clinical signs of injury.
+Unsupervised learning techniques were used to detect equine exercise sessions exhibiting gait abnormalities, providing an objective means of identifying subtle movement changes that may be missed by visual evaluation. Movement-based features derived from processed EquiPro accelerometer data were analyzed, including biomechanical metrics such as diagonal advanced placement, stride duration, and footfall duration. Typical movement patterns for each horse were modeled so that sessions deviating significantly from baseline could be identified. Through this approach, anomalies that may indicate injury risk, reinjury susceptibility, or underlying pain or discomfort were detected. This project was motivated by the need for an objective approach to detect subtle gait changes beyond what visual observation can capture.
 
 ## Introduction
 
-My overall goal was to use unsupervised learning techniques to cluster equine exercise sessions and detect anomalies that may reflect behavioral irregularities, equipment issues, or potential reinjury.
-
 I work under Dr. Laura Miller, whose recent projects involve work at the Al-Marah Equine Center owned by the University. Our team collects gait analysis data using EquiPro accelerometers during lunging exercise sessions. Seven accelerometer sensors are placed on the horse in key anatomical locations (each leg, head, withers, and sacrum) while the horse is exercised on a lunge line at a walk, trot, and canter. The EquiPro system then computes stride-level biomechanical metrics such as diagonal advanced placement and stride duration.
 
-By modeling typical movement patterns for three selected horses, I aim to identify exercise sessions that deviate significantly from a horse’s baseline. Such anomalies may reflect behavior irregularities, equipment issues, or potential reinjury. These subtle changes in loading or symmetry can also precede visible signs of injury, making anomaly detection a valuable tool for proactive performance monitoring.
+By modeling typical movement patterns for three selected horses, I aim to identify anomalous exercise sessions that deviate significantly from a horse’s baseline. Such anomalies may reflect early indicators of injury risk, reinjury susceptibility, or underlying pain or discomfort. This makes anomaly detection a valuable tool for proactive performance monitoring, enabling the identification of subtle gait changes before clear signs of injury are apparent.
 
 ## Dataset
 
@@ -56,7 +52,7 @@ For this project, I focused exclusively on trot strides. The trot is a highly sy
 
 **Coordination (4)**
 
-Diagonal Advanced Placement (DAP) describes the relative timing between diagonal limb pairs (left fore–right hind and right fore–left hind) during the trot. It reflects how coordinated the diagonal limbs are within each stride.
+Diagonal Advanced Placement (DAP) describes the relative timing between diagonal limb pairs during the trot. It reflects how coordinated the diagonal limbs are within each stride.
 
 
 - `dap_L_sec / dap_R_sec`: diagonal advanced placement timing between limb pairs (LF–RH, RF–LH), measured in seconds  
@@ -101,7 +97,7 @@ I want to disclose that AI was used to help with code development and debugging.
 
 Different anomaly detection methods flagged a different number of sessions for each horse. Z-score thresholding identified relatively few anomalies and flagged sessions only for Duque. In contrast, K-means distance and Isolation Forest flagged more sessions across horses. By construction, this could be due to their ability to capture multivariate deviations from typical patterns. Duque had the highest number of anomalous sessions across all methods, while Perseo was flagged only by the K-means method, likely due to the small number of sessions. 
 
-To identify the most likely anomalies, sessions flagged by at least two anomaly detection methods were classified as high-confidence anomalies. A small subset of 5 sessions met this criteria. One of Duque’s sessions was flagged by all three methods. The remaining high-confidence sessions were flagged by two methods: two of which were Duque sessions, two of which were Jackson sessions. A method agreement heatmap was created to further show this overlap, reinforcing the idea that agreement across methods give us more confidence that these sessions reflect meaningful deviations from typical movement patterns.
+To identify the most likely anomalies, sessions flagged by at least two anomaly detection methods were classified as high-confidence anomalies. A small subset of five sessions met this criteria. One of Duque’s sessions was flagged by all three methods. The remaining high-confidence sessions were flagged by two methods: two of which were Duque sessions, two of which were Jackson sessions. A method agreement heatmap was created to further show this overlap, reinforcing the idea that agreement across methods give us more confidence that these sessions reflect meaningful deviations from typical movement patterns.
 
 <div align="center">
 ![](analysis/data/fig_method_heatmap.png){width="60%"}
@@ -125,4 +121,4 @@ The results we found are informative, but several limitations should be acknowle
 
 ## Conclusion
 
-In this project, we constructed horse-specific baseline gait profiles using session-level biomechanical features from stride-level EquiPro data. Unsupervised anomaly detection methods including z-score thresholding, k-means clustering, and isolation forest were applied to identify sessions that deviated from each horse’s typical movement pattern. Many sessions showed minor variation, but only a small subset demonstrated strong evidence of abnormality, defined as sessions flagged by at least two detection methods. For these high-confidence anomalies, examining feature-level z-scores helped identify which biomechanical variables contributed most to deviation. This enables interpretation and insight into the potential cause of gait changes during each flagged session. Overall, this approach shows that anomaly detection can reveal subtle, horse-specific gate changes. This is helpful for indicating early irregularities or reinjury risk before abnormalities are apparent through visual observation.
+In this project, we constructed horse-specific baseline gait profiles using session-level biomechanical features from stride-level EquiPro data. Unsupervised anomaly detection methods including z-score thresholding, k-means clustering, and isolation forest were applied to identify sessions that deviated from each horse’s typical movement pattern. Many sessions showed minor variation, but only a small subset demonstrated strong evidence of abnormality, defined as sessions flagged by at least two detection methods. For these high-confidence anomalies, examining feature-level z-scores helped identify which biomechanical variables contributed most to deviation. This enables interpretation and insight into the potential cause of gait changes during each flagged session. Overall, this approach shows that anomaly detection can reveal subtle, horse-specific gait abnormalities that may reflect injury risk, reinjury susceptibility, or underlying pain or discomfort. As a result, it supports earlier and more informed intervention before clear signs of injury emerge.

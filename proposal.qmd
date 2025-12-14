@@ -30,19 +30,9 @@ from IPython.display import display
 ```
 
 ## Introduction
-My goal is to use unsupervised learning techniques to cluster equine exercise sessions and detect
-anomalies that may reflect behavioral irregularities, equipment issues, or potential reinjury.
+I work under Dr. Laura Miller, whose recent projects involve work at the Al-Marah Equine Center owned by the University. Our team collects gait analysis data using EquiPro accelerometers during lunging exercise sessions. Seven accelerometer sensors are placed on the horse in key anatomical locations (each leg, head, withers, and sacrum) while the horse is exercised on a lunge line at a walk, trot, and canter. The EquiPro system then computes stride-level biomechanical metrics such as diagonal advanced placement and stride duration.
 
-I aim to detect abnormal equine exercise sessions by clustering 
-movement-based features derived from processed EquiPro accelerometer data. Horses 
-at the Al-Marah Equine Center are equipped with 7 accelerometers during exercise 
-sessions on a lunge line at walk, trot, and canter. The EquiPro system outputs 
-calculated biomechanical metrics such as diagonal advanced placement, stride 
-duration, and footfall duration. By modeling typical movement patterns for each 
-horse, I plan to identify exercise sessions that deviate significantly from a 
-horse’s baseline. Such anomalies may reflect behavioral irregularities, equipment 
-malfunction, pain, or potential reinjury. This is important in equine rehabilitation, 
-where subtle changes in loading or symmetry can precede clinical signs of injury.
+By modeling typical movement patterns for three selected horses, I aim to identify anomalous exercise sessions that deviate significantly from a horse’s baseline. Such anomalies may reflect early indicators of injury risk, reinjury susceptibility, or underlying pain or discomfort. This makes anomaly detection a valuable tool for proactive performance monitoring, enabling the identification of subtle gait changes before clear signs of injury are apparent.
 
 
 ## Dataset

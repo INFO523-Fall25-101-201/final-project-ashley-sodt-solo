@@ -58,8 +58,7 @@ penguins = sns.load_dataset('penguins').dropna()
 * EquiPro IMUs collect accelerometer data during exercise
 * Data processed into stride-level biomechanical metrics
 
-**Goal**: Use unsupervised learning techniques to model each horse's typical movement and automatically flag exercise sessions that deviate from this baseline. Such anomalies may reflect behavioral irregularities, equipment
-malfunction, pain, or potential reinjury.
+**Goal**: Use unsupervised learning techniques to model each horse's typical movement and automatically flag exercise sessions that deviate from this baseline.
 
 ## Dataset
 
