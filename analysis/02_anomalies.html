@@ -4096,41 +4096,38 @@ vertical-align: -.125em;
   <li><a href="#isolation-forest" id="toc-isolation-forest" class="nav-link" data-scroll-target="#isolation-forest">3) Isolation Forest</a></li>
   <li><a href="#compares-which-sessions-are-flagged-as-abnormal-by-each-method" id="toc-compares-which-sessions-are-flagged-as-abnormal-by-each-method" class="nav-link" data-scroll-target="#compares-which-sessions-are-flagged-as-abnormal-by-each-method">Compares which sessions are flagged as abnormal by each method</a></li>
   <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section">—————————————–</a></li>
-  <li><a href="#imports-and-configuration" id="toc-imports-and-configuration" class="nav-link" data-scroll-target="#imports-and-configuration">1. Imports and configuration</a></li>
+  <li><a href="#load-session-level-feature-matrix" id="toc-load-session-level-feature-matrix" class="nav-link" data-scroll-target="#load-session-level-feature-matrix">1. Load session-level feature matrix</a></li>
   <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1">—————————————–</a></li>
-  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2">—————————————–</a></li>
-  <li><a href="#load-session-level-feature-matrix" id="toc-load-session-level-feature-matrix" class="nav-link" data-scroll-target="#load-session-level-feature-matrix">2. Load session-level feature matrix</a></li>
-  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3">—————————————–</a></li>
   <li><a href="#path-to-the-session-level-feature-matrix-created-by-the-trot-only-script" id="toc-path-to-the-session-level-feature-matrix-created-by-the-trot-only-script" class="nav-link" data-scroll-target="#path-to-the-session-level-feature-matrix-created-by-the-trot-only-script">Path to the session-level feature matrix created by the trot-only script</a></li>
+  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2">—————————————–</a></li>
+  <li><a href="#helper-prepare-per-horse-features" id="toc-helper-prepare-per-horse-features" class="nav-link" data-scroll-target="#helper-prepare-per-horse-features">2. Helper: prepare per-horse features</a></li>
+  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3">—————————————–</a></li>
   <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4">—————————————–</a></li>
-  <li><a href="#helper-prepare-per-horse-features" id="toc-helper-prepare-per-horse-features" class="nav-link" data-scroll-target="#helper-prepare-per-horse-features">3. Helper: prepare per-horse features</a></li>
+  <li><a href="#helper-per-horse-anomaly-analysis" id="toc-helper-per-horse-anomaly-analysis" class="nav-link" data-scroll-target="#helper-per-horse-anomaly-analysis">3. Helper: per-horse anomaly analysis</a></li>
   <li><a href="#section-5" id="toc-section-5" class="nav-link" data-scroll-target="#section-5">—————————————–</a></li>
   <li><a href="#section-6" id="toc-section-6" class="nav-link" data-scroll-target="#section-6">—————————————–</a></li>
-  <li><a href="#helper-per-horse-anomaly-analysis" id="toc-helper-per-horse-anomaly-analysis" class="nav-link" data-scroll-target="#helper-per-horse-anomaly-analysis">4. Helper: per-horse anomaly analysis</a></li>
+  <li><a href="#run-analysis-for-all-horses" id="toc-run-analysis-for-all-horses" class="nav-link" data-scroll-target="#run-analysis-for-all-horses">4. Run analysis for all horses</a></li>
   <li><a href="#section-7" id="toc-section-7" class="nav-link" data-scroll-target="#section-7">—————————————–</a></li>
-  <li><a href="#section-8" id="toc-section-8" class="nav-link" data-scroll-target="#section-8">—————————————–</a></li>
-  <li><a href="#run-analysis-for-all-horses" id="toc-run-analysis-for-all-horses" class="nav-link" data-scroll-target="#run-analysis-for-all-horses">5. Run analysis for all horses</a></li>
-  <li><a href="#section-9" id="toc-section-9" class="nav-link" data-scroll-target="#section-9">—————————————–</a></li>
   <li><a href="#combine-results-for-all-horses" id="toc-combine-results-for-all-horses" class="nav-link" data-scroll-target="#combine-results-for-all-horses">Combine results for all horses</a></li>
+  <li><a href="#section-8" id="toc-section-8" class="nav-link" data-scroll-target="#section-8">—————————————–</a></li>
+  <li><a href="#quick-sanity-checks" id="toc-quick-sanity-checks" class="nav-link" data-scroll-target="#quick-sanity-checks">5. Quick sanity checks</a></li>
+  <li><a href="#section-9" id="toc-section-9" class="nav-link" data-scroll-target="#section-9">—————————————–</a></li>
   <li><a href="#section-10" id="toc-section-10" class="nav-link" data-scroll-target="#section-10">—————————————–</a></li>
-  <li><a href="#quick-sanity-checks" id="toc-quick-sanity-checks" class="nav-link" data-scroll-target="#quick-sanity-checks">6. Quick sanity checks</a></li>
+  <li><a href="#simple-visualizations" id="toc-simple-visualizations" class="nav-link" data-scroll-target="#simple-visualizations">6. Simple visualizations</a></li>
   <li><a href="#section-11" id="toc-section-11" class="nav-link" data-scroll-target="#section-11">—————————————–</a></li>
-  <li><a href="#section-12" id="toc-section-12" class="nav-link" data-scroll-target="#section-12">—————————————–</a></li>
-  <li><a href="#simple-visualizations" id="toc-simple-visualizations" class="nav-link" data-scroll-target="#simple-visualizations">7. Simple visualizations</a></li>
-  <li><a href="#section-13" id="toc-section-13" class="nav-link" data-scroll-target="#section-13">—————————————–</a></li>
-  <li><a href="#add-datetime-columns-and-sort" id="toc-add-datetime-columns-and-sort" class="nav-link" data-scroll-target="#add-datetime-columns-and-sort">7.1 Add datetime columns and sort</a></li>
+  <li><a href="#add-datetime-columns-and-sort" id="toc-add-datetime-columns-and-sort" class="nav-link" data-scroll-target="#add-datetime-columns-and-sort">6.1 Add datetime columns and sort</a></li>
   <li><a href="#sort-once-by-date-so-plots-are-in-chronological-order" id="toc-sort-once-by-date-so-plots-are-in-chronological-order" class="nav-link" data-scroll-target="#sort-once-by-date-so-plots-are-in-chronological-order">Sort once by date so plots are in chronological order</a></li>
-  <li><a href="#plot-1-max-z-score-vs.-session-across-horses-stars-for-2-methods" id="toc-plot-1-max-z-score-vs.-session-across-horses-stars-for-2-methods" class="nav-link" data-scroll-target="#plot-1-max-z-score-vs.-session-across-horses-stars-for-2-methods">7.2 Plot 1: max |z|-score vs. session across horses (stars for ≥2 methods)</a></li>
-  <li><a href="#plot-2-mean-z-score-vs.-session-across-horses" id="toc-plot-2-mean-z-score-vs.-session-across-horses" class="nav-link" data-scroll-target="#plot-2-mean-z-score-vs.-session-across-horses">7.3 Plot 2: mean |z|-score vs. session across horses</a></li>
-  <li><a href="#plot-3-number-of-methods-that-flag-each-session" id="toc-plot-3-number-of-methods-that-flag-each-session" class="nav-link" data-scroll-target="#plot-3-number-of-methods-that-flag-each-session">7.4 Plot 3: number of methods that flag each session</a></li>
-  <li><a href="#plot-4-method-agreement-heatmap" id="toc-plot-4-method-agreement-heatmap" class="nav-link" data-scroll-target="#plot-4-method-agreement-heatmap">7.5 Plot 4: Method agreement heatmap</a></li>
+  <li><a href="#plot-1-max-z-score-vs.-session-across-horses-stars-for-2-methods" id="toc-plot-1-max-z-score-vs.-session-across-horses-stars-for-2-methods" class="nav-link" data-scroll-target="#plot-1-max-z-score-vs.-session-across-horses-stars-for-2-methods">6.2 Plot 1: max |z|-score vs. session across horses (stars for ≥2 methods)</a></li>
+  <li><a href="#plot-2-mean-z-score-vs.-session-across-horses" id="toc-plot-2-mean-z-score-vs.-session-across-horses" class="nav-link" data-scroll-target="#plot-2-mean-z-score-vs.-session-across-horses">6.3 Plot 2: mean |z|-score vs. session across horses</a></li>
+  <li><a href="#plot-3-number-of-methods-that-flag-each-session" id="toc-plot-3-number-of-methods-that-flag-each-session" class="nav-link" data-scroll-target="#plot-3-number-of-methods-that-flag-each-session">6.4 Plot 3: number of methods that flag each session</a></li>
+  <li><a href="#plot-4-method-agreement-heatmap" id="toc-plot-4-method-agreement-heatmap" class="nav-link" data-scroll-target="#plot-4-method-agreement-heatmap">6.5 Plot 4: Method agreement heatmap</a></li>
   <li><a href="#sort-sessions-by-of-methods-flagged-descending-within-horse" id="toc-sort-sessions-by-of-methods-flagged-descending-within-horse" class="nav-link" data-scroll-target="#sort-sessions-by-of-methods-flagged-descending-within-horse">Sort sessions by # of methods flagged (descending within horse)</a></li>
   <li><a href="#create-readable-date-label-mmddyy-and-combine-with-horse" id="toc-create-readable-date-label-mmddyy-and-combine-with-horse" class="nav-link" data-scroll-target="#create-readable-date-label-mmddyy-and-combine-with-horse">Create readable date label (mm/dd/yy) and combine with horse</a></li>
   <li><a href="#rename-columns-for-nicer-axis-labels" id="toc-rename-columns-for-nicer-axis-labels" class="nav-link" data-scroll-target="#rename-columns-for-nicer-axis-labels">Rename columns for nicer axis labels</a></li>
   <li><a href="#build-heatmap-matrix" id="toc-build-heatmap-matrix" class="nav-link" data-scroll-target="#build-heatmap-matrix">Build heatmap matrix</a></li>
-  <li><a href="#section-14" id="toc-section-14" class="nav-link" data-scroll-target="#section-14">—————————————–</a></li>
-  <li><a href="#feature-contribution-visualization" id="toc-feature-contribution-visualization" class="nav-link" data-scroll-target="#feature-contribution-visualization">8. Feature contribution visualization</a></li>
-  <li><a href="#section-15" id="toc-section-15" class="nav-link" data-scroll-target="#section-15">—————————————–</a></li>
+  <li><a href="#section-12" id="toc-section-12" class="nav-link" data-scroll-target="#section-12">—————————————–</a></li>
+  <li><a href="#feature-contribution-visualization" id="toc-feature-contribution-visualization" class="nav-link" data-scroll-target="#feature-contribution-visualization">7. Feature contribution visualization</a></li>
+  <li><a href="#section-13" id="toc-section-13" class="nav-link" data-scroll-target="#section-13">—————————————–</a></li>
   <li><a href="#take-only-high-confidence-anomalies-flagged-by-2-methods" id="toc-take-only-high-confidence-anomalies-flagged-by-2-methods" class="nav-link" data-scroll-target="#take-only-high-confidence-anomalies-flagged-by-2-methods">Take only high-confidence anomalies (flagged by ≥2 methods)</a></li>
   <li><a href="#build-a-long-form-table-of-top-features-per-session" id="toc-build-a-long-form-table-of-top-features-per-session" class="nav-link" data-scroll-target="#build-a-long-form-table-of-top-features-per-session">Build a long-form table of top features per session</a></li>
   <li><a href="#pivot-to-session-x-feature-matrix-nan-where-a-feature-is-not-in-that-sessions-top-n" id="toc-pivot-to-session-x-feature-matrix-nan-where-a-feature-is-not-in-that-sessions-top-n" class="nav-link" data-scroll-target="#pivot-to-session-x-feature-matrix-nan-where-a-feature-is-not-in-that-sessions-top-n">Pivot to session x feature matrix (NaN where a feature is not in that session’s top-N)</a></li>
@@ -4164,6 +4161,11 @@ vertical-align: -.125em;
 
 
 <p>#| label: summarize-session #| message: false</p>
+<p>from pathlib import Path</p>
+<p>import numpy as np import pandas as pd</p>
+<p>from IPython.display import display</p>
+<p>from sklearn.preprocessing import StandardScaler from sklearn.cluster import KMeans from sklearn.ensemble import IsolationForest</p>
+<p>import matplotlib.pyplot as plt import seaborn as sns</p>
 <section id="anomaly-analysis-for-equipro-session-level-features-trot-only" class="level1">
 <h1>Anomaly analysis for EquiPro session-level features (trot only)</h1>
 </section>
@@ -4188,24 +4190,10 @@ vertical-align: -.125em;
 <section id="section" class="level1">
 <h1>—————————————–</h1>
 </section>
-<section id="imports-and-configuration" class="level1">
-<h1>1. Imports and configuration</h1>
+<section id="load-session-level-feature-matrix" class="level1">
+<h1>1. Load session-level feature matrix</h1>
 </section>
 <section id="section-1" class="level1">
-<h1>—————————————–</h1>
-<p>from pathlib import Path</p>
-<p>import numpy as np import pandas as pd</p>
-<p>from IPython.display import display</p>
-<p>from sklearn.preprocessing import StandardScaler from sklearn.cluster import KMeans from sklearn.ensemble import IsolationForest</p>
-<p>import matplotlib.pyplot as plt import seaborn as sns</p>
-</section>
-<section id="section-2" class="level1">
-<h1>—————————————–</h1>
-</section>
-<section id="load-session-level-feature-matrix" class="level1">
-<h1>2. Load session-level feature matrix</h1>
-</section>
-<section id="section-3" class="level1">
 <h1>—————————————–</h1>
 </section>
 <section id="path-to-the-session-level-feature-matrix-created-by-the-trot-only-script" class="level1">
@@ -4216,13 +4204,13 @@ vertical-align: -.125em;
 <p>meta_cols = [“horse”, “session_id”, “n_rows”] feature_cols = [c for c in session_features.columns if c not in meta_cols]</p>
 <p>print(“of feature columns:”, len(feature_cols))</p>
 </section>
-<section id="section-4" class="level1">
+<section id="section-2" class="level1">
 <h1>—————————————–</h1>
 </section>
 <section id="helper-prepare-per-horse-features" class="level1">
-<h1>3. Helper: prepare per-horse features</h1>
+<h1>2. Helper: prepare per-horse features</h1>
 </section>
-<section id="section-5" class="level1">
+<section id="section-3" class="level1">
 <h1>—————————————–</h1>
 <p>def prepare_features( df_horse: pd.DataFrame, feature_cols, max_missing_frac: float = 0.4, ) -&gt; pd.DataFrame: ““” Clean and prepare feature matrix for one horse.</p>
 <pre><code>Steps
@@ -4252,13 +4240,13 @@ X = X.apply(lambda col: col.fillna(col.median()), axis=0)
 
 return X</code></pre>
 </section>
-<section id="section-6" class="level1">
+<section id="section-4" class="level1">
 <h1>—————————————–</h1>
 </section>
 <section id="helper-per-horse-anomaly-analysis" class="level1">
-<h1>4. Helper: per-horse anomaly analysis</h1>
+<h1>3. Helper: per-horse anomaly analysis</h1>
 </section>
-<section id="section-7" class="level1">
+<section id="section-5" class="level1">
 <h1>—————————————–</h1>
 <p>def analyze_horse_anomalies( df_horse: pd.DataFrame, feature_cols, z_thresh: float = 2.5, k_default: int = 2, iforest_contamination: float = 0.25, random_state: int = 42, ): ““” Run all three anomaly-detection methods for a single horse.</p>
 <pre><code>Methods
@@ -4380,13 +4368,13 @@ out[&quot;n_methods_flagged&quot;] = out[method_cols].sum(axis=1)
 
 return out, X_z</code></pre>
 </section>
-<section id="section-8" class="level1">
+<section id="section-6" class="level1">
 <h1>—————————————–</h1>
 </section>
 <section id="run-analysis-for-all-horses" class="level1">
-<h1>5. Run analysis for all horses</h1>
+<h1>4. Run analysis for all horses</h1>
 </section>
-<section id="section-9" class="level1">
+<section id="section-7" class="level1">
 <h1>—————————————–</h1>
 <p>all_results = [] z_spaces = {} # store z-scored features if you want to look later</p>
 <p>for horse in session_features[“horse”].unique(): df_horse = session_features[session_features[“horse”] == horse] print(f”=== Analyzing horse: {horse} ===“) print(f”Number of sessions: {df_horse.shape[0]}“)</p>
@@ -4407,28 +4395,28 @@ z_spaces[horse] = X_z</code></pre>
 <p>anomaly_summary = pd.concat(all_results, ignore_index=True)</p>
 <p>print(“anomaly summary for all horses:”) display( anomaly_summary.sort_values( [“horse”, “n_methods_flagged”, “z_max_abs”], ascending=[True, False, False], ) )</p>
 </section>
-<section id="section-10" class="level1">
+<section id="section-8" class="level1">
 <h1>—————————————–</h1>
 </section>
 <section id="quick-sanity-checks" class="level1">
-<h1>6. Quick sanity checks</h1>
+<h1>5. Quick sanity checks</h1>
 </section>
-<section id="section-11" class="level1">
+<section id="section-9" class="level1">
 <h1>—————————————–</h1>
 <p>print(“many sessions are flagged by each method?”) for col in [“z_is_outlier”, “kmeans_is_outlier”, “iforest_is_outlier”]: counts = anomaly_summary.groupby(“horse”)[col].sum() print(f”: {col}“) print(counts)</p>
 <p>print(“many sessions are flagged by ≥2 methods?”) flagged_two_plus = anomaly_summary[anomaly_summary[“n_methods_flagged”] &gt;= 2] display( flagged_two_plus.sort_values( [“horse”, “n_methods_flagged”, “z_max_abs”], ascending=[True, False, False], ) )</p>
 </section>
-<section id="section-12" class="level1">
+<section id="section-10" class="level1">
 <h1>—————————————–</h1>
 </section>
 <section id="simple-visualizations" class="level1">
-<h1>7. Simple visualizations</h1>
+<h1>6. Simple visualizations</h1>
 </section>
-<section id="section-13" class="level1">
+<section id="section-11" class="level1">
 <h1>—————————————–</h1>
 </section>
 <section id="add-datetime-columns-and-sort" class="level1">
-<h1>7.1 Add datetime columns and sort</h1>
+<h1>6.1 Add datetime columns and sort</h1>
 <p>anomaly_summary[“session_dt”] = pd.to_datetime( anomaly_summary[“session_id”].str[:8], # yyyymmdd format=“%Y%m%d” ) anomaly_summary[“session_label”] = anomaly_summary[“session_dt”].dt.strftime(“%m/%d/%y”)</p>
 </section>
 <section id="sort-once-by-date-so-plots-are-in-chronological-order" class="level1">
@@ -4436,7 +4424,7 @@ z_spaces[horse] = X_z</code></pre>
 <p>anomaly_summary = anomaly_summary.sort_values(“session_dt”)</p>
 </section>
 <section id="plot-1-max-z-score-vs.-session-across-horses-stars-for-2-methods" class="level1">
-<h1>7.2 Plot 1: max |z|-score vs. session across horses (stars for ≥2 methods)</h1>
+<h1>6.2 Plot 1: max |z|-score vs. session across horses (stars for ≥2 methods)</h1>
 <p>horse_order = [“Duque”, “Jackson”, “Perseo”] # optional, keeps legend consistent horse_colors = { “Duque”: “tab:blue”, “Jackson”: “tab:orange”, “Perseo”: “tab:green”, }</p>
 <p>plt.figure()</p>
 <p>for horse in horse_order: df_h = anomaly_summary[anomaly_summary[“horse”] == horse]</p>
@@ -4466,17 +4454,17 @@ if not df_hi.empty:
 <p>plt.xticks(rotation=90) plt.ylabel(“max |z-score| across features”) plt.xlabel(“session date”) plt.title(“Session-level deviation from baseline (max |z|)= flagged by ≥2 methods”) plt.legend() plt.tight_layout() plt.savefig(“fig_max_zscore.png”, dpi=300, bbox_inches=“tight”)</p>
 </section>
 <section id="plot-2-mean-z-score-vs.-session-across-horses" class="level1">
-<h1>7.3 Plot 2: mean |z|-score vs. session across horses</h1>
+<h1>6.3 Plot 2: mean |z|-score vs. session across horses</h1>
 <p>plt.figure() for horse, df_h in anomaly_summary.groupby(“horse”): plt.scatter(df_h[“session_dt”], df_h[“z_mean_abs”], label=horse)</p>
 <p>plt.xticks(rotation=90) plt.ylabel(“mean |z-score| across features”) plt.xlabel(“session date”) plt.title(“Session-level deviation from baseline (mean |z|)”) plt.legend() plt.tight_layout() plt.savefig(“fig_mean_zscore.png”, dpi=300, bbox_inches=“tight”)</p>
 </section>
 <section id="plot-3-number-of-methods-that-flag-each-session" class="level1">
-<h1>7.4 Plot 3: number of methods that flag each session</h1>
+<h1>6.4 Plot 3: number of methods that flag each session</h1>
 <p>plt.figure() for horse, df_h in anomaly_summary.groupby(“horse”): plt.scatter(df_h[“session_dt”], df_h[“n_methods_flagged”], label=horse)</p>
 <p>plt.xticks(rotation=90) plt.ylabel(“number of methods flagging session”) plt.xlabel(“session date”) plt.title(“Agreement between anomaly-detection methods”) plt.legend() plt.tight_layout() plt.savefig(“fig_method_agreement.png”, dpi=300, bbox_inches=“tight”)</p>
 </section>
 <section id="plot-4-method-agreement-heatmap" class="level1">
-<h1>7.5 Plot 4: Method agreement heatmap</h1>
+<h1>6.5 Plot 4: Method agreement heatmap</h1>
 <p>heat_df = anomaly_summary[ [“horse”, “session_id”, “session_dt”, “z_is_outlier”, “kmeans_is_outlier”, “iforest_is_outlier”]].copy()</p>
 </section>
 <section id="sort-sessions-by-of-methods-flagged-descending-within-horse" class="level1">
@@ -4497,13 +4485,13 @@ if not df_hi.empty:
 <p>plt.figure(figsize=(7, max(5, matrix.shape[0] * 0.35))) sns.heatmap( matrix, cmap=[“white”, “tab:red”], # white = not flagged, red = flagged linewidths=0.5, linecolor=“gray”, cbar=False, annot=True, fmt=““, )</p>
 <p>plt.xlabel(“Anomaly Detection Method”) plt.ylabel(“Session (Horse + Date)”) plt.title(“Method Agreement Heatmap: Flagged Sessions”) plt.xticks(rotation=0) plt.tight_layout() plt.savefig(“fig_method_heatmap.png”, dpi=300, bbox_inches=“tight”) plt.show()</p>
 </section>
-<section id="section-14" class="level1">
+<section id="section-12" class="level1">
 <h1>—————————————–</h1>
 </section>
 <section id="feature-contribution-visualization" class="level1">
-<h1>8. Feature contribution visualization</h1>
+<h1>7. Feature contribution visualization</h1>
 </section>
-<section id="section-15" class="level1">
+<section id="section-13" class="level1">
 <h1>—————————————–</h1>
 <p>def top_contributing_features_for_session( horse: str, session_id: str, top_n: int = 5, ): ““” Return the top-N biomechanical features (by |z|) for a given horse/session.</p>
 <pre><code>Uses the z-scored feature space stored in z_spaces[horse].
@@ -5050,509 +5038,505 @@ for feat_name, z_val in top_feats.items():
 <span id="cb7-18"><a href="#cb7-18"></a><span class="co">#| label: summarize-session</span></span>
 <span id="cb7-19"><a href="#cb7-19"></a><span class="co">#| message: false</span></span>
 <span id="cb7-20"><a href="#cb7-20"></a></span>
-<span id="cb7-21"><a href="#cb7-21"></a><span class="co"># Anomaly analysis for EquiPro session-level features (trot only)</span></span>
-<span id="cb7-22"><a href="#cb7-22"></a><span class="co"># Computes per-horse baselines via z-scores</span></span>
-<span id="cb7-23"><a href="#cb7-23"></a><span class="co"># Runs three anomaly-detection methods:</span></span>
-<span id="cb7-24"><a href="#cb7-24"></a><span class="co">#  1) Z-score thresholding</span></span>
-<span id="cb7-25"><a href="#cb7-25"></a><span class="co">#  2) K-means clustering distance</span></span>
-<span id="cb7-26"><a href="#cb7-26"></a><span class="co">#  3) Isolation Forest</span></span>
-<span id="cb7-27"><a href="#cb7-27"></a><span class="co"># Compares which sessions are flagged as abnormal by each method</span></span>
-<span id="cb7-28"><a href="#cb7-28"></a></span>
-<span id="cb7-29"><a href="#cb7-29"></a><span class="co"># -----------------------------------------</span></span>
-<span id="cb7-30"><a href="#cb7-30"></a><span class="co"># 1. Imports and configuration</span></span>
-<span id="cb7-31"><a href="#cb7-31"></a><span class="co"># -----------------------------------------</span></span>
-<span id="cb7-32"><a href="#cb7-32"></a></span>
-<span id="cb7-33"><a href="#cb7-33"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb7-21"><a href="#cb7-21"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb7-22"><a href="#cb7-22"></a></span>
+<span id="cb7-23"><a href="#cb7-23"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb7-24"><a href="#cb7-24"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb7-25"><a href="#cb7-25"></a></span>
+<span id="cb7-26"><a href="#cb7-26"></a><span class="im">from</span> IPython.display <span class="im">import</span> display</span>
+<span id="cb7-27"><a href="#cb7-27"></a></span>
+<span id="cb7-28"><a href="#cb7-28"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb7-29"><a href="#cb7-29"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span>
+<span id="cb7-30"><a href="#cb7-30"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> IsolationForest</span>
+<span id="cb7-31"><a href="#cb7-31"></a></span>
+<span id="cb7-32"><a href="#cb7-32"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb7-33"><a href="#cb7-33"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb7-34"><a href="#cb7-34"></a></span>
-<span id="cb7-35"><a href="#cb7-35"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb7-36"><a href="#cb7-36"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb7-37"><a href="#cb7-37"></a></span>
-<span id="cb7-38"><a href="#cb7-38"></a><span class="im">from</span> IPython.display <span class="im">import</span> display</span>
-<span id="cb7-39"><a href="#cb7-39"></a></span>
-<span id="cb7-40"><a href="#cb7-40"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
-<span id="cb7-41"><a href="#cb7-41"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span>
-<span id="cb7-42"><a href="#cb7-42"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> IsolationForest</span>
+<span id="cb7-35"><a href="#cb7-35"></a><span class="co"># Anomaly analysis for EquiPro session-level features (trot only)</span></span>
+<span id="cb7-36"><a href="#cb7-36"></a><span class="co"># Computes per-horse baselines via z-scores</span></span>
+<span id="cb7-37"><a href="#cb7-37"></a><span class="co"># Runs three anomaly-detection methods:</span></span>
+<span id="cb7-38"><a href="#cb7-38"></a><span class="co">#  1) Z-score thresholding</span></span>
+<span id="cb7-39"><a href="#cb7-39"></a><span class="co">#  2) K-means clustering distance</span></span>
+<span id="cb7-40"><a href="#cb7-40"></a><span class="co">#  3) Isolation Forest</span></span>
+<span id="cb7-41"><a href="#cb7-41"></a><span class="co"># Compares which sessions are flagged as abnormal by each method</span></span>
+<span id="cb7-42"><a href="#cb7-42"></a></span>
 <span id="cb7-43"><a href="#cb7-43"></a></span>
-<span id="cb7-44"><a href="#cb7-44"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb7-45"><a href="#cb7-45"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb7-46"><a href="#cb7-46"></a></span>
+<span id="cb7-44"><a href="#cb7-44"></a><span class="co"># -----------------------------------------</span></span>
+<span id="cb7-45"><a href="#cb7-45"></a><span class="co"># 1. Load session-level feature matrix</span></span>
+<span id="cb7-46"><a href="#cb7-46"></a><span class="co"># -----------------------------------------</span></span>
 <span id="cb7-47"><a href="#cb7-47"></a></span>
-<span id="cb7-48"><a href="#cb7-48"></a><span class="co"># -----------------------------------------</span></span>
-<span id="cb7-49"><a href="#cb7-49"></a><span class="co"># 2. Load session-level feature matrix</span></span>
-<span id="cb7-50"><a href="#cb7-50"></a><span class="co"># -----------------------------------------</span></span>
-<span id="cb7-51"><a href="#cb7-51"></a></span>
-<span id="cb7-52"><a href="#cb7-52"></a><span class="co"># Path to the session-level feature matrix created by the trot-only script</span></span>
-<span id="cb7-53"><a href="#cb7-53"></a>DATA_PATH <span class="op">=</span> Path(<span class="va">__file__</span>).resolve().parent <span class="op">/</span> <span class="st">&quot;session_features_trot.csv&quot;</span></span>
-<span id="cb7-54"><a href="#cb7-54"></a></span>
-<span id="cb7-55"><a href="#cb7-55"></a>session_features <span class="op">=</span> pd.read_csv(DATA_PATH)</span>
-<span id="cb7-56"><a href="#cb7-56"></a></span>
-<span id="cb7-57"><a href="#cb7-57"></a><span class="bu">print</span>(<span class="st">&quot;Session-level feature matrix (trot only):&quot;</span>)</span>
-<span id="cb7-58"><a href="#cb7-58"></a><span class="bu">print</span>(<span class="ss">f&quot;  - shape: </span><span class="sc">{</span>session_features<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">&quot;</span>)</span>
-<span id="cb7-59"><a href="#cb7-59"></a><span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">First few rows:&quot;</span>)</span>
-<span id="cb7-60"><a href="#cb7-60"></a>display(session_features.head())</span>
-<span id="cb7-61"><a href="#cb7-61"></a></span>
-<span id="cb7-62"><a href="#cb7-62"></a>meta_cols <span class="op">=</span> [<span class="st">&quot;horse&quot;</span>, <span class="st">&quot;session_id&quot;</span>, <span class="st">&quot;n_rows&quot;</span>]</span>
-<span id="cb7-63"><a href="#cb7-63"></a>feature_cols <span class="op">=</span> [c <span class="cf">for</span> c <span class="kw">in</span> session_features.columns <span class="cf">if</span> c <span class="kw">not</span> <span class="kw">in</span> meta_cols]</span>
-<span id="cb7-64"><a href="#cb7-64"></a></span>
-<span id="cb7-65"><a href="#cb7-65"></a><span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Number of feature columns:&quot;</span>, <span class="bu">len</span>(feature_cols))</span>
-<span id="cb7-66"><a href="#cb7-66"></a></span>
+<span id="cb7-48"><a href="#cb7-48"></a><span class="co"># Path to the session-level feature matrix created by the trot-only script</span></span>
+<span id="cb7-49"><a href="#cb7-49"></a>DATA_PATH <span class="op">=</span> Path(<span class="va">__file__</span>).resolve().parent <span class="op">/</span> <span class="st">&quot;session_features_trot.csv&quot;</span></span>
+<span id="cb7-50"><a href="#cb7-50"></a></span>
+<span id="cb7-51"><a href="#cb7-51"></a>session_features <span class="op">=</span> pd.read_csv(DATA_PATH)</span>
+<span id="cb7-52"><a href="#cb7-52"></a></span>
+<span id="cb7-53"><a href="#cb7-53"></a><span class="bu">print</span>(<span class="st">&quot;Session-level feature matrix (trot only):&quot;</span>)</span>
+<span id="cb7-54"><a href="#cb7-54"></a><span class="bu">print</span>(<span class="ss">f&quot;  - shape: </span><span class="sc">{</span>session_features<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb7-55"><a href="#cb7-55"></a><span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">First few rows:&quot;</span>)</span>
+<span id="cb7-56"><a href="#cb7-56"></a>display(session_features.head())</span>
+<span id="cb7-57"><a href="#cb7-57"></a></span>
+<span id="cb7-58"><a href="#cb7-58"></a>meta_cols <span class="op">=</span> [<span class="st">&quot;horse&quot;</span>, <span class="st">&quot;session_id&quot;</span>, <span class="st">&quot;n_rows&quot;</span>]</span>
+<span id="cb7-59"><a href="#cb7-59"></a>feature_cols <span class="op">=</span> [c <span class="cf">for</span> c <span class="kw">in</span> session_features.columns <span class="cf">if</span> c <span class="kw">not</span> <span class="kw">in</span> meta_cols]</span>
+<span id="cb7-60"><a href="#cb7-60"></a></span>
+<span id="cb7-61"><a href="#cb7-61"></a><span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Number of feature columns:&quot;</span>, <span class="bu">len</span>(feature_cols))</span>
+<span id="cb7-62"><a href="#cb7-62"></a></span>
+<span id="cb7-63"><a href="#cb7-63"></a></span>
+<span id="cb7-64"><a href="#cb7-64"></a><span class="co"># -----------------------------------------</span></span>
+<span id="cb7-65"><a href="#cb7-65"></a><span class="co"># 2. Helper: prepare per-horse features</span></span>
+<span id="cb7-66"><a href="#cb7-66"></a><span class="co"># -----------------------------------------</span></span>
 <span id="cb7-67"><a href="#cb7-67"></a></span>
-<span id="cb7-68"><a href="#cb7-68"></a><span class="co"># -----------------------------------------</span></span>
-<span id="cb7-69"><a href="#cb7-69"></a><span class="co"># 3. Helper: prepare per-horse features</span></span>
-<span id="cb7-70"><a href="#cb7-70"></a><span class="co"># -----------------------------------------</span></span>
-<span id="cb7-71"><a href="#cb7-71"></a></span>
-<span id="cb7-72"><a href="#cb7-72"></a><span class="kw">def</span> prepare_features(</span>
-<span id="cb7-73"><a href="#cb7-73"></a>    df_horse: pd.DataFrame,</span>
-<span id="cb7-74"><a href="#cb7-74"></a>    feature_cols,</span>
-<span id="cb7-75"><a href="#cb7-75"></a>    max_missing_frac: <span class="bu">float</span> <span class="op">=</span> <span class="fl">0.4</span>,</span>
-<span id="cb7-76"><a href="#cb7-76"></a>) <span class="op">-&gt;</span> pd.DataFrame:</span>
-<span id="cb7-77"><a href="#cb7-77"></a>    <span class="co">&quot;&quot;&quot;</span></span>
-<span id="cb7-78"><a href="#cb7-78"></a><span class="co">    Clean and prepare feature matrix for one horse.</span></span>
-<span id="cb7-79"><a href="#cb7-79"></a></span>
-<span id="cb7-80"><a href="#cb7-80"></a><span class="co">    Steps</span></span>
-<span id="cb7-81"><a href="#cb7-81"></a><span class="co">    -----</span></span>
-<span id="cb7-82"><a href="#cb7-82"></a><span class="co">    - Keep only the numeric feature columns (drop meta columns).</span></span>
-<span id="cb7-83"><a href="#cb7-83"></a><span class="co">    - Drop columns that are entirely NaN.</span></span>
-<span id="cb7-84"><a href="#cb7-84"></a><span class="co">    - Drop columns where more than `max_missing_frac` of entries are NaN.</span></span>
-<span id="cb7-85"><a href="#cb7-85"></a><span class="co">    - Impute any remaining NaN values with the column median.</span></span>
-<span id="cb7-86"><a href="#cb7-86"></a></span>
-<span id="cb7-87"><a href="#cb7-87"></a><span class="co">    Returns</span></span>
-<span id="cb7-88"><a href="#cb7-88"></a><span class="co">    -------</span></span>
-<span id="cb7-89"><a href="#cb7-89"></a><span class="co">    X : pd.DataFrame</span></span>
-<span id="cb7-90"><a href="#cb7-90"></a><span class="co">        Cleaned feature matrix for this horse (sessions x features).</span></span>
-<span id="cb7-91"><a href="#cb7-91"></a><span class="co">    &quot;&quot;&quot;</span></span>
-<span id="cb7-92"><a href="#cb7-92"></a>    X <span class="op">=</span> df_horse[feature_cols].copy()</span>
-<span id="cb7-93"><a href="#cb7-93"></a></span>
-<span id="cb7-94"><a href="#cb7-94"></a>    <span class="co"># Remove columns that are entirely NaN</span></span>
-<span id="cb7-95"><a href="#cb7-95"></a>    X <span class="op">=</span> X.dropna(axis<span class="op">=</span><span class="dv">1</span>, how<span class="op">=</span><span class="st">&quot;all&quot;</span>)</span>
-<span id="cb7-96"><a href="#cb7-96"></a></span>
-<span id="cb7-97"><a href="#cb7-97"></a>    <span class="co"># Drop columns with too much missing data</span></span>
-<span id="cb7-98"><a href="#cb7-98"></a>    missing_frac <span class="op">=</span> X.isna().mean()</span>
-<span id="cb7-99"><a href="#cb7-99"></a>    keep_cols <span class="op">=</span> missing_frac[missing_frac <span class="op">&lt;=</span> max_missing_frac].index</span>
-<span id="cb7-100"><a href="#cb7-100"></a>    X <span class="op">=</span> X[keep_cols]</span>
-<span id="cb7-101"><a href="#cb7-101"></a></span>
-<span id="cb7-102"><a href="#cb7-102"></a>    <span class="co"># Median imputation for any remaining NaNs</span></span>
-<span id="cb7-103"><a href="#cb7-103"></a>    X <span class="op">=</span> X.<span class="bu">apply</span>(<span class="kw">lambda</span> col: col.fillna(col.median()), axis<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb7-104"><a href="#cb7-104"></a></span>
-<span id="cb7-105"><a href="#cb7-105"></a>    <span class="cf">return</span> X</span>
-<span id="cb7-106"><a href="#cb7-106"></a></span>
+<span id="cb7-68"><a href="#cb7-68"></a><span class="kw">def</span> prepare_features(</span>
+<span id="cb7-69"><a href="#cb7-69"></a>    df_horse: pd.DataFrame,</span>
+<span id="cb7-70"><a href="#cb7-70"></a>    feature_cols,</span>
+<span id="cb7-71"><a href="#cb7-71"></a>    max_missing_frac: <span class="bu">float</span> <span class="op">=</span> <span class="fl">0.4</span>,</span>
+<span id="cb7-72"><a href="#cb7-72"></a>) <span class="op">-&gt;</span> pd.DataFrame:</span>
+<span id="cb7-73"><a href="#cb7-73"></a>    <span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb7-74"><a href="#cb7-74"></a><span class="co">    Clean and prepare feature matrix for one horse.</span></span>
+<span id="cb7-75"><a href="#cb7-75"></a></span>
+<span id="cb7-76"><a href="#cb7-76"></a><span class="co">    Steps</span></span>
+<span id="cb7-77"><a href="#cb7-77"></a><span class="co">    -----</span></span>
+<span id="cb7-78"><a href="#cb7-78"></a><span class="co">    - Keep only the numeric feature columns (drop meta columns).</span></span>
+<span id="cb7-79"><a href="#cb7-79"></a><span class="co">    - Drop columns that are entirely NaN.</span></span>
+<span id="cb7-80"><a href="#cb7-80"></a><span class="co">    - Drop columns where more than `max_missing_frac` of entries are NaN.</span></span>
+<span id="cb7-81"><a href="#cb7-81"></a><span class="co">    - Impute any remaining NaN values with the column median.</span></span>
+<span id="cb7-82"><a href="#cb7-82"></a></span>
+<span id="cb7-83"><a href="#cb7-83"></a><span class="co">    Returns</span></span>
+<span id="cb7-84"><a href="#cb7-84"></a><span class="co">    -------</span></span>
+<span id="cb7-85"><a href="#cb7-85"></a><span class="co">    X : pd.DataFrame</span></span>
+<span id="cb7-86"><a href="#cb7-86"></a><span class="co">        Cleaned feature matrix for this horse (sessions x features).</span></span>
+<span id="cb7-87"><a href="#cb7-87"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb7-88"><a href="#cb7-88"></a>    X <span class="op">=</span> df_horse[feature_cols].copy()</span>
+<span id="cb7-89"><a href="#cb7-89"></a></span>
+<span id="cb7-90"><a href="#cb7-90"></a>    <span class="co"># Remove columns that are entirely NaN</span></span>
+<span id="cb7-91"><a href="#cb7-91"></a>    X <span class="op">=</span> X.dropna(axis<span class="op">=</span><span class="dv">1</span>, how<span class="op">=</span><span class="st">&quot;all&quot;</span>)</span>
+<span id="cb7-92"><a href="#cb7-92"></a></span>
+<span id="cb7-93"><a href="#cb7-93"></a>    <span class="co"># Drop columns with too much missing data</span></span>
+<span id="cb7-94"><a href="#cb7-94"></a>    missing_frac <span class="op">=</span> X.isna().mean()</span>
+<span id="cb7-95"><a href="#cb7-95"></a>    keep_cols <span class="op">=</span> missing_frac[missing_frac <span class="op">&lt;=</span> max_missing_frac].index</span>
+<span id="cb7-96"><a href="#cb7-96"></a>    X <span class="op">=</span> X[keep_cols]</span>
+<span id="cb7-97"><a href="#cb7-97"></a></span>
+<span id="cb7-98"><a href="#cb7-98"></a>    <span class="co"># Median imputation for any remaining NaNs</span></span>
+<span id="cb7-99"><a href="#cb7-99"></a>    X <span class="op">=</span> X.<span class="bu">apply</span>(<span class="kw">lambda</span> col: col.fillna(col.median()), axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb7-100"><a href="#cb7-100"></a></span>
+<span id="cb7-101"><a href="#cb7-101"></a>    <span class="cf">return</span> X</span>
+<span id="cb7-102"><a href="#cb7-102"></a></span>
+<span id="cb7-103"><a href="#cb7-103"></a></span>
+<span id="cb7-104"><a href="#cb7-104"></a><span class="co"># -----------------------------------------</span></span>
+<span id="cb7-105"><a href="#cb7-105"></a><span class="co"># 3. Helper: per-horse anomaly analysis</span></span>
+<span id="cb7-106"><a href="#cb7-106"></a><span class="co"># -----------------------------------------</span></span>
 <span id="cb7-107"><a href="#cb7-107"></a></span>
-<span id="cb7-108"><a href="#cb7-108"></a><span class="co"># -----------------------------------------</span></span>
-<span id="cb7-109"><a href="#cb7-109"></a><span class="co"># 4. Helper: per-horse anomaly analysis</span></span>
-<span id="cb7-110"><a href="#cb7-110"></a><span class="co"># -----------------------------------------</span></span>
-<span id="cb7-111"><a href="#cb7-111"></a></span>
-<span id="cb7-112"><a href="#cb7-112"></a><span class="kw">def</span> analyze_horse_anomalies(</span>
-<span id="cb7-113"><a href="#cb7-113"></a>    df_horse: pd.DataFrame,</span>
-<span id="cb7-114"><a href="#cb7-114"></a>    feature_cols,</span>
-<span id="cb7-115"><a href="#cb7-115"></a>    z_thresh: <span class="bu">float</span> <span class="op">=</span> <span class="fl">2.5</span>,</span>
-<span id="cb7-116"><a href="#cb7-116"></a>    k_default: <span class="bu">int</span> <span class="op">=</span> <span class="dv">2</span>,</span>
-<span id="cb7-117"><a href="#cb7-117"></a>    iforest_contamination: <span class="bu">float</span> <span class="op">=</span> <span class="fl">0.25</span>,</span>
-<span id="cb7-118"><a href="#cb7-118"></a>    random_state: <span class="bu">int</span> <span class="op">=</span> <span class="dv">42</span>,</span>
-<span id="cb7-119"><a href="#cb7-119"></a>):</span>
-<span id="cb7-120"><a href="#cb7-120"></a>    <span class="co">&quot;&quot;&quot;</span></span>
-<span id="cb7-121"><a href="#cb7-121"></a><span class="co">    Run all three anomaly-detection methods for a single horse.</span></span>
-<span id="cb7-122"><a href="#cb7-122"></a></span>
-<span id="cb7-123"><a href="#cb7-123"></a><span class="co">    Methods</span></span>
-<span id="cb7-124"><a href="#cb7-124"></a><span class="co">    -------</span></span>
-<span id="cb7-125"><a href="#cb7-125"></a><span class="co">    1) Z-score thresholding:</span></span>
-<span id="cb7-126"><a href="#cb7-126"></a><span class="co">         - Standardize features</span></span>
-<span id="cb7-127"><a href="#cb7-127"></a><span class="co">         - Compute max absolute z-score per session</span></span>
-<span id="cb7-128"><a href="#cb7-128"></a><span class="co">         - Count how many features exceed |z| &gt; z_thresh</span></span>
-<span id="cb7-129"><a href="#cb7-129"></a><span class="co">    2) K-means distance:</span></span>
-<span id="cb7-130"><a href="#cb7-130"></a><span class="co">         - Fit K-means in z-scored space</span></span>
-<span id="cb7-131"><a href="#cb7-131"></a><span class="co">         - Compute distance of each session to its assigned cluster center</span></span>
-<span id="cb7-132"><a href="#cb7-132"></a><span class="co">         - Label top ~20% (or ~1/3 for very small N) as outliers</span></span>
-<span id="cb7-133"><a href="#cb7-133"></a><span class="co">    3) Isolation Forest:</span></span>
-<span id="cb7-134"><a href="#cb7-134"></a><span class="co">         - Run IsolationForest in z-scored space</span></span>
-<span id="cb7-135"><a href="#cb7-135"></a><span class="co">         - Use -score_samples as anomaly score (higher = more isolated)</span></span>
-<span id="cb7-136"><a href="#cb7-136"></a><span class="co">         - Use model&#39;s predicted label (-1 = anomaly)</span></span>
-<span id="cb7-137"><a href="#cb7-137"></a></span>
-<span id="cb7-138"><a href="#cb7-138"></a><span class="co">    Returns</span></span>
-<span id="cb7-139"><a href="#cb7-139"></a><span class="co">    -------</span></span>
-<span id="cb7-140"><a href="#cb7-140"></a><span class="co">    horse_results : pd.DataFrame</span></span>
-<span id="cb7-141"><a href="#cb7-141"></a><span class="co">        One row per session with meta info + anomaly scores + outlier labels.</span></span>
-<span id="cb7-142"><a href="#cb7-142"></a><span class="co">    X_z : pd.DataFrame</span></span>
-<span id="cb7-143"><a href="#cb7-143"></a><span class="co">        Z-scored features for this horse (sessions x features).</span></span>
-<span id="cb7-144"><a href="#cb7-144"></a><span class="co">    &quot;&quot;&quot;</span></span>
-<span id="cb7-145"><a href="#cb7-145"></a>    <span class="co"># Reset index so everything is clean</span></span>
-<span id="cb7-146"><a href="#cb7-146"></a>    df_horse <span class="op">=</span> df_horse.reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb7-108"><a href="#cb7-108"></a><span class="kw">def</span> analyze_horse_anomalies(</span>
+<span id="cb7-109"><a href="#cb7-109"></a>    df_horse: pd.DataFrame,</span>
+<span id="cb7-110"><a href="#cb7-110"></a>    feature_cols,</span>
+<span id="cb7-111"><a href="#cb7-111"></a>    z_thresh: <span class="bu">float</span> <span class="op">=</span> <span class="fl">2.5</span>,</span>
+<span id="cb7-112"><a href="#cb7-112"></a>    k_default: <span class="bu">int</span> <span class="op">=</span> <span class="dv">2</span>,</span>
+<span id="cb7-113"><a href="#cb7-113"></a>    iforest_contamination: <span class="bu">float</span> <span class="op">=</span> <span class="fl">0.25</span>,</span>
+<span id="cb7-114"><a href="#cb7-114"></a>    random_state: <span class="bu">int</span> <span class="op">=</span> <span class="dv">42</span>,</span>
+<span id="cb7-115"><a href="#cb7-115"></a>):</span>
+<span id="cb7-116"><a href="#cb7-116"></a>    <span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb7-117"><a href="#cb7-117"></a><span class="co">    Run all three anomaly-detection methods for a single horse.</span></span>
+<span id="cb7-118"><a href="#cb7-118"></a></span>
+<span id="cb7-119"><a href="#cb7-119"></a><span class="co">    Methods</span></span>
+<span id="cb7-120"><a href="#cb7-120"></a><span class="co">    -------</span></span>
+<span id="cb7-121"><a href="#cb7-121"></a><span class="co">    1) Z-score thresholding:</span></span>
+<span id="cb7-122"><a href="#cb7-122"></a><span class="co">         - Standardize features</span></span>
+<span id="cb7-123"><a href="#cb7-123"></a><span class="co">         - Compute max absolute z-score per session</span></span>
+<span id="cb7-124"><a href="#cb7-124"></a><span class="co">         - Count how many features exceed |z| &gt; z_thresh</span></span>
+<span id="cb7-125"><a href="#cb7-125"></a><span class="co">    2) K-means distance:</span></span>
+<span id="cb7-126"><a href="#cb7-126"></a><span class="co">         - Fit K-means in z-scored space</span></span>
+<span id="cb7-127"><a href="#cb7-127"></a><span class="co">         - Compute distance of each session to its assigned cluster center</span></span>
+<span id="cb7-128"><a href="#cb7-128"></a><span class="co">         - Label top ~20% (or ~1/3 for very small N) as outliers</span></span>
+<span id="cb7-129"><a href="#cb7-129"></a><span class="co">    3) Isolation Forest:</span></span>
+<span id="cb7-130"><a href="#cb7-130"></a><span class="co">         - Run IsolationForest in z-scored space</span></span>
+<span id="cb7-131"><a href="#cb7-131"></a><span class="co">         - Use -score_samples as anomaly score (higher = more isolated)</span></span>
+<span id="cb7-132"><a href="#cb7-132"></a><span class="co">         - Use model&#39;s predicted label (-1 = anomaly)</span></span>
+<span id="cb7-133"><a href="#cb7-133"></a></span>
+<span id="cb7-134"><a href="#cb7-134"></a><span class="co">    Returns</span></span>
+<span id="cb7-135"><a href="#cb7-135"></a><span class="co">    -------</span></span>
+<span id="cb7-136"><a href="#cb7-136"></a><span class="co">    horse_results : pd.DataFrame</span></span>
+<span id="cb7-137"><a href="#cb7-137"></a><span class="co">        One row per session with meta info + anomaly scores + outlier labels.</span></span>
+<span id="cb7-138"><a href="#cb7-138"></a><span class="co">    X_z : pd.DataFrame</span></span>
+<span id="cb7-139"><a href="#cb7-139"></a><span class="co">        Z-scored features for this horse (sessions x features).</span></span>
+<span id="cb7-140"><a href="#cb7-140"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb7-141"><a href="#cb7-141"></a>    <span class="co"># Reset index so everything is clean</span></span>
+<span id="cb7-142"><a href="#cb7-142"></a>    df_horse <span class="op">=</span> df_horse.reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb7-143"><a href="#cb7-143"></a></span>
+<span id="cb7-144"><a href="#cb7-144"></a>    <span class="co"># 1) Prepare clean feature matrix</span></span>
+<span id="cb7-145"><a href="#cb7-145"></a>    X <span class="op">=</span> prepare_features(df_horse, feature_cols)</span>
+<span id="cb7-146"><a href="#cb7-146"></a>    n_samples <span class="op">=</span> X.shape[<span class="dv">0</span>]</span>
 <span id="cb7-147"><a href="#cb7-147"></a></span>
-<span id="cb7-148"><a href="#cb7-148"></a>    <span class="co"># 1) Prepare clean feature matrix</span></span>
-<span id="cb7-149"><a href="#cb7-149"></a>    X <span class="op">=</span> prepare_features(df_horse, feature_cols)</span>
-<span id="cb7-150"><a href="#cb7-150"></a>    n_samples <span class="op">=</span> X.shape[<span class="dv">0</span>]</span>
-<span id="cb7-151"><a href="#cb7-151"></a></span>
-<span id="cb7-152"><a href="#cb7-152"></a>    <span class="co"># If too few sessions, return minimal output</span></span>
-<span id="cb7-153"><a href="#cb7-153"></a>    <span class="cf">if</span> n_samples <span class="op">&lt;</span> <span class="dv">2</span>:</span>
-<span id="cb7-154"><a href="#cb7-154"></a>        <span class="bu">print</span>(<span class="ss">f&quot;Not enough sessions for horse </span><span class="sc">{</span>df_horse[<span class="st">&#39;horse&#39;</span>]<span class="sc">.</span>iloc[<span class="dv">0</span>]<span class="sc">}</span><span class="ss"> to run anomalies.&quot;</span>)</span>
-<span id="cb7-155"><a href="#cb7-155"></a>        X_z <span class="op">=</span> pd.DataFrame(index<span class="op">=</span>df_horse.index)</span>
-<span id="cb7-156"><a href="#cb7-156"></a>        out <span class="op">=</span> df_horse[[<span class="st">&quot;horse&quot;</span>, <span class="st">&quot;session_id&quot;</span>, <span class="st">&quot;n_rows&quot;</span>]].copy()</span>
-<span id="cb7-157"><a href="#cb7-157"></a>        out[<span class="st">&quot;z_max_abs&quot;</span>] <span class="op">=</span> np.nan</span>
-<span id="cb7-158"><a href="#cb7-158"></a>        out[<span class="st">&quot;z_mean_abs&quot;</span>] <span class="op">=</span> np.nan</span>
-<span id="cb7-159"><a href="#cb7-159"></a>        out[<span class="st">&quot;z_n_features_big&quot;</span>] <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb7-160"><a href="#cb7-160"></a>        out[<span class="st">&quot;z_is_outlier&quot;</span>] <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb7-161"><a href="#cb7-161"></a>        out[<span class="st">&quot;kmeans_dist&quot;</span>] <span class="op">=</span> np.nan</span>
-<span id="cb7-162"><a href="#cb7-162"></a>        out[<span class="st">&quot;kmeans_is_outlier&quot;</span>] <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb7-163"><a href="#cb7-163"></a>        out[<span class="st">&quot;iforest_score&quot;</span>] <span class="op">=</span> np.nan</span>
-<span id="cb7-164"><a href="#cb7-164"></a>        out[<span class="st">&quot;iforest_is_outlier&quot;</span>] <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb7-165"><a href="#cb7-165"></a>        out[<span class="st">&quot;n_methods_flagged&quot;</span>] <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb7-166"><a href="#cb7-166"></a>        <span class="cf">return</span> out, X_z</span>
-<span id="cb7-167"><a href="#cb7-167"></a></span>
-<span id="cb7-168"><a href="#cb7-168"></a>    <span class="co"># 2) Standardize features (z-scores)</span></span>
-<span id="cb7-169"><a href="#cb7-169"></a>    scaler <span class="op">=</span> StandardScaler()</span>
-<span id="cb7-170"><a href="#cb7-170"></a>    X_z_values <span class="op">=</span> scaler.fit_transform(X)</span>
-<span id="cb7-171"><a href="#cb7-171"></a>    X_z <span class="op">=</span> pd.DataFrame(X_z_values, columns<span class="op">=</span>X.columns, index<span class="op">=</span>df_horse.index)</span>
-<span id="cb7-172"><a href="#cb7-172"></a></span>
-<span id="cb7-173"><a href="#cb7-173"></a>    <span class="co"># ---------- Method 1: Z-score thresholding ----------</span></span>
-<span id="cb7-174"><a href="#cb7-174"></a>    z_abs <span class="op">=</span> X_z.<span class="bu">abs</span>()</span>
-<span id="cb7-175"><a href="#cb7-175"></a>    z_max <span class="op">=</span> z_abs.<span class="bu">max</span>(axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb7-176"><a href="#cb7-176"></a>    z_mean <span class="op">=</span> z_abs.mean(axis<span class="op">=</span><span class="dv">1</span>)          <span class="co"># average |z| across features</span></span>
-<span id="cb7-177"><a href="#cb7-177"></a>    z_nbig <span class="op">=</span> (z_abs <span class="op">&gt;</span> z_thresh).<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb7-178"><a href="#cb7-178"></a>    z_label <span class="op">=</span> (z_max <span class="op">&gt;</span> z_thresh).astype(<span class="bu">int</span>)</span>
-<span id="cb7-179"><a href="#cb7-179"></a></span>
-<span id="cb7-180"><a href="#cb7-180"></a>    <span class="co"># ---------- Method 2: K-means distance ----------</span></span>
-<span id="cb7-181"><a href="#cb7-181"></a>    <span class="cf">if</span> n_samples <span class="op">&gt;=</span> <span class="dv">3</span>:</span>
-<span id="cb7-182"><a href="#cb7-182"></a>        n_clusters <span class="op">=</span> <span class="bu">min</span>(k_default, n_samples <span class="op">-</span> <span class="dv">1</span>)</span>
-<span id="cb7-183"><a href="#cb7-183"></a>        kmeans <span class="op">=</span> KMeans(</span>
-<span id="cb7-184"><a href="#cb7-184"></a>            n_clusters<span class="op">=</span>n_clusters,</span>
-<span id="cb7-185"><a href="#cb7-185"></a>            n_init<span class="op">=</span><span class="dv">10</span>,</span>
-<span id="cb7-186"><a href="#cb7-186"></a>            random_state<span class="op">=</span>random_state,</span>
-<span id="cb7-187"><a href="#cb7-187"></a>        )</span>
-<span id="cb7-188"><a href="#cb7-188"></a>        cluster_labels <span class="op">=</span> kmeans.fit_predict(X_z)</span>
-<span id="cb7-189"><a href="#cb7-189"></a>        centers <span class="op">=</span> kmeans.cluster_centers_</span>
-<span id="cb7-190"><a href="#cb7-190"></a></span>
-<span id="cb7-191"><a href="#cb7-191"></a>        <span class="co"># Euclidean distance to the assigned cluster center</span></span>
-<span id="cb7-192"><a href="#cb7-192"></a>        dists <span class="op">=</span> []</span>
-<span id="cb7-193"><a href="#cb7-193"></a>        <span class="cf">for</span> i, x <span class="kw">in</span> <span class="bu">enumerate</span>(X_z.to_numpy()):</span>
-<span id="cb7-194"><a href="#cb7-194"></a>            center <span class="op">=</span> centers[cluster_labels[i]]</span>
-<span id="cb7-195"><a href="#cb7-195"></a>            dists.append(np.linalg.norm(x <span class="op">-</span> center))</span>
-<span id="cb7-196"><a href="#cb7-196"></a>        dists <span class="op">=</span> pd.Series(dists, index<span class="op">=</span>X_z.index, name<span class="op">=</span><span class="st">&quot;kmeans_dist&quot;</span>)</span>
-<span id="cb7-197"><a href="#cb7-197"></a></span>
-<span id="cb7-198"><a href="#cb7-198"></a>        <span class="co"># Flag the largest distances as outliers</span></span>
-<span id="cb7-199"><a href="#cb7-199"></a>        <span class="cf">if</span> n_samples <span class="op">&gt;=</span> <span class="dv">5</span>:</span>
-<span id="cb7-200"><a href="#cb7-200"></a>            cutoff <span class="op">=</span> dists.quantile(<span class="fl">0.80</span>)  <span class="co"># top 20% as candidate outliers</span></span>
-<span id="cb7-201"><a href="#cb7-201"></a>        <span class="cf">else</span>:</span>
-<span id="cb7-202"><a href="#cb7-202"></a>            cutoff <span class="op">=</span> dists.quantile(<span class="dv">2</span> <span class="op">/</span> <span class="dv">3</span>)  <span class="co"># for very small N, top ~1/3</span></span>
-<span id="cb7-203"><a href="#cb7-203"></a>        kmeans_label <span class="op">=</span> (dists <span class="op">&gt;=</span> cutoff).astype(<span class="bu">int</span>)</span>
-<span id="cb7-204"><a href="#cb7-204"></a>    <span class="cf">else</span>:</span>
-<span id="cb7-205"><a href="#cb7-205"></a>        <span class="co"># If there are only 2 sessions we skip K-means</span></span>
-<span id="cb7-206"><a href="#cb7-206"></a>        dists <span class="op">=</span> pd.Series(np.nan, index<span class="op">=</span>X_z.index, name<span class="op">=</span><span class="st">&quot;kmeans_dist&quot;</span>)</span>
-<span id="cb7-207"><a href="#cb7-207"></a>        kmeans_label <span class="op">=</span> pd.Series(<span class="dv">0</span>, index<span class="op">=</span>X_z.index, name<span class="op">=</span><span class="st">&quot;kmeans_is_outlier&quot;</span>)</span>
-<span id="cb7-208"><a href="#cb7-208"></a></span>
-<span id="cb7-209"><a href="#cb7-209"></a>    <span class="co"># ---------- Method 3: Isolation Forest ----------</span></span>
-<span id="cb7-210"><a href="#cb7-210"></a>    <span class="cf">if</span> n_samples <span class="op">&gt;=</span> <span class="dv">5</span>:</span>
-<span id="cb7-211"><a href="#cb7-211"></a>        iforest <span class="op">=</span> IsolationForest(</span>
-<span id="cb7-212"><a href="#cb7-212"></a>            n_estimators<span class="op">=</span><span class="dv">200</span>,</span>
-<span id="cb7-213"><a href="#cb7-213"></a>            contamination<span class="op">=</span>iforest_contamination,</span>
-<span id="cb7-214"><a href="#cb7-214"></a>            random_state<span class="op">=</span>random_state,</span>
-<span id="cb7-215"><a href="#cb7-215"></a>        )</span>
-<span id="cb7-216"><a href="#cb7-216"></a>        if_labels <span class="op">=</span> iforest.fit_predict(X_z)         <span class="co"># -1 = anomaly</span></span>
-<span id="cb7-217"><a href="#cb7-217"></a>        if_scores <span class="op">=</span> <span class="op">-</span>iforest.score_samples(X_z)      <span class="co"># higher = more isolated</span></span>
-<span id="cb7-218"><a href="#cb7-218"></a></span>
-<span id="cb7-219"><a href="#cb7-219"></a>        if_label <span class="op">=</span> (pd.Series(if_labels, index<span class="op">=</span>X_z.index) <span class="op">==</span> <span class="op">-</span><span class="dv">1</span>).astype(<span class="bu">int</span>)</span>
-<span id="cb7-220"><a href="#cb7-220"></a>        if_score <span class="op">=</span> pd.Series(if_scores, index<span class="op">=</span>X_z.index, name<span class="op">=</span><span class="st">&quot;iforest_score&quot;</span>)</span>
-<span id="cb7-221"><a href="#cb7-221"></a>    <span class="cf">else</span>:</span>
-<span id="cb7-222"><a href="#cb7-222"></a>        if_label <span class="op">=</span> pd.Series(<span class="dv">0</span>, index<span class="op">=</span>X_z.index, name<span class="op">=</span><span class="st">&quot;iforest_is_outlier&quot;</span>)</span>
-<span id="cb7-223"><a href="#cb7-223"></a>        if_score <span class="op">=</span> pd.Series(np.nan, index<span class="op">=</span>X_z.index, name<span class="op">=</span><span class="st">&quot;iforest_score&quot;</span>)</span>
-<span id="cb7-224"><a href="#cb7-224"></a></span>
-<span id="cb7-225"><a href="#cb7-225"></a>    <span class="co"># Assemble output for this horse</span></span>
-<span id="cb7-226"><a href="#cb7-226"></a>    out <span class="op">=</span> df_horse[[<span class="st">&quot;horse&quot;</span>, <span class="st">&quot;session_id&quot;</span>, <span class="st">&quot;n_rows&quot;</span>]].copy()</span>
-<span id="cb7-227"><a href="#cb7-227"></a>    out[<span class="st">&quot;z_max_abs&quot;</span>] <span class="op">=</span> z_max</span>
-<span id="cb7-228"><a href="#cb7-228"></a>    out[<span class="st">&quot;z_mean_abs&quot;</span>] <span class="op">=</span> z_mean</span>
-<span id="cb7-229"><a href="#cb7-229"></a>    out[<span class="st">&quot;z_n_features_big&quot;</span>] <span class="op">=</span> z_nbig</span>
-<span id="cb7-230"><a href="#cb7-230"></a>    out[<span class="st">&quot;z_is_outlier&quot;</span>] <span class="op">=</span> z_label</span>
-<span id="cb7-231"><a href="#cb7-231"></a>    out[<span class="st">&quot;kmeans_dist&quot;</span>] <span class="op">=</span> dists</span>
-<span id="cb7-232"><a href="#cb7-232"></a>    out[<span class="st">&quot;kmeans_is_outlier&quot;</span>] <span class="op">=</span> kmeans_label</span>
-<span id="cb7-233"><a href="#cb7-233"></a>    out[<span class="st">&quot;iforest_score&quot;</span>] <span class="op">=</span> if_score</span>
-<span id="cb7-234"><a href="#cb7-234"></a>    out[<span class="st">&quot;iforest_is_outlier&quot;</span>] <span class="op">=</span> if_label</span>
+<span id="cb7-148"><a href="#cb7-148"></a>    <span class="co"># If too few sessions, return minimal output</span></span>
+<span id="cb7-149"><a href="#cb7-149"></a>    <span class="cf">if</span> n_samples <span class="op">&lt;</span> <span class="dv">2</span>:</span>
+<span id="cb7-150"><a href="#cb7-150"></a>        <span class="bu">print</span>(<span class="ss">f&quot;Not enough sessions for horse </span><span class="sc">{</span>df_horse[<span class="st">&#39;horse&#39;</span>]<span class="sc">.</span>iloc[<span class="dv">0</span>]<span class="sc">}</span><span class="ss"> to run anomalies.&quot;</span>)</span>
+<span id="cb7-151"><a href="#cb7-151"></a>        X_z <span class="op">=</span> pd.DataFrame(index<span class="op">=</span>df_horse.index)</span>
+<span id="cb7-152"><a href="#cb7-152"></a>        out <span class="op">=</span> df_horse[[<span class="st">&quot;horse&quot;</span>, <span class="st">&quot;session_id&quot;</span>, <span class="st">&quot;n_rows&quot;</span>]].copy()</span>
+<span id="cb7-153"><a href="#cb7-153"></a>        out[<span class="st">&quot;z_max_abs&quot;</span>] <span class="op">=</span> np.nan</span>
+<span id="cb7-154"><a href="#cb7-154"></a>        out[<span class="st">&quot;z_mean_abs&quot;</span>] <span class="op">=</span> np.nan</span>
+<span id="cb7-155"><a href="#cb7-155"></a>        out[<span class="st">&quot;z_n_features_big&quot;</span>] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb7-156"><a href="#cb7-156"></a>        out[<span class="st">&quot;z_is_outlier&quot;</span>] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb7-157"><a href="#cb7-157"></a>        out[<span class="st">&quot;kmeans_dist&quot;</span>] <span class="op">=</span> np.nan</span>
+<span id="cb7-158"><a href="#cb7-158"></a>        out[<span class="st">&quot;kmeans_is_outlier&quot;</span>] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb7-159"><a href="#cb7-159"></a>        out[<span class="st">&quot;iforest_score&quot;</span>] <span class="op">=</span> np.nan</span>
+<span id="cb7-160"><a href="#cb7-160"></a>        out[<span class="st">&quot;iforest_is_outlier&quot;</span>] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb7-161"><a href="#cb7-161"></a>        out[<span class="st">&quot;n_methods_flagged&quot;</span>] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb7-162"><a href="#cb7-162"></a>        <span class="cf">return</span> out, X_z</span>
+<span id="cb7-163"><a href="#cb7-163"></a></span>
+<span id="cb7-164"><a href="#cb7-164"></a>    <span class="co"># 2) Standardize features (z-scores)</span></span>
+<span id="cb7-165"><a href="#cb7-165"></a>    scaler <span class="op">=</span> StandardScaler()</span>
+<span id="cb7-166"><a href="#cb7-166"></a>    X_z_values <span class="op">=</span> scaler.fit_transform(X)</span>
+<span id="cb7-167"><a href="#cb7-167"></a>    X_z <span class="op">=</span> pd.DataFrame(X_z_values, columns<span class="op">=</span>X.columns, index<span class="op">=</span>df_horse.index)</span>
+<span id="cb7-168"><a href="#cb7-168"></a></span>
+<span id="cb7-169"><a href="#cb7-169"></a>    <span class="co"># ---------- Method 1: Z-score thresholding ----------</span></span>
+<span id="cb7-170"><a href="#cb7-170"></a>    z_abs <span class="op">=</span> X_z.<span class="bu">abs</span>()</span>
+<span id="cb7-171"><a href="#cb7-171"></a>    z_max <span class="op">=</span> z_abs.<span class="bu">max</span>(axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb7-172"><a href="#cb7-172"></a>    z_mean <span class="op">=</span> z_abs.mean(axis<span class="op">=</span><span class="dv">1</span>)          <span class="co"># average |z| across features</span></span>
+<span id="cb7-173"><a href="#cb7-173"></a>    z_nbig <span class="op">=</span> (z_abs <span class="op">&gt;</span> z_thresh).<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb7-174"><a href="#cb7-174"></a>    z_label <span class="op">=</span> (z_max <span class="op">&gt;</span> z_thresh).astype(<span class="bu">int</span>)</span>
+<span id="cb7-175"><a href="#cb7-175"></a></span>
+<span id="cb7-176"><a href="#cb7-176"></a>    <span class="co"># ---------- Method 2: K-means distance ----------</span></span>
+<span id="cb7-177"><a href="#cb7-177"></a>    <span class="cf">if</span> n_samples <span class="op">&gt;=</span> <span class="dv">3</span>:</span>
+<span id="cb7-178"><a href="#cb7-178"></a>        n_clusters <span class="op">=</span> <span class="bu">min</span>(k_default, n_samples <span class="op">-</span> <span class="dv">1</span>)</span>
+<span id="cb7-179"><a href="#cb7-179"></a>        kmeans <span class="op">=</span> KMeans(</span>
+<span id="cb7-180"><a href="#cb7-180"></a>            n_clusters<span class="op">=</span>n_clusters,</span>
+<span id="cb7-181"><a href="#cb7-181"></a>            n_init<span class="op">=</span><span class="dv">10</span>,</span>
+<span id="cb7-182"><a href="#cb7-182"></a>            random_state<span class="op">=</span>random_state,</span>
+<span id="cb7-183"><a href="#cb7-183"></a>        )</span>
+<span id="cb7-184"><a href="#cb7-184"></a>        cluster_labels <span class="op">=</span> kmeans.fit_predict(X_z)</span>
+<span id="cb7-185"><a href="#cb7-185"></a>        centers <span class="op">=</span> kmeans.cluster_centers_</span>
+<span id="cb7-186"><a href="#cb7-186"></a></span>
+<span id="cb7-187"><a href="#cb7-187"></a>        <span class="co"># Euclidean distance to the assigned cluster center</span></span>
+<span id="cb7-188"><a href="#cb7-188"></a>        dists <span class="op">=</span> []</span>
+<span id="cb7-189"><a href="#cb7-189"></a>        <span class="cf">for</span> i, x <span class="kw">in</span> <span class="bu">enumerate</span>(X_z.to_numpy()):</span>
+<span id="cb7-190"><a href="#cb7-190"></a>            center <span class="op">=</span> centers[cluster_labels[i]]</span>
+<span id="cb7-191"><a href="#cb7-191"></a>            dists.append(np.linalg.norm(x <span class="op">-</span> center))</span>
+<span id="cb7-192"><a href="#cb7-192"></a>        dists <span class="op">=</span> pd.Series(dists, index<span class="op">=</span>X_z.index, name<span class="op">=</span><span class="st">&quot;kmeans_dist&quot;</span>)</span>
+<span id="cb7-193"><a href="#cb7-193"></a></span>
+<span id="cb7-194"><a href="#cb7-194"></a>        <span class="co"># Flag the largest distances as outliers</span></span>
+<span id="cb7-195"><a href="#cb7-195"></a>        <span class="cf">if</span> n_samples <span class="op">&gt;=</span> <span class="dv">5</span>:</span>
+<span id="cb7-196"><a href="#cb7-196"></a>            cutoff <span class="op">=</span> dists.quantile(<span class="fl">0.80</span>)  <span class="co"># top 20% as candidate outliers</span></span>
+<span id="cb7-197"><a href="#cb7-197"></a>        <span class="cf">else</span>:</span>
+<span id="cb7-198"><a href="#cb7-198"></a>            cutoff <span class="op">=</span> dists.quantile(<span class="dv">2</span> <span class="op">/</span> <span class="dv">3</span>)  <span class="co"># for very small N, top ~1/3</span></span>
+<span id="cb7-199"><a href="#cb7-199"></a>        kmeans_label <span class="op">=</span> (dists <span class="op">&gt;=</span> cutoff).astype(<span class="bu">int</span>)</span>
+<span id="cb7-200"><a href="#cb7-200"></a>    <span class="cf">else</span>:</span>
+<span id="cb7-201"><a href="#cb7-201"></a>        <span class="co"># If there are only 2 sessions we skip K-means</span></span>
+<span id="cb7-202"><a href="#cb7-202"></a>        dists <span class="op">=</span> pd.Series(np.nan, index<span class="op">=</span>X_z.index, name<span class="op">=</span><span class="st">&quot;kmeans_dist&quot;</span>)</span>
+<span id="cb7-203"><a href="#cb7-203"></a>        kmeans_label <span class="op">=</span> pd.Series(<span class="dv">0</span>, index<span class="op">=</span>X_z.index, name<span class="op">=</span><span class="st">&quot;kmeans_is_outlier&quot;</span>)</span>
+<span id="cb7-204"><a href="#cb7-204"></a></span>
+<span id="cb7-205"><a href="#cb7-205"></a>    <span class="co"># ---------- Method 3: Isolation Forest ----------</span></span>
+<span id="cb7-206"><a href="#cb7-206"></a>    <span class="cf">if</span> n_samples <span class="op">&gt;=</span> <span class="dv">5</span>:</span>
+<span id="cb7-207"><a href="#cb7-207"></a>        iforest <span class="op">=</span> IsolationForest(</span>
+<span id="cb7-208"><a href="#cb7-208"></a>            n_estimators<span class="op">=</span><span class="dv">200</span>,</span>
+<span id="cb7-209"><a href="#cb7-209"></a>            contamination<span class="op">=</span>iforest_contamination,</span>
+<span id="cb7-210"><a href="#cb7-210"></a>            random_state<span class="op">=</span>random_state,</span>
+<span id="cb7-211"><a href="#cb7-211"></a>        )</span>
+<span id="cb7-212"><a href="#cb7-212"></a>        if_labels <span class="op">=</span> iforest.fit_predict(X_z)         <span class="co"># -1 = anomaly</span></span>
+<span id="cb7-213"><a href="#cb7-213"></a>        if_scores <span class="op">=</span> <span class="op">-</span>iforest.score_samples(X_z)      <span class="co"># higher = more isolated</span></span>
+<span id="cb7-214"><a href="#cb7-214"></a></span>
+<span id="cb7-215"><a href="#cb7-215"></a>        if_label <span class="op">=</span> (pd.Series(if_labels, index<span class="op">=</span>X_z.index) <span class="op">==</span> <span class="op">-</span><span class="dv">1</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb7-216"><a href="#cb7-216"></a>        if_score <span class="op">=</span> pd.Series(if_scores, index<span class="op">=</span>X_z.index, name<span class="op">=</span><span class="st">&quot;iforest_score&quot;</span>)</span>
+<span id="cb7-217"><a href="#cb7-217"></a>    <span class="cf">else</span>:</span>
+<span id="cb7-218"><a href="#cb7-218"></a>        if_label <span class="op">=</span> pd.Series(<span class="dv">0</span>, index<span class="op">=</span>X_z.index, name<span class="op">=</span><span class="st">&quot;iforest_is_outlier&quot;</span>)</span>
+<span id="cb7-219"><a href="#cb7-219"></a>        if_score <span class="op">=</span> pd.Series(np.nan, index<span class="op">=</span>X_z.index, name<span class="op">=</span><span class="st">&quot;iforest_score&quot;</span>)</span>
+<span id="cb7-220"><a href="#cb7-220"></a></span>
+<span id="cb7-221"><a href="#cb7-221"></a>    <span class="co"># Assemble output for this horse</span></span>
+<span id="cb7-222"><a href="#cb7-222"></a>    out <span class="op">=</span> df_horse[[<span class="st">&quot;horse&quot;</span>, <span class="st">&quot;session_id&quot;</span>, <span class="st">&quot;n_rows&quot;</span>]].copy()</span>
+<span id="cb7-223"><a href="#cb7-223"></a>    out[<span class="st">&quot;z_max_abs&quot;</span>] <span class="op">=</span> z_max</span>
+<span id="cb7-224"><a href="#cb7-224"></a>    out[<span class="st">&quot;z_mean_abs&quot;</span>] <span class="op">=</span> z_mean</span>
+<span id="cb7-225"><a href="#cb7-225"></a>    out[<span class="st">&quot;z_n_features_big&quot;</span>] <span class="op">=</span> z_nbig</span>
+<span id="cb7-226"><a href="#cb7-226"></a>    out[<span class="st">&quot;z_is_outlier&quot;</span>] <span class="op">=</span> z_label</span>
+<span id="cb7-227"><a href="#cb7-227"></a>    out[<span class="st">&quot;kmeans_dist&quot;</span>] <span class="op">=</span> dists</span>
+<span id="cb7-228"><a href="#cb7-228"></a>    out[<span class="st">&quot;kmeans_is_outlier&quot;</span>] <span class="op">=</span> kmeans_label</span>
+<span id="cb7-229"><a href="#cb7-229"></a>    out[<span class="st">&quot;iforest_score&quot;</span>] <span class="op">=</span> if_score</span>
+<span id="cb7-230"><a href="#cb7-230"></a>    out[<span class="st">&quot;iforest_is_outlier&quot;</span>] <span class="op">=</span> if_label</span>
+<span id="cb7-231"><a href="#cb7-231"></a></span>
+<span id="cb7-232"><a href="#cb7-232"></a>    <span class="co"># How many methods flag each session?</span></span>
+<span id="cb7-233"><a href="#cb7-233"></a>    method_cols <span class="op">=</span> [<span class="st">&quot;z_is_outlier&quot;</span>, <span class="st">&quot;kmeans_is_outlier&quot;</span>, <span class="st">&quot;iforest_is_outlier&quot;</span>]</span>
+<span id="cb7-234"><a href="#cb7-234"></a>    out[<span class="st">&quot;n_methods_flagged&quot;</span>] <span class="op">=</span> out[method_cols].<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb7-235"><a href="#cb7-235"></a></span>
-<span id="cb7-236"><a href="#cb7-236"></a>    <span class="co"># How many methods flag each session?</span></span>
-<span id="cb7-237"><a href="#cb7-237"></a>    method_cols <span class="op">=</span> [<span class="st">&quot;z_is_outlier&quot;</span>, <span class="st">&quot;kmeans_is_outlier&quot;</span>, <span class="st">&quot;iforest_is_outlier&quot;</span>]</span>
-<span id="cb7-238"><a href="#cb7-238"></a>    out[<span class="st">&quot;n_methods_flagged&quot;</span>] <span class="op">=</span> out[method_cols].<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb7-239"><a href="#cb7-239"></a></span>
-<span id="cb7-240"><a href="#cb7-240"></a>    <span class="cf">return</span> out, X_z</span>
-<span id="cb7-241"><a href="#cb7-241"></a></span>
+<span id="cb7-236"><a href="#cb7-236"></a>    <span class="cf">return</span> out, X_z</span>
+<span id="cb7-237"><a href="#cb7-237"></a></span>
+<span id="cb7-238"><a href="#cb7-238"></a></span>
+<span id="cb7-239"><a href="#cb7-239"></a><span class="co"># -----------------------------------------</span></span>
+<span id="cb7-240"><a href="#cb7-240"></a><span class="co"># 4. Run analysis for all horses</span></span>
+<span id="cb7-241"><a href="#cb7-241"></a><span class="co"># -----------------------------------------</span></span>
 <span id="cb7-242"><a href="#cb7-242"></a></span>
-<span id="cb7-243"><a href="#cb7-243"></a><span class="co"># -----------------------------------------</span></span>
-<span id="cb7-244"><a href="#cb7-244"></a><span class="co"># 5. Run analysis for all horses</span></span>
-<span id="cb7-245"><a href="#cb7-245"></a><span class="co"># -----------------------------------------</span></span>
-<span id="cb7-246"><a href="#cb7-246"></a></span>
-<span id="cb7-247"><a href="#cb7-247"></a>all_results <span class="op">=</span> []</span>
-<span id="cb7-248"><a href="#cb7-248"></a>z_spaces <span class="op">=</span> {}  <span class="co"># store z-scored features if you want to look later</span></span>
-<span id="cb7-249"><a href="#cb7-249"></a></span>
-<span id="cb7-250"><a href="#cb7-250"></a><span class="cf">for</span> horse <span class="kw">in</span> session_features[<span class="st">&quot;horse&quot;</span>].unique():</span>
-<span id="cb7-251"><a href="#cb7-251"></a>    df_horse <span class="op">=</span> session_features[session_features[<span class="st">&quot;horse&quot;</span>] <span class="op">==</span> horse]</span>
-<span id="cb7-252"><a href="#cb7-252"></a>    <span class="bu">print</span>(<span class="ss">f&quot;</span><span class="ch">\n</span><span class="ss">=== Analyzing horse: </span><span class="sc">{</span>horse<span class="sc">}</span><span class="ss"> ===&quot;</span>)</span>
-<span id="cb7-253"><a href="#cb7-253"></a>    <span class="bu">print</span>(<span class="ss">f&quot;Number of sessions: </span><span class="sc">{</span>df_horse<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">&quot;</span>)</span>
-<span id="cb7-254"><a href="#cb7-254"></a></span>
-<span id="cb7-255"><a href="#cb7-255"></a>    horse_results, X_z <span class="op">=</span> analyze_horse_anomalies(</span>
-<span id="cb7-256"><a href="#cb7-256"></a>        df_horse<span class="op">=</span>df_horse,</span>
-<span id="cb7-257"><a href="#cb7-257"></a>        feature_cols<span class="op">=</span>feature_cols,</span>
-<span id="cb7-258"><a href="#cb7-258"></a>        z_thresh<span class="op">=</span><span class="fl">2.5</span>,</span>
-<span id="cb7-259"><a href="#cb7-259"></a>        k_default<span class="op">=</span><span class="dv">2</span>,</span>
-<span id="cb7-260"><a href="#cb7-260"></a>        iforest_contamination<span class="op">=</span><span class="fl">0.25</span>,</span>
-<span id="cb7-261"><a href="#cb7-261"></a>        random_state<span class="op">=</span><span class="dv">42</span>,</span>
-<span id="cb7-262"><a href="#cb7-262"></a>    )</span>
-<span id="cb7-263"><a href="#cb7-263"></a></span>
-<span id="cb7-264"><a href="#cb7-264"></a>    all_results.append(horse_results)</span>
-<span id="cb7-265"><a href="#cb7-265"></a>    z_spaces[horse] <span class="op">=</span> X_z</span>
-<span id="cb7-266"><a href="#cb7-266"></a></span>
-<span id="cb7-267"><a href="#cb7-267"></a><span class="co"># Combine results for all horses</span></span>
-<span id="cb7-268"><a href="#cb7-268"></a>anomaly_summary <span class="op">=</span> pd.concat(all_results, ignore_index<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb7-269"><a href="#cb7-269"></a></span>
-<span id="cb7-270"><a href="#cb7-270"></a><span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Combined anomaly summary for all horses:&quot;</span>)</span>
-<span id="cb7-271"><a href="#cb7-271"></a>display(</span>
-<span id="cb7-272"><a href="#cb7-272"></a>    anomaly_summary.sort_values(</span>
-<span id="cb7-273"><a href="#cb7-273"></a>        [<span class="st">&quot;horse&quot;</span>, <span class="st">&quot;n_methods_flagged&quot;</span>, <span class="st">&quot;z_max_abs&quot;</span>],</span>
-<span id="cb7-274"><a href="#cb7-274"></a>        ascending<span class="op">=</span>[<span class="va">True</span>, <span class="va">False</span>, <span class="va">False</span>],</span>
-<span id="cb7-275"><a href="#cb7-275"></a>    )</span>
-<span id="cb7-276"><a href="#cb7-276"></a>)</span>
-<span id="cb7-277"><a href="#cb7-277"></a></span>
+<span id="cb7-243"><a href="#cb7-243"></a>all_results <span class="op">=</span> []</span>
+<span id="cb7-244"><a href="#cb7-244"></a>z_spaces <span class="op">=</span> {}  <span class="co"># store z-scored features if you want to look later</span></span>
+<span id="cb7-245"><a href="#cb7-245"></a></span>
+<span id="cb7-246"><a href="#cb7-246"></a><span class="cf">for</span> horse <span class="kw">in</span> session_features[<span class="st">&quot;horse&quot;</span>].unique():</span>
+<span id="cb7-247"><a href="#cb7-247"></a>    df_horse <span class="op">=</span> session_features[session_features[<span class="st">&quot;horse&quot;</span>] <span class="op">==</span> horse]</span>
+<span id="cb7-248"><a href="#cb7-248"></a>    <span class="bu">print</span>(<span class="ss">f&quot;</span><span class="ch">\n</span><span class="ss">=== Analyzing horse: </span><span class="sc">{</span>horse<span class="sc">}</span><span class="ss"> ===&quot;</span>)</span>
+<span id="cb7-249"><a href="#cb7-249"></a>    <span class="bu">print</span>(<span class="ss">f&quot;Number of sessions: </span><span class="sc">{</span>df_horse<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb7-250"><a href="#cb7-250"></a></span>
+<span id="cb7-251"><a href="#cb7-251"></a>    horse_results, X_z <span class="op">=</span> analyze_horse_anomalies(</span>
+<span id="cb7-252"><a href="#cb7-252"></a>        df_horse<span class="op">=</span>df_horse,</span>
+<span id="cb7-253"><a href="#cb7-253"></a>        feature_cols<span class="op">=</span>feature_cols,</span>
+<span id="cb7-254"><a href="#cb7-254"></a>        z_thresh<span class="op">=</span><span class="fl">2.5</span>,</span>
+<span id="cb7-255"><a href="#cb7-255"></a>        k_default<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb7-256"><a href="#cb7-256"></a>        iforest_contamination<span class="op">=</span><span class="fl">0.25</span>,</span>
+<span id="cb7-257"><a href="#cb7-257"></a>        random_state<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb7-258"><a href="#cb7-258"></a>    )</span>
+<span id="cb7-259"><a href="#cb7-259"></a></span>
+<span id="cb7-260"><a href="#cb7-260"></a>    all_results.append(horse_results)</span>
+<span id="cb7-261"><a href="#cb7-261"></a>    z_spaces[horse] <span class="op">=</span> X_z</span>
+<span id="cb7-262"><a href="#cb7-262"></a></span>
+<span id="cb7-263"><a href="#cb7-263"></a><span class="co"># Combine results for all horses</span></span>
+<span id="cb7-264"><a href="#cb7-264"></a>anomaly_summary <span class="op">=</span> pd.concat(all_results, ignore_index<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb7-265"><a href="#cb7-265"></a></span>
+<span id="cb7-266"><a href="#cb7-266"></a><span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Combined anomaly summary for all horses:&quot;</span>)</span>
+<span id="cb7-267"><a href="#cb7-267"></a>display(</span>
+<span id="cb7-268"><a href="#cb7-268"></a>    anomaly_summary.sort_values(</span>
+<span id="cb7-269"><a href="#cb7-269"></a>        [<span class="st">&quot;horse&quot;</span>, <span class="st">&quot;n_methods_flagged&quot;</span>, <span class="st">&quot;z_max_abs&quot;</span>],</span>
+<span id="cb7-270"><a href="#cb7-270"></a>        ascending<span class="op">=</span>[<span class="va">True</span>, <span class="va">False</span>, <span class="va">False</span>],</span>
+<span id="cb7-271"><a href="#cb7-271"></a>    )</span>
+<span id="cb7-272"><a href="#cb7-272"></a>)</span>
+<span id="cb7-273"><a href="#cb7-273"></a></span>
+<span id="cb7-274"><a href="#cb7-274"></a></span>
+<span id="cb7-275"><a href="#cb7-275"></a><span class="co"># -----------------------------------------</span></span>
+<span id="cb7-276"><a href="#cb7-276"></a><span class="co"># 5. Quick sanity checks</span></span>
+<span id="cb7-277"><a href="#cb7-277"></a><span class="co"># -----------------------------------------</span></span>
 <span id="cb7-278"><a href="#cb7-278"></a></span>
-<span id="cb7-279"><a href="#cb7-279"></a><span class="co"># -----------------------------------------</span></span>
-<span id="cb7-280"><a href="#cb7-280"></a><span class="co"># 6. Quick sanity checks</span></span>
-<span id="cb7-281"><a href="#cb7-281"></a><span class="co"># -----------------------------------------</span></span>
-<span id="cb7-282"><a href="#cb7-282"></a></span>
-<span id="cb7-283"><a href="#cb7-283"></a><span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">How many sessions are flagged by each method?&quot;</span>)</span>
-<span id="cb7-284"><a href="#cb7-284"></a><span class="cf">for</span> col <span class="kw">in</span> [<span class="st">&quot;z_is_outlier&quot;</span>, <span class="st">&quot;kmeans_is_outlier&quot;</span>, <span class="st">&quot;iforest_is_outlier&quot;</span>]:</span>
-<span id="cb7-285"><a href="#cb7-285"></a>    counts <span class="op">=</span> anomaly_summary.groupby(<span class="st">&quot;horse&quot;</span>)[col].<span class="bu">sum</span>()</span>
-<span id="cb7-286"><a href="#cb7-286"></a>    <span class="bu">print</span>(<span class="ss">f&quot;</span><span class="ch">\n</span><span class="ss">Method: </span><span class="sc">{</span>col<span class="sc">}</span><span class="ss">&quot;</span>)</span>
-<span id="cb7-287"><a href="#cb7-287"></a>    <span class="bu">print</span>(counts)</span>
-<span id="cb7-288"><a href="#cb7-288"></a></span>
-<span id="cb7-289"><a href="#cb7-289"></a><span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">How many sessions are flagged by ≥2 methods?&quot;</span>)</span>
-<span id="cb7-290"><a href="#cb7-290"></a>flagged_two_plus <span class="op">=</span> anomaly_summary[anomaly_summary[<span class="st">&quot;n_methods_flagged&quot;</span>] <span class="op">&gt;=</span> <span class="dv">2</span>]</span>
-<span id="cb7-291"><a href="#cb7-291"></a>display(</span>
-<span id="cb7-292"><a href="#cb7-292"></a>    flagged_two_plus.sort_values(</span>
-<span id="cb7-293"><a href="#cb7-293"></a>        [<span class="st">&quot;horse&quot;</span>, <span class="st">&quot;n_methods_flagged&quot;</span>, <span class="st">&quot;z_max_abs&quot;</span>],</span>
-<span id="cb7-294"><a href="#cb7-294"></a>        ascending<span class="op">=</span>[<span class="va">True</span>, <span class="va">False</span>, <span class="va">False</span>],</span>
-<span id="cb7-295"><a href="#cb7-295"></a>    )</span>
-<span id="cb7-296"><a href="#cb7-296"></a>)</span>
-<span id="cb7-297"><a href="#cb7-297"></a></span>
+<span id="cb7-279"><a href="#cb7-279"></a><span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">How many sessions are flagged by each method?&quot;</span>)</span>
+<span id="cb7-280"><a href="#cb7-280"></a><span class="cf">for</span> col <span class="kw">in</span> [<span class="st">&quot;z_is_outlier&quot;</span>, <span class="st">&quot;kmeans_is_outlier&quot;</span>, <span class="st">&quot;iforest_is_outlier&quot;</span>]:</span>
+<span id="cb7-281"><a href="#cb7-281"></a>    counts <span class="op">=</span> anomaly_summary.groupby(<span class="st">&quot;horse&quot;</span>)[col].<span class="bu">sum</span>()</span>
+<span id="cb7-282"><a href="#cb7-282"></a>    <span class="bu">print</span>(<span class="ss">f&quot;</span><span class="ch">\n</span><span class="ss">Method: </span><span class="sc">{</span>col<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb7-283"><a href="#cb7-283"></a>    <span class="bu">print</span>(counts)</span>
+<span id="cb7-284"><a href="#cb7-284"></a></span>
+<span id="cb7-285"><a href="#cb7-285"></a><span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">How many sessions are flagged by ≥2 methods?&quot;</span>)</span>
+<span id="cb7-286"><a href="#cb7-286"></a>flagged_two_plus <span class="op">=</span> anomaly_summary[anomaly_summary[<span class="st">&quot;n_methods_flagged&quot;</span>] <span class="op">&gt;=</span> <span class="dv">2</span>]</span>
+<span id="cb7-287"><a href="#cb7-287"></a>display(</span>
+<span id="cb7-288"><a href="#cb7-288"></a>    flagged_two_plus.sort_values(</span>
+<span id="cb7-289"><a href="#cb7-289"></a>        [<span class="st">&quot;horse&quot;</span>, <span class="st">&quot;n_methods_flagged&quot;</span>, <span class="st">&quot;z_max_abs&quot;</span>],</span>
+<span id="cb7-290"><a href="#cb7-290"></a>        ascending<span class="op">=</span>[<span class="va">True</span>, <span class="va">False</span>, <span class="va">False</span>],</span>
+<span id="cb7-291"><a href="#cb7-291"></a>    )</span>
+<span id="cb7-292"><a href="#cb7-292"></a>)</span>
+<span id="cb7-293"><a href="#cb7-293"></a></span>
+<span id="cb7-294"><a href="#cb7-294"></a></span>
+<span id="cb7-295"><a href="#cb7-295"></a><span class="co"># -----------------------------------------</span></span>
+<span id="cb7-296"><a href="#cb7-296"></a><span class="co"># 6. Simple visualizations</span></span>
+<span id="cb7-297"><a href="#cb7-297"></a><span class="co"># -----------------------------------------</span></span>
 <span id="cb7-298"><a href="#cb7-298"></a></span>
-<span id="cb7-299"><a href="#cb7-299"></a><span class="co"># -----------------------------------------</span></span>
-<span id="cb7-300"><a href="#cb7-300"></a><span class="co"># 7. Simple visualizations</span></span>
-<span id="cb7-301"><a href="#cb7-301"></a><span class="co"># -----------------------------------------</span></span>
-<span id="cb7-302"><a href="#cb7-302"></a></span>
-<span id="cb7-303"><a href="#cb7-303"></a><span class="co"># 7.1 Add datetime columns and sort</span></span>
-<span id="cb7-304"><a href="#cb7-304"></a>anomaly_summary[<span class="st">&quot;session_dt&quot;</span>] <span class="op">=</span> pd.to_datetime(</span>
-<span id="cb7-305"><a href="#cb7-305"></a>    anomaly_summary[<span class="st">&quot;session_id&quot;</span>].<span class="bu">str</span>[:<span class="dv">8</span>],  <span class="co"># yyyymmdd</span></span>
-<span id="cb7-306"><a href="#cb7-306"></a>    <span class="bu">format</span><span class="op">=</span><span class="st">&quot;%Y%m</span><span class="sc">%d</span><span class="st">&quot;</span></span>
-<span id="cb7-307"><a href="#cb7-307"></a>)</span>
-<span id="cb7-308"><a href="#cb7-308"></a>anomaly_summary[<span class="st">&quot;session_label&quot;</span>] <span class="op">=</span> anomaly_summary[<span class="st">&quot;session_dt&quot;</span>].dt.strftime(<span class="st">&quot;%m/</span><span class="sc">%d</span><span class="st">/%y&quot;</span>)</span>
-<span id="cb7-309"><a href="#cb7-309"></a></span>
-<span id="cb7-310"><a href="#cb7-310"></a><span class="co"># Sort once by date so plots are in chronological order</span></span>
-<span id="cb7-311"><a href="#cb7-311"></a>anomaly_summary <span class="op">=</span> anomaly_summary.sort_values(<span class="st">&quot;session_dt&quot;</span>)</span>
-<span id="cb7-312"><a href="#cb7-312"></a></span>
-<span id="cb7-313"><a href="#cb7-313"></a><span class="co"># 7.2 Plot 1: max |z|-score vs. session across horses (stars for ≥2 methods)</span></span>
-<span id="cb7-314"><a href="#cb7-314"></a>horse_order <span class="op">=</span> [<span class="st">&quot;Duque&quot;</span>, <span class="st">&quot;Jackson&quot;</span>, <span class="st">&quot;Perseo&quot;</span>]  <span class="co"># optional, keeps legend consistent</span></span>
-<span id="cb7-315"><a href="#cb7-315"></a>horse_colors <span class="op">=</span> {</span>
-<span id="cb7-316"><a href="#cb7-316"></a>    <span class="st">&quot;Duque&quot;</span>: <span class="st">&quot;tab:blue&quot;</span>,</span>
-<span id="cb7-317"><a href="#cb7-317"></a>    <span class="st">&quot;Jackson&quot;</span>: <span class="st">&quot;tab:orange&quot;</span>,</span>
-<span id="cb7-318"><a href="#cb7-318"></a>    <span class="st">&quot;Perseo&quot;</span>: <span class="st">&quot;tab:green&quot;</span>,</span>
-<span id="cb7-319"><a href="#cb7-319"></a>}</span>
-<span id="cb7-320"><a href="#cb7-320"></a></span>
-<span id="cb7-321"><a href="#cb7-321"></a>plt.figure()</span>
-<span id="cb7-322"><a href="#cb7-322"></a></span>
-<span id="cb7-323"><a href="#cb7-323"></a><span class="cf">for</span> horse <span class="kw">in</span> horse_order:</span>
-<span id="cb7-324"><a href="#cb7-324"></a>    df_h <span class="op">=</span> anomaly_summary[anomaly_summary[<span class="st">&quot;horse&quot;</span>] <span class="op">==</span> horse]</span>
-<span id="cb7-325"><a href="#cb7-325"></a></span>
-<span id="cb7-326"><a href="#cb7-326"></a>    <span class="co"># Base points (all sessions)</span></span>
-<span id="cb7-327"><a href="#cb7-327"></a>    plt.scatter(</span>
-<span id="cb7-328"><a href="#cb7-328"></a>        df_h[<span class="st">&quot;session_dt&quot;</span>],</span>
-<span id="cb7-329"><a href="#cb7-329"></a>        df_h[<span class="st">&quot;z_max_abs&quot;</span>],</span>
-<span id="cb7-330"><a href="#cb7-330"></a>        label<span class="op">=</span>horse,</span>
-<span id="cb7-331"><a href="#cb7-331"></a>        color<span class="op">=</span>horse_colors[horse],</span>
-<span id="cb7-332"><a href="#cb7-332"></a>        marker<span class="op">=</span><span class="st">&quot;o&quot;</span>,</span>
-<span id="cb7-333"><a href="#cb7-333"></a>        alpha<span class="op">=</span><span class="fl">0.85</span></span>
-<span id="cb7-334"><a href="#cb7-334"></a>    )</span>
-<span id="cb7-335"><a href="#cb7-335"></a></span>
-<span id="cb7-336"><a href="#cb7-336"></a>    <span class="co"># High-confidence overlay (same color, star marker)</span></span>
-<span id="cb7-337"><a href="#cb7-337"></a>    df_hi <span class="op">=</span> df_h[df_h[<span class="st">&quot;n_methods_flagged&quot;</span>] <span class="op">&gt;=</span> <span class="dv">2</span>]</span>
-<span id="cb7-338"><a href="#cb7-338"></a>    <span class="cf">if</span> <span class="kw">not</span> df_hi.empty:</span>
-<span id="cb7-339"><a href="#cb7-339"></a>        plt.scatter(</span>
-<span id="cb7-340"><a href="#cb7-340"></a>            df_hi[<span class="st">&quot;session_dt&quot;</span>],</span>
-<span id="cb7-341"><a href="#cb7-341"></a>            df_hi[<span class="st">&quot;z_max_abs&quot;</span>],</span>
-<span id="cb7-342"><a href="#cb7-342"></a>            color<span class="op">=</span>horse_colors[horse],</span>
-<span id="cb7-343"><a href="#cb7-343"></a>            marker<span class="op">=</span><span class="st">&quot;*&quot;</span>,</span>
-<span id="cb7-344"><a href="#cb7-344"></a>            s<span class="op">=</span><span class="dv">200</span>,</span>
-<span id="cb7-345"><a href="#cb7-345"></a>            edgecolors<span class="op">=</span><span class="st">&quot;black&quot;</span>,</span>
-<span id="cb7-346"><a href="#cb7-346"></a>            linewidths<span class="op">=</span><span class="fl">0.8</span>,</span>
-<span id="cb7-347"><a href="#cb7-347"></a>            alpha<span class="op">=</span><span class="fl">1.0</span></span>
-<span id="cb7-348"><a href="#cb7-348"></a>        )</span>
-<span id="cb7-349"><a href="#cb7-349"></a></span>
-<span id="cb7-350"><a href="#cb7-350"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">90</span>)</span>
-<span id="cb7-351"><a href="#cb7-351"></a>plt.ylabel(<span class="st">&quot;max |z-score| across features&quot;</span>)</span>
-<span id="cb7-352"><a href="#cb7-352"></a>plt.xlabel(<span class="st">&quot;session date&quot;</span>)</span>
-<span id="cb7-353"><a href="#cb7-353"></a>plt.title(<span class="st">&quot;Session-level deviation from baseline (max |z|)</span><span class="ch">\n</span><span class="st">* = flagged by ≥2 methods&quot;</span>)</span>
-<span id="cb7-354"><a href="#cb7-354"></a>plt.legend()</span>
-<span id="cb7-355"><a href="#cb7-355"></a>plt.tight_layout()</span>
-<span id="cb7-356"><a href="#cb7-356"></a>plt.savefig(<span class="st">&quot;fig_max_zscore.png&quot;</span>, dpi<span class="op">=</span><span class="dv">300</span>, bbox_inches<span class="op">=</span><span class="st">&quot;tight&quot;</span>)</span>
-<span id="cb7-357"><a href="#cb7-357"></a></span>
-<span id="cb7-358"><a href="#cb7-358"></a><span class="co"># 7.3 Plot 2: mean |z|-score vs. session across horses</span></span>
-<span id="cb7-359"><a href="#cb7-359"></a>plt.figure()</span>
-<span id="cb7-360"><a href="#cb7-360"></a><span class="cf">for</span> horse, df_h <span class="kw">in</span> anomaly_summary.groupby(<span class="st">&quot;horse&quot;</span>):</span>
-<span id="cb7-361"><a href="#cb7-361"></a>    plt.scatter(df_h[<span class="st">&quot;session_dt&quot;</span>], df_h[<span class="st">&quot;z_mean_abs&quot;</span>], label<span class="op">=</span>horse)</span>
-<span id="cb7-362"><a href="#cb7-362"></a></span>
-<span id="cb7-363"><a href="#cb7-363"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">90</span>)</span>
-<span id="cb7-364"><a href="#cb7-364"></a>plt.ylabel(<span class="st">&quot;mean |z-score| across features&quot;</span>)</span>
-<span id="cb7-365"><a href="#cb7-365"></a>plt.xlabel(<span class="st">&quot;session date&quot;</span>)</span>
-<span id="cb7-366"><a href="#cb7-366"></a>plt.title(<span class="st">&quot;Session-level deviation from baseline (mean |z|)&quot;</span>)</span>
-<span id="cb7-367"><a href="#cb7-367"></a>plt.legend()</span>
-<span id="cb7-368"><a href="#cb7-368"></a>plt.tight_layout()</span>
-<span id="cb7-369"><a href="#cb7-369"></a>plt.savefig(<span class="st">&quot;fig_mean_zscore.png&quot;</span>, dpi<span class="op">=</span><span class="dv">300</span>, bbox_inches<span class="op">=</span><span class="st">&quot;tight&quot;</span>)</span>
-<span id="cb7-370"><a href="#cb7-370"></a></span>
-<span id="cb7-371"><a href="#cb7-371"></a><span class="co"># 7.4 Plot 3: number of methods that flag each session</span></span>
-<span id="cb7-372"><a href="#cb7-372"></a>plt.figure()</span>
-<span id="cb7-373"><a href="#cb7-373"></a><span class="cf">for</span> horse, df_h <span class="kw">in</span> anomaly_summary.groupby(<span class="st">&quot;horse&quot;</span>):</span>
-<span id="cb7-374"><a href="#cb7-374"></a>    plt.scatter(df_h[<span class="st">&quot;session_dt&quot;</span>], df_h[<span class="st">&quot;n_methods_flagged&quot;</span>], label<span class="op">=</span>horse)</span>
-<span id="cb7-375"><a href="#cb7-375"></a></span>
-<span id="cb7-376"><a href="#cb7-376"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">90</span>)</span>
-<span id="cb7-377"><a href="#cb7-377"></a>plt.ylabel(<span class="st">&quot;number of methods flagging session&quot;</span>)</span>
-<span id="cb7-378"><a href="#cb7-378"></a>plt.xlabel(<span class="st">&quot;session date&quot;</span>)</span>
-<span id="cb7-379"><a href="#cb7-379"></a>plt.title(<span class="st">&quot;Agreement between anomaly-detection methods&quot;</span>)</span>
-<span id="cb7-380"><a href="#cb7-380"></a>plt.legend()</span>
-<span id="cb7-381"><a href="#cb7-381"></a>plt.tight_layout()</span>
-<span id="cb7-382"><a href="#cb7-382"></a>plt.savefig(<span class="st">&quot;fig_method_agreement.png&quot;</span>, dpi<span class="op">=</span><span class="dv">300</span>, bbox_inches<span class="op">=</span><span class="st">&quot;tight&quot;</span>)</span>
-<span id="cb7-383"><a href="#cb7-383"></a></span>
-<span id="cb7-384"><a href="#cb7-384"></a><span class="co"># 7.5 Plot 4: Method agreement heatmap</span></span>
-<span id="cb7-385"><a href="#cb7-385"></a>heat_df <span class="op">=</span> anomaly_summary[</span>
-<span id="cb7-386"><a href="#cb7-386"></a>    [<span class="st">&quot;horse&quot;</span>, <span class="st">&quot;session_id&quot;</span>, <span class="st">&quot;session_dt&quot;</span>,</span>
-<span id="cb7-387"><a href="#cb7-387"></a>     <span class="st">&quot;z_is_outlier&quot;</span>, <span class="st">&quot;kmeans_is_outlier&quot;</span>, <span class="st">&quot;iforest_is_outlier&quot;</span>]</span>
-<span id="cb7-388"><a href="#cb7-388"></a>].copy()</span>
-<span id="cb7-389"><a href="#cb7-389"></a></span>
-<span id="cb7-390"><a href="#cb7-390"></a><span class="co"># Sort sessions by # of methods flagged (descending within horse)</span></span>
-<span id="cb7-391"><a href="#cb7-391"></a>heat_df[<span class="st">&quot;n_flag&quot;</span>] <span class="op">=</span> (</span>
-<span id="cb7-392"><a href="#cb7-392"></a>    heat_df[[<span class="st">&quot;z_is_outlier&quot;</span>, <span class="st">&quot;kmeans_is_outlier&quot;</span>, <span class="st">&quot;iforest_is_outlier&quot;</span>]]</span>
-<span id="cb7-393"><a href="#cb7-393"></a>    .<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb7-394"><a href="#cb7-394"></a>)</span>
-<span id="cb7-395"><a href="#cb7-395"></a>heat_df <span class="op">=</span> heat_df.sort_values([<span class="st">&quot;horse&quot;</span>, <span class="st">&quot;n_flag&quot;</span>], ascending<span class="op">=</span>[<span class="va">True</span>, <span class="va">False</span>])</span>
+<span id="cb7-299"><a href="#cb7-299"></a><span class="co"># 6.1 Add datetime columns and sort</span></span>
+<span id="cb7-300"><a href="#cb7-300"></a>anomaly_summary[<span class="st">&quot;session_dt&quot;</span>] <span class="op">=</span> pd.to_datetime(</span>
+<span id="cb7-301"><a href="#cb7-301"></a>    anomaly_summary[<span class="st">&quot;session_id&quot;</span>].<span class="bu">str</span>[:<span class="dv">8</span>],  <span class="co"># yyyymmdd</span></span>
+<span id="cb7-302"><a href="#cb7-302"></a>    <span class="bu">format</span><span class="op">=</span><span class="st">&quot;%Y%m</span><span class="sc">%d</span><span class="st">&quot;</span></span>
+<span id="cb7-303"><a href="#cb7-303"></a>)</span>
+<span id="cb7-304"><a href="#cb7-304"></a>anomaly_summary[<span class="st">&quot;session_label&quot;</span>] <span class="op">=</span> anomaly_summary[<span class="st">&quot;session_dt&quot;</span>].dt.strftime(<span class="st">&quot;%m/</span><span class="sc">%d</span><span class="st">/%y&quot;</span>)</span>
+<span id="cb7-305"><a href="#cb7-305"></a></span>
+<span id="cb7-306"><a href="#cb7-306"></a><span class="co"># Sort once by date so plots are in chronological order</span></span>
+<span id="cb7-307"><a href="#cb7-307"></a>anomaly_summary <span class="op">=</span> anomaly_summary.sort_values(<span class="st">&quot;session_dt&quot;</span>)</span>
+<span id="cb7-308"><a href="#cb7-308"></a></span>
+<span id="cb7-309"><a href="#cb7-309"></a><span class="co"># 6.2 Plot 1: max |z|-score vs. session across horses (stars for ≥2 methods)</span></span>
+<span id="cb7-310"><a href="#cb7-310"></a>horse_order <span class="op">=</span> [<span class="st">&quot;Duque&quot;</span>, <span class="st">&quot;Jackson&quot;</span>, <span class="st">&quot;Perseo&quot;</span>]  <span class="co"># optional, keeps legend consistent</span></span>
+<span id="cb7-311"><a href="#cb7-311"></a>horse_colors <span class="op">=</span> {</span>
+<span id="cb7-312"><a href="#cb7-312"></a>    <span class="st">&quot;Duque&quot;</span>: <span class="st">&quot;tab:blue&quot;</span>,</span>
+<span id="cb7-313"><a href="#cb7-313"></a>    <span class="st">&quot;Jackson&quot;</span>: <span class="st">&quot;tab:orange&quot;</span>,</span>
+<span id="cb7-314"><a href="#cb7-314"></a>    <span class="st">&quot;Perseo&quot;</span>: <span class="st">&quot;tab:green&quot;</span>,</span>
+<span id="cb7-315"><a href="#cb7-315"></a>}</span>
+<span id="cb7-316"><a href="#cb7-316"></a></span>
+<span id="cb7-317"><a href="#cb7-317"></a>plt.figure()</span>
+<span id="cb7-318"><a href="#cb7-318"></a></span>
+<span id="cb7-319"><a href="#cb7-319"></a><span class="cf">for</span> horse <span class="kw">in</span> horse_order:</span>
+<span id="cb7-320"><a href="#cb7-320"></a>    df_h <span class="op">=</span> anomaly_summary[anomaly_summary[<span class="st">&quot;horse&quot;</span>] <span class="op">==</span> horse]</span>
+<span id="cb7-321"><a href="#cb7-321"></a></span>
+<span id="cb7-322"><a href="#cb7-322"></a>    <span class="co"># Base points (all sessions)</span></span>
+<span id="cb7-323"><a href="#cb7-323"></a>    plt.scatter(</span>
+<span id="cb7-324"><a href="#cb7-324"></a>        df_h[<span class="st">&quot;session_dt&quot;</span>],</span>
+<span id="cb7-325"><a href="#cb7-325"></a>        df_h[<span class="st">&quot;z_max_abs&quot;</span>],</span>
+<span id="cb7-326"><a href="#cb7-326"></a>        label<span class="op">=</span>horse,</span>
+<span id="cb7-327"><a href="#cb7-327"></a>        color<span class="op">=</span>horse_colors[horse],</span>
+<span id="cb7-328"><a href="#cb7-328"></a>        marker<span class="op">=</span><span class="st">&quot;o&quot;</span>,</span>
+<span id="cb7-329"><a href="#cb7-329"></a>        alpha<span class="op">=</span><span class="fl">0.85</span></span>
+<span id="cb7-330"><a href="#cb7-330"></a>    )</span>
+<span id="cb7-331"><a href="#cb7-331"></a></span>
+<span id="cb7-332"><a href="#cb7-332"></a>    <span class="co"># High-confidence overlay (same color, star marker)</span></span>
+<span id="cb7-333"><a href="#cb7-333"></a>    df_hi <span class="op">=</span> df_h[df_h[<span class="st">&quot;n_methods_flagged&quot;</span>] <span class="op">&gt;=</span> <span class="dv">2</span>]</span>
+<span id="cb7-334"><a href="#cb7-334"></a>    <span class="cf">if</span> <span class="kw">not</span> df_hi.empty:</span>
+<span id="cb7-335"><a href="#cb7-335"></a>        plt.scatter(</span>
+<span id="cb7-336"><a href="#cb7-336"></a>            df_hi[<span class="st">&quot;session_dt&quot;</span>],</span>
+<span id="cb7-337"><a href="#cb7-337"></a>            df_hi[<span class="st">&quot;z_max_abs&quot;</span>],</span>
+<span id="cb7-338"><a href="#cb7-338"></a>            color<span class="op">=</span>horse_colors[horse],</span>
+<span id="cb7-339"><a href="#cb7-339"></a>            marker<span class="op">=</span><span class="st">&quot;*&quot;</span>,</span>
+<span id="cb7-340"><a href="#cb7-340"></a>            s<span class="op">=</span><span class="dv">200</span>,</span>
+<span id="cb7-341"><a href="#cb7-341"></a>            edgecolors<span class="op">=</span><span class="st">&quot;black&quot;</span>,</span>
+<span id="cb7-342"><a href="#cb7-342"></a>            linewidths<span class="op">=</span><span class="fl">0.8</span>,</span>
+<span id="cb7-343"><a href="#cb7-343"></a>            alpha<span class="op">=</span><span class="fl">1.0</span></span>
+<span id="cb7-344"><a href="#cb7-344"></a>        )</span>
+<span id="cb7-345"><a href="#cb7-345"></a></span>
+<span id="cb7-346"><a href="#cb7-346"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">90</span>)</span>
+<span id="cb7-347"><a href="#cb7-347"></a>plt.ylabel(<span class="st">&quot;max |z-score| across features&quot;</span>)</span>
+<span id="cb7-348"><a href="#cb7-348"></a>plt.xlabel(<span class="st">&quot;session date&quot;</span>)</span>
+<span id="cb7-349"><a href="#cb7-349"></a>plt.title(<span class="st">&quot;Session-level deviation from baseline (max |z|)</span><span class="ch">\n</span><span class="st">* = flagged by ≥2 methods&quot;</span>)</span>
+<span id="cb7-350"><a href="#cb7-350"></a>plt.legend()</span>
+<span id="cb7-351"><a href="#cb7-351"></a>plt.tight_layout()</span>
+<span id="cb7-352"><a href="#cb7-352"></a>plt.savefig(<span class="st">&quot;fig_max_zscore.png&quot;</span>, dpi<span class="op">=</span><span class="dv">300</span>, bbox_inches<span class="op">=</span><span class="st">&quot;tight&quot;</span>)</span>
+<span id="cb7-353"><a href="#cb7-353"></a></span>
+<span id="cb7-354"><a href="#cb7-354"></a><span class="co"># 6.3 Plot 2: mean |z|-score vs. session across horses</span></span>
+<span id="cb7-355"><a href="#cb7-355"></a>plt.figure()</span>
+<span id="cb7-356"><a href="#cb7-356"></a><span class="cf">for</span> horse, df_h <span class="kw">in</span> anomaly_summary.groupby(<span class="st">&quot;horse&quot;</span>):</span>
+<span id="cb7-357"><a href="#cb7-357"></a>    plt.scatter(df_h[<span class="st">&quot;session_dt&quot;</span>], df_h[<span class="st">&quot;z_mean_abs&quot;</span>], label<span class="op">=</span>horse)</span>
+<span id="cb7-358"><a href="#cb7-358"></a></span>
+<span id="cb7-359"><a href="#cb7-359"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">90</span>)</span>
+<span id="cb7-360"><a href="#cb7-360"></a>plt.ylabel(<span class="st">&quot;mean |z-score| across features&quot;</span>)</span>
+<span id="cb7-361"><a href="#cb7-361"></a>plt.xlabel(<span class="st">&quot;session date&quot;</span>)</span>
+<span id="cb7-362"><a href="#cb7-362"></a>plt.title(<span class="st">&quot;Session-level deviation from baseline (mean |z|)&quot;</span>)</span>
+<span id="cb7-363"><a href="#cb7-363"></a>plt.legend()</span>
+<span id="cb7-364"><a href="#cb7-364"></a>plt.tight_layout()</span>
+<span id="cb7-365"><a href="#cb7-365"></a>plt.savefig(<span class="st">&quot;fig_mean_zscore.png&quot;</span>, dpi<span class="op">=</span><span class="dv">300</span>, bbox_inches<span class="op">=</span><span class="st">&quot;tight&quot;</span>)</span>
+<span id="cb7-366"><a href="#cb7-366"></a></span>
+<span id="cb7-367"><a href="#cb7-367"></a><span class="co"># 6.4 Plot 3: number of methods that flag each session</span></span>
+<span id="cb7-368"><a href="#cb7-368"></a>plt.figure()</span>
+<span id="cb7-369"><a href="#cb7-369"></a><span class="cf">for</span> horse, df_h <span class="kw">in</span> anomaly_summary.groupby(<span class="st">&quot;horse&quot;</span>):</span>
+<span id="cb7-370"><a href="#cb7-370"></a>    plt.scatter(df_h[<span class="st">&quot;session_dt&quot;</span>], df_h[<span class="st">&quot;n_methods_flagged&quot;</span>], label<span class="op">=</span>horse)</span>
+<span id="cb7-371"><a href="#cb7-371"></a></span>
+<span id="cb7-372"><a href="#cb7-372"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">90</span>)</span>
+<span id="cb7-373"><a href="#cb7-373"></a>plt.ylabel(<span class="st">&quot;number of methods flagging session&quot;</span>)</span>
+<span id="cb7-374"><a href="#cb7-374"></a>plt.xlabel(<span class="st">&quot;session date&quot;</span>)</span>
+<span id="cb7-375"><a href="#cb7-375"></a>plt.title(<span class="st">&quot;Agreement between anomaly-detection methods&quot;</span>)</span>
+<span id="cb7-376"><a href="#cb7-376"></a>plt.legend()</span>
+<span id="cb7-377"><a href="#cb7-377"></a>plt.tight_layout()</span>
+<span id="cb7-378"><a href="#cb7-378"></a>plt.savefig(<span class="st">&quot;fig_method_agreement.png&quot;</span>, dpi<span class="op">=</span><span class="dv">300</span>, bbox_inches<span class="op">=</span><span class="st">&quot;tight&quot;</span>)</span>
+<span id="cb7-379"><a href="#cb7-379"></a></span>
+<span id="cb7-380"><a href="#cb7-380"></a><span class="co"># 6.5 Plot 4: Method agreement heatmap</span></span>
+<span id="cb7-381"><a href="#cb7-381"></a>heat_df <span class="op">=</span> anomaly_summary[</span>
+<span id="cb7-382"><a href="#cb7-382"></a>    [<span class="st">&quot;horse&quot;</span>, <span class="st">&quot;session_id&quot;</span>, <span class="st">&quot;session_dt&quot;</span>,</span>
+<span id="cb7-383"><a href="#cb7-383"></a>     <span class="st">&quot;z_is_outlier&quot;</span>, <span class="st">&quot;kmeans_is_outlier&quot;</span>, <span class="st">&quot;iforest_is_outlier&quot;</span>]</span>
+<span id="cb7-384"><a href="#cb7-384"></a>].copy()</span>
+<span id="cb7-385"><a href="#cb7-385"></a></span>
+<span id="cb7-386"><a href="#cb7-386"></a><span class="co"># Sort sessions by # of methods flagged (descending within horse)</span></span>
+<span id="cb7-387"><a href="#cb7-387"></a>heat_df[<span class="st">&quot;n_flag&quot;</span>] <span class="op">=</span> (</span>
+<span id="cb7-388"><a href="#cb7-388"></a>    heat_df[[<span class="st">&quot;z_is_outlier&quot;</span>, <span class="st">&quot;kmeans_is_outlier&quot;</span>, <span class="st">&quot;iforest_is_outlier&quot;</span>]]</span>
+<span id="cb7-389"><a href="#cb7-389"></a>    .<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb7-390"><a href="#cb7-390"></a>)</span>
+<span id="cb7-391"><a href="#cb7-391"></a>heat_df <span class="op">=</span> heat_df.sort_values([<span class="st">&quot;horse&quot;</span>, <span class="st">&quot;n_flag&quot;</span>], ascending<span class="op">=</span>[<span class="va">True</span>, <span class="va">False</span>])</span>
+<span id="cb7-392"><a href="#cb7-392"></a></span>
+<span id="cb7-393"><a href="#cb7-393"></a><span class="co"># Create readable date label (mm/dd/yy) and combine with horse</span></span>
+<span id="cb7-394"><a href="#cb7-394"></a>heat_df[<span class="st">&quot;date_label&quot;</span>] <span class="op">=</span> heat_df[<span class="st">&quot;session_dt&quot;</span>].dt.strftime(<span class="st">&quot;%m/</span><span class="sc">%d</span><span class="st">/%y&quot;</span>)</span>
+<span id="cb7-395"><a href="#cb7-395"></a>heat_df[<span class="st">&quot;session_label&quot;</span>] <span class="op">=</span> heat_df[<span class="st">&quot;horse&quot;</span>] <span class="op">+</span> <span class="st">&quot; &quot;</span> <span class="op">+</span> heat_df[<span class="st">&quot;date_label&quot;</span>]</span>
 <span id="cb7-396"><a href="#cb7-396"></a></span>
-<span id="cb7-397"><a href="#cb7-397"></a><span class="co"># Create readable date label (mm/dd/yy) and combine with horse</span></span>
-<span id="cb7-398"><a href="#cb7-398"></a>heat_df[<span class="st">&quot;date_label&quot;</span>] <span class="op">=</span> heat_df[<span class="st">&quot;session_dt&quot;</span>].dt.strftime(<span class="st">&quot;%m/</span><span class="sc">%d</span><span class="st">/%y&quot;</span>)</span>
-<span id="cb7-399"><a href="#cb7-399"></a>heat_df[<span class="st">&quot;session_label&quot;</span>] <span class="op">=</span> heat_df[<span class="st">&quot;horse&quot;</span>] <span class="op">+</span> <span class="st">&quot; &quot;</span> <span class="op">+</span> heat_df[<span class="st">&quot;date_label&quot;</span>]</span>
-<span id="cb7-400"><a href="#cb7-400"></a></span>
-<span id="cb7-401"><a href="#cb7-401"></a><span class="co"># Rename columns for nicer axis labels</span></span>
-<span id="cb7-402"><a href="#cb7-402"></a>heat_df <span class="op">=</span> heat_df.rename(columns<span class="op">=</span>{</span>
-<span id="cb7-403"><a href="#cb7-403"></a>    <span class="st">&quot;z_is_outlier&quot;</span>: <span class="st">&quot;Z-score&quot;</span>,</span>
-<span id="cb7-404"><a href="#cb7-404"></a>    <span class="st">&quot;kmeans_is_outlier&quot;</span>: <span class="st">&quot;K-means&quot;</span>,</span>
-<span id="cb7-405"><a href="#cb7-405"></a>    <span class="st">&quot;iforest_is_outlier&quot;</span>: <span class="st">&quot;Isolation Forest&quot;</span>,</span>
-<span id="cb7-406"><a href="#cb7-406"></a>})</span>
-<span id="cb7-407"><a href="#cb7-407"></a></span>
-<span id="cb7-408"><a href="#cb7-408"></a><span class="co"># Build heatmap matrix</span></span>
-<span id="cb7-409"><a href="#cb7-409"></a>matrix <span class="op">=</span> heat_df.set_index(<span class="st">&quot;session_label&quot;</span>)[[<span class="st">&quot;Z-score&quot;</span>, <span class="st">&quot;K-means&quot;</span>, <span class="st">&quot;Isolation Forest&quot;</span>]]</span>
-<span id="cb7-410"><a href="#cb7-410"></a></span>
-<span id="cb7-411"><a href="#cb7-411"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="bu">max</span>(<span class="dv">5</span>, matrix.shape[<span class="dv">0</span>] <span class="op">*</span> <span class="fl">0.35</span>)))</span>
-<span id="cb7-412"><a href="#cb7-412"></a>sns.heatmap(</span>
-<span id="cb7-413"><a href="#cb7-413"></a>    matrix,</span>
-<span id="cb7-414"><a href="#cb7-414"></a>    cmap<span class="op">=</span>[<span class="st">&quot;white&quot;</span>, <span class="st">&quot;tab:red&quot;</span>],  <span class="co"># white = not flagged, red = flagged</span></span>
-<span id="cb7-415"><a href="#cb7-415"></a>    linewidths<span class="op">=</span><span class="fl">0.5</span>,</span>
-<span id="cb7-416"><a href="#cb7-416"></a>    linecolor<span class="op">=</span><span class="st">&quot;gray&quot;</span>,</span>
-<span id="cb7-417"><a href="#cb7-417"></a>    cbar<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb7-418"><a href="#cb7-418"></a>    annot<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb7-419"><a href="#cb7-419"></a>    fmt<span class="op">=</span><span class="st">&quot;&quot;</span>,</span>
-<span id="cb7-420"><a href="#cb7-420"></a>)</span>
-<span id="cb7-421"><a href="#cb7-421"></a></span>
-<span id="cb7-422"><a href="#cb7-422"></a>plt.xlabel(<span class="st">&quot;Anomaly Detection Method&quot;</span>)</span>
-<span id="cb7-423"><a href="#cb7-423"></a>plt.ylabel(<span class="st">&quot;Session (Horse + Date)&quot;</span>)</span>
-<span id="cb7-424"><a href="#cb7-424"></a>plt.title(<span class="st">&quot;Method Agreement Heatmap: Flagged Sessions&quot;</span>)</span>
-<span id="cb7-425"><a href="#cb7-425"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb7-426"><a href="#cb7-426"></a>plt.tight_layout()</span>
-<span id="cb7-427"><a href="#cb7-427"></a>plt.savefig(<span class="st">&quot;fig_method_heatmap.png&quot;</span>, dpi<span class="op">=</span><span class="dv">300</span>, bbox_inches<span class="op">=</span><span class="st">&quot;tight&quot;</span>)</span>
-<span id="cb7-428"><a href="#cb7-428"></a>plt.show()</span>
+<span id="cb7-397"><a href="#cb7-397"></a><span class="co"># Rename columns for nicer axis labels</span></span>
+<span id="cb7-398"><a href="#cb7-398"></a>heat_df <span class="op">=</span> heat_df.rename(columns<span class="op">=</span>{</span>
+<span id="cb7-399"><a href="#cb7-399"></a>    <span class="st">&quot;z_is_outlier&quot;</span>: <span class="st">&quot;Z-score&quot;</span>,</span>
+<span id="cb7-400"><a href="#cb7-400"></a>    <span class="st">&quot;kmeans_is_outlier&quot;</span>: <span class="st">&quot;K-means&quot;</span>,</span>
+<span id="cb7-401"><a href="#cb7-401"></a>    <span class="st">&quot;iforest_is_outlier&quot;</span>: <span class="st">&quot;Isolation Forest&quot;</span>,</span>
+<span id="cb7-402"><a href="#cb7-402"></a>})</span>
+<span id="cb7-403"><a href="#cb7-403"></a></span>
+<span id="cb7-404"><a href="#cb7-404"></a><span class="co"># Build heatmap matrix</span></span>
+<span id="cb7-405"><a href="#cb7-405"></a>matrix <span class="op">=</span> heat_df.set_index(<span class="st">&quot;session_label&quot;</span>)[[<span class="st">&quot;Z-score&quot;</span>, <span class="st">&quot;K-means&quot;</span>, <span class="st">&quot;Isolation Forest&quot;</span>]]</span>
+<span id="cb7-406"><a href="#cb7-406"></a></span>
+<span id="cb7-407"><a href="#cb7-407"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="bu">max</span>(<span class="dv">5</span>, matrix.shape[<span class="dv">0</span>] <span class="op">*</span> <span class="fl">0.35</span>)))</span>
+<span id="cb7-408"><a href="#cb7-408"></a>sns.heatmap(</span>
+<span id="cb7-409"><a href="#cb7-409"></a>    matrix,</span>
+<span id="cb7-410"><a href="#cb7-410"></a>    cmap<span class="op">=</span>[<span class="st">&quot;white&quot;</span>, <span class="st">&quot;tab:red&quot;</span>],  <span class="co"># white = not flagged, red = flagged</span></span>
+<span id="cb7-411"><a href="#cb7-411"></a>    linewidths<span class="op">=</span><span class="fl">0.5</span>,</span>
+<span id="cb7-412"><a href="#cb7-412"></a>    linecolor<span class="op">=</span><span class="st">&quot;gray&quot;</span>,</span>
+<span id="cb7-413"><a href="#cb7-413"></a>    cbar<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb7-414"><a href="#cb7-414"></a>    annot<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb7-415"><a href="#cb7-415"></a>    fmt<span class="op">=</span><span class="st">&quot;&quot;</span>,</span>
+<span id="cb7-416"><a href="#cb7-416"></a>)</span>
+<span id="cb7-417"><a href="#cb7-417"></a></span>
+<span id="cb7-418"><a href="#cb7-418"></a>plt.xlabel(<span class="st">&quot;Anomaly Detection Method&quot;</span>)</span>
+<span id="cb7-419"><a href="#cb7-419"></a>plt.ylabel(<span class="st">&quot;Session (Horse + Date)&quot;</span>)</span>
+<span id="cb7-420"><a href="#cb7-420"></a>plt.title(<span class="st">&quot;Method Agreement Heatmap: Flagged Sessions&quot;</span>)</span>
+<span id="cb7-421"><a href="#cb7-421"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb7-422"><a href="#cb7-422"></a>plt.tight_layout()</span>
+<span id="cb7-423"><a href="#cb7-423"></a>plt.savefig(<span class="st">&quot;fig_method_heatmap.png&quot;</span>, dpi<span class="op">=</span><span class="dv">300</span>, bbox_inches<span class="op">=</span><span class="st">&quot;tight&quot;</span>)</span>
+<span id="cb7-424"><a href="#cb7-424"></a>plt.show()</span>
+<span id="cb7-425"><a href="#cb7-425"></a></span>
+<span id="cb7-426"><a href="#cb7-426"></a><span class="co"># -----------------------------------------</span></span>
+<span id="cb7-427"><a href="#cb7-427"></a><span class="co"># 7. Feature contribution visualization</span></span>
+<span id="cb7-428"><a href="#cb7-428"></a><span class="co"># -----------------------------------------</span></span>
 <span id="cb7-429"><a href="#cb7-429"></a></span>
-<span id="cb7-430"><a href="#cb7-430"></a><span class="co"># -----------------------------------------</span></span>
-<span id="cb7-431"><a href="#cb7-431"></a><span class="co"># 8. Feature contribution visualization</span></span>
-<span id="cb7-432"><a href="#cb7-432"></a><span class="co"># -----------------------------------------</span></span>
-<span id="cb7-433"><a href="#cb7-433"></a></span>
-<span id="cb7-434"><a href="#cb7-434"></a><span class="kw">def</span> top_contributing_features_for_session(</span>
-<span id="cb7-435"><a href="#cb7-435"></a>    horse: <span class="bu">str</span>,</span>
-<span id="cb7-436"><a href="#cb7-436"></a>    session_id: <span class="bu">str</span>,</span>
-<span id="cb7-437"><a href="#cb7-437"></a>    top_n: <span class="bu">int</span> <span class="op">=</span> <span class="dv">5</span>,</span>
-<span id="cb7-438"><a href="#cb7-438"></a>):</span>
-<span id="cb7-439"><a href="#cb7-439"></a>    <span class="co">&quot;&quot;&quot;</span></span>
-<span id="cb7-440"><a href="#cb7-440"></a><span class="co">    Return the top-N biomechanical features (by |z|) for a given horse/session.</span></span>
-<span id="cb7-441"><a href="#cb7-441"></a></span>
-<span id="cb7-442"><a href="#cb7-442"></a><span class="co">    Uses the z-scored feature space stored in z_spaces[horse].</span></span>
-<span id="cb7-443"><a href="#cb7-443"></a><span class="co">    &quot;&quot;&quot;</span></span>
-<span id="cb7-444"><a href="#cb7-444"></a>    <span class="co"># Rebuild this horse&#39;s session order to match how z_spaces[horse] was created</span></span>
-<span id="cb7-445"><a href="#cb7-445"></a>    df_horse <span class="op">=</span> session_features[session_features[<span class="st">&quot;horse&quot;</span>] <span class="op">==</span> horse].reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb7-446"><a href="#cb7-446"></a>    X_z <span class="op">=</span> z_spaces[horse]</span>
-<span id="cb7-447"><a href="#cb7-447"></a></span>
-<span id="cb7-448"><a href="#cb7-448"></a>    <span class="co"># Position of this session within that horse&#39;s dataframe</span></span>
-<span id="cb7-449"><a href="#cb7-449"></a>    pos <span class="op">=</span> df_horse[df_horse[<span class="st">&quot;session_id&quot;</span>] <span class="op">==</span> session_id].index[<span class="dv">0</span>]</span>
-<span id="cb7-450"><a href="#cb7-450"></a></span>
-<span id="cb7-451"><a href="#cb7-451"></a>    <span class="co"># Absolute z-scores for this session</span></span>
-<span id="cb7-452"><a href="#cb7-452"></a>    z_vals <span class="op">=</span> X_z.iloc[pos].<span class="bu">abs</span>().sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb7-453"><a href="#cb7-453"></a></span>
-<span id="cb7-454"><a href="#cb7-454"></a>    <span class="cf">return</span> z_vals.head(top_n)   <span class="co"># series: index = feature names, values = |z|</span></span>
+<span id="cb7-430"><a href="#cb7-430"></a><span class="kw">def</span> top_contributing_features_for_session(</span>
+<span id="cb7-431"><a href="#cb7-431"></a>    horse: <span class="bu">str</span>,</span>
+<span id="cb7-432"><a href="#cb7-432"></a>    session_id: <span class="bu">str</span>,</span>
+<span id="cb7-433"><a href="#cb7-433"></a>    top_n: <span class="bu">int</span> <span class="op">=</span> <span class="dv">5</span>,</span>
+<span id="cb7-434"><a href="#cb7-434"></a>):</span>
+<span id="cb7-435"><a href="#cb7-435"></a>    <span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb7-436"><a href="#cb7-436"></a><span class="co">    Return the top-N biomechanical features (by |z|) for a given horse/session.</span></span>
+<span id="cb7-437"><a href="#cb7-437"></a></span>
+<span id="cb7-438"><a href="#cb7-438"></a><span class="co">    Uses the z-scored feature space stored in z_spaces[horse].</span></span>
+<span id="cb7-439"><a href="#cb7-439"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb7-440"><a href="#cb7-440"></a>    <span class="co"># Rebuild this horse&#39;s session order to match how z_spaces[horse] was created</span></span>
+<span id="cb7-441"><a href="#cb7-441"></a>    df_horse <span class="op">=</span> session_features[session_features[<span class="st">&quot;horse&quot;</span>] <span class="op">==</span> horse].reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb7-442"><a href="#cb7-442"></a>    X_z <span class="op">=</span> z_spaces[horse]</span>
+<span id="cb7-443"><a href="#cb7-443"></a></span>
+<span id="cb7-444"><a href="#cb7-444"></a>    <span class="co"># Position of this session within that horse&#39;s dataframe</span></span>
+<span id="cb7-445"><a href="#cb7-445"></a>    pos <span class="op">=</span> df_horse[df_horse[<span class="st">&quot;session_id&quot;</span>] <span class="op">==</span> session_id].index[<span class="dv">0</span>]</span>
+<span id="cb7-446"><a href="#cb7-446"></a></span>
+<span id="cb7-447"><a href="#cb7-447"></a>    <span class="co"># Absolute z-scores for this session</span></span>
+<span id="cb7-448"><a href="#cb7-448"></a>    z_vals <span class="op">=</span> X_z.iloc[pos].<span class="bu">abs</span>().sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb7-449"><a href="#cb7-449"></a></span>
+<span id="cb7-450"><a href="#cb7-450"></a>    <span class="cf">return</span> z_vals.head(top_n)   <span class="co"># series: index = feature names, values = |z|</span></span>
+<span id="cb7-451"><a href="#cb7-451"></a></span>
+<span id="cb7-452"><a href="#cb7-452"></a></span>
+<span id="cb7-453"><a href="#cb7-453"></a><span class="co"># Take only high-confidence anomalies (flagged by ≥2 methods)</span></span>
+<span id="cb7-454"><a href="#cb7-454"></a>flagged_multi <span class="op">=</span> anomaly_summary[anomaly_summary[<span class="st">&quot;n_methods_flagged&quot;</span>] <span class="op">&gt;=</span> <span class="dv">2</span>].copy()</span>
 <span id="cb7-455"><a href="#cb7-455"></a></span>
-<span id="cb7-456"><a href="#cb7-456"></a></span>
-<span id="cb7-457"><a href="#cb7-457"></a><span class="co"># Take only high-confidence anomalies (flagged by ≥2 methods)</span></span>
-<span id="cb7-458"><a href="#cb7-458"></a>flagged_multi <span class="op">=</span> anomaly_summary[anomaly_summary[<span class="st">&quot;n_methods_flagged&quot;</span>] <span class="op">&gt;=</span> <span class="dv">2</span>].copy()</span>
-<span id="cb7-459"><a href="#cb7-459"></a></span>
-<span id="cb7-460"><a href="#cb7-460"></a><span class="co"># Build a long-form table of top features per session</span></span>
-<span id="cb7-461"><a href="#cb7-461"></a>rows <span class="op">=</span> []</span>
-<span id="cb7-462"><a href="#cb7-462"></a><span class="cf">for</span> _, row <span class="kw">in</span> flagged_multi.iterrows():</span>
-<span id="cb7-463"><a href="#cb7-463"></a>    horse <span class="op">=</span> row[<span class="st">&quot;horse&quot;</span>]</span>
-<span id="cb7-464"><a href="#cb7-464"></a>    session_id <span class="op">=</span> row[<span class="st">&quot;session_id&quot;</span>]</span>
-<span id="cb7-465"><a href="#cb7-465"></a></span>
-<span id="cb7-466"><a href="#cb7-466"></a>    top_feats <span class="op">=</span> top_contributing_features_for_session(</span>
-<span id="cb7-467"><a href="#cb7-467"></a>        horse<span class="op">=</span>horse,</span>
-<span id="cb7-468"><a href="#cb7-468"></a>        session_id<span class="op">=</span>session_id,</span>
-<span id="cb7-469"><a href="#cb7-469"></a>        top_n<span class="op">=</span><span class="dv">5</span>,       <span class="co"># change if you want more/less per session</span></span>
-<span id="cb7-470"><a href="#cb7-470"></a>    )</span>
+<span id="cb7-456"><a href="#cb7-456"></a><span class="co"># Build a long-form table of top features per session</span></span>
+<span id="cb7-457"><a href="#cb7-457"></a>rows <span class="op">=</span> []</span>
+<span id="cb7-458"><a href="#cb7-458"></a><span class="cf">for</span> _, row <span class="kw">in</span> flagged_multi.iterrows():</span>
+<span id="cb7-459"><a href="#cb7-459"></a>    horse <span class="op">=</span> row[<span class="st">&quot;horse&quot;</span>]</span>
+<span id="cb7-460"><a href="#cb7-460"></a>    session_id <span class="op">=</span> row[<span class="st">&quot;session_id&quot;</span>]</span>
+<span id="cb7-461"><a href="#cb7-461"></a></span>
+<span id="cb7-462"><a href="#cb7-462"></a>    top_feats <span class="op">=</span> top_contributing_features_for_session(</span>
+<span id="cb7-463"><a href="#cb7-463"></a>        horse<span class="op">=</span>horse,</span>
+<span id="cb7-464"><a href="#cb7-464"></a>        session_id<span class="op">=</span>session_id,</span>
+<span id="cb7-465"><a href="#cb7-465"></a>        top_n<span class="op">=</span><span class="dv">5</span>,       <span class="co"># change if you want more/less per session</span></span>
+<span id="cb7-466"><a href="#cb7-466"></a>    )</span>
+<span id="cb7-467"><a href="#cb7-467"></a></span>
+<span id="cb7-468"><a href="#cb7-468"></a>    <span class="co"># Session label for plotting</span></span>
+<span id="cb7-469"><a href="#cb7-469"></a>    sess_date <span class="op">=</span> pd.to_datetime(session_id[:<span class="dv">8</span>], <span class="bu">format</span><span class="op">=</span><span class="st">&quot;%Y%m</span><span class="sc">%d</span><span class="st">&quot;</span>).strftime(<span class="st">&quot;%m/</span><span class="sc">%d</span><span class="st">/%y&quot;</span>)</span>
+<span id="cb7-470"><a href="#cb7-470"></a>    session_label <span class="op">=</span> <span class="ss">f&quot;</span><span class="sc">{</span>horse<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>sess_date<span class="sc">}</span><span class="ss">&quot;</span></span>
 <span id="cb7-471"><a href="#cb7-471"></a></span>
-<span id="cb7-472"><a href="#cb7-472"></a>    <span class="co"># Session label for plotting</span></span>
-<span id="cb7-473"><a href="#cb7-473"></a>    sess_date <span class="op">=</span> pd.to_datetime(session_id[:<span class="dv">8</span>], <span class="bu">format</span><span class="op">=</span><span class="st">&quot;%Y%m</span><span class="sc">%d</span><span class="st">&quot;</span>).strftime(<span class="st">&quot;%m/</span><span class="sc">%d</span><span class="st">/%y&quot;</span>)</span>
-<span id="cb7-474"><a href="#cb7-474"></a>    session_label <span class="op">=</span> <span class="ss">f&quot;</span><span class="sc">{</span>horse<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>sess_date<span class="sc">}</span><span class="ss">&quot;</span></span>
-<span id="cb7-475"><a href="#cb7-475"></a></span>
-<span id="cb7-476"><a href="#cb7-476"></a>    <span class="cf">for</span> feat_name, z_val <span class="kw">in</span> top_feats.items():</span>
-<span id="cb7-477"><a href="#cb7-477"></a>        rows.append({</span>
-<span id="cb7-478"><a href="#cb7-478"></a>            <span class="st">&quot;session_label&quot;</span>: session_label,</span>
-<span id="cb7-479"><a href="#cb7-479"></a>            <span class="st">&quot;feature&quot;</span>: feat_name,</span>
-<span id="cb7-480"><a href="#cb7-480"></a>            <span class="st">&quot;abs_z&quot;</span>: <span class="bu">float</span>(z_val),</span>
-<span id="cb7-481"><a href="#cb7-481"></a>        })</span>
-<span id="cb7-482"><a href="#cb7-482"></a></span>
-<span id="cb7-483"><a href="#cb7-483"></a>top_feat_long <span class="op">=</span> pd.DataFrame(rows)</span>
-<span id="cb7-484"><a href="#cb7-484"></a></span>
-<span id="cb7-485"><a href="#cb7-485"></a><span class="co"># Pivot to session x feature matrix (NaN where a feature is not in that session&#39;s top-N)</span></span>
-<span id="cb7-486"><a href="#cb7-486"></a>top_feat_matrix <span class="op">=</span> top_feat_long.pivot_table(</span>
-<span id="cb7-487"><a href="#cb7-487"></a>    index<span class="op">=</span><span class="st">&quot;session_label&quot;</span>,</span>
-<span id="cb7-488"><a href="#cb7-488"></a>    columns<span class="op">=</span><span class="st">&quot;feature&quot;</span>,</span>
-<span id="cb7-489"><a href="#cb7-489"></a>    values<span class="op">=</span><span class="st">&quot;abs_z&quot;</span>,</span>
-<span id="cb7-490"><a href="#cb7-490"></a>    aggfunc<span class="op">=</span><span class="st">&quot;max&quot;</span></span>
-<span id="cb7-491"><a href="#cb7-491"></a>)</span>
-<span id="cb7-492"><a href="#cb7-492"></a></span>
-<span id="cb7-493"><a href="#cb7-493"></a><span class="co"># Optional: order sessions by how many methods flagged them (same order as flagged_multi)</span></span>
-<span id="cb7-494"><a href="#cb7-494"></a>session_order <span class="op">=</span> []</span>
-<span id="cb7-495"><a href="#cb7-495"></a><span class="cf">for</span> _, row <span class="kw">in</span> flagged_multi.sort_values(</span>
-<span id="cb7-496"><a href="#cb7-496"></a>    [<span class="st">&quot;horse&quot;</span>, <span class="st">&quot;n_methods_flagged&quot;</span>, <span class="st">&quot;z_max_abs&quot;</span>],</span>
-<span id="cb7-497"><a href="#cb7-497"></a>    ascending<span class="op">=</span>[<span class="va">True</span>, <span class="va">False</span>, <span class="va">False</span>]</span>
-<span id="cb7-498"><a href="#cb7-498"></a>).iterrows():</span>
-<span id="cb7-499"><a href="#cb7-499"></a>    sess_date <span class="op">=</span> row[<span class="st">&quot;session_dt&quot;</span>].strftime(<span class="st">&quot;%m/</span><span class="sc">%d</span><span class="st">/%y&quot;</span>)</span>
-<span id="cb7-500"><a href="#cb7-500"></a>    session_order.append(<span class="ss">f&quot;</span><span class="sc">{</span>row[<span class="st">&#39;horse&#39;</span>]<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>sess_date<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb7-472"><a href="#cb7-472"></a>    <span class="cf">for</span> feat_name, z_val <span class="kw">in</span> top_feats.items():</span>
+<span id="cb7-473"><a href="#cb7-473"></a>        rows.append({</span>
+<span id="cb7-474"><a href="#cb7-474"></a>            <span class="st">&quot;session_label&quot;</span>: session_label,</span>
+<span id="cb7-475"><a href="#cb7-475"></a>            <span class="st">&quot;feature&quot;</span>: feat_name,</span>
+<span id="cb7-476"><a href="#cb7-476"></a>            <span class="st">&quot;abs_z&quot;</span>: <span class="bu">float</span>(z_val),</span>
+<span id="cb7-477"><a href="#cb7-477"></a>        })</span>
+<span id="cb7-478"><a href="#cb7-478"></a></span>
+<span id="cb7-479"><a href="#cb7-479"></a>top_feat_long <span class="op">=</span> pd.DataFrame(rows)</span>
+<span id="cb7-480"><a href="#cb7-480"></a></span>
+<span id="cb7-481"><a href="#cb7-481"></a><span class="co"># Pivot to session x feature matrix (NaN where a feature is not in that session&#39;s top-N)</span></span>
+<span id="cb7-482"><a href="#cb7-482"></a>top_feat_matrix <span class="op">=</span> top_feat_long.pivot_table(</span>
+<span id="cb7-483"><a href="#cb7-483"></a>    index<span class="op">=</span><span class="st">&quot;session_label&quot;</span>,</span>
+<span id="cb7-484"><a href="#cb7-484"></a>    columns<span class="op">=</span><span class="st">&quot;feature&quot;</span>,</span>
+<span id="cb7-485"><a href="#cb7-485"></a>    values<span class="op">=</span><span class="st">&quot;abs_z&quot;</span>,</span>
+<span id="cb7-486"><a href="#cb7-486"></a>    aggfunc<span class="op">=</span><span class="st">&quot;max&quot;</span></span>
+<span id="cb7-487"><a href="#cb7-487"></a>)</span>
+<span id="cb7-488"><a href="#cb7-488"></a></span>
+<span id="cb7-489"><a href="#cb7-489"></a><span class="co"># Optional: order sessions by how many methods flagged them (same order as flagged_multi)</span></span>
+<span id="cb7-490"><a href="#cb7-490"></a>session_order <span class="op">=</span> []</span>
+<span id="cb7-491"><a href="#cb7-491"></a><span class="cf">for</span> _, row <span class="kw">in</span> flagged_multi.sort_values(</span>
+<span id="cb7-492"><a href="#cb7-492"></a>    [<span class="st">&quot;horse&quot;</span>, <span class="st">&quot;n_methods_flagged&quot;</span>, <span class="st">&quot;z_max_abs&quot;</span>],</span>
+<span id="cb7-493"><a href="#cb7-493"></a>    ascending<span class="op">=</span>[<span class="va">True</span>, <span class="va">False</span>, <span class="va">False</span>]</span>
+<span id="cb7-494"><a href="#cb7-494"></a>).iterrows():</span>
+<span id="cb7-495"><a href="#cb7-495"></a>    sess_date <span class="op">=</span> row[<span class="st">&quot;session_dt&quot;</span>].strftime(<span class="st">&quot;%m/</span><span class="sc">%d</span><span class="st">/%y&quot;</span>)</span>
+<span id="cb7-496"><a href="#cb7-496"></a>    session_order.append(<span class="ss">f&quot;</span><span class="sc">{</span>row[<span class="st">&#39;horse&#39;</span>]<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>sess_date<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb7-497"><a href="#cb7-497"></a></span>
+<span id="cb7-498"><a href="#cb7-498"></a><span class="co"># Keep only sessions that appear in the matrix</span></span>
+<span id="cb7-499"><a href="#cb7-499"></a>session_order <span class="op">=</span> [s <span class="cf">for</span> s <span class="kw">in</span> session_order <span class="cf">if</span> s <span class="kw">in</span> top_feat_matrix.index]</span>
+<span id="cb7-500"><a href="#cb7-500"></a>top_feat_matrix <span class="op">=</span> top_feat_matrix.loc[session_order]</span>
 <span id="cb7-501"><a href="#cb7-501"></a></span>
-<span id="cb7-502"><a href="#cb7-502"></a><span class="co"># Keep only sessions that appear in the matrix</span></span>
-<span id="cb7-503"><a href="#cb7-503"></a>session_order <span class="op">=</span> [s <span class="cf">for</span> s <span class="kw">in</span> session_order <span class="cf">if</span> s <span class="kw">in</span> top_feat_matrix.index]</span>
-<span id="cb7-504"><a href="#cb7-504"></a>top_feat_matrix <span class="op">=</span> top_feat_matrix.loc[session_order]</span>
-<span id="cb7-505"><a href="#cb7-505"></a></span>
-<span id="cb7-506"><a href="#cb7-506"></a><span class="co"># Plot heatmap of top contributing features</span></span>
-<span id="cb7-507"><a href="#cb7-507"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="bu">max</span>(<span class="dv">4</span>, <span class="fl">0.4</span> <span class="op">*</span> top_feat_matrix.shape[<span class="dv">0</span>])))</span>
-<span id="cb7-508"><a href="#cb7-508"></a>sns.heatmap(</span>
-<span id="cb7-509"><a href="#cb7-509"></a>    top_feat_matrix,</span>
-<span id="cb7-510"><a href="#cb7-510"></a>    cmap<span class="op">=</span><span class="st">&quot;viridis&quot;</span>,      <span class="co"># magnitude of |z|</span></span>
-<span id="cb7-511"><a href="#cb7-511"></a>    linewidths<span class="op">=</span><span class="fl">0.5</span>,</span>
-<span id="cb7-512"><a href="#cb7-512"></a>    linecolor<span class="op">=</span><span class="st">&quot;gray&quot;</span>,</span>
-<span id="cb7-513"><a href="#cb7-513"></a>    cbar_kws<span class="op">=</span>{<span class="st">&quot;label&quot;</span>: <span class="st">&quot;|z-score|&quot;</span>},</span>
-<span id="cb7-514"><a href="#cb7-514"></a>    annot<span class="op">=</span><span class="va">False</span></span>
-<span id="cb7-515"><a href="#cb7-515"></a>)</span>
-<span id="cb7-516"><a href="#cb7-516"></a></span>
-<span id="cb7-517"><a href="#cb7-517"></a>plt.xlabel(<span class="st">&quot;Biomechanical Feature&quot;</span>)</span>
-<span id="cb7-518"><a href="#cb7-518"></a>plt.ylabel(<span class="st">&quot;Session (Horse + Date)&quot;</span>)</span>
-<span id="cb7-519"><a href="#cb7-519"></a>plt.title(<span class="st">&quot;Top Contributing Features for High-Confidence Anomalies&quot;</span>)</span>
-<span id="cb7-520"><a href="#cb7-520"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">90</span>)</span>
-<span id="cb7-521"><a href="#cb7-521"></a>plt.tight_layout()</span>
-<span id="cb7-522"><a href="#cb7-522"></a>plt.savefig(<span class="st">&quot;fig_top_feature_heatmap.png&quot;</span>, dpi<span class="op">=</span><span class="dv">300</span>, bbox_inches<span class="op">=</span><span class="st">&quot;tight&quot;</span>)</span>
-<span id="cb7-523"><a href="#cb7-523"></a>plt.show()</span>
+<span id="cb7-502"><a href="#cb7-502"></a><span class="co"># Plot heatmap of top contributing features</span></span>
+<span id="cb7-503"><a href="#cb7-503"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="bu">max</span>(<span class="dv">4</span>, <span class="fl">0.4</span> <span class="op">*</span> top_feat_matrix.shape[<span class="dv">0</span>])))</span>
+<span id="cb7-504"><a href="#cb7-504"></a>sns.heatmap(</span>
+<span id="cb7-505"><a href="#cb7-505"></a>    top_feat_matrix,</span>
+<span id="cb7-506"><a href="#cb7-506"></a>    cmap<span class="op">=</span><span class="st">&quot;viridis&quot;</span>,      <span class="co"># magnitude of |z|</span></span>
+<span id="cb7-507"><a href="#cb7-507"></a>    linewidths<span class="op">=</span><span class="fl">0.5</span>,</span>
+<span id="cb7-508"><a href="#cb7-508"></a>    linecolor<span class="op">=</span><span class="st">&quot;gray&quot;</span>,</span>
+<span id="cb7-509"><a href="#cb7-509"></a>    cbar_kws<span class="op">=</span>{<span class="st">&quot;label&quot;</span>: <span class="st">&quot;|z-score|&quot;</span>},</span>
+<span id="cb7-510"><a href="#cb7-510"></a>    annot<span class="op">=</span><span class="va">False</span></span>
+<span id="cb7-511"><a href="#cb7-511"></a>)</span>
+<span id="cb7-512"><a href="#cb7-512"></a></span>
+<span id="cb7-513"><a href="#cb7-513"></a>plt.xlabel(<span class="st">&quot;Biomechanical Feature&quot;</span>)</span>
+<span id="cb7-514"><a href="#cb7-514"></a>plt.ylabel(<span class="st">&quot;Session (Horse + Date)&quot;</span>)</span>
+<span id="cb7-515"><a href="#cb7-515"></a>plt.title(<span class="st">&quot;Top Contributing Features for High-Confidence Anomalies&quot;</span>)</span>
+<span id="cb7-516"><a href="#cb7-516"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">90</span>)</span>
+<span id="cb7-517"><a href="#cb7-517"></a>plt.tight_layout()</span>
+<span id="cb7-518"><a href="#cb7-518"></a>plt.savefig(<span class="st">&quot;fig_top_feature_heatmap.png&quot;</span>, dpi<span class="op">=</span><span class="dv">300</span>, bbox_inches<span class="op">=</span><span class="st">&quot;tight&quot;</span>)</span>
+<span id="cb7-519"><a href="#cb7-519"></a>plt.show()</span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
