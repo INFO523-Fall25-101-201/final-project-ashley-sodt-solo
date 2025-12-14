@@ -249,7 +249,7 @@
     "href": "presentation.html#introduction",
     "title": "Clustering Movement Patterns in Equine Exercise Sessions",
     "section": "Introduction",
-    "text": "Introduction\n\nAl-Marah Equine Center // Laura Miller\nEquiPro intertial measurement units collect accelerometer data\n\nOutputs stride-level biomechanical metrics\nEarly detection of subtle gait abnormalities\n\n\nGoal: Use unsupervised learning techniques to model each horse’s typical movement and automatically flag exercise sessions that deviate from this baseline. Such anomalies may reflect behavioral irregularities, equipment malfunction, pain, or potential reinjury."
+    "text": "Introduction\n\nAl-Marah Equine Center // Laura Miller\nEquiPro IMUs collect accelerometer data during exercise\nData processed into stride-level biomechanical metrics\n\nGoal: Use unsupervised learning techniques to model each horse’s typical movement and automatically flag exercise sessions that deviate from this baseline. Such anomalies may reflect behavioral irregularities, equipment malfunction, pain, or potential reinjury."
   },
   {
     "objectID": "presentation.html#dataset",
@@ -382,7 +382,7 @@
     "href": "presentation.html#anomaly-detection-framework",
     "title": "Clustering Movement Patterns in Equine Exercise Sessions",
     "section": "Anomaly Detection Framework",
-    "text": "Anomaly Detection Framework\n\nConvert every feature to a z-score.\nZ-score Thresholding: Flags sessions where any feature deviates strongly from the horse’s baseline.\nK-means Cluster Distance: Groups similar sessions and marks those far from their cluster center as outliers.\nIsolation Forest: Identifies sessions that are difficult to group with others (unusual combinations of features).\n\nSessions flagged by multiple methods are more likely to reflect real gait irregularities."
+    "text": "Anomaly Detection Framework\n\nConvert every feature to a z-score.\nAnomaly Detection Methods:\n\nZ-score Thresholding\nK-means Cluster Distance\nIsolation Forest\n\n\nSessions flagged by multiple methods are more likely to reflect real gait irregularities."
   },
   {
     "objectID": "presentation.html#how-many-sessions-were-flagged",
@@ -494,6 +494,27 @@
     "href": "presentation.html#conclusions",
     "title": "Clustering Movement Patterns in Equine Exercise Sessions",
     "section": "Conclusions",
-    "text": "Conclusions\n\nComputed session-level biomechanics for each horse → established individualized baseline movement patterns\nMultiple anomaly detection methods (Z-score, K-means, Isolation Forest) flagged sessions showing deviations from baseline\nOnly a small subset of sessions showed strong evidence of abnormality\n\nHigh-confidence anomalies = flagged by ≥ 2 methods\n\nDeviations were driven primarily by:\n\nDiagonal advanced placement, duty factor, and head motion symmetry\nFeatures tied to stride timing and weight distribution\n\n\n\nInterpretation:\nAutomated anomaly detection reveals subtle, horse-specific gait changes that may signal behavioral irregularities, equipment issues, pain responses, or early reinjury risk. This can enable earlier detection and proactive intervention."
+    "text": "Conclusions\n\nBuilt horse-specific baseline gait profiles from session-level biomechanics\nMultiple anomaly detection methods identified deviations from baseline\nOnly a small subset hoes strong evidence of abnormality\n\nHigh-confidence anomalies (flagged by ≥ 2 methods)\n\nDeviations were driven primarily by\n\nstride timing\nlimb loading\nsymmetry features\n\n\n\nInterpretation:\nAutomated anomaly detection can reveal subtle, horse-specific gait changes that may indicate early movement irregularities or reinjury risk."
+  },
+  {
+    "objectID": "presentation.html#interpreting-anomaly-drivers",
+    "href": "presentation.html#interpreting-anomaly-drivers",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Interpreting Anomaly Drivers",
+    "text": "Interpreting Anomaly Drivers\nExample: Duque 08/04/25\nTop contributing features\n\n↑ Right Hind stance duration (stance_dur_RH_max)\n↑ Diagonal timing variability (DAP metrics: dap_L_perc_iqr, dap_R_sec_max)\n\nWhat this suggests\n\nRight hind is staying on the ground longer → compensation\nIncreased timing variability → reduced trot symmetry & coordination"
+  },
+  {
+    "objectID": "presentation.html#limitations",
+    "href": "presentation.html#limitations",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Limitations",
+    "text": "Limitations\n\nSmall number of sessions per horse (5-14 sessions)\nExternal factors (environment, rider, equipment)\nNo labeled injury or clinical ground truth\nAssumes stable baseline gait over time"
+  },
+  {
+    "objectID": "presentation.html#per-method-anomalies",
+    "href": "presentation.html#per-method-anomalies",
+    "title": "Clustering Movement Patterns in Equine Exercise Sessions",
+    "section": "Per Method Anomalies",
+    "text": "Per Method Anomalies\n\n\n\nMethod\nDuque\nJackson\nPerseo\n\n\n\n\nZ-score threshold\n7\n0\n0\n\n\nK-means distance\n3\n2\n2\n\n\nIsolation Forest\n4\n2\n0"
   }
 ]

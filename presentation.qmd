@@ -55,9 +55,8 @@ penguins = sns.load_dataset('penguins').dropna()
 
 -   Al-Marah Equine Center // Laura Miller
 
-* EquiPro intertial measurement units collect accelerometer data
-  + Outputs stride-level biomechanical metrics
-  + Early detection of subtle gait abnormalities
+* EquiPro IMUs collect accelerometer data during exercise
+* Data processed into stride-level biomechanical metrics
 
 **Goal**: Use unsupervised learning techniques to model each horse's typical movement and automatically flag exercise sessions that deviate from this baseline. Such anomalies may reflect behavioral irregularities, equipment
 malfunction, pain, or potential reinjury.
@@ -135,17 +134,19 @@ session_features.loc[rows_to_show, display_cols] \
 
 - Convert every feature to a z-score.
 
-- **Z-score Thresholding**: Flags sessions where any feature deviates strongly from the horse’s baseline.
+- Anomaly Detection Methods:
 
-- **K-means Cluster Distance**: Groups similar sessions and marks those far from their cluster center as outliers.
+  - **Z-score Thresholding**
 
-- **Isolation Forest**: Identifies sessions that are difficult to group with others (unusual combinations of features).
+  - **K-means Cluster Distance**
+
+  - **Isolation Forest**
 
 Sessions flagged by multiple methods are more likely to reflect real gait irregularities.
 
 # Results
 
-## Anomalies Flagged by Individual Methods
+## Per Method Anomalies
 
 | Method               | Duque | Jackson | Perseo |
 |---------------------|:-----:|:-------:|:------:|
@@ -199,7 +200,9 @@ These sessions consistently deviate from each horse’s typical movement pattern
 </div>
 
 
-## Interpreting Anomaly Drivers — Example: Duque 08/04/25 {.smaller}
+## Interpreting Anomaly Drivers {.smaller}
+
+Example: Duque 08/04/25
 
 **Top contributing features**
 
@@ -213,25 +216,28 @@ These sessions consistently deviate from each horse’s typical movement pattern
 
 - Increased timing variability → reduced trot symmetry & coordination
 
-**Likely interpretation**
+## Limitations 
 
-Right hind is supporting more load, causing instability in diagonal pairing.  
-This may indicate early hind-limb discomfort or fatigue.
+- Small number of sessions per horse (5-14 sessions)
+- External factors (environment, rider, equipment)
+- No labeled injury or clinical ground truth
+- Assumes stable baseline gait over time
 
 
 ## Conclusions {.smaller}
 
-- Computed session-level biomechanics for each horse → established individualized baseline movement patterns
-- Multiple anomaly detection methods (Z-score, K-means, Isolation Forest) flagged sessions showing deviations from baseline
-- Only a small subset of sessions showed strong evidence of abnormality  
-  - High-confidence anomalies = flagged by ≥ 2 methods
+- Built horse-specific baseline gait profiles from session-level biomechanics
+- Multiple anomaly detection methods identified deviations from baseline
+- Only a small subset hoes strong evidence of abnormality
+  - High-confidence anomalies (flagged by ≥ 2 methods)
 
-- Deviations were driven primarily by:
-  - Diagonal advanced placement, duty factor, and head motion symmetry
-  - Features tied to stride timing and weight distribution
+- Deviations were driven primarily by
+  - stride timing
+  - limb loading
+  - symmetry features
 
 <div style="margin-top:10px; font-size:0.9em;">
 **Interpretation:**  
-Automated anomaly detection reveals subtle, horse-specific gait changes that may signal behavioral irregularities, equipment issues, 
-pain responses, or early reinjury risk. This can enable earlier detection and proactive intervention.
+Automated anomaly detection can reveal subtle, horse-specific gait changes that
+may indicate early movement irregularities or reinjury risk.
 </div>
