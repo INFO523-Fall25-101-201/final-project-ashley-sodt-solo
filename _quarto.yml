@@ -10,12 +10,6 @@ website:
     left:
       - text: Project
         href: index.qmd
-      - text: Code
-        menu:
-          - text: Feature Engineering
-            href: analysis/01_features.qmd
-          - text: Anomaly Detection
-            href: analysis/02_anomalies.qmd
       - text: Proposal
         href: proposal.qmd
       - text: Presentation

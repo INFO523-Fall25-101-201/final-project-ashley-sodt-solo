@@ -1,16 +1,20 @@
-# Anomaly analysis for EquiPro session-level features (trot only)
-# - Computes per-horse baselines via z-scores
-# - Runs three anomaly-detection methods:
-#     1) Z-score thresholding
-#     2) K-means clustering distance
-#     3) Isolation Forest
-# - Compares which sessions are flagged as abnormal by each method
-#
-# You can run this as a standalone Python script or import pieces into a notebook.
+---
+title: "Anomaly Analysis"
+format:
+  html:
+    code-tools: true
+    code-overflow: wrap
+    code-line-numbers: true
+    embed-resources: true
+execute:
+  warning: false
+  message: false
+jupyter: python3
+---
 
-# -----------------------------------------
-# 1. Imports and configuration
-# -----------------------------------------
+```{python}
+#| label: summarize-session
+#| message: false
 
 from pathlib import Path
 
@@ -26,9 +30,17 @@ from sklearn.ensemble import IsolationForest
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+# Anomaly analysis for EquiPro session-level features (trot only)
+# Computes per-horse baselines via z-scores
+# Runs three anomaly-detection methods:
+#  1) Z-score thresholding
+#  2) K-means clustering distance
+#  3) Isolation Forest
+# Compares which sessions are flagged as abnormal by each method
+
 
 # -----------------------------------------
-# 2. Load session-level feature matrix
+# 1. Load session-level feature matrix
 # -----------------------------------------
 
 # Path to the session-level feature matrix created by the trot-only script
@@ -48,7 +60,7 @@ print("\nNumber of feature columns:", len(feature_cols))
 
 
 # -----------------------------------------
-# 3. Helper: prepare per-horse features
+# 2. Helper: prepare per-horse features
 # -----------------------------------------
 
 def prepare_features(
@@ -88,7 +100,7 @@ def prepare_features(
 
 
 # -----------------------------------------
-# 4. Helper: per-horse anomaly analysis
+# 3. Helper: per-horse anomaly analysis
 # -----------------------------------------
 
 def analyze_horse_anomalies(
@@ -223,7 +235,7 @@ def analyze_horse_anomalies(
 
 
 # -----------------------------------------
-# 5. Run analysis for all horses
+# 4. Run analysis for all horses
 # -----------------------------------------
 
 all_results = []
@@ -259,7 +271,7 @@ display(
 
 
 # -----------------------------------------
-# 6. Quick sanity checks
+# 5. Quick sanity checks
 # -----------------------------------------
 
 print("\nHow many sessions are flagged by each method?")
@@ -279,10 +291,10 @@ display(
 
 
 # -----------------------------------------
-# 7. Simple visualizations
+# 6. Simple visualizations
 # -----------------------------------------
 
-# 7.1 Add datetime columns and sort
+# 6.1 Add datetime columns and sort
 anomaly_summary["session_dt"] = pd.to_datetime(
     anomaly_summary["session_id"].str[:8],  # yyyymmdd
     format="%Y%m%d"
@@ -292,7 +304,7 @@ anomaly_summary["session_label"] = anomaly_summary["session_dt"].dt.strftime("%m
 # Sort once by date so plots are in chronological order
 anomaly_summary = anomaly_summary.sort_values("session_dt")
 
-# 7.2 Plot 1: max |z|-score vs. session across horses (stars for ≥2 methods)
+# 6.2 Plot 1: max |z|-score vs. session across horses (stars for ≥2 methods)
 horse_order = ["Duque", "Jackson", "Perseo"]  # optional, keeps legend consistent
 horse_colors = {
     "Duque": "tab:blue",
@@ -337,7 +349,7 @@ plt.legend()
 plt.tight_layout()
 plt.savefig("fig_max_zscore.png", dpi=300, bbox_inches="tight")
 
-# 7.3 Plot 2: mean |z|-score vs. session across horses
+# 6.3 Plot 2: mean |z|-score vs. session across horses
 plt.figure()
 for horse, df_h in anomaly_summary.groupby("horse"):
     plt.scatter(df_h["session_dt"], df_h["z_mean_abs"], label=horse)
@@ -350,7 +362,7 @@ plt.legend()
 plt.tight_layout()
 plt.savefig("fig_mean_zscore.png", dpi=300, bbox_inches="tight")
 
-# 7.4 Plot 3: number of methods that flag each session
+# 6.4 Plot 3: number of methods that flag each session
 plt.figure()
 for horse, df_h in anomaly_summary.groupby("horse"):
     plt.scatter(df_h["session_dt"], df_h["n_methods_flagged"], label=horse)
@@ -363,7 +375,7 @@ plt.legend()
 plt.tight_layout()
 plt.savefig("fig_method_agreement.png", dpi=300, bbox_inches="tight")
 
-# 7.5 Plot 4: Method agreement heatmap
+# 6.5 Plot 4: Method agreement heatmap
 heat_df = anomaly_summary[
     ["horse", "session_id", "session_dt",
      "z_is_outlier", "kmeans_is_outlier", "iforest_is_outlier"]
@@ -410,7 +422,7 @@ plt.savefig("fig_method_heatmap.png", dpi=300, bbox_inches="tight")
 plt.show()
 
 # -----------------------------------------
-# 8. Feature contribution visualization
+# 7. Feature contribution visualization
 # -----------------------------------------
 
 def top_contributing_features_for_session(
